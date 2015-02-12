@@ -1,0 +1,72 @@
+@charset "utf-8";
+/* CSS Document */
+
+*{
+	margin: 0;
+	padding: 0;
+	font-size: 12pt;
+	font-family: 'Open Sans', sans-serif;
+}
+a{
+	font: inherit;
+	color: inherit;	
+	transition: color ease-in-out 0.2s;	
+}
+body{
+	background: #2B3F57;	
+}
+.block{
+	width: 395px;
+	margin: 50px;
+	padding: 25px;
+	background: rgb(192, 67, 50);
+
+}
+.input{
+	padding: 10px;
+	font-size: 14pt;
+	width: 375px;
+	margin-bottom: 10px;
+	border: none;	
+}
+.submit{
+	font-size: 14pt;	
+	padding: 10px;
+	background: #642323;
+	border: none;
+	width: 150px;
+	color: #fff;
+	cursor: pointer;
+	transition: background ease-in-out 0.3s;
+}
+.submit:hover{
+	background: #7992A5;
+	transition: background ease-in-out 0.3s;	
+}
+.authentication{
+	font-size: 14pt;
+	color: #fff;		
+}
+.checkbox{
+	margin-right: 5px;
+}
+.span{
+	font-size: 12pt;
+	color: #fff;
+}
+form a:hover{
+	color: 	#642323;
+	transition: color ease-in-out 0.2s;
+}
+.getnewpass{	
+}
+#pass{
+	width: 215px;
+	margin-right: 5px;	
+}
+.h1-form{
+	color: #fff;
+	font-size: 18pt;
+	text-align: center;
+	margin-bottom: 25px;	
+}
