@@ -98,3 +98,12 @@ form a:hover{
     width: 988px;
     margin:  auto;
 }
+
+.copyright{
+    font-size: 10pt;
+    color: #fff;
+    text-align: center;
+    padding: 75px 0px 0px 25px;
+    font: 100;
+    font-weight: 100;
+}

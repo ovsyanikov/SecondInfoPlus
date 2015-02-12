@@ -16,7 +16,7 @@
 <body> 
     <section class="fst-section">
 	<div class="text">
-            <img src="img/info-puls1.png" alt="" class="fst-logo"/><h1 class="in"> INFO PLUSE </h1>
+            <img src="img/info-puls1.png" alt="" class="fst-logo"/><h1 class="in"> INFO PLUS </h1>
             
                 <p>Your app needs to work where your users live, work and play – and that’s exactly where our testers are.
     SQA Solution puts your app through rigorous testing using professional </p><p>
@@ -51,5 +51,8 @@
         </div> 
         
     </section>
+    <footer>
+        <h2 class="copyright">© Info-plus 2015</h2>
+    </footer>
 </body>
 </html>
