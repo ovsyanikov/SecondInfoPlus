@@ -15,7 +15,20 @@
 </head>
 <body> 
     <section>
-		<div class="block" id="authentication">
+	<div class="text">
+                <h1 class="in"> INFO_PLUSE </h1>
+                <p>Your app needs to work where your users live, work and play – and that’s exactly where our testers are.
+    SQA Solution puts your app through rigorous testing using professional </p><p>
+    testers on real devices across locations and use cases that match your actual users.
+    
+    Your custom testing team and QA Project Manager are the winning combination to reduce overhead and maximize app quality.</p>
+                <p>Your app needs to work where your users live, work and play – and that’s exactly where our testers are.
+    SQA Solution puts your app through rigorous testing using professional </p><p>
+    testers on real devices across locations and use cases that match your actual users.
+    
+    Your custom testing team and QA Project Manager are the winning combination to reduce overhead and maximize app quality.</p>
+        </div>
+        <div class="block" id="authentication">
             <form action="?ctrl=user&act=authorize" method= "POST">
                 <input class="input" name="e-mail" placeholder="Введите e-mail или логин пользователя">
                 <input class="input" name="password" placeholder="Пароль" id="pass">

@@ -13,7 +13,10 @@ a{
 	transition: color ease-in-out 0.2s;	
 }
 body{
-	background: #2B3F57;	
+/*	background: #2B3F57 url(../img/banner.jpg);
+	background-size: auto 120%;
+*/	background: url(../img/footer_lodyas.png);
+		
 }
 .block{
 	width: 395px;
@@ -69,4 +72,18 @@ form a:hover{
 	font-size: 18pt;
 	text-align: center;
 	margin-bottom: 25px;	
+}
+.text{
+	width: 500px;
+	font-size: 16pt;
+	color: #fff;
+	float: right;
+	margin-right: 310px;	
+}
+.in{
+	font-size: 30pt;
+	padding-bottom: 25px;	
+}
+.text p{
+	margin: 25px 0px;	
 }
