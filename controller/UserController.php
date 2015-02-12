@@ -18,7 +18,7 @@ class UserController extends BaseController{
               
           }//if
           
-          return 'leave';
+          header('Location: ?ctrl=start&act=welcome');
           
       }//leaveAction
       
