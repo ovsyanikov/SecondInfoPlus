@@ -20,10 +20,10 @@ body{
 }
 .block{
 	width: 395px;
-	margin: 50px;
+	margin: 50px 0px 0px 0px;
 	padding: 25px;
-	background: rgb(192, 67, 50);
-
+	/*background: rgb(192, 67, 50);*/
+        background: #b11700;
 }
 .input{
 	padding: 10px;
@@ -78,13 +78,23 @@ form a:hover{
 	font-size: 16pt;
 	color: #fff;
 	float: right;
-	margin-right: 310px;	
+	/* margin-right: 150px; */	
 }
 .in{
-	font-size: 30pt;
-	padding-bottom: 25px;	
+        font-size: 50pt;
+        /* margin-left: 111px; */
+        position: relative;
+        top: -16px;
 }
 .text p{
 	margin: 25px 0px;	
         text-align: justify;
+}
+.fst-logo{
+    width: 80px;
+    float: right;
+}
+.fst-section{
+    width: 988px;
+    margin:  auto;
 }

@@ -14,9 +14,10 @@
 
 </head>
 <body> 
-    <section>
+    <section class="fst-section">
 	<div class="text">
-                <h1 class="in"> INFO PLUSE </h1>
+            <img src="img/info-puls1.png" alt="" class="fst-logo"/><h1 class="in"> INFO PLUSE </h1>
+            
                 <p>Your app needs to work where your users live, work and play – and that’s exactly where our testers are.
     SQA Solution puts your app through rigorous testing using professional </p><p>
     testers on real devices across locations and use cases that match your actual users.
