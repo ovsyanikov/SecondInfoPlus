@@ -13,4 +13,3 @@
             
             $front = new FrontController();
             $front->start();
-            //Hello!
