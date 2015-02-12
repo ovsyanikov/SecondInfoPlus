@@ -23,7 +23,6 @@
                 <input type="checkbox" name="remember_me" class="checkbox"><span class="span">Запомнить /</span>
                 <span class="span getnewpass"><a href=""> Забыли пароль?</a></span>
             </form>	
-                    <h1>Hello!</h1>
         </div>
         <div class="block" id="registration">
         	<h1 class="h1-form">Еще не зарегестрированы?</h1>
