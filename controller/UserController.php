@@ -63,8 +63,10 @@ class UserController extends BaseController{
     }
     
       function registerAction(){
-                
-               return 'register';
+               
+          $this->view->newUser = new user();
+          
+          return 'register';
         
       }
       
@@ -78,24 +80,16 @@ class UserController extends BaseController{
           
           $r = new \util\Request();
               
-//          $login = $r->getPostValue("new_user_login");
-//          $password = $r->getPostValue("new_user_password");
-//          $cpassword = $r->getPostValue("new_user_confirm_password");
-//          $email = $r->getPostValue("new_user_email");
-//          $firstName = $r->getPostValue("new_user_first_name");
-//          $lastName = $r->getPostValue("new_user_last_name");
+          $login = $r->getPostValue("new_user_login");
+          $password = $r->getPostValue("new_user_password");
+          $cpassword = $r->getPostValue("new_user_confirm_password");
+          $email = $r->getPostValue("new_user_email");
+          $firstName = $r->getPostValue("new_user_first_name");
+          $lastName = $r->getPostValue("new_user_last_name");
           
-          $user = new user();
-          $user->setEmail('newEM');
-          $user->setFirstName('newFN');
-          $user->setLastName('newFN');
-          $user->getLogin('newLogin');
-          $user->getPassword('newPS');
+          $this->userService->add($user);
           
-          $newID = $this->userService->add($user);
-          
-          
-          header("Location: index.php?ctrl=news&act=news&newId=$newID");
+          header("Location: ?ctrl=news&act=news");
           
       }//newuserAction
       

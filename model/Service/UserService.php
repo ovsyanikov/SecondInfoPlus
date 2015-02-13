@@ -7,22 +7,23 @@ use model\entity\user;
 class UserService{
     
     function add(user $user) {
+       
+        $stmt = \util\MySQL::$db->prepare("INSERT INTO users (id,Login,Password,Email,FirstName,LastName) VALUES(NULL,:login,:pass,:email,:fn,:ln)");
+        
+        $login = $user->getLogin();
+        $pass = $user->getPassword();
+        $email = $user->getEmail();
+        $firstName = $user->getFirstName();
+        $lastName = $user->getLastName();
         
         
-        
-        $stmt = \util\MySQL::$db->prepare(
-                "INSERT INTO users (id,Login,Password,Email,FirstName,LastName)".
-                "VALUES(NULL,:login,:pass,:email,:fn,:ln)");
-        
-        $stmt->bindParam(":login",$user->getLogin());
-        $stmt->bindParam(":pass",$user->getPassword());
-        $stmt->bindParam(":email",$user->getEmail());
-        $stmt->bindParam(":fn",$user->getFirstName());
-        $stmt->bindParam(":ln",$user->getLastName());
+        $stmt->bindParam(":login",$login);
+        $stmt->bindParam(":pass",$pass);
+        $stmt->bindParam(":email",$email);
+        $stmt->bindParam(":fn",$firstName);
+        $stmt->bindParam(":ln",$lastName);
         
         $stmt->execute();
-        
-        return $stmt->lastInsertId();     
         
     }//add
     
