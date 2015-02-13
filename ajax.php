@@ -17,7 +17,7 @@ use model\entity\user;
     $stmt->execute();
     $user = $stmt->fetchObject(user::class);
        if(is_a($user, 'model\entity\user')){
-               echo "yes";
+          echo "yes";
 
        }//if
    else{

@@ -4,6 +4,51 @@ if (!window.jQuery) {
     alert(msg);
 }
 
+function ShowAuthorizeMessage(message){
+    
+    var inp_class = $('#error_lp').attr("class");
+    
+    if(inp_class != 'error_block'){
+        
+        $('#authentication').animate({height: $('#authentication').height()+20},500);
+        $('#error_lp').removeClass('invisible');
+        $('#error_lp').addClass('error_block');
+
+        $('#error_lp').text(message);
+        
+    }//if
+    else{
+        
+        $('#error_lp').text(message);
+        
+    }
+    
+    
+}//ShowAuthorizeMessage
+
+function ShowRegisterMessage(message){
+    
+    var inp_class = $('#error').attr("class");
+    
+    if(inp_class != 'error_block'){
+        
+        $('#registration').animate({height: $('#registration').height()+20},500);
+        $('#error').removeClass('invisible');
+        $('#error').addClass('error_block');
+
+        $('#error').text(message);
+        
+    }//if
+    else{
+        
+        $('#error').text(message);
+        
+    }
+    
+    
+}//ShowAuthorizeMessage
+
+
 $(document).ready(function(){
     
         //Ajax проверка на совпадение введенного логина
@@ -17,27 +62,10 @@ $(document).ready(function(){
                 
                 if(data === "yes"){
                     
-                  $('#registration').animate({height: $('#registration').height()+20},500);
-                  $('#error').removeClass('invisible');
-                  $('#error').addClass('error_block');
+                  ShowRegisterMessage('Логин уже используется!');
                   
                     
                 }//if
-                else{
-                  
-                  var inp_class = $('#error').attr("class");
-
-                  if(inp_class == 'error_block'){
-                      
-                      $('#registration').animate({height: $('#registration').height()-20},500);
-                      $('#error').removeClass('error_block');
-                      $('#error').addClass('invisible');
-                      
-                  }//if
-                  
-                  
-                }//else
-                
                 
             });
             
@@ -46,75 +74,73 @@ $(document).ready(function(){
         //Нажатие кнопки Вход
         $('#Authorise').click(function(){
           
-            $.post("ajax.php",
-            {
-                userLE: $('#userLE').val(),
-                userPS: $('#userPS').val()
-                
-            },function (data){
-             
-              if ($('#userPS').val() || $('#userLE').val()){ //if empty
-                    
-                 var inp_class = $('#error_lp').attr("class");
+        if ($('#userPS').val() && $('#userLE').val()){ //if not empty
                  
-                  if(inp_class != 'error_block'){
-                      
-                      $('#error').text('*Извините, логин уже занят!');
-                      $('#authentication').animate({height: $('#authentication').height()+20},500);
-                      $('#error_lp').removeClass('invisible');
-                      $('#error_lp').addClass('error_block');
-                      
-                  }
-                  
-                  
-                    
+                $.post("ajax.php",
+                {
+                    userLE: $('#userLE').val(),
+                    userPS: $('#userPS').val()
+
+                },function (data){
+                     
+                     if(data == "yes"){//верный логин или пароль
+                         $('#AuthoriseForm').submit();
+                         
+                         
+                     }//if
+                     else{
+                         
+                         ShowAuthorizeMessage('Не верный логин или пароль!');
+                         
+                     }//else
+
+                });
                 
-                else{
-                    
-                  $('#AuthoriseForm').submit();
-                  
-                  var inp_class = $('#error_lp').attr("class");
-                  
-                  if(inp_class == 'error_block'){
-                      
-                      $('#authentication').animate({height: $('#authentication').height()-20},500);
-                      $('#error_lp').removeClass('error_block');
-                      $('#error_lp').addClass('invisible');
-                      
-                  }//if
-                  
-                  
-                }
-              
-              }//end if empty
-            });
+        }//end if empty
+        else{
+            
+            ShowAuthorizeMessage('Все поля должны быть заполнены!');
+        }      
+            
             
         });
         
         //Нажатие кнопки Регистрация
         $('#register').click(function(){
-            if ($('#RLogin').val() && $('#RPass').val() && $('#RMail').val()){//if empty
             
-                var inp_class = $('#error').attr("class");
-                if(inp_class != 'error_block'){
-
+            if ($('#RLogin').val() && $('#RPass').val() && $('#RMail').val()){//if empty
+                
+                var a = String($('#RMail').val());
+                
+                if(a.indexOf("@") == -1){
+                    
+                    ShowRegisterMessage('Поле имейл не корректно!');
+                    
+                }
+                else if($('#RLogin').val().length < 7){
+                    
+                    ShowRegisterMessage('Логин должен содержать более 6-ти букв');
+                    
+                }//else if
+                
+                else if($('#RPass').val().length < 7){
+                    
+                    ShowRegisterMessage('Пароль должен содержать более 6-ти букв');
+                    
+                }//else if
+                else{
+                    
                     $('#registerForm').submit();
-
-                }//if
-            }//end if empty    
+                    
+                }//else
+                
+                
+            }//end not empty    
             else{
                 
-                var inp_class = $('#error').attr("class");
-                 
-                  if(inp_class != 'error_block'){
-                      
-                      $('#error').text('*Все поля должны быть заполнены!');
-                      $('#registration').animate({height: $('#registration').height()+20},500);
-                      $('#error').removeClass('invisible');
-                      $('#error').addClass('error_block');
-                      
-                  }
-            }
+                ShowRegisterMessage('Все поля должны быть заполнены!');
+                  
+            }//else
         });
         
        

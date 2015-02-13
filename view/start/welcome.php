@@ -37,7 +37,7 @@
                 <input type="checkbox" name="remember_me" class="checkbox"><span class="span">Запомнить /</span>
                 <span class="span getnewpass"><a href=""> Забыли пароль?</a></span>
             </form>	
-            <div id="error_lp" class="invisible">*Неверный логин или пароль</div>
+            <div id="error_lp" class="invisible"></div>
         </div>
         <div class="block" id="registration">
             
@@ -51,7 +51,7 @@
                 <input class="submit" id="register" value="Регистрация" type="button">
                  
             </form>
-            <div id="error" class="invisible">Извините, логин уже занят!</div>
+            <div id="error" class="invisible"></div>
         </div> 
         
     </section>
