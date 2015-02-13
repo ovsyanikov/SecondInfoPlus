@@ -50,8 +50,8 @@ $(document).ready(function(){
                 userPS: $('#userPS').val()
                 
             },function (data){
-               
-              if ($('#APass').val() && $('#ALogin').val()){ //if empty
+             
+              if ($('#userPS').val() && $('#userLE').val()){ //if empty
                     
                  var inp_class = $('#error_lp').attr("class");
                  
@@ -90,7 +90,7 @@ $(document).ready(function(){
         
         
         $('#register').click(function(){
-            if ($('#RLog').val() && $('#Rpass').val() && $('#Rmail').val()){//if empty
+            if ($('#RLogin').val() || $('#RPass').val() || $('#RMail').val()){//if empty
             
                 var inp_class = $('#error').attr("class");
                 if(inp_class != 'error_block'){
