@@ -98,13 +98,14 @@ form a:hover{
         /* margin-left: 111px; */
         position: relative;
         top: -16px;
+        color: #fff;
 }
 .text p{
 	margin: 25px 0px;	
         text-align: justify;
 }
 .fst-logo{
-    width: 80px;
+    width: 84px;
     float: right;
 }
 .fst-section{
@@ -135,7 +136,7 @@ form a:hover{
     font-size: 10pt;
     color: #fff;
     text-align: center;
-    padding: 50px 0px 0px 25px;
+    padding: 50px 0px 25px 0px;
     font-weight: 100;
 }
 .top-head{
@@ -300,4 +301,37 @@ form a:hover{
     padding: 20px 0px 10px 5px;
     float: right;
     color: rgb(137, 11, 0);
+}
+.head-reg{
+    width: 530px;
+    padding: 25px 0px;
+    margin: auto;
+}
+.reg-logo{
+    /* margin-top: 15px; */
+    position: relative;
+    width: 137px;
+    left: 0px;
+    top: 20px;
+}
+.h2-reg {
+    font-weight: 700;
+    font-size: 30pt;
+    position: relative;
+    top: -35px;
+    color: #CF1000;
+}
+.reg-block{
+    margin: auto;
+}
+.h2-reg-form{
+    color: #fff;
+    
+    padding: 10px 0px;
+    font-weight: 400;
+    font-size: 18pt;
+}
+.reg-button{
+    width: 395px;
+    margin-top: 25px;
 }
