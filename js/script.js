@@ -1,4 +1,23 @@
+var data;
+if (!window.jQuery) {
+    msg = 'УПС :-( JQuery не загрузился! ';
+    alert(msg);
+}
+
 $(document).ready(function(){
+        
+         jQuery('#RLogin').keydown(function(){
+           
+            jQuery.post("ajax.php",{userLogin: jQuery('#RLogin').val() },function (data){
+                
+                
+                alert(data);
+               
+                
+            });
+            
+        });
+        
 	$('.bxslider').bxSlider({
 		controls: false,
 		auto: true,
@@ -71,4 +90,7 @@ $(document).ready(function(){
 			$('body,html').animate({scrollTop:0},800);
 		});
 	});
+        
+        
+       
 });

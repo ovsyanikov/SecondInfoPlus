@@ -40,12 +40,12 @@
         </div>
         <div class="block" id="registration">
         	<h1 class="h1-form">Еще не зарегестрированы?</h1>
-            <form method= "POST">
+                <form method= "POST">
                 
-                <input class="input" name="e-mail" placeholder="Имя пользователя">
-                <input class="input" name="e-mail" placeholder="E-mail">
-                <input class="input" name="e-mail" placeholder="Пароль" id="pass">
-                <input class="submit" value="Регистрация" type="submit">
+                <input class="input" id="RLogin" name="RLogin" placeholder="Имя пользователя">
+                <input class="input" name="RE-mail" placeholder="E-mail">
+                <input class="input" name="Rpassword" placeholder="Пароль" id="pass">
+                <input class="submit" id="register" value="Регистрация" type="submit">
 
             </form>	
         </div> 
