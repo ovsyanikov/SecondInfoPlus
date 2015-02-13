@@ -32,12 +32,12 @@
         <div class="block" id="authentication">
             <form action="?ctrl=news&act=news" id="AuthoriseForm"  method= "POST">
                 <input class="input" id="userLE" name="userLE" placeholder="Введите e-mail или логин пользователя">
-                <input class="password input" id="userPS" name="userPS" placeholder="Пароль">
+                <input class="password input" id="userPS" name="userPS" placeholder="Пароль" type="password">
                 <input id="Authorise" class="submit" value="Войти" type="button">
                 <input type="checkbox" name="remember_me" class="checkbox"><span class="span">Запомнить /</span>
                 <span class="span getnewpass"><a href=""> Забыли пароль?</a></span>
             </form>	
-            <div id="error_lp" class="invisible">Неверный логин или пароль</div>
+            <div id="error_lp" class="invisible">*Неверный логин или пароль</div>
         </div>
         <div class="block" id="registration">
             
@@ -47,7 +47,7 @@
                 
                 <input class="input" id="RLogin" name="RLogin" placeholder="Имя пользователя">
                 <input class="input" name="RE-mail" placeholder="E-mail"  id="RMail">
-                <input class="password input" name="Rpassword" placeholder="Пароль"  id="RPass">
+                <input class="password input" name="Rpassword" placeholder="Пароль" type="password"  id="RPass">
                 <input class="submit" id="register" value="Регистрация" type="button">
                  
             </form>

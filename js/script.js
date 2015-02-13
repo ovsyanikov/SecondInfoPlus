@@ -33,10 +33,10 @@ $(document).ready(function(){
                       $('#error').removeClass('error_block');
                       $('#error').addClass('invisible');
                       
-                  }//
+                  }//if
                   
                   
-                }
+                }//else
                 
                 
             });
@@ -53,12 +53,13 @@ $(document).ready(function(){
                 
             },function (data){
              
-              if ($('#userPS').val() && $('#userLE').val()){ //if empty
+              if ($('#userPS').val() || $('#userLE').val()){ //if empty
                     
                  var inp_class = $('#error_lp').attr("class");
                  
                   if(inp_class != 'error_block'){
                       
+                      $('#error').text('*Извините, логин уже занят!');
                       $('#authentication').animate({height: $('#authentication').height()+20},500);
                       $('#error_lp').removeClass('invisible');
                       $('#error_lp').addClass('error_block');
@@ -92,7 +93,7 @@ $(document).ready(function(){
         
         //Нажатие кнопки Регистрация
         $('#register').click(function(){
-            if ($('#RLogin').val() || $('#RPass').val() || $('#RMail').val()){//if empty
+            if ($('#RLogin').val() && $('#RPass').val() && $('#RMail').val()){//if empty
             
                 var inp_class = $('#error').attr("class");
                 if(inp_class != 'error_block'){
@@ -100,7 +101,20 @@ $(document).ready(function(){
                     $('#registerForm').submit();
 
                 }//if
-            }//end if empty        
+            }//end if empty    
+            else{
+                
+                var inp_class = $('#error').attr("class");
+                 
+                  if(inp_class != 'error_block'){
+                      
+                      $('#error').text('*Все поля должны быть заполнены!');
+                      $('#registration').animate({height: $('#registration').height()+20},500);
+                      $('#error').removeClass('invisible');
+                      $('#error').addClass('error_block');
+                      
+                  }
+            }
         });
         
        
