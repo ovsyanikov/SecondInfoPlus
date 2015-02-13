@@ -1,6 +1,6 @@
 var data;
 if (!window.jQuery) {
-    msg = 'УПС :-( JQuery не загрузился! ';
+    msg = 'Не загружен JQUERY';
     alert(msg);
 }
 
@@ -48,35 +48,11 @@ function ShowRegisterMessage(message){
     
 }//ShowAuthorizeMessage
 
+var loginResult;
 
 $(document).ready(function(){
-    
-        //Ajax проверка на совпадение введенного логина
-         $('#RLogin').on('input',function(e){
-           
-            $.post("ajax.php",
-            {
-                userLogin: $('#RLogin').val()
-                
-            },function (data){
-                
-                if(data === "yes"){
-                    
-                  ShowRegisterMessage('Логин уже используется!');
-                  
-                    
-                }//if
-                
-                else{
-                    
-                    ShowRegisterMessage('Данный логин свободен!');
-                    
-                }
-            });
-            
-        });
         
-        //Нажатие кнопки Вход
+        //Авторизация
         $('#Authorise').click(function(){
           
         if ($('#userPS').val() && $('#userLE').val()){ //if not empty
@@ -88,14 +64,12 @@ $(document).ready(function(){
 
                 },function (data){
                      
-                     if(data == "yes"){//верный логин или пароль
+                     if(data == "yes"){//РІРµСЂРЅС‹Р№ Р»РѕРіРёРЅ РёР»Рё РїР°СЂРѕР»СЊ
                          $('#AuthoriseForm').submit();
-                         
-                         
                      }//if
                      else{
                          
-                         ShowAuthorizeMessage('Не верный логин или пароль!');
+                         ShowAuthorizeMessage('РќРµ РІРµСЂРЅС‹Р№ Р»РѕРіРёРЅ РёР»Рё РїР°СЂРѕР»СЊ!');
                          
                      }//else
 
@@ -104,48 +78,51 @@ $(document).ready(function(){
         }//end if empty
         else{
             
-            ShowAuthorizeMessage('Все поля должны быть заполнены!');
+            ShowAuthorizeMessage('Р’СЃРµ РїРѕР»СЏ РґРѕР»Р¶РЅС‹ Р±С‹С‚СЊ Р·Р°РїРѕР»РЅРµРЅС‹!');
         }      
             
             
         });
         
-        //Нажатие кнопки Регистрация
+        //Регистрация
         $('#register').click(function(){
             
-            if ($('#RLogin').val() && $('#RPass').val() && $('#RMail').val()){//if empty
-                
-                var a = String($('#RMail').val());
-                
-                if(a.indexOf("@") == -1){
-                    
-                    ShowRegisterMessage('Поле имейл не корректно!');
-                    
-                }
-                else if($('#RLogin').val().length < 7){
-                    
-                    ShowRegisterMessage('Логин должен содержать более 6-ти букв');
-                    
-                }//else if
-                
-                else if($('#RPass').val().length < 7){
-                    
-                    ShowRegisterMessage('Пароль должен содержать более 6-ти букв');
-                    
-                }//else if
-                else{
-                    
-                    $('#registerForm').submit();
-                    
-                }//else
-                
-                
-            }//end not empty    
-            else{
-                
-                ShowRegisterMessage('Все поля должны быть заполнены!');
-                  
-            }//else
+           if($('#RLogin').val() && $('#RMail').val() && $('#RPass').val()){
+               
+               $.post("ajax.php",{
+               
+                userLogin: $('#RLogin').val(),
+                userEmail: $('#RMail').val()
+               
+                },function(data){
+
+               if(data == "used_login"){
+
+                   ShowRegisterMessage('Такой логин уже есть');
+
+               }//if
+               else if(data == "used_email"){
+
+                   ShowRegisterMessage('Такой email уже используется!');
+
+               }//else if
+               else if(data == "acc_free"){
+
+                   $("#registerForm").submit();
+
+               }//else if
+               else{
+                  ShowRegisterMessage('Servor error');
+               }
+               
+            }); 
+            
+           }//if not empty
+           else{
+               
+               ShowRegisterMessage('Есть пустые поля!');
+               
+           }//else
+            
         });
-        
 });

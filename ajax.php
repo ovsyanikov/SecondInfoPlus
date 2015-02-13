@@ -7,26 +7,43 @@ require_once './model/Entity/user.php';
 
 use model\entity\user;
 
-//Проверка на регистрационной форме
+//Регистрация
  $login = (new \util\Request())->getPostValue('userLogin');
+ $email = (new \util\Request())->getPostValue('userEmail');
  
- if(!empty($login)){
+ if(!empty($login) && !empty($email)){
      
     $stmt = \util\MySQL::$db->prepare("SELECT * FROM users WHERE Login = :login");
     $stmt->bindParam(":login",$login);
     $stmt->execute();
     $user = $stmt->fetchObject(user::class);
-       if(is_a($user, 'model\entity\user')){
-          echo "yes";
-
-       }//if
-   else{
-       echo "no_reg_form";
-   }//else
-     
+    
+    if(is_a($user, 'model\entity\user')){
+        
+        echo "used_login";
+        
+    }//if
+    else{
+        
+        $stmt = \util\MySQL::$db->prepare("SELECT * FROM users WHERE Email = :email");
+        $stmt->bindParam(":email",$email);
+        $stmt->execute();
+        $user = $stmt->fetchObject(user::class);
+        
+        if(is_a($user, 'model\entity\user')){
+        
+            echo "used_email";
+        
+        }//if
+        else{
+            echo "acc_free";
+        }
+    }
+    
+    
  }
  
- //Проверка на форме авторизации
+ //Авторизация
  $userLE = (new \util\Request())->getPostValue('userLE');
  
  if(!empty($userLE)){
@@ -42,7 +59,6 @@ use model\entity\user;
     
        if(is_a($user, 'model\entity\user')){
                echo "yes";
-
        }//if
        else{
             echo "no_authorize";
