@@ -13,7 +13,7 @@
 	<title>Info-Plus</title>
 
 </head>
-<body> 
+<body class="news-bg"> 
     <heder>
         <div class="top-head">
             <div class="content">

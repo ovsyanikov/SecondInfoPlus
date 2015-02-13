@@ -13,7 +13,7 @@
 	<title>Info-Plus</title>
 
 </head>
-<body> 
+<body class="welc"> 
     <section class="fst-section">
 	<div class="text">
             <img src="img/info-puls1.png" alt="" class="fst-logo"/><h1 class="in"> INFO PLUS </h1>

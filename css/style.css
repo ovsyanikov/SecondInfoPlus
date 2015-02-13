@@ -16,8 +16,14 @@ a{
 body{
 /*	background: #2B3F57 url(../img/banner.jpg);
 	background-size: auto 120%;
-*/	background: url(../img/footer_lodyas.png);
-		
+*/			
+}
+.welc{
+    background: url(../img/footer_lodyas.png);
+}
+.news-bg{
+    //background: url(../img/footer_lodyas.png);  
+    background: url(../img/halftone.png)
 }
 .block{
 	width: 395px;
@@ -163,7 +169,7 @@ form a:hover{
 }
 .menu{
     font-size: 18pt;
-    font-weight: 700;
+    font-weight: 100;
     text-transform: uppercase;
     border-top: 3px solid #890B00;
 }
