@@ -19,17 +19,17 @@
             <h2 class="h2-reg h2">Регистрация</h2>   
         </div>
         <div class="reg-block block" id="authentication">
-            <form action="?ctrl=user&act=register" id="registerForm" method= "POST">
+            <form action="?ctrl=user&act=newuser" id="registerForm" method= "POST">
                 <h2 class="h2-reg-form">Выберите логин</h2>
-                <input class="input" id="newUserLogin" name="userLE" placeholder="Логин">
+                <input class="input" id="newUserLogin" name="userLE" placeholder="Логин" value="<?php echo"{$this->view->NewUser->getLogin()}"; ?>">
                 <h2 class="h2-reg-form">Введите Ваш e-mail</h2>
-                <input class="input" id="newMail" name="RE-mail" placeholder="E-mail" >
+                <input class="input" id="newMail" name="REmail" placeholder="E-mail" value="<?php echo"{$this->view->NewUser->getEmail()}"; ?>" >
                 <h2 class="h2-reg-form">Создать пароль</h2>
-                <input class="input" id="userPS" name="userPS" placeholder="Пароль" type="password">
+                <input class="input" id="userPS" name="userPS" placeholder="Пароль" type="password" value="<?php echo"{$this->view->NewUser->getPassword()}"; ?>">
                 <input class="input" id="userPS2" name="userPS2" placeholder="Повторите ввод" type="password">
                 <h2 class="h2-reg-form">Ваши имя и фамилия</h2>
-                <input class="input" id="NewFirstName" name="RLogin" placeholder="Имя">
-                <input class="input" id="NewLastName" name="RLogin" placeholder="Фамилия">
+                <input class="input" id="NewFirstName" name="NewFirstName" placeholder="Имя">
+                <input class="input" id="NewLastName" name="NewLastName" placeholder="Фамилия">
                 <input class="reg-button submit" id="registerNewUser" value="Зарегистрироваться" type="button">
                 
             </form>

@@ -63,14 +63,29 @@ class UserController extends BaseController{
     }
     
       function mainRegisterAction(){
-
+          
+          $newUser = new user();
+          $r = new \util\Request();
+          
+          $newUser->setEmail($r->getPostValue('REmail'));
+          $newUser->setLogin($r->getPostValue('RLogin'));
+          $newUser->setPassword('Rpassword');
+          
+          $this->view->NewUser = $newUser;
+          
           return 'register';
           
       }
       
       function registerAction(){
-               
-          $this->view->newUser = new user();
+          
+           if(empty($this->userService)){
+              
+              $this->userService = new UserService();
+              
+          }//if
+
+          $this->userService->add($user);
           
           header("Location: ?ctrl=news&act=news");
           
@@ -85,13 +100,22 @@ class UserController extends BaseController{
           }//if
           
           $r = new \util\Request();
-              
-          $login = $r->getPostValue("new_user_login");
-          $password = $r->getPostValue("new_user_password");
-          $cpassword = $r->getPostValue("new_user_confirm_password");
-          $email = $r->getPostValue("new_user_email");
-          $firstName = $r->getPostValue("new_user_first_name");
-          $lastName = $r->getPostValue("new_user_last_name");
+          $newUser = new user();
+          
+          $login = $r->getPostValue("userLE");
+          $newUser->setLogin($login);
+          
+          $password = $r->getPostValue("userPS");
+          $newUser->setPassword($password);
+          
+          $email = $r->getPostValue("REmail");
+          $newUser->setEmail($email);
+          
+          $firstName = $r->getPostValue("NewFirstName");
+          $newUser->setFirstName($firstName);
+          
+          $lastName = $r->getPostValue("NewLastName");
+          $newUser->getLastName($lastName);
           
           $this->userService->add($user);
           

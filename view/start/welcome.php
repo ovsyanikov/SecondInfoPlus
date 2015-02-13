@@ -44,7 +44,7 @@
                 
             <form action="?ctrl=user&act=mainRegister" id="registerForm" method= "POST">
                 <input class="input" id="RLogin" name="RLogin" placeholder="Имя пользователя">
-                <input class="input" name="RE-mail" placeholder="E-mail"  id="RMail">
+                <input class="input" name="REmail" placeholder="E-mail"  id="RMail">
                 <input class="password input" name="Rpassword" placeholder="Пароль" type="password"  id="RPass">
                 <input class="submit" id="register" value="Регистрация" type="button">
             </form>

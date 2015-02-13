@@ -25,6 +25,9 @@ class UserService{
         
         $stmt->execute();
         
+        $r = new \util\Request();
+        $r->setSessionValue('user_info_plus', $login);
+        
     }//add
     
     function searchLoginAction(){
