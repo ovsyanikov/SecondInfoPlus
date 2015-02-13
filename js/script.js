@@ -63,12 +63,12 @@ $(document).ready(function(){
 
                 },function (data){
                      
-                     if(data == "yes"){//РІРµСЂРЅС‹Р№ Р»РѕРіРёРЅ РёР»Рё РїР°СЂРѕР»СЊ
+                     if(data == "yes"){//
                          $('#AuthoriseForm').submit();
                      }//if
                      else{
                          
-                         ShowAuthorizeMessage('РќРµ РІРµСЂРЅС‹Р№ Р»РѕРіРёРЅ РёР»Рё РїР°СЂРѕР»СЊ!');
+                         ShowAuthorizeMessage('Неверный логин или пароль!');
                          
                      }//else
 

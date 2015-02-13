@@ -23,27 +23,12 @@ class UserService{
         $stmt->bindParam(":fn",$firstName);
         $stmt->bindParam(":ln",$lastName);
         
-        $stmt->execute();
+        $st = $stmt->execute();
         
         $r = new \util\Request();
-        $r->setSessionValue('user_info_plus', $login);
+        $r->setSessionValue('user_info_plus', $user->getLogin());
         
     }//add
-    
-    function searchLoginAction(){
-        
-        $login = (new \util\Request())->getPostValue('userLogin');
-        $stmt = \util\MySQL::$db->prepare("SELECT id FROM users WHERE Login = :login");
-        $stmt->bindParam(":login",$login);
-        $stmt->execute();
-        $user = $stmt->fetchObject(user::class);
-        
-        if(is_a($user, 'user'))
-        {echo "yes";}
-        else
-        {echo "no";}
-        
-    }//searchLoginAction
             
     function authorize($login, $password) {
 

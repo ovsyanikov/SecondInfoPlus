@@ -115,9 +115,9 @@ class UserController extends BaseController{
           $newUser->setFirstName($firstName);
           
           $lastName = $r->getPostValue("NewLastName");
-          $newUser->getLastName($lastName);
+          $newUser->setLastName($lastName);
           
-          $this->userService->add($user);
+          $this->userService->add($newUser);
           
           header("Location: ?ctrl=news&act=news");
           
