@@ -14,16 +14,16 @@ class UserService{
     
     function searchLoginAction(){
         
-        $login = (new \util\Request())->getPostValue('RLogin');
+        $login = (new \util\Request())->getPostValue('userLogin');
         $stmt = \util\MySQL::$db->prepare("SELECT id FROM users WHERE Login = :login");
         $stmt->bindParam(":login",$login);
         $stmt->execute();
         $user = $stmt->fetchObject(user::class);
         
-        if(is_a($user, 'model\entity\user'))
-        {echo 1;}
+        if(is_a($user, 'user'))
+        {echo "yes";}
         else
-        {echo 0;}
+        {echo "no";}
         
     }//searchLoginAction
             

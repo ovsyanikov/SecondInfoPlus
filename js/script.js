@@ -6,13 +6,24 @@ if (!window.jQuery) {
 
 $(document).ready(function(){
         
-         jQuery('#RLogin').keydown(function(){
+         jQuery('#RLogin').on('input',function(e){
            
-            jQuery.post("ajax.php",{userLogin: jQuery('#RLogin').val() },function (data){
+            jQuery.post("ajax.php",
+            {
+                userLogin: jQuery('#RLogin').val()
+                
+            },function (data){
                 
                 
-                alert(data);
-               
+                if(data === "yes"){
+                    
+                    alert('Извините, логин уже занят!');
+                    
+                }
+                else{
+                    
+                }
+                
                 
             });
             
