@@ -22,7 +22,7 @@ class UserController extends BaseController{
           
       }//leaveAction
       
-    function authorizeAction() {
+      function authorizeAction() {
         
         if(empty($this->userService)){
               
@@ -62,10 +62,41 @@ class UserController extends BaseController{
           }
     }
     
-    function registerAction(){
+      function registerAction(){
+                
+               return 'register';
         
-        return 'register';
-        
-    }
-    
+      }
+      
+      function newuserAction(){
+          
+          if(empty($this->userService)){
+              
+              $this->userService = new UserService();
+              
+          }//if
+          
+          $r = new \util\Request();
+              
+//          $login = $r->getPostValue("new_user_login");
+//          $password = $r->getPostValue("new_user_password");
+//          $cpassword = $r->getPostValue("new_user_confirm_password");
+//          $email = $r->getPostValue("new_user_email");
+//          $firstName = $r->getPostValue("new_user_first_name");
+//          $lastName = $r->getPostValue("new_user_last_name");
+          
+          $user = new user();
+          $user->setEmail('newEM');
+          $user->setFirstName('newFN');
+          $user->setLastName('newFN');
+          $user->getLogin('newLogin');
+          $user->getPassword('newPS');
+          
+          $newID = $this->userService->add($user);
+          
+          
+          header("Location: index.php?ctrl=news&act=news&newId=$newID");
+          
+      }//newuserAction
+      
 }//UserController

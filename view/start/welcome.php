@@ -6,8 +6,7 @@
         <link rel="stylesheet" href="css/style.css">
         <link rel="shortcut icon" href="img/info-puls.png">
 	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,600,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
-        
-	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script> 
+       	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script> 
         <script type="text/javascript" src="js/script.js"></script> 
     
 	<title>Info-Plus</title>
@@ -41,15 +40,13 @@
         </div>
         <div class="block" id="registration">
             
-        	<h1 class="h1-form">Еще не зарегестрированы?</h1>
+            <h1 class="h1-form">Еще не зарегестрированы?</h1>
                 
-                <form action="?ctrl=user&act=register" id="registerForm" method= "POST">
-                
+            <form action="?ctrl=user&act=newuser" id="registerForm" method= "POST">
                 <input class="input" id="RLogin" name="RLogin" placeholder="Имя пользователя">
                 <input class="input" name="RE-mail" placeholder="E-mail"  id="RMail">
                 <input class="password input" name="Rpassword" placeholder="Пароль" type="password"  id="RPass">
                 <input class="submit" id="register" value="Регистрация" type="button">
-                 
             </form>
             <div id="error" class="invisible"></div>
         </div> 
