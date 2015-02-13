@@ -13,6 +13,7 @@ a{
 	transition: color ease-in-out 0.2s;
         text-decoration: none;
 }
+
 body{
 /*	background: #2B3F57 url(../img/banner.jpg);
 	background-size: auto 120%;
@@ -158,9 +159,10 @@ form a:hover{
 }
 .personal{
     float: right;
-    padding: 20px 0px;
+    padding: 8px 0px;
     color: #fff;
     text-decoration: none;
+    /* display: none; */
 }
 
 .logo{
@@ -176,6 +178,8 @@ form a:hover{
     font-weight: 100;
     text-transform: uppercase;
     border-top: 3px solid #890B00;
+    width: 720px;
+    display: inline-block;
 }
 .menu-li{
     display: inline-block;
@@ -259,4 +263,40 @@ form a:hover{
 }
 .last{
     border: none;
+}
+.search{
+    float: right;
+}
+.isearch{
+    padding: 5px;
+    margin-top: 15px;
+    border: none;
+}
+
+@font-face {
+    font-family: 'search font';
+    src: url('../fonts/search-font.eot');
+    src: url('../fonts/search-font?#iefix') format('embedded-opentype'),
+         url('../fonts/search-font.woff') format('woff'),
+         url('../fonts/search-font.ttf') format('truetype'),
+         url('../fonts/search-font.svg#search-font') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+[class^='icon-']:before{
+	display: inline-block;
+   font-family: 'search font';
+   font-style: normal;
+   font-weight: normal;
+   line-height: 1;
+   -webkit-font-smoothing: antialiased;
+   -moz-osx-font-smoothing: grayscale
+}
+
+.search-icon{
+    font-family: 'search font';
+    font-size: 14pt;
+    padding: 20px 0px 10px 5px;
+    float: right;
+    color: rgb(137, 11, 0);
 }

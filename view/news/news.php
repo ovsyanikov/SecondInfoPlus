@@ -20,16 +20,9 @@
                     <img src="img/info-puls1.png" alt="">
                     <h1 class="logo-h1">INFO PLUS</h1>
                 </div>
-                <div class="personal">
-                    <a href="">Личный кабинет(<?php 
-                    require_once 'util/Request.php';
-                    use util\Request;
-                    $r = new Request();
-                    echo "{$r->getSessionValue('user_info_plus')}";?>)</a>/
-                    <a href="?ctrl=user&act=leave">Выйти</a>
-                </div>
                 <div class="search">
-                    
+                    <input type="search" class="isearch" placeholder="Поиск">
+                    <span class="search-icon">A</span>
                 </div>
             </div>
         </div>
@@ -42,6 +35,15 @@
                     <a href=""><li class="menu-li">Участники</li></a>
                     <a href=""><li class="menu-li">Мои записи</li></a>
                 </ul>
+            
+                <div class="personal">
+                        <a href="">Личный кабинет (<?php 
+                        require_once 'util/Request.php';
+                        use util\Request;
+                        $r = new Request();
+                        echo "{$r->getSessionValue('user_info_plus')}";?>) </a> / 
+                        <a href="?ctrl=user&act=leave"> Выйти</a>
+                </div>
             </div>
         </div>
     </heder>
