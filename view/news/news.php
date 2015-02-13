@@ -20,6 +20,7 @@
                 <div class="logo">
                     <img src="img/info-plus1.png" alt="">
                     <h1 class="logo-h1">INFO PLUS</h1>
+                    
                 </div>
             </div>
         </div>
