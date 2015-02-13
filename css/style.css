@@ -180,8 +180,8 @@ form a:hover{
 .menu-li{
     display: inline-block;
     list-style-type: none;
-    width: 120px;
-    padding: 7px 5px;
+    width: 130px;
+    padding: 7px 0px;
     text-align: center;
     color: #fff;
     /* border-bottom: 3px solid #890B00; */
