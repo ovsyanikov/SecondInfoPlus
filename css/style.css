@@ -249,6 +249,7 @@ form a:hover{
 .post-text{
     font-size: 12pt;
     padding: 5px 0px;
+    text-align: justify;
 }
 .post{
     padding: 15px 0px;
