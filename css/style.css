@@ -63,7 +63,8 @@ form a:hover{
 }
 .getnewpass{	
 }
-#pass{
+
+.password{
 	width: 215px;
 	margin-right: 5px;	
 }
@@ -105,4 +106,16 @@ form a:hover{
     text-align: center;
     padding: 75px 0px 0px 25px;
     font-weight: 100;
+}
+
+.invisible{
+    
+    display: none;
+    height: 0px;
+}
+
+.error_block{
+    
+    display: block;
+    color: white;
 }

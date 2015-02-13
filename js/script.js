@@ -6,22 +6,74 @@ if (!window.jQuery) {
 
 $(document).ready(function(){
         
-         jQuery('#RLogin').on('input',function(e){
+         $('#RLogin').on('input',function(e){
            
-            jQuery.post("ajax.php",
+            $.post("ajax.php",
             {
-                userLogin: jQuery('#RLogin').val()
+                userLogin: $('#RLogin').val()
                 
             },function (data){
                 
                 
                 if(data === "yes"){
                     
-                    alert('Извините, логин уже занят!');
+                  $('#registration').animate({height: $('#registration').height()+20},500);
+                  $('#error').removeClass('invisible');
+                  $('#error').addClass('error_block');
+                  
                     
-                }
+                }//if
                 else{
                     
+                  var inp_class = $('#error').attr("class");
+
+                  if(inp_class == 'error_block'){
+                      
+                      $('#registration').animate({height: $('#registration').height()-20},500);
+                      $('#error').removeClass('error_block');
+                      $('#error').addClass('invisible');
+                      
+                  }
+                  
+                  
+                }
+                
+                
+            });
+            
+        });
+        
+        $('#Authorise').on('click',function(e){
+           
+            $.post("ajax.php",
+            {
+                userLE: $('#userLE').val(),
+                userPS: $('#userPS').val()
+                
+            },function (data){
+                
+                
+                if(data === "yes"){
+                    
+                  $('#authentication').animate({height: $('#authentication').height()+20},500);
+                  $('#error_lp').removeClass('invisible');
+                  $('#error_lp').addClass('error_block');
+                  
+                    
+                }//if
+                else{
+                    
+                  var inp_class = $('#error_lp').attr("class");
+
+                  if(inp_class == 'error_block'){
+                      
+                      $('#authentication').animate({height: $('#authentication').height()-20},500);
+                      $('#error_lp').removeClass('error_block');
+                      $('#error_lp').addClass('invisible');
+                      
+                  }
+                  
+                  
                 }
                 
                 
