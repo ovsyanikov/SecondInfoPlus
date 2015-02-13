@@ -9,7 +9,6 @@
         
 	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script> 
         <script type="text/javascript" src="js/script.js"></script> 
-    
 	<title>Info-Plus</title>
 
 </head>
@@ -22,7 +21,11 @@
                     <h1 class="logo-h1">INFO PLUS</h1>
                 </div>
                 <div class="personal">
-                    <a href="">Личный кабинет</a>/
+                    <a href="">Личный кабинет(<?php 
+                    require_once 'util/Request.php';
+                    use util\Request;
+                    $r = new Request();
+                    echo "{$r->getSessionValue('user_info_plus')}";?>)</a>/
                     <a href="?ctrl=user&act=leave">Выйти</a>
                 </div>
             </div>
