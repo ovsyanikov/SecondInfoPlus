@@ -19,5 +19,5 @@ use model\entity\user;
             
         }//if
         else{
-            echo $login;
+            echo "no";
         }//else
