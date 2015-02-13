@@ -55,7 +55,7 @@ if(!empty($_POST['mainregister'])){
 
 else{
     
-    //Регистрация
+ //Регистрация
  $login = (new \util\Request())->getPostValue('userLogin');
  $email = (new \util\Request())->getPostValue('userEmail');
  

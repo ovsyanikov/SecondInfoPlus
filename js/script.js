@@ -88,6 +88,9 @@ $(document).ready(function(){
             
            if($('#RLogin').val() && $('#RMail').val() && $('#RPass').val()){
                
+               mail = new String($('#RMail').val());
+               pass = new String($('#RPass').val());
+               
                $.post("ajax.php",{
                
                 userLogin: $('#RLogin').val(),
@@ -105,6 +108,19 @@ $(document).ready(function(){
                    ShowRegisterMessage('Такой email уже используется!');
 
                }//else if
+               else if(mail.indexOf('@') == -1){
+
+                   ShowRegisterMessage('email не содержит символ @');
+
+               }//else if
+               else if(pass.length < 7){
+
+                   ShowRegisterMessage('Пароль должен быть дленнее 7-ми символов');
+
+               }//else if
+               else if(pass.length > 50){
+                   ShowRegisterMessage('Слишком длинный пароль');
+               }//else if
                else if(data == "acc_free"){
 
                    $("#registerForm").submit();
@@ -112,7 +128,7 @@ $(document).ready(function(){
                }//else if
                else{
                   ShowRegisterMessage('Servor error');
-               }
+               }//else
                
             }); 
             
