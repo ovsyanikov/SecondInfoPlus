@@ -35,7 +35,8 @@ body{
 	margin: 50px 0px 0px 0px;
 	padding: 25px;
 	/*background: rgb(192, 67, 50);*/
-        background: #b11700;
+        
+	background: #CF1000;
 }
 .input{
 	padding: 10px;
@@ -105,7 +106,7 @@ form a:hover{
         text-align: justify;
 }
 .fst-logo{
-    width: 84px;
+    width: 85px;
     float: right;
 }
 .fst-section{
