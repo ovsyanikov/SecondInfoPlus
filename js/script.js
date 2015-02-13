@@ -67,6 +67,11 @@ $(document).ready(function(){
                     
                 }//if
                 
+                else{
+                    
+                    ShowRegisterMessage('Данный логин свободен!');
+                    
+                }
             });
             
         });
