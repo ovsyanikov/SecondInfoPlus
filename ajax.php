@@ -7,7 +7,55 @@ require_once './model/Entity/user.php';
 
 use model\entity\user;
 
-//Регистрация
+if(!empty($_POST['mainregister'])){
+    
+    //Главная регистрация
+ 
+ $newLogin = (new \util\Request())->getPostValue('newUserLogin');
+ $newMail = (new \util\Request())->getPostValue('newMail');
+ 
+ //Если не пуст новый логин
+ if(!empty($newLogin)){
+     
+     $stmt = \util\MySQL::$db->prepare("SELECT * FROM users WHERE Login = :login");
+     $stmt->bindParam(":login",$newLogin);
+     $stmt->execute();
+     $user = $stmt->fetchObject(user::class);
+     
+     if(is_a($user,'model\entity\user')){
+         
+         echo "used_login";
+         
+     }//if
+     //Если логин не используется и пароль на форме не пуст
+     else if(!empty($newMail)){
+         
+            $stmt = \util\MySQL::$db->prepare("SELECT * FROM users WHERE Email = :mail");
+            $stmt->bindParam(":mail",$newMail);
+            $stmt->execute();
+            $user = $stmt->fetchObject(user::class);
+
+            if(is_a($user,'model\entity\user')){
+
+                echo "used_email";
+
+            }//if
+            else{
+                
+                echo $newMail;
+                
+            }//else
+            
+     }//if !empty($newMail)
+     else {echo "no";}
+     
+ }//login
+ 
+}
+
+else{
+    
+    //Регистрация
  $login = (new \util\Request())->getPostValue('userLogin');
  $email = (new \util\Request())->getPostValue('userEmail');
  
@@ -66,3 +114,6 @@ use model\entity\user;
      
  }//if
  
+
+    
+}

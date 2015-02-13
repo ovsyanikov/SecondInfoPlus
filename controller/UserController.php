@@ -62,13 +62,19 @@ class UserController extends BaseController{
           }
     }
     
+      function mainRegisterAction(){
+
+          return 'register';
+          
+      }
+      
       function registerAction(){
                
           $this->view->newUser = new user();
           
-          return 'register';
-        
-      }
+          header("Location: ?ctrl=news&act=news");
+          
+      }//registerAction
       
       function newuserAction(){
           

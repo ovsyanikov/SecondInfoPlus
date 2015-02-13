@@ -21,18 +21,17 @@
         <div class="reg-block block" id="authentication">
             <form action="?ctrl=user&act=register" id="registerForm" method= "POST">
                 <h2 class="h2-reg-form">Выберите логин</h2>
-                <input class="input" id="userLE" name="userLE" placeholder="Логин">
+                <input class="input" id="newUserLogin" name="userLE" placeholder="Логин">
                 <h2 class="h2-reg-form">Введите Ваш e-mail</h2>
-                <input class="input" name="RE-mail" placeholder="E-mail"  id="RMail">
+                <input class="input" id="newMail" name="RE-mail" placeholder="E-mail" >
                 <h2 class="h2-reg-form">Создать пароль</h2>
                 <input class="input" id="userPS" name="userPS" placeholder="Пароль" type="password">
                 <input class="input" id="userPS2" name="userPS2" placeholder="Повторите ввод" type="password">
                 <h2 class="h2-reg-form">Ваши имя и фамилия</h2>
-                <input class="input" id="RLogin" name="RLogin" placeholder="Имя">
-                <input class="input" id="RLogin" name="RLogin" placeholder="Фамилия">
+                <input class="input" id="NewFirstName" name="RLogin" placeholder="Имя">
+                <input class="input" id="NewLastName" name="RLogin" placeholder="Фамилия">
+                <input class="reg-button submit" id="registerNewUser" value="Зарегистрироваться" type="button">
                 
-
-                <input class="reg-button submit" id="register" value="Зарегистрироваться" type="button">
             </form>
             <div id="error" class="invisible"></div>
         </div> 

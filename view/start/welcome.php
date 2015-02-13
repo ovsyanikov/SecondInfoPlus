@@ -42,7 +42,7 @@
             
             <h1 class="h1-form">Еще не зарегестрированы?</h1>
                 
-            <form action="?ctrl=user&act=register" id="registerForm" method= "POST">
+            <form action="?ctrl=user&act=mainRegister" id="registerForm" method= "POST">
                 <input class="input" id="RLogin" name="RLogin" placeholder="Имя пользователя">
                 <input class="input" name="RE-mail" placeholder="E-mail"  id="RMail">
                 <input class="password input" name="Rpassword" placeholder="Пароль" type="password"  id="RPass">
