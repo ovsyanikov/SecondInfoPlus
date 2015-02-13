@@ -22,8 +22,12 @@ body{
     background: url(../img/footer_lodyas.png);
 }
 .news-bg{
-    //background: url(../img/footer_lodyas.png);  
-    background: url(../img/halftone.png)
+    background: url(../img/footer_lodyas.png);  
+    /* background: url(../img/halftone.png); */
+    /* background: url(../img/sos.png); */
+    background: url(../img/ticks.png);
+    /* background: url(../img/binding_light.png); */
+
 }
 .block{
 	width: 395px;
@@ -187,4 +191,72 @@ form a:hover{
     background: #CF1000;
     /* border-bottom: 3px solid #CF1000; */
     transition:  background ease-in-out 0.2s, border ease-in-out 0.2s;
+}
+.news-section{
+    margin: 25px 0px 0px 25px;
+    background: #fff;
+    display: inline-block;
+    width: 720px;
+    min-height: 450px;
+    padding: 25px;
+}
+.sidebar{
+    margin-top: 25px;
+    background: #fff;
+    display: inline-block;
+    width: 350px;
+    min-height: 450px;
+    vertical-align: top;
+    padding: 25px;
+}
+.h1{
+    font-size: 20pt;
+    color: #890B00;
+    /* font-weight: 400; */
+    font-stretch: condensed;
+    padding: 10px 0px;
+}
+.h2{
+    font-size: 14pt;
+    color: #BE1000;
+    font-weight: 400;
+    font-stretch: condensed;
+    padding: 5px 0px;
+}
+.top-3 img{
+    width: 720px;
+}
+.top-3{
+    width: 720px;
+    height: 450px;
+    overflow: hidden;
+}
+.footer{
+    background:  #890B00;
+    margin-top: 25px;
+}
+.foot{
+    padding: 15px;
+}
+.post-h2{
+    font-weight: 700;
+    font-size: 14pt;
+}
+.post-text{
+    font-size: 12pt;
+    padding: 5px 0px;
+}
+.post{
+    padding: 15px 0px;
+    border-bottom: 1px solid #E3E3E3;
+}
+.span-time{
+    color: #000;
+}
+.side-post{
+    padding:  15px 0px;
+    border-bottom: 1px solid #E3E3E3; 
+}
+.last{
+    border: none;
 }
