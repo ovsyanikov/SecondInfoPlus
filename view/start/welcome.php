@@ -30,7 +30,7 @@
     Your custom testing team and QA Project Manager are the winning combination to reduce overhead and maximize app quality.</p>
         </div>
         <div class="block" id="authentication">
-            <form action="?ctrl=news&act=news" id="AuthoriseForm"  method= "POST">
+            <form action="?ctrl=user&act=authorize" id="AuthoriseForm"  method= "POST">
                 <input class="input" id="userLE" name="userLE" placeholder="Введите e-mail или логин пользователя">
                 <input class="password input" id="userPS" name="userPS" placeholder="Пароль" type="password">
                 <input id="Authorise" class="submit" value="Войти" type="button">

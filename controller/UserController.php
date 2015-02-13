@@ -31,8 +31,8 @@ class UserController extends BaseController{
           }//if
           $r = new \util\Request();
               
-          $login = $r->getPostValue("e-mail");
-          $password = $r->getPostValue("password");
+          $login = $r->getPostValue("userLE");
+          $password = $r->getPostValue("userPS");
           $remember = $r->getPostValue("remember_me");
           
           $cuser = $this->userService->authorize($login, $password);
@@ -51,7 +51,8 @@ class UserController extends BaseController{
                       $r->setSessionValue('user_info_plus', $cuser->getLogin());
                       
                   }//else
-                  return 'authorize';
+                  
+                  header("Location: ?ctrl=news&act=news");
                   
           }//if
           else{
