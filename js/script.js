@@ -5,7 +5,8 @@ if (!window.jQuery) {
 }
 
 $(document).ready(function(){
-        
+    
+        //Ajax проверка на совпадение введенного логина
          $('#RLogin').on('input',function(e){
            
             $.post("ajax.php",
@@ -42,6 +43,7 @@ $(document).ready(function(){
             
         });
         
+        //Нажатие кнопки Вход
         $('#Authorise').click(function(){
           
             $.post("ajax.php",
@@ -88,7 +90,7 @@ $(document).ready(function(){
             
         });
         
-        
+        //Нажатие кнопки Регистрация
         $('#register').click(function(){
             if ($('#RLogin').val() || $('#RPass').val() || $('#RMail').val()){//if empty
             
