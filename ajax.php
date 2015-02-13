@@ -12,7 +12,7 @@ use model\entity\user;
  
  if(!empty($login)){
      
-      $stmt = \util\MySQL::$db->prepare("SELECT * FROM users WHERE Login = :login");
+    $stmt = \util\MySQL::$db->prepare("SELECT * FROM users WHERE Login = :login");
     $stmt->bindParam(":login",$login);
     $stmt->execute();
     $user = $stmt->fetchObject(user::class);
@@ -21,30 +21,32 @@ use model\entity\user;
 
        }//if
    else{
-       echo "no";
+       echo "no_reg_form";
    }//else
      
  }
  
  //Проверка на форме авторизации
  $userLE = (new \util\Request())->getPostValue('userLE');
+ 
  if(!empty($userLE)){
      
-     $iserPS = (new \util\Request())->getPostValue('userPS');
+    $userPS = (new \util\Request())->getPostValue('userPS');
      
     $stmt = \util\MySQL::$db->prepare("SELECT * FROM users WHERE ( (Login = :login or Email =:login) and Password = :pass)");
     $stmt->bindParam(":login",$userLE);
-    $stmt->bindParam(":pass",$iserPS);
+    $stmt->bindParam(":pass",$userPS);
     $stmt->execute();
+    
     $user = $stmt->fetchObject(user::class);
     
        if(is_a($user, 'model\entity\user')){
                echo "yes";
 
        }//if
-   else{
-       echo "no";
-   }//else
+       else{
+            echo "no_authorize";
+       }//else
      
  }//if
  

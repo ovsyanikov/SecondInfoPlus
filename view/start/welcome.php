@@ -30,10 +30,10 @@
     Your custom testing team and QA Project Manager are the winning combination to reduce overhead and maximize app quality.</p>
         </div>
         <div class="block" id="authentication">
-            <form method= "POST">
-                <input class="input" id="userLE" name="e-mail" placeholder="Введите e-mail или логин пользователя">
-                <input class="password input" id="userPS" name="password" placeholder="Пароль">
-                <input id="Authorise" class="submit" value="Войти" type="submit">
+            <form action="?ctrl=news&act=news" id="AuthoriseForm"  method= "POST">
+                <input class="input" id="userLE" name="userLE" placeholder="Введите e-mail или логин пользователя">
+                <input class="password input" id="userPS" name="userPS" placeholder="Пароль">
+                <input id="Authorise" class="submit" value="Войти" type="button">
                 <input type="checkbox" name="remember_me" class="checkbox"><span class="span">Запомнить /</span>
                 <span class="span getnewpass"><a href=""> Забыли пароль?</a></span>
             </form>	
@@ -43,12 +43,12 @@
             
         	<h1 class="h1-form">Еще не зарегестрированы?</h1>
                 
-            <form id="registerForm" method= "POST">
+                <form action="?ctrl=user&act=register" id="registerForm" method= "POST">
                 
                 <input class="input" id="RLogin" name="RLogin" placeholder="Имя пользователя">
                 <input class="input" name="RE-mail" placeholder="E-mail">
                 <input class="password input" name="Rpassword" placeholder="Пароль">
-                <input class="submit" id="register" value="Регистрация" type="submit">
+                <input class="submit" id="register" value="Регистрация" type="button">
                  
             </form>
             <div id="error" class="invisible">Извините, логин уже занят!</div>
