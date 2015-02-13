@@ -43,7 +43,7 @@ $(document).ready(function(){
         });
         
         $('#Authorise').click(function(){
-           
+          
             $.post("ajax.php",
             {
                 userLE: $('#userLE').val(),
@@ -51,8 +51,7 @@ $(document).ready(function(){
                 
             },function (data){
                
-               
-                if(data === "no_authorize"){
+              if ($('#APass').val() && $('#ALogin').val()){ //if empty
                     
                  var inp_class = $('#error_lp').attr("class");
                  
@@ -66,7 +65,7 @@ $(document).ready(function(){
                   
                   
                     
-                }//if
+                
                 else{
                     
                   $('#AuthoriseForm').submit();
@@ -83,24 +82,23 @@ $(document).ready(function(){
                   
                   
                 }
-                
-                
+              
+              }//end if empty
             });
             
         });
         
         
         $('#register').click(function(){
+            if ($('#RLog').val() && $('#Rpass').val() && $('#Rmail').val()){//if empty
             
-            var inp_class = $('#error').attr("class");
+                var inp_class = $('#error').attr("class");
+                if(inp_class != 'error_block'){
 
-            if(inp_class != 'error_block'){
-                
-                $('#registerForm').submit();
-                
-            }//if
-            
-        
+                    $('#registerForm').submit();
+
+                }//if
+            }//end if empty        
         });
         
        
