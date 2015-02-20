@@ -271,7 +271,7 @@ class NewsController extends \controller\BaseController{
                         $pass_session_user = explode('|',$is_user_session)[1];  
 
                         if($session_user->getPassword() == $pass_session_user){
-                            $this->view->current_user = $pass_session_user;
+                            $this->view->current_user = $session_user;
                            return 'MakePost';
                         }//if
                         else{
@@ -299,7 +299,7 @@ class NewsController extends \controller\BaseController{
                 $pass_session_user = explode('|',$is_user_session)[1];  
                 
                 if($session_user->getPassword() == $pass_session_user){
-                    $this->view->current_user = $pass_session_user;
+                    $this->view->current_user = $session_user;
                     return 'MakePost';
                 }//if
                 else{
