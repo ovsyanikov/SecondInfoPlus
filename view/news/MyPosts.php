@@ -63,16 +63,27 @@
                        }//if
                        else{
                            foreach($this->view->current_user_news as $specific_news){
+                               
+                           $post_title = $specific_news->getTitle();
+                           $post_description = $specific_news->getDescription();
+                           
+                           if(strlen($post_title) > 50){
+                              $post_title = (substr($post_title, 0, 40) . "...");
+                           }//if
+                           
+                           if(strlen($post_description) > 150){
+                              $post_description = (substr($post_description, 0, 140) . "...");
+                           }//if
                            
                            if($specific_news->getFiles() != NULL){
                                
                                 $img_files = explode(',',$specific_news->getFiles());
                                 $img_count = count($img_files);
-                                echo "<div class=\"post\"><div data-post-id=\"{$specific_news->getId()}\"  class=\"delete-post\">J</div><img class=\"post-img\" alt=\"\" src=\"files/{$img_files[0]}\"/><a href=\"?ctrl=news&act=SpecificNews&news_id={$specific_news->getId()}\"><h2 class=\"post-h2 h2\">{$specific_news->getTitle()}</h2></a><p class=\"post-text\">{$specific_news->getDescription()}</p></div>";
+                                echo "<div class=\"post\"><div data-post-id=\"{$specific_news->getId()}\"  class=\"delete-post\">J</div><img class=\"post-img\" alt=\"\" src=\"files/{$img_files[0]}\"/><a href=\"?ctrl=news&act=SpecificNews&news_id={$specific_news->getId()}\"><h2 class=\"post-h2 h2\">$post_title</h2></a><p class=\"post-text\">$post_description</p></div>";
                            }//if
                           
                            else{
-                                 echo "<div class=\"post\"><div  data-post-id=\"{$specific_news->getId()}\"  class=\"delete-post\">J</div><a href=\"?ctrl=news&act=SpecificNews&news_id={$specific_news->getId()}\"><h2 class=\"post-h2 h2\">{$specific_news->getTitle()}</h2></a><p class=\"post-text\">{$specific_news->getDescription()}</p></div>";
+                                 echo "<div class=\"post\"><div  data-post-id=\"{$specific_news->getId()}\"  class=\"delete-post\">J</div><a href=\"?ctrl=news&act=SpecificNews&news_id={$specific_news->getId()}\"><h2 class=\"post-h2 h2\">$post_title</h2></a><p class=\"post-text\">$post_description</p></div>";
                                   
                            }//else
                            

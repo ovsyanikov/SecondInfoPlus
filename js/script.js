@@ -541,6 +541,9 @@ $(document).ready(function(){
             if($("#postTitle").val() && $("#makePostArea").val()){
                 $("#NewPostForm").submit();
             }//if not empty post field
+            else if($("#postTitle").val().length > 100){
+                ShowPostMessage("Длина заголовка слишком велика!");
+            }//else if
             else{
                 ShowPostMessage("Поля не должны быть пустыми!");
             }

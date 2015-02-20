@@ -159,7 +159,7 @@ class NewsController extends \controller\BaseController{
                     else if(!empty($is_user_session)){
                 
                         if(empty($this->userService)){
-                            $this->userService = new model\Service\UserService();
+                            $this->userService = new UserService();
                         }//if
 
                         $session_login = explode('|',$is_user_session)[0];  
@@ -168,7 +168,7 @@ class NewsController extends \controller\BaseController{
                         $pass_session_user = explode('|',$is_user_session)[1];  
 
                         if($session_user->getPassword() == $pass_session_user){
-                            $this->view->current_user = $pass_session_user;
+                            $this->view->current_user = $session_user;
                             return 'SpecificPost';
                         }//if
                         else{
@@ -187,7 +187,7 @@ class NewsController extends \controller\BaseController{
             else if(!empty($is_user_session)){
                 
                 if(empty($this->userService)){
-                    $this->userService = new model\service\UserService();
+                    $this->userService = new UserService();
                 }//if
                 
                 $session_login = explode('|',$is_user_session)[0];  
@@ -196,7 +196,7 @@ class NewsController extends \controller\BaseController{
                 $pass_session_user = explode('|',$is_user_session)[1];  
                 
                 if($session_user->getPassword() == $pass_session_user){
-                    $this->view->current_user = $pass_session_user;
+                    $this->view->current_user = $session_user;
                     return 'SpecificPost';
                 }//if
                 else{
@@ -615,7 +615,7 @@ class NewsController extends \controller\BaseController{
                         $pass_session_user = explode('|',$is_user_session)[1];  
 
                         if($session_user->getPassword() == $pass_session_user){
-                            $this->view->current_user = $pass_session_user;
+                            $this->view->current_user = $session_user;
                             $this->view->specific_news = $this->newsService->GetSpecificNews();
                         return 'SpecificNews';
                         }//if
@@ -644,7 +644,7 @@ class NewsController extends \controller\BaseController{
                 $pass_session_user = explode('|',$is_user_session)[1];  
                 
                 if($session_user->getPassword() == $pass_session_user){
-                    $this->view->current_user = $pass_session_user;
+                    $this->view->current_user = $session_user;
                     $this->view->specific_news = $this->newsService->GetSpecificNews();
                     return 'SpecificNews';
                 }//if
