@@ -6,7 +6,7 @@ use model\entity\news;
 
 class NewsService{
     
-      function PublicPost(){
+      function PublicPost($owner){
           
           $r = new Request();
           
@@ -14,11 +14,12 @@ class NewsService{
           
           $post_description = $r->getPostValue('makePostArea');
           
-          $owner = $r->getSessionValue('user_info_plus');
-          
           $user_files;
+          $name = NULL;
           
-        foreach($_FILES['user_files']['name'] as $k=>$f) {
+          try {
+              
+            foreach($_FILES['user_files']['name'] as $k=>$f) {
 
             if (!$_FILES['user_files']['error'][$k]) {
 
@@ -38,6 +39,11 @@ class NewsService{
                         }//if
             }//if
         }//foreach
+        
+          } 
+          catch (Exception $ex) {} 
+          
+        
         $stmt = \util\MySQL::$db->prepare("INSERT INTO news (id,Title,Files,Owner,Description,PublicDateTime) VALUES(NULL,:title,:files,:owner,:description,now())");
         
         $stmt->bindParam(":title",$post_title); 

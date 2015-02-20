@@ -4,6 +4,7 @@ namespace controller;
 
 use model\entity\user;
 use model\service\UserService;
+use model\service\StartService;
 
 class UserController extends BaseController{
     
@@ -126,17 +127,103 @@ class UserController extends BaseController{
       
       function MyProfileAction(){ 
           
-          if(empty($this->userService)){
-              
-              $this->userService = new UserService();
-              
-          }//if
-          
-          $r = new \util\Request();
-          
-          $this->view->UserToUpdate = $this->userService->getUser($r->getSessionValue('user_info_plus'));
-          
-          return 'MyProfile';
+         if(empty($this->startService)){
+            
+            $this->startService = new StartService();
+        }
+        $r = new \util\Request();
+        
+        $is_user_cookies = $r->getCookieValue('user_info_plus');
+        $is_user_session = $r->getSessionValue('user_info_plus');
+        
+        if($is_user_cookies == NULL && $is_user_session == NULL){
+            
+            header('Location: index.php?ctrl=start&act=welcome');
+            
+        }//if
+        else{
+            
+            if(!empty($is_user_cookies)){
+                
+                if(empty($this->userService)){
+                    $this->userService = new UserService();
+                }//if
+                
+                $decode_string = htmlspecialchars_decode($is_user_cookies);
+                //login[0]
+                //pass[1]
+                
+                $login = explode('|',$decode_string)[0];
+                $pass = explode('|',$decode_string)[1];
+                
+                $user = $this->userService->getUser($login);
+                
+                if(is_a($user,'model\entity\user')){
+                    
+                    $md5_pass = md5($user->getPassword());
+                    
+                    if($pass == $md5_pass){
+                        $this->view->current_user = $user;
+                        return 'MyProfile';
+                        
+                    }//if
+                    
+                    else if(!empty($is_user_session)){
+                
+                        if(empty($this->userService)){
+                            $this->userService = new model\Service\UserService();
+                        }//if
+
+                        $session_login = explode('|',$is_user_session)[0];  
+                        $session_user = $this->userService->getUser($session_login);
+
+                        $pass_session_user = explode('|',$is_user_session)[1];  
+
+                        if($session_user->getPassword() == $pass_session_user){
+                             $this->view->current_user = $session_user;
+                             return 'MyProfile';
+                        }//if
+                        else{
+                            header('Location: index.php?ctrl=start&act=welcome');
+                        }//else
+                
+                    }//else if
+                    else{
+                            header('Location: index.php?ctrl=start&act=welcome');
+                    }//else
+                }//if
+                
+                
+            }//if
+            
+            else if(!empty($is_user_session)){
+                
+                if(empty($this->userService)){
+                    $this->userService = new model\service\UserService();
+                }//if
+                
+                $session_login = explode('|',$is_user_session)[0];  
+                $session_user = $this->userService->getUser($session_login);
+                
+                $pass_session_user = explode('|',$is_user_session)[1];  
+                
+                if($session_user->getPassword() == $pass_session_user){
+                    $this->view->current_user = $session_user;
+                     return 'MyProfile';
+                }//if
+                else{
+                    header('Location: index.php?ctrl=start&act=welcome');
+                }//else
+                
+            }//else
+            else{
+                
+                 header('Location: index.php?ctrl=start&act=welcome');
+                
+            }//else
+            
+        }//else
+         
           
       }
       
