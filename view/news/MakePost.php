@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -9,22 +10,19 @@
         <script type="text/javascript" src="js/script.js"></script> 
         <title>Info-Pulse</title>
     </head>
-    <body class="news-bg"> 
-        <script>
-                        //DEFAULT_SEARCH();
-                for(i = 0;i < 3;i++){
-                    if(i==0){
-                        LoaderOn();
-                        
-                    }
-                    if(i==1){
-                        DEFAULT_SEARCH();
-                    }
-
-                }    
-                    
-
+    <body i="body" class="news-bg"> 
+        
+       <script>
+           
+            var script = document.createElement('SCRIPT');
+            
+            var data = new String("<?php echo $_GET['vklink']; ?>");
+            
+            script.src = "https://api.vk.com/method/wall.getById?posts="+data+"&extended=0&copy_history_depth=0&v=5.28&callback=getpost";
+            document.getElementsByTagName("body")[0].appendChild(script);      
+            
         </script>
+        
     <heder>
         <div class="top-head">
             <div class="content">
@@ -37,17 +35,17 @@
                     <input id="search" type="search" class="isearch" placeholder="Поиск">
                     <span class="search-icon">A</span>
                 </div>
-                <img src="img/loader.gif" alt="" id="loader" class="show loader">
+                <img src="img/loader.gif" alt="" id="loader" class="hide loader">
             </div>
         </div>
         <div class="bottom-head">
             <div class="content">
                 <ul class="menu">
-                    <a href="?ctrl=news&act=news"><li class="active menu-li">ГЛАВНАЯ</li></a>
+                    <a href="?ctrl=news&act=news"><li class="menu-li">ГЛАВНАЯ</li></a>
                     <a href=""><li class="menu-li">РАЙОНЫ</li></a>
                     <a href=""><li class="menu-li">ЗАДАЧИ</li></a>
                     <a href=""><li class="menu-li">УЧАСНИКИ</li></a>
-                    <a href="?ctrl=news&act=MyPosts"><li class="menu-li">МОИ ЗАПИСИ</li></a>
+                    <a href="?ctrl=news&act=MyPosts"><li class="active menu-li">МОИ ЗАПИСИ</li></a>
                 </ul>
 
                 <div class="personal">
@@ -80,42 +78,25 @@
         </div>
     </heder>
 
-
-
     <div class="content">
-        <aside class="sidebar">
-            <h1 class="h1">Лента новостей</br>Выводятся новости 1ой рубрики, кратко</h1>
-            <div class="side-post">
-                <h2 class="h2">Section 1.10.32 of "de Finibus Bonorum et Malorum" <span class="span-time">14:32</span></h2>
-            </div>
-            <div class="side-post">
-                <h2 class="h2">Section 1.10.32 of "de Finibus Bonorum et Malorum" <span class="span-time">14:32</span></h2>
-            </div>
-            <div class="side-post">
-                <h2 class="h2">Section 1.10.32 of "de Finibus Bonorum et Malorum" <span class="span-time">14:32</span></h2>
-            </div>
-            <div class="side-post last">
-                <h2 class="h2">Section 1.10.32 of "de Finibus Bonorum et Malorum" <span class="span-time">14:32</span></h2>
-            </div>
 
-        </aside>
-        <section class="news-section" id="news-section">
-            <div class="top-3">
-                <img src="img/moscow_1.jpg" alt="">
+        <section class="post-section news-section">
+            <div class="makepost">
+                <form id="NewPostForm" action="?ctrl=news&act=ConfirmPost" method="POST"  enctype="multipart/form-data">
+                    <h2 class="post-h2 h2">Введите заголовок записи</h2>
+                    <input class="makepostInput input" name="postTitle" id="postTitle" placeholder="Заголовок">
+                    <h2 class="post-h2 h2">Введите текст записи</h2>
+                    <textarea name="makePostArea" id="makePostArea" placeholder="Текст"></textarea>
+                    <input type="file" name="user_files[]" multiple=""/>
+                    <input class="makepost-button submit" id="addPost" value="Опубликовать" type="button">
+                </form>
+                    
             </div>
-            <h1 class="h1">Все новости по дате</h1>
-            <div id="newsContent">
-                
-            </div>
-<!--            <div class="post">
-                <h2 id="postTitle" class="post-h2 h2"></h2>
-                <p id="postContent" class="post-text"></p>
-            </div>-->
-
+            <div id="error" class="invisible"></div>
         </section>
     </div>
     <footer class="footer">
-        <h2 class="foot copyright">© Info-pulse 2015</h2>
+        <h2 class="foot copyright">© Info-plus 2015</h2>
     </footer>
     <div id="toTop" class="hidden">E</div>
 </body>

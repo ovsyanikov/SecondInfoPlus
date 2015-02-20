@@ -123,4 +123,20 @@ class UserController extends BaseController{
           
       }//newuserAction
       
+      function MyProfileAction(){ 
+          
+          if(empty($this->userService)){
+              
+              $this->userService = new UserService();
+              
+          }//if
+          
+          $r = new \util\Request();
+          
+          $this->view->UserToUpdate = $this->userService->getUser($r->getSessionValue('user_info_plus'));
+          
+          return 'MyProfile';
+          
+      }
+      
 }//UserController

@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -9,22 +10,8 @@
         <script type="text/javascript" src="js/script.js"></script> 
         <title>Info-Pulse</title>
     </head>
-    <body class="news-bg"> 
-        <script>
-                        //DEFAULT_SEARCH();
-                for(i = 0;i < 3;i++){
-                    if(i==0){
-                        LoaderOn();
-                        
-                    }
-                    if(i==1){
-                        DEFAULT_SEARCH();
-                    }
-
-                }    
-                    
-
-        </script>
+    <body i="body" class="news-bg"> 
+        
     <heder>
         <div class="top-head">
             <div class="content">
@@ -37,17 +24,17 @@
                     <input id="search" type="search" class="isearch" placeholder="Поиск">
                     <span class="search-icon">A</span>
                 </div>
-                <img src="img/loader.gif" alt="" id="loader" class="show loader">
+                <img src="img/loader.gif" alt="" id="loader" class="hide loader">
             </div>
         </div>
         <div class="bottom-head">
             <div class="content">
                 <ul class="menu">
-                    <a href="?ctrl=news&act=news"><li class="active menu-li">ГЛАВНАЯ</li></a>
+                    <a href="?ctrl=news&act=news"><li class="menu-li">ГЛАВНАЯ</li></a>
                     <a href=""><li class="menu-li">РАЙОНЫ</li></a>
                     <a href=""><li class="menu-li">ЗАДАЧИ</li></a>
                     <a href=""><li class="menu-li">УЧАСНИКИ</li></a>
-                    <a href="?ctrl=news&act=MyPosts"><li class="menu-li">МОИ ЗАПИСИ</li></a>
+                    <a href="?ctrl=news&act=MyPosts"><li class="active menu-li">МОИ ЗАПИСИ</li></a>
                 </ul>
 
                 <div class="personal">
@@ -83,39 +70,42 @@
 
 
     <div class="content">
-        <aside class="sidebar">
-            <h1 class="h1">Лента новостей</br>Выводятся новости 1ой рубрики, кратко</h1>
-            <div class="side-post">
-                <h2 class="h2">Section 1.10.32 of "de Finibus Bonorum et Malorum" <span class="span-time">14:32</span></h2>
-            </div>
-            <div class="side-post">
-                <h2 class="h2">Section 1.10.32 of "de Finibus Bonorum et Malorum" <span class="span-time">14:32</span></h2>
-            </div>
-            <div class="side-post">
-                <h2 class="h2">Section 1.10.32 of "de Finibus Bonorum et Malorum" <span class="span-time">14:32</span></h2>
-            </div>
-            <div class="side-post last">
-                <h2 class="h2">Section 1.10.32 of "de Finibus Bonorum et Malorum" <span class="span-time">14:32</span></h2>
-            </div>
 
-        </aside>
-        <section class="news-section" id="news-section">
-            <div class="top-3">
-                <img src="img/moscow_1.jpg" alt="">
-            </div>
-            <h1 class="h1">Все новости по дате</h1>
+        <section class="post-section news-section">
+
+            <a href="?ctrl=news&act=MakePost"><input class="My-posts-button submit" id="addPost" value="Добавить запись" type="button"></a>
+
             <div id="newsContent">
-                
+                  <?php 
+                  
+                       $count_current_posts = count($this->view->current_user_news);
+                       if($count_current_posts == 0){
+                           echo "<h2 class=\"post-h2 h2\" style=\"margin: 15px 0px\">У вас пока нет записей!</h2>";
+                       }//if
+                       else{
+                           foreach($this->view->current_user_news as $specific_news){
+                           
+                           if($specific_news->getFiles() != NULL){
+                               
+                                $img_files = explode(',',$specific_news->getFiles());
+                                $img_count = count($img_files);
+                                echo "<div class=\"post\"><div data-post-id=\"{$specific_news->getId()}\"  class=\"delete-post\">J</div><img class=\"post-img\" alt=\"\" src=\"files/{$img_files[0]}\"/><a href=\"?ctrl=news&act=SpecificNews&news_id={$specific_news->getId()}\"><h2 class=\"post-h2 h2\">{$specific_news->getTitle()}</h2></a><p class=\"post-text\">{$specific_news->getDescription()}</p></div>";
+                           }//if
+                          
+                           else{
+                                 echo "<div class=\"post\"><div  data-post-id=\"{$specific_news->getId()}\"  class=\"delete-post\">J</div><a href=\"?ctrl=news&act=SpecificNews&news_id={$specific_news->getId()}\"><h2 class=\"post-h2 h2\">{$specific_news->getTitle()}</h2></a><p class=\"post-text\">{$specific_news->getDescription()}</p></div>";
+                                  
+                           }//else
+                           
+                       }//foreach
+                       }//else
+                       
+                  ?>
             </div>
-<!--            <div class="post">
-                <h2 id="postTitle" class="post-h2 h2"></h2>
-                <p id="postContent" class="post-text"></p>
-            </div>-->
-
         </section>
     </div>
     <footer class="footer">
-        <h2 class="foot copyright">© Info-pulse 2015</h2>
+        <h2 class="foot copyright">© Info-plus 2015</h2>
     </footer>
     <div id="toTop" class="hidden">E</div>
 </body>

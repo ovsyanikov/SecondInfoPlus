@@ -2,17 +2,52 @@
 
 namespace model\entity;
 
-class News{
+class news{
     
     private $id;
     private $Title;
-    private $Resourse;
+    private $Files;
+    private $Owner;
+    private $Description;
+    private $PublicDateTime;
     
+    function getFiles() {
+        return $this->Files;
+    }
+
+    function getOwner() {
+        return $this->Owner;
+    }
+
+    function getDescription() {
+        return $this->Description;
+    }
+
+    function getPublicDateTime() {
+        return $this->PublicDateTime;
+    }
+
     function __construct() {
         
     }
+    
+    function setFiles($Files) {
+        $this->Files = $Files;
+    }
 
-    function getId() {
+    function setOwner($Owner) {
+        $this->Owner = $Owner;
+    }
+
+    function setDescription($Description) {
+        $this->Description = $Description;
+    }
+
+    function setPublicDateTime($PublicDateTime) {
+        $this->PublicDateTime = $PublicDateTime;
+    }
+
+        function getId() {
         return $this->id;
     }
 
@@ -20,9 +55,7 @@ class News{
         return $this->Title;
     }
 
-    function getResourse() {
-        return $this->Resourse;
-    }
+    
 
     function setId($id) {
         $this->id = $id;
@@ -32,9 +65,7 @@ class News{
         $this->Title = $Title;
     }
 
-    function setResourse($Resourse) {
-        $this->Resourse = $Resourse;
-    }
+  
 
 
     

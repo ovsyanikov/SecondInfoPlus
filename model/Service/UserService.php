@@ -23,7 +23,7 @@ class UserService{
         $stmt->bindParam(":fn",$firstName);
         $stmt->bindParam(":ln",$lastName);
         
-        $st = $stmt->execute();
+        $stmt->execute();
         
         $r = new \util\Request();
         $r->setSessionValue('user_info_plus', $user->getLogin());
@@ -58,6 +58,24 @@ class UserService{
         $r->unsetCookie('user_info_plus');
         $r->unsetSeesionValue('user_info_plus');
         
+    }
+    
+    function getUser($login){
+        
+        $stmt = \util\MySQL::$db->prepare("SELECT * FROM users WHERE Login = :login");
+        $stmt->bindParam(":login",$login);
+        
+        $stmt->execute();
+        $user = $stmt->fetchObject(user::class);
+        
+        if(is_a($user, 'model\entity\user')){
+           return $user;
+        }//if
+        else {
+            
+            return NULL;
+            
+        }
     }
     
 }

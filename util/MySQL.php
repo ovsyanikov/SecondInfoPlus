@@ -1,10 +1,10 @@
-<?php
-
-namespace util;
-
-class MySQL{
-    
-    static $db;
-    
-}
-
+<?php
+
+namespace util;
+
+class MySQL{
+    
+    static $db;
+    
+}
+

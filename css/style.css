@@ -13,7 +13,9 @@ a{
 	transition: color ease-in-out 0.2s;
         text-decoration: none;
 }
-
+html{
+	min-width:1200px;
+}
 body{
 /*	background: #2B3F57 url(../img/banner.jpg);
 	background-size: auto 120%;
@@ -44,6 +46,9 @@ body{
 	width: 375px;
 	margin-bottom: 10px;
 	border: none;	
+}
+heder{
+	width:100%;
 }
 .submit{
 	font-size: 14pt;	
@@ -135,6 +140,13 @@ form a:hover{
     display: block;
     color: white;
 }
+
+.error_block2{
+    
+    display: block;
+    color: red;
+}
+
 .copyright{
     font-size: 10pt;
     color: #fff;
@@ -146,6 +158,7 @@ form a:hover{
     /* min-height:  70px; */
     padding: 5px 0px;
     background: #CF1000;
+    width: 100%;
 }
 .content{
     width: 1200px;
@@ -170,12 +183,13 @@ form a:hover{
 }
 
 .logo{
-    width: 500px;
+    width: 350px;
     display: inline-block;
 }
 .bottom-head{
     min-height: 40px;
     background: #890B00;
+    width: 100%;
 }
 .menu{
     font-size: 18pt;
@@ -194,6 +208,9 @@ form a:hover{
     color: #fff;
     /* border-bottom: 3px solid #890B00; */
     transition:  background ease-in-out 0.2s, border ease-in-out 0.2s;    
+}
+.active{
+    background: #CF1000;
 }
 .menu-li:hover{
     background: #CF1000;
@@ -247,6 +264,8 @@ form a:hover{
     padding: 15px;
 }
 .post-h2{
+max-width: 530px;
+display: inline-block;
     font-weight: 700;
     font-size: 14pt;
 }
@@ -258,6 +277,7 @@ form a:hover{
 .post{
     padding: 15px 0px;
     border-bottom: 1px solid #E3E3E3;
+    overflow: hidden;
 }
 .span-time{
     color: #000;
@@ -337,4 +357,198 @@ form a:hover{
 .reg-button{
     width: 395px;
     margin-top: 25px;
+}
+.post-img{
+width: 150px;
+float: left;
+margin: 10px 15px 5px 0px;
+}
+.loader{
+margin: 0px 10px;
+float: right;
+margin-top: 15px;
+}
+.show{
+	display: block;
+}
+.hide{
+	display: none;
+}
+#toTop{
+	font-family: 'search font', sans-serif;
+	font-size: 30px;
+	color: rgba(168, 168, 168, 1);
+	//border-radius: 10px 0px 0px 10px;
+	width: 55px;
+	height: 35px;
+	position: fixed;
+	right: 0px;
+	bottom: 90px;
+	background: rgba(195, 195, 195, 0.3);
+	text-align: center;		
+	transition: width ease-in-out 0.2s;
+	cursor: pointer;
+	padding: 10px 0px;
+}
+#toTop:hover{
+	width: 75px;
+	transition: width ease-in-out 0.2s;
+}
+.hidden{
+opacity:0;
+}
+.visible{
+opacity:1;
+}
+.post-section{
+    margin: 25px auto;
+    display: block;
+}
+.makepostInput{
+    width: 700px;
+    background: #E6E6E6;
+    font-size: 13pt;
+}
+#makePostArea{
+    min-height: 250px;
+    width: 700px;
+    max-width: 700px;
+    padding: 10px;
+    border: none;
+    background: #E6E6E6;
+    font-size: 13pt;
+}
+.makepost-button{
+    width: 100%;
+    margin: 10px 0px;
+}
+.post-linkFiles{
+    width: 200px;
+    display: inline;
+}
+.My-posts-button{
+    width: 100%;
+	margin-bottom: 15px;
+}
+.delete-post{
+	opacity:0;
+    float: right;
+    font-family: 'search font', sans-serif;
+    font-size: 15px;
+    color: #E3E3E3;
+	transition: opacity ease-in-out 0.3s;
+
+	display: flex;
+	cursor: pointer;
+}
+.delete-post:hover{
+    color: #CF1000;
+
+}
+.post:hover .delete-post{
+	opacity: 1;
+	transition: opacity ease-in-out 0.3s;
+}
+.specificIMG{
+	display: inline-block;
+	max-width: 300px;
+	margin: 10px;
+
+}
+.pers-title-h1{
+    padding: 0px 0px 15px 0px;
+    border-bottom: 1px solid #E3E3E3;
+}
+.pers-h2 {
+    display: inline-block;
+    width: 140px;
+    padding: 10px 20px;
+    color: #fff;
+    margin-top: 10px;
+    background: rgb(137, 11, 0);
+    text-align: right;
+}
+.pers-text{
+    background: rgb(227, 227, 227);
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 14pt;
+    width: 500px;    
+}
+.correct{
+    opacity: 0;
+    float: right;
+    font-family: 'search font', sans-serif;
+    font-size: 15pt;
+    color: #890B00;
+    transition: opacity ease-in-out 0.3s;
+    display: flex;
+    cursor: pointer;
+}
+
+
+.pers-text:hover .correct{
+    opacity: 1;
+    transition: opacity ease-in-out 0.3s;
+}
+.correct:active .pers-input{
+    height: 20px;
+    transition:  height ease-in 0.3s;
+}
+.pers-input-block-hide{
+    display: none;
+    opacity: 0;
+    overflow: hidden;
+    transition:  opacity ease-in 0.3s;
+}
+.pers-input-block{
+    display: none;
+    height: 0px;
+    opacity: 1;
+    overflow: hidden;
+    transition:  opacity ease-in 0.3s;
+    width: 500px;
+}
+
+.pers-input{
+    width: 240px;
+    font-size: 14pt;
+    padding: 10px 20px;
+    border: none;
+    background: #E3E3E3;
+    border-top: 3px solid #fff;
+    margin-left: 180px;
+    overflow: hidden;
+}
+.pers-input:active{
+    outline: none;
+}
+.ok{
+    float: right;
+    font-size: 15pt;
+    font-family: 'search font', sans-serif;
+    color: #890B00;
+    opacity: 0.4;
+    transition: opacity ease-in-out 0.3s;
+    display: flex;
+    cursor: pointer;
+    margin: 15px 10px; 
+    
+}
+.ok:hover{
+   opacity: 1;
+    transition: opacity ease-in-out 0.3s;   
+}
+.pers-success{
+    padding: 5px 20px;
+    margin: 5px 0px 0px 180px;
+    background: #dff0d8;  
+}
+.pers-error{
+    padding: 5px 20px;
+    margin: 5px 0px 0px 180px;
+    background: #FFE6E4;  
+}
+.pers-success h2{
+    color: #206F00;  
 }

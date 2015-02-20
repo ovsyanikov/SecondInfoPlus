@@ -15,7 +15,7 @@
 <body class="welc"> 
     <section class="fst-section">
 	<div class="head-reg">
-            <h1 class="in"> INFO PLUS <img src="img/info-puls1.png" alt="" class="reg-logo fst-logo"/></h1>
+            <h1 class="in"> INFO PULSE <img src="img/info-puls1.png" alt="" class="reg-logo fst-logo"/></h1>
             <h2 class="h2-reg h2">Регистрация</h2>   
         </div>
         <div class="reg-block block" id="authentication">
@@ -38,7 +38,7 @@
         
     </section>
     <footer>
-        <h2 class="copyright">© Info-plus 2015</h2>
+        <h2 class="copyright">© Info-pulse 2015</h2>
     </footer>
 </body>
 </html>
