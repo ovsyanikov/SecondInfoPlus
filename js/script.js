@@ -581,7 +581,6 @@ $(document).ready(function(){
                          $('#AuthoriseForm').submit();
                      }//if
                      else{
-                         alert(data);
                          ShowAuthorizeMessage('Неверный логин или пароль');
                          
                      }//else
