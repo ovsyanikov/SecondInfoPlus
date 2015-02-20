@@ -11,18 +11,6 @@
         <title>Info-Pulse</title>
     </head>
     <body i="body" class="news-bg"> 
-        
-       <script>
-           
-            var script = document.createElement('SCRIPT');
-            
-            var data = new String("<?php echo $_GET['vklink']; ?>");
-            
-            script.src = "https://api.vk.com/method/wall.getById?posts="+data+"&extended=0&copy_history_depth=0&v=5.28&callback=getpost";
-            document.getElementsByTagName("body")[0].appendChild(script);      
-            
-        </script>
-        
     <heder>
         <div class="top-head">
             <div class="content">
@@ -50,28 +38,7 @@
 
                 <div class="personal">
                     <a href="?ctrl=user&act=MyProfile">Личный кабинет(<?php
-                        require_once 'util/Request.php';
-
-                        use util\Request;
-                           
-                        $r = new Request();
-                        $sess = $r->getSessionValue('user_info_plus');
-                        $ressessio = empty($sess);
-                        
-                        $coc = $r->getCookieValue('user_info_plus');
-                        $iscoockies = empty($coc);
-                        
-                        if (!$ressessio) {
-                            echo "{$r->getSessionValue('user_info_plus')}";
-                        } else if(!$iscoockies){
-                            echo "{$r->getCookieValue('user_info_plus')}";
-                        }//else
-                        else{
-                            
-                            header("Location: index.php?ctrl=start&act=welcome");
-                            
-                        }
-                        ?>)</a> / 
+                        echo "{$this->view->current_user->getLogin()}"?></a> / 
                     <a href="?ctrl=user&act=leave">Выйти</a>
                 </div>
             </div>

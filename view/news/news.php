@@ -52,27 +52,7 @@
 
                 <div class="personal">
                     <a href="?ctrl=user&act=MyProfile">Личный кабинет(<?php
-                        require_once 'util/Request.php';
-
-                        use util\Request;
-                           
-                        $r = new Request();
-                        $sess = $r->getSessionValue('user_info_plus');
-                        $ressessio = empty($sess);
-                        
-                        $coc = $r->getCookieValue('user_info_plus');
-                        $iscoockies = empty($coc);
-                        
-                        if (!$ressessio) {
-                            echo "{$r->getSessionValue('user_info_plus')}";
-                        } else if(!$iscoockies){
-                            echo "{$r->getCookieValue('user_info_plus')}";
-                        }//else
-                        else{
-                            
-                            header("Location: index.php?ctrl=start&act=welcome");
-                            
-                        }
+                        echo "{$this->view->current_user->getLogin()}"
                         ?>)</a> / 
                     <a href="?ctrl=user&act=leave">Выйти</a>
                 </div>

@@ -39,16 +39,17 @@ class UserController extends BaseController{
               
           if($cuser != NULL){
                   
-                  $this->view->currentUser = $cuser;
+                  $this->view->current_user = $cuser;
                   
                   if($remember == 'on'){
                       
-                      $r->setCookies($cuser->getLogin());
+                      $r->setCookies($cuser->getLogin(). "|" . md5($cuser->getPassword()));
+                      $r->setSessionValue('user_info_plus', $cuser->getLogin() . "|" . $cuser->getPassword());
                       
                   }//if
                   else{
                       
-                      $r->setSessionValue('user_info_plus', $cuser->getLogin());
+                      $r->setSessionValue('user_info_plus', $cuser->getLogin() . "|" . $cuser->getPassword());
                       
                   }//else
                   

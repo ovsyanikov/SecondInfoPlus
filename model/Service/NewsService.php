@@ -54,7 +54,7 @@ class NewsService{
           $news = [];
           
           $r = new Request();
-          $owner = $r->getSessionValue('user_info_plus');
+          $owner = explode('|',$r->getSessionValue('user_info_plus'))[0];
           
           $stmt = \util\MySQL::$db->prepare("SELECT * FROM news WHERE Owner = :owner");
           $stmt->bindParam(":owner",$owner);

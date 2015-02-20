@@ -1,66 +1,543 @@
 <?php
 
 namespace controller;
+
 use model\service\NewsService;
+use model\service\UserService;
+use model\service\StartService;
 
 class NewsController extends \controller\BaseController{
     
+    private $startService;
+    private $newsService;
+    
     public function newsAction(){
         
-        return 'news';
+        
+        if(empty($this->startService)){
+            
+            $this->startService = new StartService();
+        }
+        $r = new \util\Request();
+        
+        $is_user_cookies = $r->getCookieValue('user_info_plus');
+        $is_user_session = $r->getSessionValue('user_info_plus');
+        
+        if($is_user_cookies == NULL && $is_user_session == NULL){
+            
+            header('Location: index.php?ctrl=start&act=welcome');
+            
+        }//if
+        else{
+            
+            if(!empty($is_user_cookies)){
+                
+                if(empty($this->userService)){
+                    $this->userService = new UserService();
+                }//if
+                
+                $decode_string = htmlspecialchars_decode($is_user_cookies);
+                //login[0]
+                //pass[1]
+                
+                $login = explode('|',$decode_string)[0];
+                $pass = explode('|',$decode_string)[1];
+                
+                $user = $this->userService->getUser($login);
+                
+                if(is_a($user,'model\entity\user')){
+                    
+                    $md5_pass = md5($user->getPassword());
+                    
+                    if($pass == $md5_pass){
+                        $this->view->current_user = $user;
+                        return 'news';
+                        
+                    }//if
+                    
+                    else if(!empty($is_user_session)){
+                
+                        if(empty($this->userService)){
+                            $this->userService = new model\Service\UserService();
+                        }//if
+
+                        $session_login = explode('|',$is_user_session)[0];  
+                        $session_user = $this->userService->getUser($session_login);
+
+                        $pass_session_user = explode('|',$is_user_session)[1];  
+
+                        if($session_user->getPassword() == $pass_session_user){
+                            $this->view->current_user = $session_user;
+                            return 'news';
+                        }//if
+                        else{
+                            header('Location: index.php?ctrl=start&act=welcome');
+                        }//else
+                
+                    }//else if
+                    else{
+                            header('Location: index.php?ctrl=start&act=welcome');
+                    }//else
+                }//if
+                
+                
+            }//if
+            
+            else if(!empty($is_user_session)){
+                
+                if(empty($this->userService)){
+                    $this->userService = new model\service\UserService();
+                }//if
+                
+                $session_login = explode('|',$is_user_session)[0];  
+                $session_user = $this->userService->getUser($session_login);
+                
+                $pass_session_user = explode('|',$is_user_session)[1];  
+                
+                if($session_user->getPassword() == $pass_session_user){
+                    $this->view->current_user = $session_user;
+                    return 'news';
+                }//if
+                else{
+                    header('Location: index.php?ctrl=start&act=welcome');
+                }//else
+                
+            }//else
+            else{
+                
+                 header('Location: index.php?ctrl=start&act=welcome');
+                
+            }//else
+            
+        }//else
         
     }
     
     public function specificPostAction(){
         
-        return 'SpecificPost';
+        if(empty($this->startService)){
+            
+            $this->startService = new StartService();
+        }
+        $r = new \util\Request();
+        
+        $is_user_cookies = $r->getCookieValue('user_info_plus');
+        $is_user_session = $r->getSessionValue('user_info_plus');
+        
+        if($is_user_cookies == NULL && $is_user_session == NULL){
+            
+            header('Location: index.php?ctrl=start&act=welcome');
+            
+        }//if
+        else{
+            
+            if(!empty($is_user_cookies)){
+                
+                if(empty($this->userService)){
+                    $this->userService = new UserService();
+                }//if
+                
+                $decode_string = htmlspecialchars_decode($is_user_cookies);
+                //login[0]
+                //pass[1]
+                
+                $login = explode('|',$decode_string)[0];
+                $pass = explode('|',$decode_string)[1];
+                
+                $user = $this->userService->getUser($login);
+                
+                if(is_a($user,'model\entity\user')){
+                    
+                    $md5_pass = md5($user->getPassword());
+                    
+                    if($pass == $md5_pass){
+                        $this->view->current_user = $user;
+                        return 'SpecificPost';
+                        
+                    }//if
+                    
+                    else if(!empty($is_user_session)){
+                
+                        if(empty($this->userService)){
+                            $this->userService = new model\Service\UserService();
+                        }//if
+
+                        $session_login = explode('|',$is_user_session)[0];  
+                        $session_user = $this->userService->getUser($session_login);
+
+                        $pass_session_user = explode('|',$is_user_session)[1];  
+
+                        if($session_user->getPassword() == $pass_session_user){
+                            $this->view->current_user = $pass_session_user;
+                            return 'SpecificPost';
+                        }//if
+                        else{
+                            header('Location: index.php?ctrl=start&act=welcome');
+                        }//else
+                
+                    }//else if
+                    else{
+                            header('Location: index.php?ctrl=start&act=welcome');
+                    }//else
+                }//if
+                
+                
+            }//if
+            
+            else if(!empty($is_user_session)){
+                
+                if(empty($this->userService)){
+                    $this->userService = new model\service\UserService();
+                }//if
+                
+                $session_login = explode('|',$is_user_session)[0];  
+                $session_user = $this->userService->getUser($session_login);
+                
+                $pass_session_user = explode('|',$is_user_session)[1];  
+                
+                if($session_user->getPassword() == $pass_session_user){
+                    $this->view->current_user = $pass_session_user;
+                    return 'SpecificPost';
+                }//if
+                else{
+                    header('Location: index.php?ctrl=start&act=welcome');
+                }//else
+                
+            }//else
+            else{
+                
+                 header('Location: index.php?ctrl=start&act=welcome');
+                
+            }//else
+            
+        }//else
+        
         
     }
     
     public function MakePostAction(){
         
-        return 'MakePost';
-        
-    }
-   
-    public function SpecificNewsAction(){
-        
-        $newsService = new NewsService();
-        
-        $spec_news =  $newsService->GetSpecificNews();
-        
-        if($spec_news != NULL){
+         if(empty($this->startService)){
             
-            $this->view->specific_news = $spec_news;
+            $this->startService = new StartService();
+        }
+        $r = new \util\Request();
+        
+        $is_user_cookies = $r->getCookieValue('user_info_plus');
+        $is_user_session = $r->getSessionValue('user_info_plus');
+        
+        if($is_user_cookies == NULL && $is_user_session == NULL){
             
-            return 'SpecificNews';
+            header('Location: index.php?ctrl=start&act=welcome');
             
         }//if
         else{
-            return 'NewsNotFound';
-        }
+            
+            if(!empty($is_user_cookies)){
+                
+                if(empty($this->userService)){
+                    $this->userService = new UserService();
+                }//if
+                
+                $decode_string = htmlspecialchars_decode($is_user_cookies);
+                //login[0]
+                //pass[1]
+                
+                $login = explode('|',$decode_string)[0];
+                $pass = explode('|',$decode_string)[1];
+                
+                $user = $this->userService->getUser($login);
+                
+                if(is_a($user,'model\entity\user')){
+                    
+                    $md5_pass = md5($user->getPassword());
+                    
+                    if($pass == $md5_pass){
+                        
+                        $this->view->current_user = $user;
+                        return 'MakePost';
+                        
+                    }//if
+                    
+                    else if(!empty($is_user_session)){
+                
+                        if(empty($this->userService)){
+                            $this->userService = new model\Service\UserService();
+                        }//if
+
+                        $session_login = explode('|',$is_user_session)[0];  
+                        $session_user = $this->userService->getUser($session_login);
+
+                        $pass_session_user = explode('|',$is_user_session)[1];  
+
+                        if($session_user->getPassword() == $pass_session_user){
+                            $this->view->current_user = $pass_session_user;
+                           return 'MakePost';
+                        }//if
+                        else{
+                            header('Location: index.php?ctrl=start&act=welcome');
+                        }//else
+                
+                    }//else if
+                    else{
+                            header('Location: index.php?ctrl=start&act=welcome');
+                    }//else
+                }//if
+                
+                
+            }//if
+            
+            else if(!empty($is_user_session)){
+                
+                if(empty($this->userService)){
+                    $this->userService = new model\service\UserService();
+                }//if
+                
+                $session_login = explode('|',$is_user_session)[0];  
+                $session_user = $this->userService->getUser($session_login);
+                
+                $pass_session_user = explode('|',$is_user_session)[1];  
+                
+                if($session_user->getPassword() == $pass_session_user){
+                    $this->view->current_user = $pass_session_user;
+                    return 'MakePost';
+                }//if
+                else{
+                    header('Location: index.php?ctrl=start&act=welcome');
+                }//else
+                
+            }//else
+            else{
+                
+                 header('Location: index.php?ctrl=start&act=welcome');
+                
+            }//else
+            
+        }//else
+        
         
         
     }
-    
+
     public function MyPostsAction(){
         
-        $newsService = new NewsService();
-        $this->view->current_user_news = $newsService->GetMyPosts();
+         if(empty($this->startService)){
+            
+            $this->startService = new StartService();
+        }
+        $r = new \util\Request();
         
-        return 'MyPosts';
+        $is_user_cookies = $r->getCookieValue('user_info_plus');
+        $is_user_session = $r->getSessionValue('user_info_plus');
+        
+        if($is_user_cookies == NULL && $is_user_session == NULL){
+            
+            header('Location: index.php?ctrl=start&act=welcome');
+            
+        }//if
+        else{
+            
+            if(!empty($is_user_cookies)){
+                
+                if(empty($this->userService)){
+                    $this->userService = new UserService();
+                }//if
+                
+                $decode_string = htmlspecialchars_decode($is_user_cookies);
+                //login[0]
+                //pass[1]
+                
+                $login = explode('|',$decode_string)[0];
+                $pass = explode('|',$decode_string)[1];
+                
+                $user = $this->userService->getUser($login);
+                
+                if(is_a($user,'model\entity\user')){
+                    
+                    $md5_pass = md5($user->getPassword());
+                    
+                    if($pass == $md5_pass){
+                         $this->view->current_user = $user;
+                         if(empty($this->newsService)){
+                             $this->newsService = new NewsService();
+                             
+                         }
+                         $this->view->current_user_news = $this->newsService->GetMyPosts();
+                         return 'MyPosts';
+                        
+                    }//if
+                    
+                    else if(!empty($is_user_session)){
+                
+                        if(empty($this->userService)){
+                            $this->userService = new model\Service\UserService();
+                        }//if
+
+                        $session_login = explode('|',$is_user_session)[0];  
+                        $session_user = $this->userService->getUser($session_login);
+
+                        $pass_session_user = explode('|',$is_user_session)[1];  
+
+                        if($session_user->getPassword() == $pass_session_user){
+                             $this->view->current_user = $pass_session_user;
+                            return 'MyPosts';
+                        }//if
+                        else{
+                            header('Location: index.php?ctrl=start&act=welcome');
+                        }//else
+                
+                    }//else if
+                    else{
+                            header('Location: index.php?ctrl=start&act=welcome');
+                    }//else
+                }//if
+                
+                
+            }//if
+            
+            else if(!empty($is_user_session)){
+                
+                if(empty($this->userService)){
+                    $this->userService = new model\service\UserService();
+                }//if
+                
+                $session_login = explode('|',$is_user_session)[0];  
+                $session_user = $this->userService->getUser($session_login);
+                
+                $pass_session_user = explode('|',$is_user_session)[1];  
+                
+                if($session_user->getPassword() == $pass_session_user){
+                    $this->view->current_user = $pass_session_user;
+                    return 'MyPosts';
+                }//if
+                else{
+                    header('Location: index.php?ctrl=start&act=welcome');
+                }//else
+                
+            }//else
+            else{
+                
+                 header('Location: index.php?ctrl=start&act=welcome');
+                
+            }//else
+            
+        }//else
+        
+       
         
     }
-    
-    
     
     public function ConfirmPostAction(){
         
-        $newsService = new NewsService();
+        if(empty($this->startService)){
+            
+            $this->startService = new StartService();
+        }
+        $r = new \util\Request();
         
-        $newsService->PublicPost();
+        $is_user_cookies = $r->getCookieValue('user_info_plus');
+        $is_user_session = $r->getSessionValue('user_info_plus');
         
-        header("Location: index.php?ctrl=news&act=MyPosts");
+        if($is_user_cookies == NULL && $is_user_session == NULL){
+            
+            header('Location: index.php?ctrl=start&act=welcome');
+            
+        }//if
+        else{
+            
+            if(!empty($is_user_cookies)){
+                
+                if(empty($this->userService)){
+                    $this->userService = new UserService();
+                }//if
+                
+                $decode_string = htmlspecialchars_decode($is_user_cookies);
+                //login[0]
+                //pass[1]
+                
+                $login = explode('|',$decode_string)[0];
+                $pass = explode('|',$decode_string)[1];
+                
+                $user = $this->userService->getUser($login);
+                
+                if(is_a($user,'model\entity\user')){
+                    
+                    $md5_pass = md5($user->getPassword());
+                    
+                    if($pass == $md5_pass){
+                         $newsService = new NewsService();
+        
+                            $newsService->PublicPost();
+                            $this->view->current_user = $user;
+                            
+                            return 'MyPosts';
+                        
+                    }//if
+                    
+                    else if(!empty($is_user_session)){
+                
+                        if(empty($this->userService)){
+                            $this->userService = new model\Service\UserService();
+                        }//if
+
+                        $session_login = explode('|',$is_user_session)[0];  
+                        $session_user = $this->userService->getUser($session_login);
+
+                        $pass_session_user = explode('|',$is_user_session)[1];  
+
+                        if($session_user->getPassword() == $pass_session_user){
+                            $newsService = new NewsService();
+        
+                            $newsService->PublicPost();
+                            $this->view->current_user = $pass_session_user;
+                            return 'MyPosts';
+                        }//if
+                        else{
+                            header('Location: index.php?ctrl=start&act=welcome');
+                        }//else
+                
+                    }//else if
+                    else{
+                            header('Location: index.php?ctrl=start&act=welcome');
+                    }//else
+                }//if
+                
+                
+            }//if
+            
+            else if(!empty($is_user_session)){
+                
+                if(empty($this->userService)){
+                    $this->userService = new model\service\UserService();
+                }//if
+                
+                $session_login = explode('|',$is_user_session)[0];  
+                $session_user = $this->userService->getUser($session_login);
+                
+                $pass_session_user = explode('|',$is_user_session)[1];  
+                
+                if($session_user->getPassword() == $pass_session_user){
+                    $newsService = new NewsService();
+        
+                            $newsService->PublicPost();
+                            $this->view->current_user = $pass_session_user;
+                            
+                            return 'MyPosts';
+                }//if
+                else{
+                    header('Location: index.php?ctrl=start&act=welcome');
+                }//else
+                
+            }//else
+            else{
+                
+                 header('Location: index.php?ctrl=start&act=welcome');
+                
+            }//else
+            
+        }//else
+        
+        
         
     }
     
