@@ -14,7 +14,7 @@ a{
         text-decoration: none;
 }
 html{
-	min-width:1200px;
+	/* min-width:1200px; */
 }
 body{
 /*	background: #2B3F57 url(../img/banner.jpg);
@@ -33,9 +33,9 @@ body{
 
 }
 .block{
-	width: 395px;
-	margin: 50px 0px 0px 0px;
-	padding: 25px;
+	width: 39%;
+	margin: 5% 0px 0px 0px;
+	padding: 2.5%;
 	/*background: rgb(192, 67, 50);*/
         
 	background: #CF1000;
@@ -43,8 +43,9 @@ body{
 .input{
 	padding: 10px;
 	font-size: 14pt;
-	width: 375px;
-	margin-bottom: 10px;
+	width: 100%;
+	box-sizing: border-box;
+	margin-bottom: 4%;
 	border: none;	
 }
 heder{
@@ -55,10 +56,12 @@ heder{
 	padding: 10px;
 	background: #642323;
 	border: none;
-	width: 150px;
+	box-sizing: border-box;
+	width: 39%;
 	color: #fff;
 	cursor: pointer;
 	transition: background ease-in-out 0.3s;
+	float: right;
 }
 .submit:hover{
 	background: #0879CF;
@@ -85,8 +88,8 @@ form a:hover{
 }
 
 .password{
-	width: 215px;
-	margin-right: 5px;	
+	width: 57%;
+	margin-right: 2%;	
 }
 .h1-form{
 	color: #fff;
@@ -95,7 +98,7 @@ form a:hover{
 	margin-bottom: 25px;	
 }
 .text{
-	width: 500px;
+	width: 50%;
 	font-size: 16pt;
 	color: #fff;
 	float: right;
@@ -111,13 +114,14 @@ form a:hover{
 .text p{
 	margin: 25px 0px;	
         text-align: justify;
+	font-size: 12pt;
 }
 .fst-logo{
     width: 85px;
     float: right;
 }
 .fst-section{
-    width: 988px;
+    width: 75%;
     margin:  auto;
 }
 
@@ -154,6 +158,32 @@ form a:hover{
     padding: 50px 0px 25px 0px;
     font-weight: 100;
 }
+
+@media screen and (max-width: 980px) {
+    .text{
+        float: none;
+        width: 100%;
+        margin-top: 5%;
+    }
+    .block{
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 .top-head{
     /* min-height:  70px; */
     padding: 5px 0px;
