@@ -86,7 +86,7 @@ class NewsController extends \controller\BaseController{
             else if(!empty($is_user_session)){
                 
                 if(empty($this->userService)){
-                    $this->userService = new model\service\UserService();
+                    $this->userService = new UserService();
                 }//if
                 
                 $session_login = explode('|',$is_user_session)[0];  
@@ -290,7 +290,7 @@ class NewsController extends \controller\BaseController{
             else if(!empty($is_user_session)){
                 
                 if(empty($this->userService)){
-                    $this->userService = new model\service\UserService();
+                    $this->userService = new UserService();
                 }//if
                 
                 $session_login = explode('|',$is_user_session)[0];  
@@ -404,7 +404,7 @@ class NewsController extends \controller\BaseController{
             else if(!empty($is_user_session)){
                 
                 if(empty($this->userService)){
-                    $this->userService = new model\service\UserService();
+                    $this->userService = new UserService();
                 }//if
                 
                 $session_login = explode('|',$is_user_session)[0];  
@@ -476,6 +476,8 @@ class NewsController extends \controller\BaseController{
                          $newsService = new NewsService();
                          $this->view->current_user = $user;
                          $newsService->PublicPost($user->getLogin());
+                         $this->view->current_user_news = $newsService->GetMyPosts();
+                         
                          return 'MyPosts';
                         
                     }//if
@@ -495,8 +497,9 @@ class NewsController extends \controller\BaseController{
                             
                             $newsService = new NewsService();
         
-                            $this->view->current_user = $user;
-                            $newsService->PublicPost($user->getLogin());
+                            $this->view->current_user = $session_user;
+                            $newsService->PublicPost($session_user->getLogin());
+                            $this->view->current_user_news = $newsService->GetMyPosts();
                             return 'MyPosts';
                             
                         }//if
@@ -516,7 +519,7 @@ class NewsController extends \controller\BaseController{
             else if(!empty($is_user_session)){
                 
                 if(empty($this->userService)){
-                    $this->userService = new model\service\UserService();
+                    $this->userService = new UserService();
                 }//if
                 
                 $session_login = explode('|',$is_user_session)[0];  
@@ -525,9 +528,11 @@ class NewsController extends \controller\BaseController{
                 $pass_session_user = explode('|',$is_user_session)[1];  
                 
                 if($session_user->getPassword() == $pass_session_user){
+                    
                             $newsService = new NewsService();
-                            $this->view->current_user = $user;
-                            $newsService->PublicPost($user->getLogin());
+                            $this->view->current_user = $session_user;
+                            $newsService->PublicPost($session_user->getLogin());
+                            $this->view->current_user_news = $newsService->GetMyPosts();
                             return 'MyPosts';
                 }//if
                 else{
@@ -601,7 +606,7 @@ class NewsController extends \controller\BaseController{
                     else if(!empty($is_user_session)){
                 
                         if(empty($this->userService)){
-                            $this->userService = new model\Service\UserService();
+                            $this->userService = new serService();
                         }//if
 
                         $session_login = explode('|',$is_user_session)[0];  
@@ -630,7 +635,7 @@ class NewsController extends \controller\BaseController{
             else if(!empty($is_user_session)){
                 
                 if(empty($this->userService)){
-                    $this->userService = new model\service\UserService();
+                    $this->userService = new UserService();
                 }//if
                 
                 $session_login = explode('|',$is_user_session)[0];  

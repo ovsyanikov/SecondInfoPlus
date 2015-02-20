@@ -199,7 +199,7 @@ class UserController extends BaseController{
             else if(!empty($is_user_session)){
                 
                 if(empty($this->userService)){
-                    $this->userService = new model\service\UserService();
+                    $this->userService = new UserService();
                 }//if
                 
                 $session_login = explode('|',$is_user_session)[0];  
