@@ -325,6 +325,11 @@ class NewsController extends \controller\BaseController{
             
             $this->startService = new StartService();
         }
+        
+        if(empty($this->newsService)){
+            $this->newsService = new NewsService();
+        }
+        
         $r = new \util\Request();
         
         $is_user_cookies = $r->getCookieValue('user_info_plus');
@@ -379,7 +384,7 @@ class NewsController extends \controller\BaseController{
                         $pass_session_user = explode('|',$is_user_session)[1];  
 
                         if($session_user->getPassword() == $pass_session_user){
-                             $this->view->current_user = $pass_session_user;
+                             $this->view->current_user = $session_user;
                              $this->view->current_user_news = $this->newsService->GetMyPosts();
                             return 'MyPosts';
                         }//if
@@ -408,7 +413,7 @@ class NewsController extends \controller\BaseController{
                 $pass_session_user = explode('|',$is_user_session)[1];  
                 
                 if($session_user->getPassword() == $pass_session_user){
-                    $this->view->current_user = $pass_session_user;
+                    $this->view->current_user = $session_user;
                     $this->view->current_user_news = $this->newsService->GetMyPosts();
                     return 'MyPosts';
                 }//if
