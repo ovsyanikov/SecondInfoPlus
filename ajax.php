@@ -169,3 +169,125 @@ else if(!empty($_POST['DeleteMyNews'])){
     
     
 }//else if
+
+else if(!empty($_POST['EmailSuccess'])){
+    
+    $r = new Request();
+    
+    $db_user = $r->getPostValue('Owner');
+    
+    $NewMail = $r->getPostValue('NewPersonalMail');
+    
+    \util\MySQL::$db = new PDO('mysql:host=localhost;dbname=u304199710_info', 'u304199710_alex', '1qaz2wsx');
+    
+    $stmt = \util\MySQL::$db->prepare("UPDATE users SET Email = :email WHERE Login = :owner");
+    $stmt->bindParam(":email",$NewMail);
+    $stmt->bindParam(":owner",$db_user);
+    
+    $result = $stmt->execute();
+    
+    if($result == 1){
+        echo "ok";
+    }
+    else{
+        echo "$result";
+    }
+   
+}
+
+else if(!empty($_POST['CheckPassword'])){
+    
+    \util\MySQL::$db = new PDO('mysql:host=localhost;dbname=u304199710_info', 'u304199710_alex', '1qaz2wsx');
+    $r = new Request();
+    $owner = $r->getPostValue('Owner');
+    $input_password = $r->getPostValue('UserPassword');
+    
+    $stmt = \util\MySQL::$db->prepare("SELECT * FROM users WHERE Login = :owner");
+    $stmt->bindParam(":owner",$owner);
+    
+    $stmt->execute();
+    
+    $user = $stmt->fetchObject(user::class);
+    
+    if(is_a($user,'model\entity\user')){
+        
+        $pass = $user->getPassword();
+        if($pass == $input_password){
+            echo "password_correct";
+        }//if
+        else{
+            echo "password_incorrect";
+        }//else
+    }//if
+    else{echo "owner_problem($owner)";}//else
+    
+}
+
+else if(!empty($_POST['ChangePassword'])){
+    
+    $r = new Request();
+    $NewPass = $r->getPostValue('NewPassword');
+    $Owner = $r->getPostValue('Owner');
+    
+    \util\MySQL::$db = new PDO('mysql:host=localhost;dbname=u304199710_info', 'u304199710_alex', '1qaz2wsx');
+    
+    $stmt = \util\MySQL::$db->prepare("UPDATE users SET Password = :pass WHERE Login = :owner");
+    $stmt->bindParam(":pass",$NewPass);
+    $stmt->bindParam(":owner",$Owner);
+    
+    $res = $stmt->execute();
+    
+    if($res == 1){
+        echo "ok";
+    }//if
+    else{
+        echo "$res";
+    }//else
+    
+}//else if
+
+else if(!empty($_POST['ChangeFirstName'])){
+    
+    $r = new Request();
+    $NewFirstName = $r->getPostValue('NewFirstName');
+    $Owner = $r->getPostValue('Owner');
+    
+    \util\MySQL::$db = new PDO('mysql:host=localhost;dbname=u304199710_info', 'u304199710_alex', '1qaz2wsx');
+    
+    $stmt = \util\MySQL::$db->prepare("UPDATE users SET FirstName = :firstName WHERE Login = :owner");
+    $stmt->bindParam(":firstName",$NewFirstName);
+    $stmt->bindParam(":owner",$Owner);
+    
+    $res = $stmt->execute();
+    
+    if($res == 1){
+        echo "ok";
+    }//if
+    else{
+        echo "res = $res, Owner = $Owner, new name = $NewFirstName";
+        
+    }//else
+}
+
+else if(!empty($_POST['ChangeLastName'])){
+    
+    $r = new Request();
+    $NewLastName = $r->getPostValue('NewLastName');
+    $Owner = $r->getPostValue('Owner');
+    
+    \util\MySQL::$db = new PDO('mysql:host=localhost;dbname=u304199710_info', 'u304199710_alex', '1qaz2wsx');
+    
+    $stmt = \util\MySQL::$db->prepare("UPDATE users SET LastName = :lastName WHERE Login = :owner");
+    $stmt->bindParam(":lastName",$NewLastName);
+    $stmt->bindParam(":owner",$Owner);
+    
+    $res = $stmt->execute();
+    
+    if($res == 1){
+        echo "ok";
+    }//if
+    else{
+        echo "res = $res, Owner = $Owner, new last name = $NewLastName";
+        
+    }//else
+}
