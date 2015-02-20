@@ -581,7 +581,7 @@ $(document).ready(function(){
                          $('#AuthoriseForm').submit();
                      }//if
                      else{
-                         
+                         alert(data);
                          ShowAuthorizeMessage('Неверный логин или пароль');
                          
                      }//else
@@ -611,8 +611,6 @@ $(document).ready(function(){
                     userEmail: $('#RMail').val()
                
                 },function(data){
-                    
-                alert(data);
                     
                if(data == "used_login"){
 
