@@ -12,35 +12,15 @@
     </head>
     <body i="body" class="news-bg"> 
         
-    <heder>
-        <div class="top-head">
-            <div class="content">
-                <a href="?ctrl=news&act=news"><div class="logo">
-                    <img src="img/info-puls1.png" alt="">
-                    <h1 class="logo-h1">INFO PULSE</h1>
-                </div></a>
-                
-            </div>
-        </div>
-        <div class="bottom-head">
-            <div class="content">
-                <ul class="menu">
-                    <a href="?ctrl=news&act=news"><li class="menu-li">ГЛАВНАЯ</li></a>
-                    <a href=""><li class="menu-li">РАЙОНЫ</li></a>
-                    <a href=""><li class="menu-li">ЗАДАЧИ</li></a>
-                    <a href=""><li class="menu-li">УЧАСНИКИ</li></a>
-                    <a href="?ctrl=news&act=MyPosts"><li class="menu-li">МОИ ЗАПИСИ</li></a>
-                </ul>
-
-                <div class="personal">
-                    <a href="?ctrl=user&act=MyProfile">Личный кабинет(<?php
-                        echo "{$this->view->current_user->getLogin()}"
-                        ?>)</a> / 
-                    <a href="?ctrl=user&act=leave">Выйти</a>
-                </div>
-            </div>
-        </div>
-    </heder>
+    <?php
+    
+        require_once 'util/HTMLCOMPONENTS.php';
+        use util\HTMLCOMPONENTS;
+        
+        $hc = new HTMLCOMPONENTS();
+        $hc->GetHeader();
+        
+    ?>
 
 
 

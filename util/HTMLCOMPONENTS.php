@@ -11,8 +11,8 @@ class HTMLCOMPONENTS{
          <aside class=\"sidebar\">
             
             
-                            <div class=\"personal\">
-    <a href=\"?ctrl=user&act=MyProfile\">Личный кабинет(".$user->getLogin().")</a> / 
+                <div class=\"personal\">
+                    <a href=\"?ctrl=user&act=MyProfile\">Личный кабинет(".$user->getLogin().")</a> / 
                     <a href=\"?ctrl=user&act=leave\">Выйти</a>
                 </div>
             

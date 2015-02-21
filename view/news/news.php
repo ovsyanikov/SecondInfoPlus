@@ -38,11 +38,11 @@
 
 
     <div class="content">
-       <?php 
-          
+        
+       <?php        
            $hc->GetLeftBar($this->view->current_user);
-           
        ?>
+        
         <section class="news-section" id="news-section">
             <div class="top-3">
                 <img src="img/moscow_1.jpg" alt="">
