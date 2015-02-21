@@ -55,7 +55,7 @@ heder{
 .submit{
 	font-size: 14pt;	
 	padding: 10px;
-	background: #642323;
+	background: #890B00;
 	border: none;
 	box-sizing: border-box;
 	width: 39%;
@@ -266,6 +266,8 @@ form a:hover{
 .footer{
     background:  #890B00;
     margin-top: 25px;
+    width: 1200px;
+    margin: auto;
 }
 .foot{
     padding: 15px;
@@ -410,8 +412,9 @@ opacity:0;
 opacity:1;
 }
 .post-section{
-    margin: 25px auto;
-    display: block;
+    margin: 10px 1px;
+    display: inline-block;
+    min-height: 558px;
 }
 .makepostInput{
     width: 100%;
@@ -421,8 +424,9 @@ opacity:1;
 }
 #makePostArea{
     min-height: 250px;
-    width: 700px;
-    max-width: 700px;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
     padding: 10px;
     border: none;
     background: #E6E6E6;
