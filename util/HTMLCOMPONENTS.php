@@ -40,7 +40,7 @@ class HTMLCOMPONENTS{
 
     }
     
-    public function GetHeader(){
+    public function GetHeader($location){
         echo "<heder>
         <div class=\"top-head\">
             <div class=\"content\">
