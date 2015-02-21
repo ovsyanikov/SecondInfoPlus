@@ -21,11 +21,11 @@
                 </div></a>
                 <div class="div-menu">
                     <ul class="menu">
-                        <a href="?ctrl=news&act=news"><li class="active menu-li">ГЛАВНАЯ</li></a>
+                        <a href="?ctrl=news&act=news"><li class=" menu-li">ГЛАВНАЯ</li></a>
                         <a href=""><li class="menu-li">РАЙОНЫ</li></a>
                         <a href=""><li class="menu-li">ЗАДАЧИ</li></a>
                         <a href=""><li class="menu-li">УЧАСНИКИ</li></a>
-                        <a href="?ctrl=news&act=MyPosts"><li class="menu-li">МОИ ЗАПИСИ</li></a>
+                        <a href="?ctrl=news&act=MyPosts"><li class="active menu-li">МОИ ЗАПИСИ</li></a>
                     </ul>
 
                     <div class="search">

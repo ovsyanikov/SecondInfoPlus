@@ -206,20 +206,22 @@ form a:hover{
 .menu-li{
     display: inline-block;
     width: 110px;
-    padding: 25px 1px;
+    height: 23px;
+    padding: 26px 1px 19px 1px;
     text-align: center;
     color: #fff;
-    /* border-bottom: 3px solid #890B00; */
+    border-bottom: 4px solid #890B00;
     transition:  background ease-in-out 0.2s, border ease-in-out 0.2s;    
 }
 .active{
     background: #890B00;
     /* background: #fff; */
     /* color: #CF1000; */
+    border-bottom: 4px solid #fff;
 }
 .menu-li:hover{
-    background: #CF1000;
-    /* border-bottom: 3px solid #CF1000; */
+    /* background: #CF1000; */
+    border-bottom: 4px solid #FFFFFF;
     transition:  background ease-in-out 0.2s, border ease-in-out 0.2s;
 }
 .news-section{

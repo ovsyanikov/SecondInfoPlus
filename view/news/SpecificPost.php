@@ -32,7 +32,7 @@
                 </div></a>
                 <div class="div-menu">
                     <ul class="menu">
-                        <a href="?ctrl=news&act=news"><li class="active menu-li">ГЛАВНАЯ</li></a>
+                        <a href="?ctrl=news&act=news"><li class="menu-li">ГЛАВНАЯ</li></a>
                         <a href=""><li class="menu-li">РАЙОНЫ</li></a>
                         <a href=""><li class="menu-li">ЗАДАЧИ</li></a>
                         <a href=""><li class="menu-li">УЧАСНИКИ</li></a>
