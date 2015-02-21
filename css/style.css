@@ -16,11 +16,6 @@ a{
 html{
 	/* min-width:1200px; */
 }
-body{
-/*	background: #2B3F57 url(../img/banner.jpg);
-	background-size: auto 120%;
-*/			
-}
 .welc{
     background: url(../img/footer_lodyas.png);
 }
@@ -49,7 +44,13 @@ body{
 	border: none;	
 }
 heder{
-	width:100%;
+	width: 1200px;
+	margin: auto;
+	display: block;
+	box-sizing: border-box;
+	padding: 0px 25px;
+	background: #CF1000;
+	margin-top: 8px;
 }
 .submit{
 	font-size: 14pt;	
@@ -84,8 +85,6 @@ form a:hover{
 	color: 	#642323;
 	transition: color ease-in-out 0.2s;
 }
-.getnewpass{	
-}
 
 .password{
 	width: 57%;
@@ -93,7 +92,7 @@ form a:hover{
 }
 .h1-form{
 	color: #fff;
-	font-size: 18pt;
+	font-size: 1.4vw;
 	text-align: center;
 	margin-bottom: 25px;	
 }
@@ -108,13 +107,13 @@ form a:hover{
         font-size: 50pt;
         /* margin-left: 111px; */
         position: relative;
-        top: -16px;
+        /* top: -16px; */
         color: #fff;
 }
 .text p{
 	margin: 25px 0px;	
         text-align: justify;
-	font-size: 12pt;
+	font-size: 1.25vw;
 }
 .fst-logo{
     width: 85px;
@@ -124,13 +123,10 @@ form a:hover{
     width: 75%;
     margin:  auto;
 }
-
-.copyright{
-    font-size: 10pt;
-    color: #fff;
-    text-align: center;
-    padding: 50px 0px 0px 25px;
-    font-weight: 100;
+.reg-section{
+    max-width: 540px;
+    /* width: 40%; */
+    margin: auto;
 }
 
 .invisible{
@@ -152,43 +148,18 @@ form a:hover{
 }
 
 .copyright{
-    font-size: 10pt;
+    font-size: 1vw;
     color: #fff;
     text-align: center;
     padding: 50px 0px 25px 0px;
     font-weight: 100;
 }
 
-@media screen and (max-width: 980px) {
-    .text{
-        float: none;
-        width: 100%;
-        margin-top: 5%;
-    }
-    .block{
-        width: 100%;
-        box-sizing: border-box;
-    }
-    
-}
-
-
-
-
-
-
-
-
-
 
 
 
 
 .top-head{
-    /* min-height:  70px; */
-    padding: 5px 0px;
-    background: #CF1000;
-    width: 100%;
 }
 .content{
     width: 1200px;
@@ -197,50 +168,55 @@ form a:hover{
 .logo img{
     height: 50px;
     display:  inline-block;
-    margin-left: 26px;
 }
 .logo-h1{
     color: #fff;
     font-size: 32pt;
     display: inline-block;
+    font-weight: 100;
 }
 .personal{
-    float: right;
-    padding: 8px 0px;
-    color: #fff;
+    /* float: right; */
+    padding: 0px 0px 10px 0px;
+    color: #CF1000;
     text-decoration: none;
-    /* display: none; */
+    border-bottom: 1px solid #E3E3E3;
+    font-size: 11.5pt;
+    text-align: left;
 }
 
 .logo{
-    width: 350px;
+    width: 220px;
+    margin-right: 70px;
     display: inline-block;
+    padding: 5px 0px;
 }
 .bottom-head{
-    min-height: 40px;
     background: #890B00;
-    width: 100%;
+    display: none;
 }
 .menu{
     font-size: 18pt;
     font-weight: 100;
     text-transform: uppercase;
-    border-top: 3px solid #890B00;
-    width: 720px;
-    display: inline-block;
+    /* border-top: 3px solid #890B00; */
+    /* width: 632px; */
+    display: inline;
 }
 .menu-li{
     display: inline-block;
-    list-style-type: none;
-    width: 130px;
-    padding: 7px 0px;
+    list-style-type:;
+    width: 110px;
+    padding: 25px 1px;
     text-align: center;
     color: #fff;
     /* border-bottom: 3px solid #890B00; */
     transition:  background ease-in-out 0.2s, border ease-in-out 0.2s;    
 }
 .active{
-    background: #CF1000;
+    background: #890B00;
+    /* background: #fff; */
+    /* color: #CF1000; */
 }
 .menu-li:hover{
     background: #CF1000;
@@ -248,21 +224,22 @@ form a:hover{
     transition:  background ease-in-out 0.2s, border ease-in-out 0.2s;
 }
 .news-section{
-    margin: 25px 0px 0px 25px;
+    margin: 10px 0px 0px 2px;
     background: #fff;
     display: inline-block;
-    width: 720px;
+    width: 828px;
     min-height: 450px;
     padding: 25px;
 }
 .sidebar{
-    margin-top: 25px;
+    margin-top: 10px;
     background: #fff;
     display: inline-block;
-    width: 350px;
+    width: 315px;
     min-height: 450px;
     vertical-align: top;
     padding: 25px;
+    box-sizing: border-box;
 }
 .h1{
     font-size: 20pt;
@@ -278,13 +255,14 @@ form a:hover{
     font-stretch: condensed;
     padding: 5px 0px;
 }
-.top-3 img{
-    width: 720px;
-}
 .top-3{
-    width: 720px;
-    height: 450px;
+   // height: 450px;
     overflow: hidden;
+    text-align: center;
+    /* padding: 10px 0px; */
+}
+.top-3 img{
+    max-width: 100%; 
 }
 .footer{
     background:  #890B00;
@@ -321,10 +299,11 @@ display: inline-block;
 }
 .search{
     float: right;
+    margin-right: 25px;
 }
 .isearch{
     padding: 5px;
-    margin-top: 15px;
+    margin-top: 18px;
     border: none;
 }
 
@@ -351,42 +330,43 @@ display: inline-block;
 .search-icon{
     font-family: 'search font';
     font-size: 14pt;
-    padding: 20px 0px 10px 5px;
+    padding: 23px 0px 10px 5px;
     float: right;
-    color: rgb(137, 11, 0);
+    color: #fff;
 }
 .head-reg{
-    width: 530px;
     padding: 25px 0px;
     margin: auto;
 }
 .reg-logo{
-    /* margin-top: 15px; */
     position: relative;
-    width: 137px;
-    left: 0px;
     top: 20px;
+    float: right;
+    width: 9vw;
 }
 .h2-reg {
     font-weight: 700;
     font-size: 30pt;
     position: relative;
-    top: -35px;
+    top: -15px;
     color: #CF1000;
 }
 .reg-block{
     margin: auto;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 4%;
 }
 .h2-reg-form{
     color: #fff;
     
-    padding: 10px 0px;
-    font-weight: 400;
     font-size: 18pt;
+    margin: 3% 0;
 }
 .reg-button{
-    width: 395px;
+    width: 100%;
     margin-top: 25px;
+    float: none;
 }
 .post-img{
 width: 150px;
@@ -394,9 +374,9 @@ float: left;
 margin: 10px 15px 5px 0px;
 }
 .loader{
-margin: 0px 10px;
+margin: 0px 5px;
 float: right;
-margin-top: 15px;
+margin-top: 18px;
 }
 .show{
 	display: block;
@@ -435,9 +415,10 @@ opacity:1;
     display: block;
 }
 .makepostInput{
-    width: 700px;
+    width: 100%;
     background: #E6E6E6;
     font-size: 13pt;
+    margin-bottom: 5px;
 }
 #makePostArea{
     min-height: 250px;
@@ -451,6 +432,7 @@ opacity:1;
 .makepost-button{
     width: 100%;
     margin: 10px 0px;
+    float: none;
 }
 .post-linkFiles{
     width: 200px;
@@ -459,6 +441,7 @@ opacity:1;
 .My-posts-button{
     width: 100%;
 	margin-bottom: 15px;
+    float: none;
 }
 .delete-post{
 	opacity:0;
@@ -581,4 +564,140 @@ opacity:1;
 }
 .pers-success h2{
     color: #206F00;  
+}
+
+@media screen and (min-width: 1400px) {
+    *{
+        font-size: 1.2vw;
+    }
+    .input,.span,.submit,.text p{
+        font-size: 1.2vw;
+    }
+    .in{
+        font-size: 5vw;
+    }
+    .fst-logo{
+        width: 17%;
+    }
+    .copyright{
+        font-size:1vw;    
+        padding: 3% 0px;
+    }
+    .h1-form{
+        font-size: 1.4vw;
+    }
+    .reg-section{
+        max-width: none;
+        width: 40%;
+    }
+    .head-reg{
+        max-width: none;
+        width: 100%;
+    }
+    .h2-reg-form, .input{
+        font-size: 1.8vw;
+    }
+    .h2-reg{
+        font-size: 2vw;
+    }
+}
+@media screen and (max-width: 1350px) {
+    .fst-logo{
+        width: 6vw;
+    }
+    .in{
+        font-size: 5vw;
+    }
+}
+@media screen and (max-width: 980px) {
+    .text{
+        float: none;
+        width: 100%;
+        margin-top: 5%;
+    
+}
+    .block{
+        width: 100%;
+        box-sizing: border-box;
+        padding: 3.5%;
+    }
+    .fst-logo{
+        width: 6vw;
+        display: inline-block;
+        float: none;
+    
+        position: relative;
+    }
+    .in{
+        font-size: 6vw;
+        display: inline-block;
+    
+        margin: 0px 10px;
+        /* vertical-align: bottom; */
+    
+        top: 0;
+}
+    .h1-form{
+        font-size: 16pt;
+    }
+    .text p{
+        font-size: 14pt;
+        margin: 15px 0px;
+    }
+    .reg-logo{
+        width: 12vw;
+    }
+    .reg-section{
+        width:75%;
+    }
+    .h2-reg{
+        font-size: 4vw;
+    }
+    .reg-section .in{
+        margin: 0;
+    }
+    .h2-reg-form, .input{
+        font-size: 2.5vw;
+    }
+    .copyright{
+        font-size:10pt;    
+        padding: 5% 0px;
+    }    
+}
+@media screen and (max-width: 680px) {
+    .text p{
+        font-size: 3.4vw;
+        margin: 15px 0px;
+    }
+    .input,.span,.submit{
+        font-size: 3.5vw;
+    }
+    .h1-form{
+        font-size: 4.4vw;
+        margin-bottom: 5px;
+    }
+
+    .input, .submit{
+        padding: 5px;
+    }
+    .reg-logo{
+        top: 10px;
+    }
+    .reg-section .head-reg{
+        padding-bottom: 0px;
+    }
+    .h2-reg-form, .input{
+        font-size: 3.5vw;
+    }
+    .copyright{
+        font-size:6pt;  
+    }
+}
+.div-menu{
+    display: inline-block;
+    background: #890B00;
+    vertical-align: top;
+    width: 881px;
+    /* background: url(../img/bg-top.jpg); */
+    /* background-size: 40%; */
 }

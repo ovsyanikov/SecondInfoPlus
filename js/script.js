@@ -743,7 +743,7 @@ $(document).ready(function(){
 				$('#news-section').css({margin : "auto", display : "block"});
 			} else {
 				$('aside.sidebar').css({display : "inline-block"});
-				$('#news-section').css({margin : "25px 0px 0px 25px", display : "inline-block"});
+				$('#news-section').css({margin : "10px 0px 0px 2px", display : "inline-block"});
 			}
 			});
 			 

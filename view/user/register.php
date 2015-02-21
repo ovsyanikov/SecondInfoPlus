@@ -13,9 +13,10 @@
 
 </head>
 <body class="welc"> 
-    <section class="fst-section">
+    <section class="reg-section">
 	<div class="head-reg">
-            <h1 class="in"> INFO PULSE <img src="img/info-puls1.png" alt="" class="reg-logo fst-logo"/></h1>
+            <img src="img/info-puls1.png" alt="" class="reg-logo"/>
+            <h1 class="in"> INFO PULSE </h1>
             <h2 class="h2-reg h2">Регистрация</h2>   
         </div>
         <div class="reg-block block" id="authentication">
