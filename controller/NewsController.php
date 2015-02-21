@@ -105,10 +105,14 @@ class NewsController extends \controller\BaseController{
            if(empty($user)){
                $user = $this->getRequest()->getCookieValue('user_info_plus');
            }//if
+           
            $this->view->current_user = $this->GetUserService()->getUser($user);
-           $this->view->current_user_news =  $this->GetNewsService()->GetMyPosts();
+           
            $owner = $this->getRequest()->getSessionValue('user_info_plus');
            $this->GetNewsService()->PublicPost($owner);
+           
+           $this->view->current_user_news =  $this->GetNewsService()->GetMyPosts();
+           
            return 'MyPosts';
        }//else
         
