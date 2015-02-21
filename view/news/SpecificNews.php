@@ -12,17 +12,6 @@
     </head>
     <body i="body" class="news-bg"> 
         
-       <script>
-           
-            var script = document.createElement('SCRIPT');
-            
-            var data = new String("<?php echo $_GET['vklink']; ?>");
-            
-            script.src = "https://api.vk.com/method/wall.getById?posts="+data+"&extended=0&copy_history_depth=0&v=5.28&callback=getpost";
-            document.getElementsByTagName("body")[0].appendChild(script);      
-            
-        </script>
-        
     <heder>
         <div class="top-head">
             <div class="content">

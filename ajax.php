@@ -238,7 +238,23 @@ else if(!empty($_POST['ChangePassword'])){
     $res = $stmt->execute();
     
     if($res == 1){
-        echo "ok";
+            
+        $stmt = \util\MySQL::$db->prepare("SELECT * FROM users WHERE Login = :owner");
+        $stmt->bindParam(":owner",$Owner);
+        $stmt->execute();
+        $user = $stmt->fetchObject(user::class);
+        
+        if(is_a($user,'model\entity\user')){
+            
+            $id = $user->getId();
+            $stmt = \util\MySQL::$db->prepare("UPDATE passwordinfo SET LastChangePassword = NOW() WHERE user = :owner");
+            $stmt->bindParam(":owner",$id);
+            $stmt->execute();
+            
+            echo "ok";
+            
+        }//if
+        
     }//if
     else{
         echo "$res";

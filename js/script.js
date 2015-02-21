@@ -485,7 +485,7 @@ $(document).ready(function(){
                      
                   }//if deleted succesful
                   
-                  else {alert("Ошибка сервера! Не возможно удалить запись!");}
+                  else {alert("Ошибка сервера! Не возможно удалить запись!data = " + data);}
                   
                 });
                 
@@ -493,8 +493,6 @@ $(document).ready(function(){
             
         };
 
-
-        
         $("div.delete-post").click(function(){
             
             if($(this).text() == "J"){
@@ -541,7 +539,7 @@ $(document).ready(function(){
             if($("#postTitle").val() && $("#makePostArea").val()){
                 $("#NewPostForm").submit();
             }//if not empty post field
-            else if($("#postTitle").val().length > 100){
+            else if($("#postTitle").val().length > 97){
                 ShowPostMessage("Длина заголовка слишком велика!");
             }//else if
             else{

@@ -55,4 +55,10 @@ class Request{
         
     }
     
+    function setCookiesWithKey($key,$value){
+        
+        setcookie($key, $value, time() + 86400);
+        
+    }
+    
 }

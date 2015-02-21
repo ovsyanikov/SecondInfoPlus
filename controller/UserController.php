@@ -18,8 +18,7 @@ class UserController extends BaseController{
               $this->userService->leaveResource();
               
           }//if
-          
-          header('Location: ?ctrl=start&act=welcome');
+          $this->redirect("index");
           
       }//leaveAction
       
@@ -37,21 +36,26 @@ class UserController extends BaseController{
           $remember = $r->getPostValue("remember_me");
           
           $cuser = $this->userService->authorize($login, $password);
-              
+          
+          
           if($cuser != NULL){
                   
                   $this->view->current_user = $cuser;
+                  $lpc = $this->userService->getLastTimeChangePassword($cuser->getId());
                   
                   if($remember == 'on'){
                       
-                      $r->setCookies($cuser->getLogin(). "|" . md5($cuser->getPassword()));
-                      $r->setSessionValue('user_info_plus', $cuser->getLogin() . "|" . $cuser->getPassword());
+                      $r->setCookies($cuser->getLogin());
+                      $r->setCookiesWithKey('lpc',$lpc->getLastChangePassword());
+                      $r->setSessionValue('user_info_plus', $cuser->getLogin());
+                      $r->setSessionValue('lpc', $lpc->getLastChangePassword());
                       
                   }//if
                   else{
                       
-                      $r->setSessionValue('user_info_plus', $cuser->getLogin() . "|" . $cuser->getPassword());
-                      
+                      $r->setSessionValue('user_info_plus', $cuser->getLogin());
+                      $r->setSessionValue('lpc', $lpc->getLastChangePassword());
+                       
                   }//else
                   
                   header("Location: ?ctrl=news&act=news");
@@ -66,32 +70,20 @@ class UserController extends BaseController{
     
       function mainRegisterAction(){
           
+          //Регистрация на главной (welcome.php)
+          
           $newUser = new user();
           $r = new \util\Request();
-          
+         
           $newUser->setEmail($r->getPostValue('REmail'));
           $newUser->setLogin($r->getPostValue('RLogin'));
-          $newUser->setPassword('Rpassword');
+          $newUser->setPassword($r->getPostValue('Rpassword'));
           
           $this->view->NewUser = $newUser;
           
           return 'register';
           
       }
-      
-      function registerAction(){
-          
-           if(empty($this->userService)){
-              
-              $this->userService = new UserService();
-              
-          }//if
-
-          $this->userService->add($user);
-          
-          header("Location: ?ctrl=news&act=news");
-          
-      }//registerAction
       
       function newuserAction(){
           
@@ -127,104 +119,32 @@ class UserController extends BaseController{
       
       function MyProfileAction(){ 
           
-         if(empty($this->startService)){
-            
-            $this->startService = new StartService();
-        }
-        $r = new \util\Request();
-        
-        $is_user_cookies = $r->getCookieValue('user_info_plus');
-        $is_user_session = $r->getSessionValue('user_info_plus');
-        
-        if($is_user_cookies == NULL && $is_user_session == NULL){
-            
-            header('Location: index.php?ctrl=start&act=welcome');
-            
-        }//if
-        else{
-            
-            if(!empty($is_user_cookies)){
-                
-                if(empty($this->userService)){
-                    $this->userService = new UserService();
-                }//if
-                
-                $decode_string = htmlspecialchars_decode($is_user_cookies);
-                //login[0]
-                //pass[1]
-                
-                $login = explode('|',$decode_string)[0];
-                $pass = explode('|',$decode_string)[1];
-                
-                $user = $this->userService->getUser($login);
-                
-                if(is_a($user,'model\entity\user')){
-                    
-                    $md5_pass = md5($user->getPassword());
-                    
-                    if($pass == $md5_pass){
-                        $this->view->current_user = $user;
-                        return 'MyProfile';
-                        
-                    }//if
-                    
-                    else if(!empty($is_user_session)){
-                
-                        if(empty($this->userService)){
-                            $this->userService = new model\Service\UserService();
-                        }//if
-
-                        $session_login = explode('|',$is_user_session)[0];  
-                        $session_user = $this->userService->getUser($session_login);
-
-                        $pass_session_user = explode('|',$is_user_session)[1];  
-
-                        if($session_user->getPassword() == $pass_session_user){
-                             $this->view->current_user = $session_user;
-                             return 'MyProfile';
-                        }//if
-                        else{
-                            header('Location: index.php?ctrl=start&act=welcome');
-                        }//else
-                
-                    }//else if
-                    else{
-                            header('Location: index.php?ctrl=start&act=welcome');
-                    }//else
-                }//if
-                
-                
+            $user_serv = $this->GetUserService();
+            $access = $user_serv->isAccessDenied();
+       
+            if($access){//Если доступ запрещен
+                $this->redirect("index");
             }//if
-            
-            else if(!empty($is_user_session)){
-                
-                if(empty($this->userService)){
-                    $this->userService = new UserService();
-                }//if
-                
-                $session_login = explode('|',$is_user_session)[0];  
-                $session_user = $this->userService->getUser($session_login);
-                
-                $pass_session_user = explode('|',$is_user_session)[1];  
-                
-                if($session_user->getPassword() == $pass_session_user){
-                    $this->view->current_user = $session_user;
-                     return 'MyProfile';
-                }//if
-                else{
-                    header('Location: index.php?ctrl=start&act=welcome');
-                }//else
+            else{//Если доступ разрешен
+                $user = $this->getRequest()->getSessionValue('user_info_plus');
+                if(empty($user)){
+                    $user = $this->getRequest()->getCookieValue('user_info_plus');
+                }//
+                $this->view->current_user = $this->GetUserService()->getUser($user);
+                return 'MyProfile';
                 
             }//else
-            else{
-                
-                 header('Location: index.php?ctrl=start&act=welcome');
-                
-            }//else
-            
-        }//else
-         
-          
-      }
+
+      }//MyProfileAction
       
+      public function GetUserService(){
+        
+        if(empty($this->userService)){
+            $this->userService = new UserService();
+        }//if
+        
+        return $this->userService;
+        
+    }
+    
 }//UserController

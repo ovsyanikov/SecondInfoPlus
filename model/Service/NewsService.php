@@ -60,8 +60,10 @@ class NewsService{
           $news = [];
           
           $r = new Request();
-          $owner = explode('|',$r->getSessionValue('user_info_plus'))[0];
-          
+          $owner = $r->getSessionValue('user_info_plus');
+          if(empty($owner)){
+              $owner = $r->getCookieValue('user_info_plus');
+          }
           $stmt = \util\MySQL::$db->prepare("SELECT * FROM news WHERE Owner = :owner");
           $stmt->bindParam(":owner",$owner);
           $stmt->execute();
