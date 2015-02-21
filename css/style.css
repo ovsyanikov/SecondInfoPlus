@@ -199,9 +199,8 @@ form a:hover{
     font-size: 18pt;
     font-weight: 100;
     text-transform: uppercase;
-    /* border-top: 3px solid #890B00; */
-    /* width: 632px; */
     display: inline;
+    margin: 0px 10px;
 }
 .menu-li{
     display: inline-block;
@@ -306,7 +305,7 @@ display: inline-block;
 }
 .isearch{
     padding: 5px;
-    margin-top: 18px;
+    margin-top: 20px;
     border: none;
 }
 
@@ -333,7 +332,7 @@ display: inline-block;
 .search-icon{
     font-family: 'search font';
     font-size: 14pt;
-    padding: 23px 0px 10px 5px;
+    padding: 25px 0px 10px 5px;
     float: right;
     color: #fff;
 }
@@ -379,7 +378,7 @@ margin: 10px 15px 5px 0px;
 .loader{
 margin: 0px 5px;
 float: right;
-margin-top: 18px;
+margin-top: 20px;
 }
 .show{
 	display: block;

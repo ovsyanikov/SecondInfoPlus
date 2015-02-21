@@ -741,7 +741,10 @@ $(document).ready(function(){
 			if($(this).scrollTop() > 650) {
 				$('aside.sidebar').css("display" , "none");
 				$('#news-section').css({margin : "auto", display : "block"});
-			} else {
+                                //$('#news-section').css({display : "block"});
+                                //$('#news-section').animate({ marginTop: 'auto', marginRight: 'auto', marginBottom: 'auto', marginLeft: 250},500);
+
+                        } else {
 				$('aside.sidebar').css({display : "inline-block"});
 				$('#news-section').css({margin : "10px 0px 0px 2px", display : "inline-block"});
 			}
