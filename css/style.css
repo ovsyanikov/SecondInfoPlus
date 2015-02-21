@@ -154,8 +154,12 @@ form a:hover{
     padding: 50px 0px 25px 0px;
     font-weight: 100;
 }
-
-
+#newsContent .post,.post-h2{
+    padding-top: 0px; 
+}
+#newsContent img{
+    margin: 10px 10px 10px 0px;
+}
 
 
 
