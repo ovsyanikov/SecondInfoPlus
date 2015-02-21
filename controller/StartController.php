@@ -25,7 +25,7 @@ class StartController extends \controller\BaseController{
            return 'welcome';
        }
        else{//Если доступ разрешен
-          $this->redirect("index.php");
+          $this->redirect("index");
        }
        
     }
