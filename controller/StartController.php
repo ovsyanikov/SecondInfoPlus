@@ -2,7 +2,7 @@
 
 namespace controller;
 
-use model\Service\StartService;
+use model\service\StartService;
 use model\service\UserService;
 
 class StartController extends \controller\BaseController{

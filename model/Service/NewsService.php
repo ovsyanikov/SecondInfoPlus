@@ -63,7 +63,7 @@ class NewsService{
           $owner = $r->getSessionValue('user_info_plus');
           if(empty($owner)){
               $owner = $r->getCookieValue('user_info_plus');
-          }
+          }//if
           $stmt = \util\MySQL::$db->prepare("SELECT * FROM news WHERE Owner = :owner");
           $stmt->bindParam(":owner",$owner);
           $stmt->execute();
