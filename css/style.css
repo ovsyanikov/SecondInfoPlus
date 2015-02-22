@@ -712,11 +712,13 @@ opacity:1;
     /* background-size: 40%; */
 }
 .selectDistrict{
+    display: inline-block;
     width: 250px;
     height: 42px;
     overflow: hidden;
 
     transition: height ease 0.3s;
+    margin: 15px 0px;
 }
 .selectDistrict:hover{
     height: 172px;
@@ -744,8 +746,24 @@ opacity:1;
 .h2-distr,.selectDistrict li:active{
     transform: scale(0.98);
     transition: transform ease-in-out 0.1s;
+    border: none;
 }
 .selectDistrict li:hover{
     transform: translateX(10px);
     transition: transform ease-in-out 0.2s;
 }
+
+.stop-area{
+    max-width: 535px;
+    color: #fff;
+    min-width: 535px;
+    max-height: 22px;
+    height: 22px;
+    vertical-align: top;
+    background: #890B00;
+    border: none;
+    padding: 10px;
+    display: inline-block;
+    margin: 15px 0px 15px 15px;
+}
+.stop-area::-webkit-input-placeholder {color:#fff;}

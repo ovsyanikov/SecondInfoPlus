@@ -58,8 +58,8 @@
     <div class="content">
     <aside class="sidebar">
             
-            
-                            <div class="personal">
+
+                <div class="personal">
                     <a href="?ctrl=user&act=MyProfile">Личный кабинет(<?php
                         echo "{$this->view->current_user->getLogin()}"
                         ?>)</a> / 
@@ -88,18 +88,21 @@
 
 
             <div id="newsContent">
-                  
-                <div class="selectDistrict">
-                    <h2 class="h2-distr">Выберите район</h2>
-                    <ul class="district">
-                        <?php   
-                            foreach ($this->view->districts as $district){
-                                echo "<li data-district-id = \"{$district->getId()}\">{$district->getTitle()}</li>";
-                            }
-                        ?>               
-                    </ul>
+                <div class="post">    
+                    <h2 class="h2">Введите стоп слова, разделяя их запятыми, и выберите район:</h2>  
+
+                    <div class="selectDistrict">
+                        <h2 class="h2-distr">Выберите район</h2>
+                        <ul class="district">
+                            <?php   
+                                foreach ($this->view->districts as $district){
+                                    echo "<li data-district-id = \"{$district->getId()}\">{$district->getTitle()}</li>";
+                                }
+                            ?>               
+                        </ul>
+                    </div>
+                    <textarea name="" id="" class="stop-area" placeholder="Стоп слова"></textarea>
                 </div>
-                
             </div>
         </section>
     </div>
