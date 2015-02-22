@@ -323,10 +323,11 @@ function ShowPersonalRoomMessage(controll,message,type){
 }
 
 function GetPostByStopWord(result){
+    
         
         
         words = new String( $("#stop_words").val() );
-            
+        
         delimers_words = words.split(',');
         
         for(i = 0;i < result.response.items.length;i++){
@@ -342,8 +343,7 @@ function GetPostByStopWord(result){
                                 record_text = new String(result.response.items[i].text);
                                 
                                 for(j = 0; j < delimers_words.length; j++){
-                                    
-                                        if(record_text.indexOf(delimers_words[j]) != -1){//если запись содержит стоп слово
+                                    if(record_text.indexOf(delimers_words[j]) != -1){//если запись содержит стоп слово
                                             title = new String(result.response.items[i].text.split('.')[0]);
                                         if(title.length > 100){
                                             title = (title.substr(0,100)+"...");
@@ -374,7 +374,6 @@ function GetPostByStopWord(result){
                                         }//else
                                     
                             }//if содержить стоп слово
-                            
                         }//Перебор всех стоп-слов
                                 
                             
@@ -384,14 +383,15 @@ function GetPostByStopWord(result){
                         }//true
                         if(i == result.response.items.length-1){
                             LoaderOff();
+                            $("#search_news_by_stop_words").blur();
                         }//if  
                         
                     }//for
                     
-                    if($('#newsContent').children().length == 0){
-                        $('section div.h1').remove();
-                        $("section").append("<div class=\"h1\" id=\"newsContent\">Новости по данному запросу не найдены</div>");
-                    }//if   
+        if($('#newsContent').children().length == 0){
+             $('section div.h1').remove();
+             $("section").append("<div class=\"h1\" id=\"newsContent\">Новости по данному запросу не найдены</div>");
+        }//if   
         
 }//GetPostByStopWord
 
