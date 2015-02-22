@@ -421,7 +421,26 @@ $(function() {
 
 $(document).ready(function(){
         
-
+$("#search_news_by_stop_words").click(function(){
+            
+        LoaderOn();
+        district = $("div.selectDistrict h2.h2-distr").text();
+            
+        if(district != 'Выберите район'){
+                
+                $("#newsContent div.post").remove();
+                
+                script = document.createElement('SCRIPT');
+                
+                script.src = "https://api.vk.com/method/newsfeed.search?q="+district+"&extended=0&count=200&v=5.28&callback=GetPostByStopWord";
+                
+                document.getElementsByTagName("body")[0].appendChild(script); 
+                
+            }//if
+            else{//error
+                alert("Не получен район");
+            }//else
+        });
         
         $("div.selectDistrict ul.district li").click(function(){
             

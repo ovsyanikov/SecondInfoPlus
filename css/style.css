@@ -233,7 +233,7 @@ form a:hover{
     background: #fff;
     display: inline-block;
     width: 828px;
-    min-height: 1559px;
+    min-height: 559px;
     padding: 25px;
 }
 .sidebar{
@@ -758,7 +758,7 @@ opacity:1;
     vertical-align: top;
     background: #890B00;
     border: none;
-    display: block;
+    display: inline;
     padding: 10px;
     margin: 15px 0px;
 }
@@ -777,4 +777,7 @@ span#minimize{
     font: inherit;
     cursor: pointer;
     float: right;
+}
+.srch{
+    text-align: center;
 }
