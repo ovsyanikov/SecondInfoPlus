@@ -11,6 +11,9 @@ class GlobalService{
     
     public function GetDistricts(){
         
+        $stmt = \util\MySQL::$db->prepare("SET NAMES UTF-8");
+        $stmt->execute();
+        
         $districts = [];
         $stmt = \util\MySQL::$db->prepare("SELECT * FROM Districts");
         $stmt->execute();
