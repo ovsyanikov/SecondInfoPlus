@@ -92,10 +92,11 @@
                 <div class="selectDistrict">
                     <h2 class="h2-distr">Выберите район</h2>
                     <ul class="district">
-                        <li>Арбат</li>
-                        <li>Киевский</li>
-                        <li>Ленинский</li>
-                        <li>Петровка</li>                        
+                        <?php   
+                            foreach ($this->view->districts as $district){
+                                echo "<li data-district-id = \"{$district->getId()}\">{$district->getTitle()}</li>";
+                            }
+                        ?>               
                     </ul>
                 </div>
                 
