@@ -388,7 +388,7 @@ function GetPostByStopWord(result){
                         
                     }//for
                     
-        if($('#newsContent').children().length == 0){
+                    if($('#newsContent').children().length == 0){
                         $('section div.h1').remove();
                         $("section").append("<div class=\"h1\" id=\"newsContent\">Новости по данному запросу не найдены</div>");
                     }//if   
@@ -403,6 +403,8 @@ $(document).ready(function(){
             district = $("div.selectDistrict h2.h2-distr").text();
             
             if(district != 'Выберите район'){
+                
+                $("#newsContent div.post").remove();
                 
                 script = document.createElement('SCRIPT');
                 
