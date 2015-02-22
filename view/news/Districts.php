@@ -10,7 +10,7 @@
         <script type="text/javascript" src="js/script.js"></script> 
         <title>Info-Pulse</title>
     </head>
-    <body i="body" class="news-bg"> 
+    <body id="body" class="news-bg"> 
         
     <heder>
         <div class="top-head">
@@ -98,7 +98,7 @@
                             <?php   
                                 foreach ($this->view->districts as $district){
                                     echo "<li data-district-id = \"{$district->getId()}\">{$district->getTitle()}</li>";
-                                }
+                                }//foreach
                             ?>               
                         </ul>
                     </div>
