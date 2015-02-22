@@ -47,6 +47,8 @@
                     <a href=""><li class="menu-li">УЧАСНИКИ</li></a>
                     <a href="?ctrl=news&act=MyPosts"><li class="menu-li">МОИ ЗАПИСИ</li></a>
                 </ul>
+
+
             </div>
         </div>
     </heder>
@@ -57,10 +59,15 @@
     <aside class="sidebar">
             
             
-            <div class="personal">
-                <a href="?ctrl=user&act=MyProfile">Личный кабинет(<?php
-                echo "{$this->view->current_user->getLogin()}"?>)</a> / <a href="?ctrl=user&act=leave">Выйти</a>  
-            </div>
+                            <div class="personal">
+                    <a href="?ctrl=user&act=MyProfile">Личный кабинет(<?php
+                        echo "{$this->view->current_user->getLogin()}"
+                        ?>)</a> / 
+                    <a href="?ctrl=user&act=leave">Выйти</a>
+                </div>
+            
+            
+            
             
             <h1 class="h1">Лента новостей</br>Выводятся новости 1ой рубрики, кратко</h1>
             <div class="side-post">
@@ -78,7 +85,20 @@
 
         </aside>
         <section class="post-section news-section">
+
+
             <div id="newsContent">
+                  
+                <div class="selectDistrict">
+                    <h2 class="h2-distr">Выберите район</h2>
+                    <ul class="district">
+                        <li>Арбат</li>
+                        <li>Киевский</li>
+                        <li>Ленинский</li>
+                        <li>Петровка</li>                        
+                    </ul>
+                </div>
+                
             </div>
         </section>
     </div>

@@ -3,7 +3,7 @@
 
 *{
 	margin: 0;
-	padding: 0;
+	padding: 0px;
 	font-size: 12pt;
 	font-family: 'Open Sans', sans-serif;
 }
@@ -710,4 +710,42 @@ opacity:1;
     height: 72px;
     /* background: url(../img/bg-top.jpg); */
     /* background-size: 40%; */
+}
+.selectDistrict{
+    width: 250px;
+    height: 42px;
+    overflow: hidden;
+
+    transition: height ease 0.3s;
+}
+.selectDistrict:hover{
+    height: 172px;
+    transition: height ease 0.3s;
+}
+.selectDistrict li{
+    list-style: none;
+    padding: 5px 20px;
+    background: #CF1000;
+    margin: 1px 5px;
+    color: #fff;
+    cursor: pointer;
+    transition: transform ease-in-out 0.2s;
+}
+.h2-distr{
+    text-align: center;
+    color: #fff;
+    padding: 10px;
+    background: #890B00;
+    font-weight: 100;
+    cursor: pointer;
+    transform: scale(1); 
+    transition: transform ease-in-out 0.1s;    
+}
+.h2-distr,.selectDistrict li:active{
+    transform: scale(0.98);
+    transition: transform ease-in-out 0.1s;
+}
+.selectDistrict li:hover{
+    transform: translateX(10px);
+    transition: transform ease-in-out 0.2s;
 }
