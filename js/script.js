@@ -388,11 +388,11 @@ function GetPostByStopWord(result){
                         
                     }//for
                     
-                    if($('#newsContent').children().length == 0){
+        if($('#newsContent').children().length == 0){
                         $('section div.h1').remove();
                         $("section").append("<div class=\"h1\" id=\"newsContent\">Новости по данному запросу не найдены</div>");
                     }//if   
-                    
+        
 }//GetPostByStopWord
 
 $(document).ready(function(){
