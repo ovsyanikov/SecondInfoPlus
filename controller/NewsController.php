@@ -11,6 +11,7 @@ class NewsController extends \controller\BaseController{
     private $startService;
     private $newsService;
     private $userService;
+    private $globalService;
     
     public function newsAction(){
         
@@ -137,6 +138,7 @@ class NewsController extends \controller\BaseController{
            return 'SpecificNews';
        }//else
     }
+    
     public function DistrictsAction(){
         
        $user_serv = $this->GetUserService();
@@ -151,6 +153,8 @@ class NewsController extends \controller\BaseController{
                $user = $this->getRequest()->getCookieValue('user_info_plus');
            }//if
            $this->view->current_user = $this->GetUserService()->getUser($user);
+           $this->view->districts = $this->GetGlobalService()->GetDistricts();
+           
            return 'Districts';
        }//else
         
@@ -175,5 +179,13 @@ class NewsController extends \controller\BaseController{
         return $this->newsService;
     }
     
-    
+    public function GetGlobalService() {
+        
+        if(empty($this->globalService)){
+            
+            $this->globalService = new GlobalService();
+            
+        }//if
+        return $this->globalService;
+    }
 }

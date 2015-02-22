@@ -1,6 +1,7 @@
 <?php
 
 namespace model\service;
+
 use model\entity\district;
 use model\entity\global_news;
 use model\entity\stopword;
@@ -216,7 +217,7 @@ class GlobalService{
     
     public function GetStatisticByStopWordId($id) {
         
-        $stmt = \util\MySQL::$db->prepare("SELECT COUNT(*) FROM statistic_stop_words WHERE word_id = :wId");
+        $stmt = \util\MySQL::$db->prepare("SELECT COUNT(id) FROM statistic_stop_words WHERE word_id = :wId");
         $stmt->bindParam(":wId",$id);
         $stmt->execute();
         
