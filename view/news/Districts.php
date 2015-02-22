@@ -84,7 +84,7 @@
             </div>
 
         </aside>
-        <section class="post-section news-section">
+        <section class=" news-section">
 
             <div id="newsContent">
                 <h1 class="h1">Панель поиска <span id="minimize" title="Скрыть панель">─</span></h1>
