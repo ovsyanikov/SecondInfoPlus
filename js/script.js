@@ -423,10 +423,10 @@ $(document).ready(function(){
         
 $("#search_news_by_stop_words").click(function(){
             
-        
         district = $("div.selectDistrict h2.h2-distr").text();
             
-        if(district != 'Выберите район'){
+        if(district != 'Выберите район' && $("#stop_words").val()){
+            
                 LoaderOn();
                 $("#newsContent div.post").remove();
                 
@@ -438,7 +438,7 @@ $("#search_news_by_stop_words").click(function(){
                 
             }//if
             else{//error
-                alert("Не получен район");
+                alert("Не получен район или стоп слова");
             }//else
         });
         
