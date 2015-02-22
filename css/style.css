@@ -51,6 +51,7 @@ heder{
 	padding: 0px 25px;
 	background: #CF1000;
 	margin-top: 8px;
+	height: 72px;
 }
 .submit{
 	font-size: 14pt;	
@@ -575,7 +576,7 @@ opacity:1;
 }
 
 @media screen and (min-width: 1400px) {
-    *{
+    body.welc *{
         font-size: 1.2vw;
     }
     .input,.span,.submit,.text p{
@@ -706,6 +707,7 @@ opacity:1;
     background: #890B00;
     vertical-align: top;
     width: 881px;
+    height: 72px;
     /* background: url(../img/bg-top.jpg); */
     /* background-size: 40%; */
 }
