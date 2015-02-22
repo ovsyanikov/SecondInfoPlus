@@ -101,6 +101,21 @@
                                 }//foreach
                             ?>               
                         </ul>
+                        <ul class="district">
+                            <?php   
+                                foreach ($this->view->districts as $district){
+                                    echo "<li data-district-id = \"{$district->getId()}\">{$district->getTitle()}</li>";
+                                }//foreach
+                            ?>               
+                        </ul>
+                        <ul class="district">
+                            <?php   
+                                foreach ($this->view->districts as $district){
+                                    echo "<li data-district-id = \"{$district->getId()}\">{$district->getTitle()}</li>";
+                                }//foreach
+                            ?>               
+                        </ul>
+                        
                     </div>
                     <input class="distr-button submit" id="search_news_by_stop_words" value="Найти" type="button">
                 </div>

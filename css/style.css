@@ -725,7 +725,7 @@ opacity:1;
     transition: height ease 0.3s;
 }
 .selectDistrict li{
-    width: 145px;
+    width: 139px;
     list-style: none;
     padding: 5px 20px;
     background: #CF1000;
@@ -781,4 +781,7 @@ span#minimize{
 }
 .srch{
     /* text-align: center; */
+}
+.district{
+    display: inline-block;
 }
