@@ -725,6 +725,7 @@ opacity:1;
     transition: height ease 0.3s;
 }
 .selectDistrict li{
+    width: 145px;
     list-style: none;
     padding: 5px 20px;
     background: #CF1000;
