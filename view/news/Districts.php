@@ -12,17 +12,6 @@
     </head>
     <body i="body" class="news-bg"> 
         
-       <script>
-           
-            var script = document.createElement('SCRIPT');
-            
-            var data = new String("<?php echo $_GET['vklink']; ?>");
-            
-            script.src = "https://api.vk.com/method/wall.getById?posts="+data+"&extended=0&copy_history_depth=0&v=5.28&callback=getpost";
-            document.getElementsByTagName("body")[0].appendChild(script);      
-            
-        </script>
-        
     <heder>
         <div class="top-head">
             <div class="content">
@@ -32,11 +21,11 @@
                 </div></a>
                 <div class="div-menu">
                     <ul class="menu">
-                        <a href="?ctrl=news&act=news"><li class="menu-li">ГЛАВНАЯ</li></a>
-                        <a href="?ctrl=news&act=Districts"><li class="menu-li">РАЙОНЫ</li></a>
+                        <a href="?ctrl=news&act=news"><li class=" menu-li">ГЛАВНАЯ</li></a>
+                        <a href="?ctrl=news&act=Districts"><li class="active menu-li">РАЙОНЫ</li></a>
                         <a href=""><li class="menu-li">ЗАДАЧИ</li></a>
                         <a href=""><li class="menu-li">УЧАСНИКИ</li></a>
-                        <a href="?ctrl=news&act=MyPosts"><li class="menu-li">МОИ ЗАПИСИ</li></a>
+                        <a href="?ctrl=news&act=MyPosts"><li class=" menu-li">МОИ ЗАПИСИ</li></a>
                     </ul>
 
                     <div class="search">
@@ -96,11 +85,46 @@
 
         </aside>
         <section class="post-section news-section">
-            
+
+
             <div id="newsContent">
-                <div class="post">
-                    
-                </div>
+                  
+                <?php 
+                  
+//                       $count_current_posts = count($this->view->current_user_news);
+//                       if($count_current_posts == 0){
+//                           echo "<h2 class=\"post-h2 h2\" style=\"margin: 15px 0px\">У вас пока нет записей!</h2>";
+//                       }//if
+//                       else{
+//                           foreach($this->view->current_user_news as $specific_news){
+//                               
+//                           $post_title = $specific_news->getTitle();
+//                           $post_description = $specific_news->getDescription();
+//                           
+//                           if(strlen($post_title) > 50){
+//                              $post_title = (substr($post_title, 0, 40) . "...");
+//                           }//if
+//                           
+//                           if(strlen($post_description) > 150){
+//                              $post_description = (substr($post_description, 0, 140) . "...");
+//                           }//if
+//                           
+//                           if($specific_news->getFiles() != NULL){
+//                               
+//                                $img_files = explode(',',$specific_news->getFiles());
+//                                $img_count = count($img_files);
+//                                echo "<div class=\"post\"><div data-post-id=\"{$specific_news->getId()}\"  class=\"delete-post\">J</div><img class=\"post-img\" alt=\"\" src=\"files/{$img_files[0]}\"/><a href=\"?ctrl=news&act=SpecificNews&news_id={$specific_news->getId()}\"><h2 class=\"post-h2 h2\">$post_title</h2></a><p class=\"post-text\">$post_description</p></div>";
+//                           }//if
+//                          
+//                           else{
+//                                 echo "<div class=\"post\"><div  data-post-id=\"{$specific_news->getId()}\"  class=\"delete-post\">J</div><a href=\"?ctrl=news&act=SpecificNews&news_id={$specific_news->getId()}\"><h2 class=\"post-h2 h2\">$post_title</h2></a><p class=\"post-text\">$post_description</p></div>";
+//                                  
+//                           }//else
+//                           
+//                       }//foreach
+//                       }//else
+                       
+                  ?>
             </div>
         </section>
     </div>

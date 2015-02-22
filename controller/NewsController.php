@@ -137,6 +137,24 @@ class NewsController extends \controller\BaseController{
            return 'SpecificNews';
        }//else
     }
+    public function DistrictsAction(){
+        
+       $user_serv = $this->GetUserService();
+       $access = $user_serv->isAccessDenied();
+       
+       if($access){//Если доступ запрещен
+           $this->redirect("index");
+       }//if
+       else{//Если доступ разрешен
+           $user = $this->getRequest()->getSessionValue('user_info_plus');
+           if(empty($user)){
+               $user = $this->getRequest()->getCookieValue('user_info_plus');
+           }//if
+           $this->view->current_user = $this->GetUserService()->getUser($user);
+           return 'Districts';
+       }//else
+        
+    }
     
     public function GetUserService(){
         
