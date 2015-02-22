@@ -322,15 +322,107 @@ function ShowPersonalRoomMessage(controll,message,type){
     }//if
 }
 
+function GetPostByStopWord(result){
+        
+        words = new String( $("#stop_words").val() );
+            
+        delimers_words = words.split(',');
+        
+        for(i = 0;i < result.response.items.length;i++){
+            
+                        is_group = new String(result.response.items[i].from_id);
+                        
+                        if(is_group.indexOf('-') != -1){
+                            
+                            news_id = result.response.items[i].id;
+                            
+                            if(result.response.items[i].text != ""){
+                                
+                                record_text = new String(result.response.items[i].text);
+                                
+                                for(j = 0; j < delimers_words.length; j++){
+                                    
+                                        if(record_text.indexOf(delimers_words[j]) != -1){//если запись содержит стоп слово
+                                            title = new String(result.response.items[i].text.split('.')[0]);
+                                        if(title.length > 100){
+                                            title = (title.substr(0,100)+"...");
+                                        }//if
+                                            description = new String(result.response.items[i].text);
+                                        if(description.length > 500){
+                                            description = (description.substr(0,500) + "...");
+                                        }//if
+                                        if(result.response.items[i].attachments){   
+                                                try{
+                                                    if(result.response.items[i].attachments[0].video){
+                                                            title = (title + "(Есть видео)");
+                                                    }//if
+                                                }catch(ex){
+                                                    console.writeln(ex);
+                                                }//catch
+                                            if(result.response.items[i].attachments[0].photo){
+                                                $('#newsContent').append("<div class=\"post\"><img class=\"post-img\" alt=\"\" src=\""+result.response.items[i].attachments[0].photo.photo_130+"\"/><a href=\"?ctrl=news&act=SpecificPost&vklink="+is_group+"_"+news_id+"\"><h2 class=\"post-h2 h2\">"+title+"</h2></a><p class=\"post-text\">"+description+"</p></div>");             
+                                            }//if   
+
+                                            else{
+                                                $('#newsContent').append("<div class=\"post\"><a href=\"?ctrl=news&act=SpecificPost&vklink="+is_group+"_"+news_id+"\"><h2 class=\"post-h2 h2\">"+title+"</h2></a><p class=\"post-text\">"+description+"</p></div>");
+                                            }//else  
+
+                                        }//if
+                                        else{
+                                            $('#newsContent').append("<div class=\"post\"><a href=\"?ctrl=news&act=SpecificPost&vklink="+is_group+"_"+news_id+"\"><h2 class=\"post-h2 h2\">"+title+"</h2></a><p class=\"post-text\">"+description+"</p></div>");
+                                        }//else
+                                    
+                            }//if содержить стоп слово
+                            
+                        }//Перебор всех стоп-слов
+                                
+                            
+                            
+         }//if res.response
+                            
+                        }//true
+                        if(i == result.response.items.length-1){
+                            LoaderOff();
+                        }//if  
+                        
+                    }//for
+                    
+                    if($('#newsContent').children().length == 0){
+                        $('section div.h1').remove();
+                        $("section").append("<div class=\"h1\" id=\"newsContent\">Новости по данному запросу не найдены</div>");
+                    }//if   
+                    
+}//GetPostByStopWord
 
 $(document).ready(function(){
+        
+        $("#search_news_by_stop_words").click(function(){
+            
+            
+            district = $("div.selectDistrict h2.h2-distr").text();
+            
+            if(district != 'Выберите район'){
+                
+                script = document.createElement('SCRIPT');
+                
+                script.src = "https://api.vk.com/method/newsfeed.search?q="+district+"&extended=0&count=200&v=5.28&callback=GetPostByStopWord";
+                
+                document.getElementsByTagName("body")[0].appendChild(script); 
+                
+            }//if
+            else{//error
+                alert("Не получен район");
+            }//else
+        });
         
         $("div.selectDistrict ul.district li").click(function(){
             
             $("div.selectDistrict h2.h2-distr").text($(this).text());
             
         });
+        
         $fl = true;
+        
         $("#minimize").click(function(){
             if($fl){
                 $("#search-panel").fadeOut(200);

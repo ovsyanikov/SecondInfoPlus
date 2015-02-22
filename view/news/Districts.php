@@ -90,7 +90,7 @@
                 <h1 class="h1">Панель поиска <span id="minimize" title="Скрыть панель">─</span></h1>
                 <div id="search-panel" class="post">    
                     <h2 class="h2">Введите стоп слова, разделяя их запятыми, и выберите район:</h2>  
-                    <textarea name="" id="" class="stop-area" placeholder="Стоп слова"></textarea>
+                    <textarea id="stop_words" name="" class="stop-area" placeholder="Стоп слова"></textarea>
                     
                     <div class="selectDistrict">
                         <h2 class="h2-distr">Выберите район</h2>
@@ -102,7 +102,7 @@
                             ?>               
                         </ul>
                     </div>
-                    <input class="distr-button submit" id="addPost" value="Найти" type="button">
+                    <input class="distr-button submit" id="search_news_by_stop_words" value="Найти" type="button">
 
                 </div>
             </div>
