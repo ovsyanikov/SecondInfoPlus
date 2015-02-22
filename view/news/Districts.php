@@ -103,7 +103,6 @@
                         </ul>
                     </div>
                     <input class="distr-button submit" id="search_news_by_stop_words" value="Найти" type="button">
-
                 </div>
             </div>
             <div id="newsContent">
