@@ -157,4 +157,5 @@ class NewsController extends \controller\BaseController{
         return $this->newsService;
     }
     
+    
 }
