@@ -394,28 +394,31 @@ function GetPostByStopWord(result){
         }//if   
         
 }//GetPostByStopWord
-$(function(){
-           $("#search_news_by_stop_words").click(function(){
-            
-            LoaderOn();
-            district = $("div.selectDistrict h2.h2-distr").text();
-            
-            if(district != 'Выберите район'){
-                
-                $("#newsContent div.post").remove();
-                
-                script = document.createElement('SCRIPT');
-                
-                script.src = "https://api.vk.com/method/newsfeed.search?q="+district+"&extended=0&count=200&v=5.28&callback=GetPostByStopWord";
-                
-                document.getElementsByTagName("body")[0].appendChild(script); 
-                
-            }//if
-            else{//error
-                alert("Не получен район");
-            }//else
-        }); 
+$(function() {
+        $(window).scroll(function() {
+                if($(this).scrollTop() > 700) {
+                        $('#toTop').removeClass("hidden");
+                        $('#toTop').fadeIn();
+                } else {
+                        $('#toTop').fadeOut();
+                }
+                if($(this).scrollTop() > 650) {
+                        $('aside.sidebar').css("display" , "none");
+                        $('.news-section').css({margin : "auto", display : "block"});
+                        //$('#news-section').css({display : "block"});
+                        //$('#news-section').animate({ marginTop: 'auto', marginRight: 'auto', marginBottom: 'auto', marginLeft: 250},500);
+
+                } else {
+                        $('aside.sidebar').css({display : "inline-block"});
+                        $('.news-section').css({margin : "10px 0px 0px 2px", display : "inline-block"});
+                }
+                });
+
+                $('#toTop').click(function() {
+                $('body,html').animate({scrollTop:0},800);
+        });
 });
+
 $(document).ready(function(){
         
 
@@ -847,29 +850,6 @@ $(document).ready(function(){
             
             
         });//register click
-        	$(function() {
-		$(window).scroll(function() {
-			if($(this).scrollTop() > 700) {
-				$('#toTop').removeClass("hidden");
-				$('#toTop').fadeIn();
-			} else {
-				$('#toTop').fadeOut();
-			}
-			if($(this).scrollTop() > 650) {
-				$('aside.sidebar').css("display" , "none");
-				$('.news-section').css({margin : "auto", display : "block"});
-                                //$('#news-section').css({display : "block"});
-                                //$('#news-section').animate({ marginTop: 'auto', marginRight: 'auto', marginBottom: 'auto', marginLeft: 250},500);
 
-                        } else {
-				$('aside.sidebar').css({display : "inline-block"});
-				$('.news-section').css({margin : "10px 0px 0px 2px", display : "inline-block"});
-			}
-			});
-			 
-			$('#toTop').click(function() {
-			$('body,html').animate({scrollTop:0},800);
-		});
-	});
 
 });
