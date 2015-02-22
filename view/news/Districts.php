@@ -87,7 +87,8 @@
         <section class="post-section news-section">
 
             <div id="newsContent">
-                <div class="post">    
+                <h1 class="h1">Панель поиска <span id="minimize" title="Скрыть панель">─</span></h1>
+                <div id="search-panel" class="post">    
                     <h2 class="h2">Введите стоп слова, разделяя их запятыми, и выберите район:</h2>  
                     <textarea name="" id="" class="stop-area" placeholder="Стоп слова"></textarea>
                     

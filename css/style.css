@@ -773,3 +773,8 @@ opacity:1;
     max-width: 270px;
     margin-left: 10px;
 }
+span#minimize{
+    font: inherit;
+    cursor: pointer;
+    float: right;
+}

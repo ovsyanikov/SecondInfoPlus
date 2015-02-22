@@ -330,7 +330,20 @@ $(document).ready(function(){
             $("div.selectDistrict h2.h2-distr").text($(this).text());
             
         });
-        
+        $fl = true;
+        $("#minimize").click(function(){
+            if($fl){
+                $("#search-panel").fadeOut(200);
+                $fl=false;
+                $("#minimize").text('+');
+            }
+            else
+            {
+                $("#search-panel").fadeIn(200);
+                $fl=true;
+                $("#minimize").text('─');
+            }
+        });
         
         $("#ConfirmEmail").click(function(){
             
