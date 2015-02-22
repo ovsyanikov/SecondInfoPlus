@@ -325,6 +325,13 @@ function ShowPersonalRoomMessage(controll,message,type){
 
 $(document).ready(function(){
         
+        $("div.selectDistrict ul.district li").click(function(){
+            
+            $("div.selectDistrict h2.h2-distr").text($(this).text());
+            
+        });
+        
+        
         $("#ConfirmEmail").click(function(){
             
             if(!$("#NewMailInPersonal").val()){
