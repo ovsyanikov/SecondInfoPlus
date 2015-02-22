@@ -86,7 +86,7 @@
         </aside>
         <section class="post-section news-section">
 
-            
+            <div id="newsContent">
                 <h1 class="h1">Панель поиска <span id="minimize" title="Скрыть панель">─</span></h1>
                 <div id="search-panel" class="post">    
                     <h2 class="h2">Введите стоп слова, разделяя их запятыми, и выберите район:</h2>  
@@ -105,8 +105,7 @@
                     <input class="distr-button submit" id="search_news_by_stop_words" value="Найти" type="button">
 
                 </div>
-                <div id="newsContent">
-                </div>
+            </div>
         </section>
     </div>
     <footer class="footer">
