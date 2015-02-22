@@ -4,7 +4,7 @@ namespace controller;
 
 use model\service\NewsService;
 use model\service\UserService;
-use model\service\StartService;
+use model\service\GlobalService;
 
 class NewsController extends \controller\BaseController{
     
@@ -148,11 +148,15 @@ class NewsController extends \controller\BaseController{
            $this->redirect("index");
        }//if
        else{//Если доступ разрешен
+           
            $user = $this->getRequest()->getSessionValue('user_info_plus');
+           
            if(empty($user)){
                $user = $this->getRequest()->getCookieValue('user_info_plus');
            }//if
+           
            $this->view->current_user = $this->GetUserService()->getUser($user);
+           
            $this->view->districts = $this->GetGlobalService()->GetDistricts();
            
            return 'Districts';

@@ -3,6 +3,7 @@
 namespace model\service;
 use util\Request;
 use model\entity\news;
+use model\entity\resource_news;
 
 class NewsService{
     
@@ -92,4 +93,25 @@ class NewsService{
           return $spec_news;
           
       }
+      
+      function GetLastResourceNews(){
+          
+          $last_news = [];
+          
+          $stmt = \util\MySQL::$db->prepare("SET NAMES UTF-8");
+          $stmt->execute();
+          
+          $stmt = \util\MySQL::$db->prepare("SELECT * FROM ResourceNews LIMIT 5");
+          $stmt->execute();
+          
+          while($news = $stmt->fetchObject(resource_news::class) ){
+              
+              $last_news[] = $news;
+              
+          }//while
+          
+          return $last_news;
+          
+      }//GetLastResourceNews
+      
 }
