@@ -86,11 +86,11 @@
         </aside>
         <section class="post-section news-section">
 
-
             <div id="newsContent">
                 <div class="post">    
                     <h2 class="h2">Введите стоп слова, разделяя их запятыми, и выберите район:</h2>  
-
+                    <textarea name="" id="" class="stop-area" placeholder="Стоп слова"></textarea>
+                    
                     <div class="selectDistrict">
                         <h2 class="h2-distr">Выберите район</h2>
                         <ul class="district">
@@ -101,7 +101,8 @@
                             ?>               
                         </ul>
                     </div>
-                    <textarea name="" id="" class="stop-area" placeholder="Стоп слова"></textarea>
+                    <input class="distr-button submit" id="addPost" value="Найти" type="button">
+
                 </div>
             </div>
         </section>

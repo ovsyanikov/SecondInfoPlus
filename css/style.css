@@ -714,12 +714,11 @@ opacity:1;
 }
 .selectDistrict{
     display: inline-block;
-    width: 250px;
+    width: 270px;
     height: 42px;
     overflow: hidden;
 
     transition: height ease 0.3s;
-    margin: 15px 0px;
 }
 .selectDistrict:hover{
     height: 241px;
@@ -741,12 +740,8 @@ opacity:1;
     background: #890B00;
     font-weight: 100;
     cursor: pointer;
-    transform: scale(1); 
-    transition: transform ease-in-out 0.1s;    
 }
 .h2-distr,.selectDistrict li:active{
-    transform: scale(0.98);
-    transition: transform ease-in-out 0.1s;
     border: none;
 }
 .selectDistrict li:hover{
@@ -758,13 +753,23 @@ opacity:1;
     max-width: 535px;
     color: #fff;
     min-width: 535px;
-    max-height: 22px;
-    height: 22px;
+    max-height: 100px;
+    height: 50px;
     vertical-align: top;
     background: #890B00;
     border: none;
+    display: block;
     padding: 10px;
-    display: inline-block;
-    margin: 15px 0px 15px 15px;
+    margin: 15px 0px;
 }
 .stop-area::-webkit-input-placeholder {color:#fff;}
+
+.distr-button{
+    font-size: 12pt;
+    padding: 10px;
+    display: inline-block;
+    float: none;
+    vertical-align: top;
+    max-width: 270px;
+    margin-left: 10px;
+}
