@@ -233,7 +233,7 @@ form a:hover{
     background: #fff;
     display: inline-block;
     width: 828px;
-    min-height: 450px;
+    min-height: 559px;
     padding: 25px;
 }
 .sidebar{
@@ -271,9 +271,9 @@ form a:hover{
 }
 .footer{
     background:  #890B00;
-    margin-top: 25px;
     width: 1200px;
     margin: auto;
+    margin-top: 10px;
 }
 .foot{
     padding: 15px;
@@ -417,11 +417,11 @@ opacity:0;
 .visible{
 opacity:1;
 }
-.post-section{
+/*.post-section{
     margin: 10px 1px;
     display: inline-block;
     min-height: 558px;
-}
+}*/
 .makepostInput{
     width: 100%;
     background: #E6E6E6;

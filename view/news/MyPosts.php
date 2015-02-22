@@ -84,7 +84,7 @@
             </div>
 
         </aside>
-        <section class="post-section news-section">
+        <section class=" news-section">
 
             <a href="?ctrl=news&act=MakePost"><input class="My-posts-button submit" id="addPost" value="Добавить запись" type="button"></a>
 

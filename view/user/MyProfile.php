@@ -84,7 +84,7 @@
             </div>
 
         </aside>
-        <section class="post-section news-section">
+        <section class=" news-section">
             <div class="personal-block">
                 <h1 class="pers-title-h1 h1">Личный кабинет</h1>
                 <div><h2 class="pers-h2 h2">Логин</h2><p class="pers-text" id="login"><?php echo"{$this->view->current_user->getLogin()}" ;?></p></div>

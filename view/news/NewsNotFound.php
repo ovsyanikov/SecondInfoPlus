@@ -46,7 +46,7 @@
 
     <div class="content">
 
-        <section class="post-section news-section">
+        <section class=" news-section">
             
             <h1 class="h1">Запрашиваемая новость не найдена!</h1>
             

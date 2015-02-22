@@ -15,7 +15,6 @@
                 for(i = 0;i < 3;i++){
                     if(i==0){
                         LoaderOn();
-                        
                     }
                     if(i==1){
                         DEFAULT_SEARCH();

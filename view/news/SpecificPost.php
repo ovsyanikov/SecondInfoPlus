@@ -95,7 +95,7 @@
             </div>
 
         </aside>
-        <section class="post-section news-section">
+        <section class=" news-section">
             
             <div id="newsContent">
                 <div class="post">

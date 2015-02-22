@@ -81,7 +81,7 @@
             </div>
 
         </aside>
-        <section class="post-section news-section">
+        <section class=" news-section">
             <div class="makepost">
                 <form id="NewPostForm" action="?ctrl=news&act=ConfirmPost" method="POST"  enctype="multipart/form-data">
                     <h2 class="post-h2 h2">Введите заголовок записи</h2>

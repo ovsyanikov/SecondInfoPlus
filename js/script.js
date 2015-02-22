@@ -101,7 +101,7 @@ function LoaderOff(){
             
  }           
  
- function getpost(response){
+function getpost(response){
 
      if(response.response[0].text){
               
@@ -179,7 +179,7 @@ function LoaderOff(){
      
  }
  
- function WorkLoader(){
+function WorkLoader(){
      
      if($('#loader').hasClass('hide') || $('#loader').hasClass('show')){
          
@@ -200,7 +200,7 @@ function LoaderOff(){
         
  }
  
- function callbackFunc(result) {
+function callbackFunc(result) {
 
                                        
                     $('#newsContent').empty();
@@ -324,6 +324,7 @@ function ShowPersonalRoomMessage(controll,message,type){
 
 function GetPostByStopWord(result){
         
+        
         words = new String( $("#stop_words").val() );
             
         delimers_words = words.split(',');
@@ -398,7 +399,7 @@ $(document).ready(function(){
         
         $("#search_news_by_stop_words").click(function(){
             
-            
+            LoaderOn();
             district = $("div.selectDistrict h2.h2-distr").text();
             
             if(district != 'Выберите район'){
@@ -852,13 +853,13 @@ $(document).ready(function(){
 			}
 			if($(this).scrollTop() > 650) {
 				$('aside.sidebar').css("display" , "none");
-				$('#news-section').css({margin : "auto", display : "block"});
+				$('.news-section').css({margin : "auto", display : "block"});
                                 //$('#news-section').css({display : "block"});
                                 //$('#news-section').animate({ marginTop: 'auto', marginRight: 'auto', marginBottom: 'auto', marginLeft: 250},500);
 
                         } else {
 				$('aside.sidebar').css({display : "inline-block"});
-				$('#news-section').css({margin : "10px 0px 0px 2px", display : "inline-block"});
+				$('.news-section').css({margin : "10px 0px 0px 2px", display : "inline-block"});
 			}
 			});
 			 
