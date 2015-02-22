@@ -569,6 +569,7 @@ opacity:1;
 .pers-error{
     padding: 5px 20px;
     margin: 5px 0px 0px 180px;
+    width: 500px;
     background: #FFE6E4;  
 }
 .pers-success h2{
