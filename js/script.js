@@ -423,11 +423,11 @@ $(document).ready(function(){
         
 $("#search_news_by_stop_words").click(function(){
             
-        LoaderOn();
+        
         district = $("div.selectDistrict h2.h2-distr").text();
             
         if(district != 'Выберите район'){
-                
+                LoaderOn();
                 $("#newsContent div.post").remove();
                 
                 script = document.createElement('SCRIPT');
