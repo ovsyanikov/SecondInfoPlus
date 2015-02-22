@@ -394,10 +394,8 @@ function GetPostByStopWord(result){
         }//if   
         
 }//GetPostByStopWord
-
-$(document).ready(function(){
-        
-        $("#search_news_by_stop_words").click(function(){
+$(function(){
+           $("#search_news_by_stop_words").click(function(){
             
             LoaderOn();
             district = $("div.selectDistrict h2.h2-distr").text();
@@ -416,7 +414,11 @@ $(document).ready(function(){
             else{//error
                 alert("Не получен район");
             }//else
-        });
+        }); 
+});
+$(document).ready(function(){
+        
+
         
         $("div.selectDistrict ul.district li").click(function(){
             
