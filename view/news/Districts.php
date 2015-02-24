@@ -9,9 +9,13 @@
         <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script> 
         <script type="text/javascript" src="js/script.js"></script> 
         <title>Info-Pulse</title>
+        <script>
+            
+            StartAllServices();
+            
+        </script>
     </head>
     <body id="body" class="news-bg"> 
-        
     <heder>
         <div class="top-head">
             <div class="content">
@@ -69,7 +73,7 @@
             
             
             
-            <h1 class="h1">Лента новостей</br>Выводятся новости 1ой рубрики, кратко</h1>
+        <h1 class="h1">Лента новостей</br>Найдено новостей - <span id="count">0</span></h1>
             <div class="side-post">
                 <h2 class="h2">Section 1.10.32 of "de Finibus Bonorum et Malorum" <span class="span-time">14:32</span></h2>
             </div>
