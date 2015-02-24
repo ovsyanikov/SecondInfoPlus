@@ -116,15 +116,10 @@ var G_INDEX = 1;
 
                 if(result.response.items[i].text != ""){
                     
-                    
-                    
                     title = new String(result.response.items[i].text.split('.')[0]);
-                                   
-
+                    
                         if(title.length > 100){
-
                             title = (title.substr(0,100)+"...");
-
                         }//if
 
                         date = result.response.items[i].date;
@@ -136,44 +131,53 @@ var G_INDEX = 1;
                             description = (description.substr(0,500) + "...");
 
                         }//if
-
+                        
                         if(result.response.items[i].attachments){
 
-                            try{
+                        try{
 
-                                                    if(result.response.items[i].attachments[0].video){
+                            if(result.response.items[i].attachments[0].video){
 
-                                                            title = (title + "(Есть видео)");
+                                        title = (title + "(Есть видео)");
 
-                                                    }//if
+                                }//if
 
-                                                }catch(ex){
+                            }catch(ex){
 
-                        console.writeln(ex);
+    console.writeln(ex);
 
-                            }
-
-
-                                            if(result.response.items[i].attachments[0].photo){
-
-                                                $('#newsContent').append("<div class=\"post\"><img class=\"post-img\" alt=\"\" src=\""+result.response.items[i].attachments[0].photo.photo_130+"\"/><a href=\"?ctrl=news&act=SpecificPost&vklink="+is_group+"_"+news_id+"\"><h2 class=\"post-h2 h2\">"+title+"</h2></a><p data-date="+date+" class=\"post-text\">"+description+"</p></div>");
+    }
 
 
-                                            }//if
+                        if(result.response.items[i].attachments[0].photo){
+                            
+                            $.post("MAIN_CRONE.php",{Title:title, Description: description,district: "арбат",img: result.response.items[i].attachments[0].photo.photo_130, Source: "http://vk.com/feed?w=wall"+is_group+"_"+news_id},function(data){
+                                
+                            });
+                            $('#newsContent').append("<div class=\"post\"><img class=\"post-img\" alt=\"\" src=\""+result.response.items[i].attachments[0].photo.photo_130+"\"/><a href=\"?ctrl=news&act=SpecificPost&vklink="+is_group+"_"+news_id+"\"><h2 class=\"post-h2 h2\">"+title+"</h2></a><p data-date="+date+" class=\"post-text\">"+description+"</p></div>");
 
-                                            else{
+                        }//if
 
-                                                $('#newsContent').append("<div class=\"post\"><a href=\"?ctrl=news&act=SpecificPost&vklink="+is_group+"_"+news_id+"\"><h2 class=\"post-h2 h2\">"+title+"</h2></a><p data-date="+date+" class=\"post-text\">"+description+"</p></div>");
+                        else{
+                            $.post("MAIN_CRONE.php",{Title:title, Description: description,district: "арбат", Source: "http://vk.com/feed?w=wall"+is_group+"_"+news_id},function(data){
+                                
+                                
+                            });
+                            $('#newsContent').append("<div class=\"post\"><a href=\"?ctrl=news&act=SpecificPost&vklink="+is_group+"_"+news_id+"\"><h2 class=\"post-h2 h2\">"+title+"</h2></a><p data-date="+date+" class=\"post-text\">"+description+"</p></div>");
 
-                                            }//else
+                            }//else
 
-                                        }//if
+                        }//if
 
-                                        else{
-                                            $('#newsContent').append("<div class=\"post\"><a href=\"?ctrl=news&act=SpecificPost&vklink="+is_group+"_"+news_id+"\"><h2 class=\"post-h2 h2\">"+title+"</h2></a><p data-date="+date+" class=\"post-text\">"+description+"</p></div>");
-                                        }//else
+                        else{
+                            $.post("MAIN_CRONE.php",{Title:title, Description: description,district: "арбат", Source: "http://vk.com/feed?w=wall"+is_group+"_"+news_id},function(data){
+                                 
+                            });
+                            
+                            $('#newsContent').append("<div class=\"post\"><a href=\"?ctrl=news&act=SpecificPost&vklink="+is_group+"_"+news_id+"\"><h2 class=\"post-h2 h2\">"+title+"</h2></a><p data-date="+date+" class=\"post-text\">"+description+"</p></div>");
+                        }//else
 
-                                   }//if
+                }//if
 
             }//true group
 
@@ -190,7 +194,7 @@ var G_INDEX = 1;
         $("section").append("<div class=\"h1\" id=\"newsContent\">Новости по данному запросу не найдены</div>");
                         
     }//if
-    else{
+     else{
         
         Last_Date = $("p.post-text").last().data("date");
         $("#count").text($("div.post").length);
@@ -222,7 +226,7 @@ var G_INDEX = 1;
                 }//else
                 
                  
-    },10000);
+    },15000);
      
  }//StartAllServices
  

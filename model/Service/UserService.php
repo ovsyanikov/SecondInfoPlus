@@ -95,7 +95,7 @@ class UserService{
         $stmt->bindParam(":login",$login);
         
         $stmt->execute();
-        $user = $stmt->fetchObject(user::class);
+        $user = $stmt->fetchObject('model\entity\user');
         
         if(is_a($user, 'model\entity\user')){
            return $user;

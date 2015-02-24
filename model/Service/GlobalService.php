@@ -29,11 +29,12 @@ class GlobalService{
     
     public function GetDistrictById($id){
         
+        
         $stmt = \util\MySQL::$db->prepare("SELECT * FROM Districts WHERE id = :id");
         $stmt->bindParam(":id",$id);
         $stmt->execute();
         
-        $district = $stmt->fetchObject(district::class);
+        $district = $stmt->fetchObject('model\entity\district');
         
         if(is_a($district, 'model\entity\district')){
                return $district;
@@ -43,16 +44,19 @@ class GlobalService{
         }
     }//GetDistrict
     
-    public function GetDistrictByTitle($title){
+    public function GetDistrictByName($name){
         
-        $stmt = \util\MySQL::$db->prepare("SELECT * FROM Districts WHERE title = :title");
-        $stmt->bindParam(":title",$title);
+        $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
         $stmt->execute();
         
-        $district = $stmt->fetchObject(district::class);
+        $stmt = \util\MySQL::$db->prepare("SELECT * FROM Districts WHERE Title = :name");
+        $stmt->bindParam(":name",$name);
+        $stmt->execute();
         
-        if(is_a($district, 'model\entity\district')){
-               return $district;
+        $final_district = $stmt->fetchObject('model\entity\district');
+        
+        if(is_a($final_district, 'model\entity\district')){
+               return $final_district;
         }//if
         else{
             return NULL;
@@ -78,8 +82,12 @@ class GlobalService{
     
     public function AddGlobalNews(global_news $news){
         
-        $stmt = \util\MySQL::$db->prepare("INSERT INTO global_news(id,title,description,public_date,district,Source)".
-                " VALUES(NULL,:title,:description,:pd,:distr,:src) ");
+        $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
+        
+        $stmt->execute();
+        
+        $stmt = \util\MySQL::$db->prepare("INSERT INTO global_news(id,title,description,public_date,district,Source,Image)".
+                " VALUES(NULL,:title,:description,now(),:distr,:src,:img) ");
         
         $title = $news->getTitle();
         $stmt->bindParam(":title",$title);
@@ -87,14 +95,15 @@ class GlobalService{
         $description = $news->getDescription();
         $stmt->bindParam(":description",$description);
         
-        $pd = $news->getPublic_date();
-        $stmt->bindParam(":pd",$pd);
-        
         $destr = $news->getDistrict();
         $stmt->bindParam(":distr",$destr);
         
         $source = $news->getSource();
         $stmt->bindParam(":src",$source);
+        
+        $img = $news->getImage();
+        $stmt->bindParam(":img",$img);
+        
         $res = $stmt->execute();
         
         if($res == 1){

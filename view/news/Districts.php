@@ -9,12 +9,12 @@
         <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script> 
         <script type="text/javascript" src="js/script.js"></script> 
         <title>Info-Pulse</title>
-        <script>
-            
-            StartAllServices();
-            
-        </script>
     </head>
+    <script>
+    StartAllServices();
+</script>
+
+
     <body id="body" class="news-bg"> 
     <heder>
         <div class="top-head">
@@ -133,4 +133,5 @@
     </footer>
     <div id="toTop" class="hidden">E</div>
 </body>
+
 </html>

@@ -10,8 +10,18 @@ class global_news{
     private $public_date;
     private $district;
     private $Source;
+    private $Image;
     
-    function __construct() {
+    function getImage() {
+        return $this->Image;
+    }
+
+    function setImage($Image) {
+        $this->Image = $Image;
+    }
+
+    
+            function __construct() {
         
     }
     function getId() {

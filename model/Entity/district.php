@@ -26,6 +26,5 @@ class district{
     function setTitle($Title) {
         $this->Title = $Title;
     }
-
-
+    
 }
