@@ -5,6 +5,7 @@ namespace controller;
 use model\service\NewsService;
 use model\service\UserService;
 use model\service\GlobalService;
+use util\Request;
 
 class NewsController extends \controller\BaseController{
     
@@ -30,6 +31,49 @@ class NewsController extends \controller\BaseController{
            $this->view->current_user = $this->GetUserService()->getUser($user);
            return 'news';
        }//else
+    }
+    
+    public function getNewsByStopWordsAction(){
+        
+       $user_serv = $this->GetUserService();
+       $access = $user_serv->isAccessDenied();
+       $global_service = new GlobalService();
+       
+       if($access){//Если доступ запрещен
+           $this->redirect("index");
+       }//if
+       else{//Если доступ разрешен
+           
+           $user = $this->getRequest()->getSessionValue('user_info_plus');
+           
+           if(empty($user)){
+               $user = $this->getRequest()->getCookieValue('user_info_plus');
+           }//if
+           
+           $this->view->current_user = $this->GetUserService()->getUser($user);
+           $this->view->districts = $global_service->GetDistricts();
+           
+           $r = new Request();
+           
+           $stop_words = $r->getPostValue('stop_words');
+           $distr =  $global_service->GetDistrictByName($r->getPostValue('District'));
+           
+           $arr_sw = explode(',', $stop_words);
+           $news = [];
+           
+           foreach($arr_sw as $word){
+               
+               $word = trim($word);
+               
+               $news[] = $global_service->GetGlobalNewsByStopWord($word, $distr->getId());
+               
+           }//for
+           $this->view->finded_news = $news;
+           return 'Districts';
+           
+       }//else'
+       
+        
     }
     
     public function specificPostAction(){

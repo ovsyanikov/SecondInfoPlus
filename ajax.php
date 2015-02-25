@@ -4,11 +4,18 @@ require_once './util/Request.php';
 require_once './util/MySQL.php';
 require_once './model/entity/user.php';
 require_once './model/entity/news.php';
+require_once './model/entity/global_news.php';
+require_once './model/service/GlobalService.php';
+require_once './model/entity/district.php';
 
 \util\MySQL::$db = new PDO('mysql:host=localhost;dbname=u304199710_info', 'u304199710_alex', '1qaz2wsx');
 
 use model\entity\user;
 use model\entity\news;
+use model\entity\global_news;
+use model\entity\district;
+use model\service\GlobalService;
+
 use util\Request;
 
  
@@ -307,3 +314,31 @@ else if(!empty($_POST['ChangeLastName'])){
         
     }//else
 }
+
+else if(!empty ($_POST['GetCountOfNews'])){
+    
+    $stmt = \util\MySQL::$db->prepare("SELECT COUNT(id) FROM global_news");
+    $stmt->execute();
+    $count = $stmt->fetch(PDO::FETCH_BOTH);
+    
+    if($count >= 0){
+        echo "$count[0]";
+    }//if
+    else{
+        echo "$count";
+    }//else
+}//else if
+
+else if(!empty ($_POST['STOP_WORD_EXP'])){
+    
+    $glob_serv = new GlobalService();
+    
+    $distr =  $glob_serv->GetDistrictByName($_POST['District']);
+    $stop_word = $_POST['stop_word'];
+    
+    $to_return = $glob_serv->GetGlobalNewsByStopWord($stop_word, $distr->getId());
+    $json_result[] = json_encode($news);
+    
+    echo print_r($json_result);
+    
+}//else

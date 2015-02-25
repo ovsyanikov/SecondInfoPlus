@@ -4,13 +4,13 @@ namespace model\entity;
 
 class global_news{
     
-    private $id;
-    private $title;
-    private $description;
-    private $public_date;
-    private $district;
-    private $Source;
-    private $Image;
+    public $id;
+    public $title;
+    public $description;
+    public $public_date;
+    public $district;
+    public $Source;
+    public $Image;
     
     function getImage() {
         return $this->Image;
@@ -21,7 +21,7 @@ class global_news{
     }
 
     
-            function __construct() {
+    function __construct() {
         
     }
     function getId() {

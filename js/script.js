@@ -104,129 +104,60 @@ function LoaderOff(){
 var Last_Date;
 var G_INDEX = 1;
 
- function DistrictsFunction(result){
-     
-     for(i = 0;i < result.response.items.length;i++){
-                        
-            is_group = new String(result.response.items[i].from_id);
-
-            if(is_group.indexOf('-') != -1){
-
-                news_id = result.response.items[i].id;
-
-                if(result.response.items[i].text != ""){
-                    
-                    title = new String(result.response.items[i].text.split('.')[0]);
-                    
-                        if(title.length > 100){
-                            title = (title.substr(0,100)+"...");
-                        }//if
-
-                        date = result.response.items[i].date;
-
-                        description = new String(result.response.items[i].text);
-
-                        if(description.length > 500){
-
-                            description = (description.substr(0,500) + "...");
-
-                        }//if
-                        
-                        if(result.response.items[i].attachments){
-
-                        try{
-
-                            if(result.response.items[i].attachments[0].video){
-
-                                        title = (title + "(Есть видео)");
-
-                                }//if
-
-                            }catch(ex){
-
-    console.writeln(ex);
-
-    }
-
-
-                        if(result.response.items[i].attachments[0].photo){
-                            
-                            $.post("MAIN_CRONE.php",{Title:title, Description: description,district: "арбат",img: result.response.items[i].attachments[0].photo.photo_130, Source: "http://vk.com/feed?w=wall"+is_group+"_"+news_id},function(data){
-                                
-                            });
-                            $('#newsContent').append("<div class=\"post\"><img class=\"post-img\" alt=\"\" src=\""+result.response.items[i].attachments[0].photo.photo_130+"\"/><a href=\"?ctrl=news&act=SpecificPost&vklink="+is_group+"_"+news_id+"\"><h2 class=\"post-h2 h2\">"+title+"</h2></a><p data-date="+date+" class=\"post-text\">"+description+"</p></div>");
-
-                        }//if
-
-                        else{
-                            $.post("MAIN_CRONE.php",{Title:title, Description: description,district: "арбат", Source: "http://vk.com/feed?w=wall"+is_group+"_"+news_id},function(data){
-                                
-                                
-                            });
-                            $('#newsContent').append("<div class=\"post\"><a href=\"?ctrl=news&act=SpecificPost&vklink="+is_group+"_"+news_id+"\"><h2 class=\"post-h2 h2\">"+title+"</h2></a><p data-date="+date+" class=\"post-text\">"+description+"</p></div>");
-
-                            }//else
-
-                        }//if
-
-                        else{
-                            $.post("MAIN_CRONE.php",{Title:title, Description: description,district: "арбат", Source: "http://vk.com/feed?w=wall"+is_group+"_"+news_id},function(data){
-                                 
-                            });
-                            
-                            $('#newsContent').append("<div class=\"post\"><a href=\"?ctrl=news&act=SpecificPost&vklink="+is_group+"_"+news_id+"\"><h2 class=\"post-h2 h2\">"+title+"</h2></a><p data-date="+date+" class=\"post-text\">"+description+"</p></div>");
-                        }//else
-
-                }//if
-
-            }//true group
-
-            if(i == result.response.items.length-1){
-                   LoaderOff();
-
-            }//if
-
-     }//for
-                        
-     if($('#newsContent').children().length == 0){
-                        
-        $('section div.h1').remove();
-        $("section").append("<div class=\"h1\" id=\"newsContent\">Новости по данному запросу не найдены</div>");
-                        
-    }//if
-     else{
-        
-        Last_Date = $("p.post-text").last().data("date");
-        $("#count").text($("div.post").length);
-        
-    }//else                
-    
- }//func
+//function DistrictsFunction(){
+//    
+//    $('#newsContent').empty();
+//    $("section").append("<div id=\"newsContent\"></div>");
+//    $("#search_news_by_stop_words").blur();
+//    stop_words = new String($("#stop_words").val());
+//    
+//    stop_array = stop_words.split(',');
+//    
+//    for(ind = 0;ind < stop_array.length; ind++){
+//        
+//        $.post("ajax.php",{STOP_WORD_EXP: 'set',District: $("h2.h2-distr").text(), stop_word: stop_array[ind]},function(data){
+//       
+//        news = $.parseJSON(data);
+//        
+//        for(i = 0; i < news.length; i++){
+//
+//            if(news[i].Image){
+//                $('#newsContent').append("<div class=\"post\"><img class=\"post-img\" alt=\"\" src=\""+news[i].Image+"\"/><a href=\""+news[i].Source+"\"><h2 class=\"post-h2 h2\">"+news[i].title+"</h2></a><p class=\"post-text\">"+news[i].description+"</p></div>");
+//            }//if
+//            else{
+//                 $('#newsContent').append("<div class=\"post\"><a href=\""+news[i].Source+"\"><h2 class=\"post-h2 h2\">"+news[i].title+"</h2></a><p class=\"post-text\">"+news[i].description+"</p></div>");
+//            }//else
+//            
+//        }//for
+//        
+//        
+//        });
+//    }//for
+//    
+//    
+//    
+// }//func
  
- function StartAllServices(){
+function StartAllServices(){
+     
+     $.post("ajax.php",{GetCountOfNews: 'set'},function(ajax_data){
+                 
+        $('#count').text(ajax_data);        
+     });
      
      setInterval(function(){
          
-                if(G_INDEX == 1){
-                    
-                    script = document.createElement('SCRIPT');
-                    script.src = "https://api.vk.com/method/newsfeed.search?q=арбат&extended=0&count=100&v=5.28&callback=DistrictsFunction";
-                    document.getElementsByTagName("body")[0].appendChild(script); 
-                    $("#count").text($("div.post").length);
-                    G_INDEX++;
-                    
-                }//if
-                else{
-                    
-                    script = document.createElement('SCRIPT');
-                    script.src = "https://api.vk.com/method/newsfeed.search?q=арбат&start_time="+Last_Date+"&extended=0&count=100&v=5.28&callback=DistrictsFunction";
-                    document.getElementsByTagName("body")[0].appendChild(script); 
-                    
-                    
-                }//else
-                
+         $.post("cron_queries.php",{},function(cron_data){
+             
+             $.post("ajax.php",{GetCountOfNews: 'set'},function(ajax_data){
                  
-    },15000);
+                 $('#count').text(ajax_data);
+                 
+             });
+             
+         });
+         
+     },300000);
      
  }//StartAllServices
  
@@ -420,9 +351,7 @@ function callbackFunc(result) {
 }//callback
 
 function ShowPersonalRoomMessage(controll,message,type){
-    
-
-    
+   
     if(type == "success"){
         
         $("#" + $(controll).attr('id')).children(".pers-error").remove();
@@ -451,74 +380,10 @@ function ShowPersonalRoomMessage(controll,message,type){
     }//if
 }
 
-function GetPostByStopWord(result){
+function GetPostByStopWord(){
     
         words = new String( $("#stop_words").val() );
-        
         delimers_words = words.split(',');
-        
-        for(i = 0;i < result.response.items.length;i++){
-            
-                        is_group = new String(result.response.items[i].from_id);
-                        
-                        if(is_group.indexOf('-') != -1){
-                            
-                            news_id = result.response.items[i].id;
-                            
-                            if(result.response.items[i].text != ""){
-                                
-                                record_text = new String(result.response.items[i].text);
-                                
-                                for(j = 0; j < delimers_words.length; j++){
-                                    if(record_text.indexOf(delimers_words[j]) != -1){//если запись содержит стоп слово
-                                            title = new String(result.response.items[i].text.split('.')[0]);
-                                        if(title.length > 100){
-                                            title = (title.substr(0,100)+"...");
-                                        }//if
-                                            description = new String(result.response.items[i].text);
-                                        if(description.length > 500){
-                                            description = (description.substr(0,500) + "...");
-                                        }//if
-                                        if(result.response.items[i].attachments){   
-                                                try{
-                                                    if(result.response.items[i].attachments[0].video){
-                                                            title = (title + "(Есть видео)");
-                                                    }//if
-                                                }catch(ex){
-                                                    console.writeln(ex);
-                                                }//catch
-                                            if(result.response.items[i].attachments[0].photo){
-                                                $('#newsContent').append("<div class=\"post\"><img class=\"post-img\" alt=\"\" src=\""+result.response.items[i].attachments[0].photo.photo_130+"\"/><a href=\"?ctrl=news&act=SpecificPost&vklink="+is_group+"_"+news_id+"\"><h2 class=\"post-h2 h2\">"+title+"</h2></a><p class=\"post-text\">"+description+"</p></div>");             
-                                            }//if   
-
-                                            else{
-                                                $('#newsContent').append("<div class=\"post\"><a href=\"?ctrl=news&act=SpecificPost&vklink="+is_group+"_"+news_id+"\"><h2 class=\"post-h2 h2\">"+title+"</h2></a><p class=\"post-text\">"+description+"</p></div>");
-                                            }//else  
-
-                                        }//if
-                                        else{
-                                            $('#newsContent').append("<div class=\"post\"><a href=\"?ctrl=news&act=SpecificPost&vklink="+is_group+"_"+news_id+"\"><h2 class=\"post-h2 h2\">"+title+"</h2></a><p class=\"post-text\">"+description+"</p></div>");
-                                        }//else
-                                    
-                            }//if содержить стоп слово
-                        }//Перебор всех стоп-слов
-                                
-                            
-                            
-         }//if res.response
-                            
-                        }//true
-                        if(i == result.response.items.length-1){
-                            LoaderOff();
-                            $("#search_news_by_stop_words").blur();
-                        }//if  
-                        
-                    }//for
-                    
-        if($('#newsContent').children().length == 0){
-             $('section div.h1').remove();
-             $("section").append("<div class=\"h1\" id=\"newsContent\">Новости по данному запросу не найдены</div>");
-        }//if   
         
 }//GetPostByStopWord
 
@@ -555,15 +420,10 @@ $("#search_news_by_stop_words").click(function(){
         district = $("div.selectDistrict h2.h2-distr").text();
             
         if(district != 'Выберите район' && $("#stop_words").val()){
-            
-                LoaderOn();
-                $("#newsContent div.post").remove();
                 
-                script = document.createElement('SCRIPT');
+                $("#District").val(district);
+                $("#start_search_news").submit();
                 
-                script.src = "https://api.vk.com/method/newsfeed.search?q="+district+"&extended=0&count=200&v=5.28&callback=GetPostByStopWord";
-                
-                document.getElementsByTagName("body")[0].appendChild(script); 
                 
             }//if
             else{//error

@@ -4,8 +4,8 @@ namespace model\entity;
 
 class district{
     
-    private $id;
-    private $Title;
+    public $id;
+    public $Title;
     
     function __construct() {
         

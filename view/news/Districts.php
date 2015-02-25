@@ -11,8 +11,8 @@
         <title>Info-Pulse</title>
     </head>
     <script>
-    StartAllServices();
-</script>
+        StartAllServices();
+    </script>
 
 
     <body id="body" class="news-bg"> 
@@ -92,11 +92,13 @@
 
             <div class="srch">
                 <h1 class="h1">Панель поиска <span id="minimize" title="Скрыть панель">─</span></h1>
-                <div id="search-panel" class="post">    
-                    <h2 class="h2">Введите стоп слова, разделяя их запятыми, и выберите район:</h2>  
-                    <textarea id="stop_words" name="" class="stop-area" placeholder="Стоп слова"></textarea>
+                <div id="search-panel" class="post">
+                    <form id="start_search_news" method="POST" action="?ctrl=news&act=getNewsByStopWords">
+                        <h2 class="h2">Введите стоп слова, разделяя их запятыми, и выберите район:</h2>  
+                    <textarea id="stop_words" name="stop_words" class="stop-area" placeholder="Стоп слова"></textarea>
                     
                     <div class="selectDistrict">
+                        <input style="display: none" id="District" name="District" />
                         <h2 class="h2-distr">Выберите район</h2>
                         <ul class="district">
                             <?php   
@@ -122,9 +124,34 @@
                         
                     </div>
                     <input class="distr-button submit" id="search_news_by_stop_words" value="Найти" type="button">
+                    </form>
+                    
                 </div>
             </div>
             <div id="newsContent">
+                <?php
+                    
+                    if(is_array($this->view->finded_news)){
+                        
+                        foreach($this->view->finded_news as $news){
+                            
+                            foreach($news as $one_news){
+                                
+                                $image = $one_news->getImage();
+                                if(!empty($image)){
+                                    echo "<div class=\"post\"><img class=\"post-img\" alt=\"\" src=\"{$one_news->getImage()}\"/><a href=\"{$one_news->getSource()}\"><h2 class=\"post-h2 h2\">{$one_news->getTitle()}</h2></a><p class=\"post-text\">{$one_news->getDescription()}</p></div>";
+                                }
+                                else{
+                                    echo "<div class=\"post\"><a href=\"{$one_news->getSource()}\"><h2 class=\"post-h2 h2\">{$one_news->getTitle()}</h2></a><p class=\"post-text\">{$one_news->getDescription()}</p></div>";
+                                }
+                            
+                            }//foreach
+                            
+                        }//foreach
+                        
+                    }//if
+                    
+                ?>
             </div>
         </section>
     </div>
