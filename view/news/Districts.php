@@ -136,13 +136,29 @@
                         foreach($this->view->finded_news as $news){
                             
                             foreach($news as $one_news){
+
+                                $d_title = $one_news->getTitle();
+                                if(strlen($d_title)>100){
+                                    $d_title = substr($d_title, 0, 100);
+                                    $d_title .= '...';
+                                }
+
+                                $d_description = $one_news->getDescription();
+                                if(strlen($d_description)>500){
+                                    $d_description = substr($d_description, 0, 500);
+                                    $d_description .= '...';
+                                }
+                                $d_id = $one_news->getId();
+                                echo "$d_id";
                                 
                                 $image = $one_news->getImage();
                                 if(!empty($image)){
-                                    echo "<div class=\"post\"><img class=\"post-img\" alt=\"\" src=\"{$one_news->getImage()}\"/><a href=\"{$one_news->getSource()}\"><h2 class=\"post-h2 h2\">{$one_news->getTitle()}</h2></a><p class=\"post-text\">{$one_news->getDescription()}</p></div>";
+
+                                    
+                                    echo "<div class=\"post\"><img class=\"post-img\" alt=\"\" src=\"{$one_news->getImage()}\"/><a href=\"?ctrl=news&act=SpecificPostHome&id={$d_id}\"><h2 class=\"post-h2 h2\">{$d_title}</h2></a><p class=\"post-text\">{$d_description}</p></div>";
                                 }
                                 else{
-                                    echo "<div class=\"post\"><a href=\"{$one_news->getSource()}\"><h2 class=\"post-h2 h2\">{$one_news->getTitle()}</h2></a><p class=\"post-text\">{$one_news->getDescription()}</p></div>";
+                                    echo "<div class=\"post\"><a href=\"?ctrl=news&act=SpecificPostHome&id={$d_id}\"><h2 class=\"post-h2 h2\">{$d_title}</h2></a><p class=\"post-text\">{$d_description}</p></div>";
                                 }
                             
                             }//foreach

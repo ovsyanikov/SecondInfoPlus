@@ -75,6 +75,33 @@ class NewsController extends \controller\BaseController{
        
         
     }
+    public function SpecificPostHomeAction(){
+        
+       $user_serv = $this->GetUserService();
+       $access = $user_serv->isAccessDenied();
+       $global_service = new GlobalService();
+       
+       if($access){//Если доступ запрещен
+           $this->redirect("index");
+       }//if
+       else{//Если доступ разрешен
+           $user = $this->getRequest()->getSessionValue('user_info_plus');
+           if(empty($user)){
+               $user = $this->getRequest()->getCookieValue('user_info_plus');
+           }//if
+           $this->view->current_user = $this->GetUserService()->getUser($user);
+           
+           
+           $post_id = $_GET['id'];
+           
+           $distr =  $global_service->GetGlobalNewsById($post_id);
+           
+           $this->view->specific_news = $distr;
+           
+           return 'SpecificPostHome';
+       }//else
+        
+    }
     
     public function specificPostAction(){
         

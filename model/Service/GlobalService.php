@@ -85,6 +85,8 @@ class GlobalService{
     }
     
     public function GetGlobalNewsById($id) {
+        $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");       
+        $stmt->execute();
         
         $stmt = \util\MySQL::$db->prepare("SELECT * FROM global_news WHERE id = :id");
         $stmt->bindParam(":id",$id);
@@ -142,7 +144,7 @@ class GlobalService{
         
         $stmt->execute();
         
-        $stmt = \util\MySQL::$db->prepare("INSERT INTO global_news(id,title,description,public_date,district,Source,Image)".
+        $stmt = \util\MySQL::$db->prepare("INSERT INTO global_news(id,title,description,public_date,district,Source,Images)".
                 " VALUES(NULL,:title,:description,now(),:distr,:src,:img) ");
         
         $title = $news->getTitle();
