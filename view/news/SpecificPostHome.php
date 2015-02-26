@@ -59,7 +59,7 @@
 <aside class="sidebar">
             
             
-                            <div class="personal">
+                <div class="personal">
                     <a href="?ctrl=user&act=MyProfile">Личный кабинет(<?php
                         echo "{$this->view->current_user->getLogin()}"
                         ?>)</a> / 
@@ -89,32 +89,20 @@
             <div id="newsContent">
                 <div class="post">
                     <?php 
-                        echo "<h2 class=\"post-h2 h2\">{$this->view->specific_news->getTitle()}</h2><br />";
-                 //       $img_files = $this->view->specific_news->getFiles();
-                 //       $imges = explode(',',$img_files);
+                        echo "<h2 class=\"post-h2 h2\">{$this->view->global_news->getTitle()}</h2><br />";
+                        $img = $this->view->global_news->getImage();
                         
-                 //       $img_count = count($imges);
-                        
-//                        if($img_count != 0){
-//                            $i = 0;
-//                            
-//                            foreach ($imges as $image){
-//                                
-//                                if($i != $img_count-1){
-//                                    echo "<img class=\"specificIMG\" src=\"files/$image\" alt=\"\"/>";
-//                                }//if
-//                                
-//                                $i++;
-//                                
-//                            }//foreach
-//                            
-//                            
-//                        }//if not empty images
-//                        
-                        echo "<p class=\"post-text\">{$this->view->specific_news->getDescription()}</p>";
+                        if ($img){
+                            echo "<div class=\"top-3\"><img id=\"post_image\" src=\"{$img}\" alt=\"\"></div>";                        
+                        }
+                        echo "<p class=\"post-text\">{$this->view->global_news->getDescription()}</p>";
                         
                     ?>
                 </div>
+                <?php 
+                    $source = $this->view->global_news->getSource(); 
+                    echo "<a href=\"{$source}\">Ссылка на первоисточник</a>";
+                ?>
             </div>
         </section>
     </div>

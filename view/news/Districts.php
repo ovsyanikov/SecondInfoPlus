@@ -149,7 +149,6 @@
                                     $d_description .= '...';
                                 }
                                 $d_id = $one_news->getId();
-                                echo "$d_id";
                                 
                                 $image = $one_news->getImage();
                                 if(!empty($image)){

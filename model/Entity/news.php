@@ -55,8 +55,6 @@ class news{
         return $this->Title;
     }
 
-    
-
     function setId($id) {
         $this->id = $id;
     }

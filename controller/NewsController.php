@@ -96,8 +96,9 @@ class NewsController extends \controller\BaseController{
            
            $distr =  $global_service->GetGlobalNewsById($post_id);
            
-           $this->view->specific_news = $distr;
-           
+ //          $this->view->specific_news = $distr;
+           $this->view->global_news = $distr;
+              
            return 'SpecificPostHome';
        }//else
         
