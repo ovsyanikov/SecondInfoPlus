@@ -114,4 +114,28 @@ class NewsService{
           
       }//GetLastResourceNews
       
+      function GetMyTasks(){
+          
+          $news = [];
+          
+          $r = new Request();
+          $owner = $r->getSessionValue('user_info_plus');
+          if(empty($owner)){
+              $owner = $r->getCookieValue('user_info_plus');
+          }
+          $stmt = \util\MySQL::$db->prepare("SELECT * FROM news WHERE Title Like ? or Description Like ?");
+          $params = array("%#$owner%","%#$owner%");
+          $stmt->execute($params);
+          
+          while ($current_news = $stmt->fetchObject('model\entity\news')){
+              
+                 $news[] = $current_news;
+                 
+          }//while
+
+          return $news;
+          
+          
+      }
+      
 }

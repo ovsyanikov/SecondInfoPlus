@@ -75,6 +75,7 @@ class NewsController extends \controller\BaseController{
        
         
     }
+    
     public function SpecificPostHomeAction(){
         
        $user_serv = $this->GetUserService();
@@ -91,15 +92,21 @@ class NewsController extends \controller\BaseController{
            }//if
            $this->view->current_user = $this->GetUserService()->getUser($user);
            
+           $r = new Request();
            
-           $post_id = $_GET['id'];
+           $post_id = $r->getGetValue('id');
            
-           $distr =  $global_service->GetGlobalNewsById($post_id);
+           $specific_news =  $global_service->GetGlobalNewsById($post_id);
            
- //          $this->view->specific_news = $distr;
-           $this->view->global_news = $distr;
-              
-           return 'SpecificPostHome';
+           if(is_a($specific_news,'model\entity\global_news')){
+               
+               $this->view->global_news = $specific_news;
+               return 'SpecificPostHome';
+           }//if
+           else{
+               return 'NewsNotFound';
+           }//else
+           
        }//else
         
     }
@@ -164,6 +171,32 @@ class NewsController extends \controller\BaseController{
        }//else
     }
     
+    public function MyTasksAction() {
+        
+       $user_serv = $this->GetUserService();
+       $access = $user_serv->isAccessDenied();
+       
+       if($access){//Если доступ запрещен
+           $this->redirect("index");
+       }//if
+       else{//Если доступ разрешен
+           
+           $user = $this->getRequest()->getSessionValue('user_info_plus');
+           
+           if(empty($user)){
+               $user = $this->getRequest()->getCookieValue('user_info_plus');
+           }//if
+           
+           $this->view->current_user = $this->GetUserService()->getUser($user);
+           $this->view->my_tasks = $this->GetNewsService()->GetMyTasks();
+           
+           return 'MyTasks';
+           
+       }//else
+        
+        
+    }
+    
     public function ConfirmPostAction(){
         
        $user_serv = $this->GetUserService();
@@ -181,7 +214,7 @@ class NewsController extends \controller\BaseController{
            
            $this->view->current_user = $this->GetUserService()->getUser($user);
            
-           $owner = $this->getRequest()->getSessionValue('user_info_plus');
+           $owner = $this->view->current_user->getLogin();
            $this->GetNewsService()->PublicPost($owner);
            
            $this->view->current_user_news =  $this->GetNewsService()->GetMyPosts();

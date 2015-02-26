@@ -141,7 +141,6 @@ class GlobalService{
     public function AddGlobalNews(global_news $news){
         
         $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
-        
         $stmt->execute();
         
         $stmt = \util\MySQL::$db->prepare("INSERT INTO global_news(id,title,description,public_date,district,Source,Images)".

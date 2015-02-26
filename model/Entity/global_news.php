@@ -4,13 +4,14 @@ namespace model\entity;
 
 class global_news{
 
-    public $Images;    
+       
     public $id;
     public $title;
     public $description;
     public $public_date;
     public $district;
     public $Source;
+    public $Images;
     
     function getImage() {
         return $this->Images;

@@ -100,43 +100,6 @@ function LoaderOff(){
             document.getElementsByTagName("body")[0].appendChild(script);   
             
  }           
-
-var Last_Date;
-var G_INDEX = 1;
-
-//function DistrictsFunction(){
-//    
-//    $('#newsContent').empty();
-//    $("section").append("<div id=\"newsContent\"></div>");
-//    $("#search_news_by_stop_words").blur();
-//    stop_words = new String($("#stop_words").val());
-//    
-//    stop_array = stop_words.split(',');
-//    
-//    for(ind = 0;ind < stop_array.length; ind++){
-//        
-//        $.post("ajax.php",{STOP_WORD_EXP: 'set',District: $("h2.h2-distr").text(), stop_word: stop_array[ind]},function(data){
-//       
-//        news = $.parseJSON(data);
-//        
-//        for(i = 0; i < news.length; i++){
-//
-//            if(news[i].Image){
-//                $('#newsContent').append("<div class=\"post\"><img class=\"post-img\" alt=\"\" src=\""+news[i].Image+"\"/><a href=\""+news[i].Source+"\"><h2 class=\"post-h2 h2\">"+news[i].title+"</h2></a><p class=\"post-text\">"+news[i].description+"</p></div>");
-//            }//if
-//            else{
-//                 $('#newsContent').append("<div class=\"post\"><a href=\""+news[i].Source+"\"><h2 class=\"post-h2 h2\">"+news[i].title+"</h2></a><p class=\"post-text\">"+news[i].description+"</p></div>");
-//            }//else
-//            
-//        }//for
-//        
-//        
-//        });
-//    }//for
-//    
-//    
-//    
-// }//func
  
 function StartAllServices(){
      

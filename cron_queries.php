@@ -73,4 +73,3 @@ foreach ($districts as $district){//Проходим по всем района�
     }//foreach
     
 }//foreach
-

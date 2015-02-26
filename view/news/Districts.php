@@ -27,7 +27,7 @@
                     <ul class="menu">
                         <a href="?ctrl=news&act=news"><li class=" menu-li">ГЛАВНАЯ</li></a>
                         <a href="?ctrl=news&act=Districts"><li class="active menu-li">РАЙОНЫ</li></a>
-                        <a href=""><li class="menu-li">ЗАДАЧИ</li></a>
+                        <a href="?ctrl=news&act=MyTasks"><li class="menu-li">ЗАДАЧИ</li></a>
                         <a href=""><li class="menu-li">УЧАСНИКИ</li></a>
                         <a href="?ctrl=news&act=MyPosts"><li class=" menu-li">МОИ ЗАПИСИ</li></a>
                     </ul>
