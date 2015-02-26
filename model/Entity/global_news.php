@@ -3,21 +3,21 @@
 namespace model\entity;
 
 class global_news{
-    
+
+    public $Images;    
     public $id;
     public $title;
     public $description;
     public $public_date;
     public $district;
     public $Source;
-    public $Image;
     
     function getImage() {
-        return $this->Image;
+        return $this->Images;
     }
 
-    function setImage($Image) {
-        $this->Image = $Image;
+    function setImage($Images) {
+        $this->Images = $Images;
     }
 
     
