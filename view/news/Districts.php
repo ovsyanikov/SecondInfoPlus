@@ -150,20 +150,40 @@
                                 }
                                 $d_id = $one_news->getId();
 
-                                $ch_social = $one_news->getSource();                            
-                                if(strripos($ch_social,'twitter') != false){
-                                    echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"twitter post-icon\">R</span></a>";
-                                }
-                                if(strripos($ch_social,'vk') != false){
-                                    echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">Q</span></a>";
-                                }                                   
+                                $ch_social = $one_news->getSource();   
                                 
                                 $image = $one_news->getImage();
-                                if(!empty($image)){                                   
-                                    echo "<div class=\"post\"><img class=\"post-img\" alt=\"\" src=\"{$one_news->getImage()}\"/><a href=\"?ctrl=news&act=SpecificPostHome&id={$d_id}\"><h2 class=\"post-h2 h2\">{$d_title}</h2></a><p class=\"post-text\">{$d_description}</p></div>";
+                                if(!empty($image)){
+                                                                                                   
+                                    if(strripos($ch_social,'twitter') != false){
+                                        echo "<div class=\"post\">"
+                                        . "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"twitter post-icon\">R</span></a>"
+                                        . "<img class=\"post-img\" alt=\"\" src=\"{$one_news->getImage()}\"/>"
+                                        . "<a href=\"?ctrl=news&act=SpecificPostHome&id={$d_id}\"><h2 class=\"post-h2 h2\">{$d_title}</h2></a>"
+                                        . "<p class=\"post-text\">{$d_description}</p></div>";
+                                    }
+                                    if(strripos($ch_social,'vk') != false){
+                                        echo "<div class=\"post\">"
+                                        . "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">Q</span></a>"
+                                        . "<img class=\"post-img\" alt=\"\" src=\"{$one_news->getImage()}\"/>"
+                                        . "<a href=\"?ctrl=news&act=SpecificPostHome&id={$d_id}\"><h2 class=\"post-h2 h2\">{$d_title}</h2></a>"
+                                        . "<p class=\"post-text\">{$d_description}</p></div>";
+                                    } 
                                 }
                                 else{
-                                    echo "<div class=\"post\"><a href=\"?ctrl=news&act=SpecificPostHome&id={$d_id}\"><h2 class=\"post-h2 h2\">{$d_title}</h2></a><p class=\"post-text\">{$d_description}</p></div>";
+                                    if(strripos($ch_social,'twitter') != false){
+                                        echo "<div class=\"post\">"
+                                        . "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"twitter post-icon\">R</span></a>"
+                                        . "<a href=\"?ctrl=news&act=SpecificPostHome&id={$d_id}\"><h2 class=\"post-h2 h2\">{$d_title}</h2></a>"
+                                        . "<p class=\"post-text\">{$d_description}</p></div>";
+                                    }
+                                    if(strripos($ch_social,'vk') != false){
+                                        echo "<div class=\"post\">"
+                                        . "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">Q</span></a>"
+                                        . "<a href=\"?ctrl=news&act=SpecificPostHome&id={$d_id}\"><h2 class=\"post-h2 h2\">{$d_title}</h2></a>"
+                                        . "<p class=\"post-text\">{$d_description}</p></div>";
+                                    }                                 
+                                    
                                 }
                             
                             }//foreach
