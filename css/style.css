@@ -14,7 +14,7 @@ a{
         text-decoration: none;
 }
 html{
-	/* min-width:1200px; */
+    min-width: 1200px;
 }
 .welc{
     background: url(../img/footer_lodyas.png);
@@ -249,7 +249,7 @@ form a:hover{
 .h1{
     font-size: 20pt;
     color: #890B00;
-    /* font-weight: 400; */
+    font-weight: 600;
     font-stretch: condensed;
     padding: 10px 0px;
 }
@@ -281,7 +281,8 @@ form a:hover{
 .post-h2{
 max-width: 510px;
 display: inline-block;
-    font-weight: 700;
+    
+font-weight: 600;
     font-size: 14pt;
 }
 .post-text{
@@ -376,7 +377,7 @@ display: inline-block;
     float: none;
 }
 .post-img{
-width: 150px;
+max-width: 150px;
 float: left;
 margin: 10px 15px 5px 0px;
 }
@@ -754,14 +755,15 @@ opacity:1;
     max-width: 535px;
     color: #fff;
     min-width: 100%;
-    max-height: 100px;
+    min-height: 75px;
     height: 50px;
     vertical-align: top;
     background: #890B00;
     border: none;
     display: inline;
-    padding: 10px;
+    padding: 10px 10px;
     margin: 15px 0px;
+    box-sizing: border-box;
 }
 .stop-area::-webkit-input-placeholder {color:#fff;}
 
@@ -784,4 +786,20 @@ span#minimize{
 }
 .district{
     display: inline-block;
+}
+.post-icon{
+    float: right;
+    font-family: 'search font';
+    font-size: 14pt;
+    padding: 10px 0px 10px 0px;
+    color: rgb(228, 228, 228);
+    transition: color ease-in-out 0.2s;    
+}
+.twitter:hover{
+    color: rgb(85, 172, 238);
+    transition: color ease-in-out 0.2s;
+}
+.vk:hover{
+    color: rgb(89, 125, 163);
+    transition: color ease-in-out 0.2s;    
 }

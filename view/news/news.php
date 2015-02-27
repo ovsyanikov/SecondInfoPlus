@@ -115,6 +115,7 @@
                         foreach($this->view->all_news as $news){
                             echo '<div class="post">';
                             
+                            $ch_social = $news->getSource();
                             $title = $news->getTitle();
                             
                             if(strlen($title) > 50){
@@ -134,9 +135,14 @@
                                 
                             }//if
                             $image = $news->getImage();
-                            
+                            if(strripos($ch_social,'twitter') != false){
+                                echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"twitter post-icon\">R</span></a>";
+                            }
+                            if(strripos($ch_social,'vk') != false){
+                                echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">Q</span></a>";
+                            }                            
+                            //qr
                             if($image != null){
-                                
                                 echo "<img  class=\"post-img\" src=\"$image\" alt=\"\"/>";
                                 echo "<h2 id=\"postTitle\" class=\"post-h2 h2\">$title</h2>";
                                 echo "<p id=\"postContent\" class=\"post-text\">$description</p>";
