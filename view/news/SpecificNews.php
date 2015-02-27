@@ -120,7 +120,7 @@
         </section>
     </div>
     <footer class="footer">
-        <h2 class="foot copyright">© Info-plus 2015</h2>
+        <h2 class="foot copyright">© Info-pulse 2015</h2>
     </footer>
     <div id="toTop" class="hidden">E</div>
 </body>
