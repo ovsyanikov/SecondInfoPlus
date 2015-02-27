@@ -56,7 +56,7 @@
 
 
     <div class="content">
-<aside class="sidebar">
+        <aside class="sidebar">
             
             
                 <div class="personal">
@@ -87,7 +87,7 @@
         <section class=" news-section">
             
             <div id="newsContent">
-                <div class="post">
+                <div class="specific-post post">
                     <?php 
                         echo "<h2 class=\"post-h2 h2\">{$this->view->global_news->getTitle()}</h2><br />";
                         $img = $this->view->global_news->getImage();

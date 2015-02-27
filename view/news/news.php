@@ -114,7 +114,8 @@
                     else{
                         foreach($this->view->all_news as $news){
                             echo '<div class="post">';
-                            
+                            $d_id = $news->getId();
+                            $ch_social = $news->getSource();
                             $title = $news->getTitle();
                             
                             if(strlen($title) > 50){
@@ -134,8 +135,6 @@
                                 
                             }//if
                             $image = $news->getImage();
-                            
-                            $ch_social = $news->getSource();                            
                             if(strripos($ch_social,'twitter') != false){
                                 echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"twitter post-icon\">R</span></a>";
                             }
@@ -145,12 +144,12 @@
                             //qr
                             if($image != null){
                                 echo "<img  class=\"post-img\" src=\"$image\" alt=\"\"/>";
-                                echo "<h2 id=\"postTitle\" class=\"post-h2 h2\">$title</h2>";
+                                echo "<a href=\"?ctrl=news&act=SpecificPostHome&id={$d_id}\"><h2 id=\"postTitle\" class=\"post-h2 h2\">$title</h2></a>";
                                 echo "<p id=\"postContent\" class=\"post-text\">$description</p>";
                                 
                             }//if
                             else{
-                                echo "<h2 id=\"postTitle\" class=\"post-h2 h2\">$title</h2>";
+                                echo "<a href=\"?ctrl=news&act=SpecificPostHome&id={$d_id}\"><h2 id=\"postTitle\" class=\"post-h2 h2\">$title</h2></a>";
                                 echo "<p id=\"postContent\" class=\"post-text\">$description</p>";
                             }//else
                             echo '</div>';

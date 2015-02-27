@@ -87,7 +87,7 @@
         <section class=" news-section">
             
             <div id="newsContent">
-                <div class="post">
+                <div class="specific-post post">
                     <?php 
                         echo "<h2 class=\"post-h2 h2\">{$this->view->specific_news->getTitle()}</h2><br />";
                         $img_files = $this->view->specific_news->getFiles();

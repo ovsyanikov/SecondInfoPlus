@@ -156,10 +156,10 @@ form a:hover{
     font-weight: 100;
 }
 #newsContent .post,.post-h2{
-    padding-top: 0px; 
+    /* padding-top: 0px; */ 
 }
 #newsContent img{
-    margin: 10px 10px 10px 0px;
+    margin: 10px 20px 10px 0px;
 }
 
 
@@ -418,11 +418,6 @@ opacity:0;
 .visible{
 opacity:1;
 }
-/*.post-section{
-    margin: 10px 1px;
-    display: inline-block;
-    min-height: 558px;
-}*/
 .makepostInput{
     width: 100%;
     background: #E6E6E6;
@@ -791,7 +786,7 @@ span#minimize{
     float: right;
     font-family: 'search font';
     font-size: 14pt;
-    padding: 10px 0px 10px 0px;
+    padding: 5px 0px 5px 0px;
     color: rgb(228, 228, 228);
     transition: color ease-in-out 0.2s;    
 }
@@ -802,4 +797,7 @@ span#minimize{
 .vk:hover{
     color: rgb(89, 125, 163);
     transition: color ease-in-out 0.2s;    
+}
+.specific-post{
+    padding-top:  0px;
 }
