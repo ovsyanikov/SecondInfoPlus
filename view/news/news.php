@@ -115,7 +115,6 @@
                         foreach($this->view->all_news as $news){
                             echo '<div class="post">';
                             
-                            $ch_social = $news->getSource();
                             $title = $news->getTitle();
                             
                             if(strlen($title) > 50){
@@ -135,6 +134,8 @@
                                 
                             }//if
                             $image = $news->getImage();
+                            
+                            $ch_social = $news->getSource();                            
                             if(strripos($ch_social,'twitter') != false){
                                 echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"twitter post-icon\">R</span></a>";
                             }
