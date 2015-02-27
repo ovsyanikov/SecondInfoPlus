@@ -111,7 +111,7 @@ function StartAllServices(){
      setInterval(function(){
          
          $.post("cron_queries.php",{},function(cron_data){
-             
+            
              $.post("ajax.php",{GetCountOfNews: 'set'},function(ajax_data){
                  
                  $('#count').text(ajax_data);
@@ -120,7 +120,7 @@ function StartAllServices(){
              
          });
          
-     },300000);
+     },5000);
      
  }//StartAllServices
  

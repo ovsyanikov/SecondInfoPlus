@@ -109,7 +109,7 @@
                     $count = count($this->view->all_news);
                     
                     if($count == 0){
-                        echo '<h2 id="postTitle" class="post-h2 h2">База данных поку что пуста!</h2>';
+                        echo '<h2 id="postTitle" class="post-h2 h2">База данных пока что пуста!</h2>';
                     }//if
                     else{
                         foreach($this->view->all_news as $news){
@@ -119,7 +119,8 @@
                             
                             if(strlen($title) > 50){
                                 
-                                $title = substr($title, 0, 50);
+                                $title = iconv_substr($title,0, 50, 'UTF-8');
+                                
                                 $title .= "...";
                                 
                             }//if
@@ -128,7 +129,7 @@
                             
                             if(strlen($description) > 300){
                                 
-                                $description = substr($description, 0, 300);
+                                $description = iconv_substr($description,0, 300, 'UTF-8');
                                 $description .= "...";
                                 
                             }//if

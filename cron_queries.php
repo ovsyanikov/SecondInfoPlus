@@ -28,8 +28,7 @@ foreach ($districts as $district){//Проходим по всем района�
         if($my_item->owner_id < 0){//Отсеивание групп
             
             //Описание новости
-            $text = $my_item->text;   
-            
+            $text = $my_item->text;
             
             //Заголовок
             $title = explode('.', $text)[0];

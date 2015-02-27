@@ -126,13 +126,11 @@ class GlobalService{
         
         $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
         $stmt->execute();
+        
         $global_news_array = [];
         
         if($offset == 0){//DefaultParam
-            
-            $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
-            $stmt->execute();
-            
+
             $stmt = \util\MySQL::$db->prepare("SELECT * FROM global_news");
             $stmt->execute();
             
