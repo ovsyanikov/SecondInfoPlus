@@ -18,6 +18,7 @@ class NewsController extends \controller\BaseController{
         
        $user_serv = $this->GetUserService();
        $access = $user_serv->isAccessDenied();
+       $glob_sevice = $this->GetGlobalService();
        
        if($access){//Если доступ запрещен
            $this->redirect("index");
@@ -29,7 +30,9 @@ class NewsController extends \controller\BaseController{
                $user = $this->getRequest()->getCookieValue('user_info_plus');
            }//
            $this->view->current_user = $this->GetUserService()->getUser($user);
+           $this->view->all_news = $glob_sevice->GetGlobalNews();
            return 'news';
+           
        }//else
     }
     
@@ -238,9 +241,15 @@ class NewsController extends \controller\BaseController{
                 $user = $this->getRequest()->getCookieValue('user_info_plus');
             }//if
             $this->view->current_user = $this->GetUserService()->getUser($user);
-            $this->view->specific_news = $this->GetNewsService()->GetSpecificNews();
+            $spec_news = $this->GetNewsService()->GetSpecificNews();
+            if($spec_news != null){
+                $this->view->specific_news = $spec_news;
+                return 'SpecificNews';
+            }//if
+            else{
+                return 'NewsNotFound';
+            }//else
             
-           return 'SpecificNews';
        }//else
     }
     

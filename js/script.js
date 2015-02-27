@@ -74,7 +74,7 @@ function LoaderOn(){
 }
 
 function LoaderOff(){
-    $('body').css({cursor:"default"});
+     $('body').css({cursor:"default"});
      $('#loader').removeClass('show');
      $('#loader').addClass('hide');
     

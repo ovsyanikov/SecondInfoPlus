@@ -8,9 +8,11 @@
         <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.0.min.js"></script> 
         <script type="text/javascript" src="js/script.js"></script> 
         <title>Info-Pulse</title>
+        <script>LoaderOff();</script>
     </head>
     <body class="news-bg"> 
-        <script>
+        
+<!--        <script>
                         //DEFAULT_SEARCH();
                 for(i = 0;i < 3;i++){
                     if(i==0){
@@ -23,7 +25,7 @@
                 }    
                     
 
-        </script>
+        </script>-->
     <heder>
         <div class="top-head">
             <div class="content">
@@ -44,7 +46,7 @@
                         <input id="search" type="search" class="isearch" placeholder="Поиск">
                         <span class="search-icon">A</span>
                     </div>
-                <img src="img/loader2.gif" alt="" id="loader" class="show loader">
+                <img src="img/loader2.gif" alt="" id="loader" class="hide">
 
                 </div>
 
@@ -102,7 +104,51 @@
             </div>
             <h1 class="h1">Все новости по дате</h1>
             <div id="newsContent">
+                <?php
                 
+                    $count = count($this->view->all_news);
+                    
+                    if($count == 0){
+                        echo '<h2 id="postTitle" class="post-h2 h2">База данных поку что пуста!</h2>';
+                    }//if
+                    else{
+                        foreach($this->view->all_news as $news){
+                            echo '<div class="post">';
+                            
+                            $title = $news->getTitle();
+                            
+                            if(strlen($title) > 50){
+                                
+                                $title = substr($title, 0, 50);
+                                $title .= "...";
+                                
+                            }//if
+                            
+                            $description = $news->getDescription();
+                            
+                            if(strlen($description) > 300){
+                                
+                                $description = substr($description, 0, 300);
+                                $description .= "...";
+                                
+                            }//if
+                            $image = $news->getImage();
+                            
+                            if($image != null){
+                                
+                                echo "<img  class=\"post-img\" src=\"$image\" alt=\"\"/>";
+                                echo "<h2 id=\"postTitle\" class=\"post-h2 h2\">$title</h2>";
+                                echo "<p id=\"postContent\" class=\"post-text\">$description</p>";
+                                
+                            }//if
+                            else{
+                                echo "<h2 id=\"postTitle\" class=\"post-h2 h2\">$title</h2>";
+                                echo "<p id=\"postContent\" class=\"post-text\">$description</p>";
+                            }//else
+                            echo '</div>';
+                        }//foreach
+                    }//else
+                ?>
             </div>
 <!--            <div class="post">
                 <h2 id="postTitle" class="post-h2 h2"></h2>

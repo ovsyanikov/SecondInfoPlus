@@ -89,8 +89,12 @@ class NewsService{
           $stmt->bindParam(":id",$news_id);
           $stmt->execute();
           $spec_news = $stmt->fetchObject('model\entity\news');
-          
-          return $spec_news;
+          if(is_a($spec_news, 'model\entity\news')){
+              return $spec_news;
+          }
+          else{
+              return NULL;
+          }
           
       }
       

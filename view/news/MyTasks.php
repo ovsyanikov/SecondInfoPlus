@@ -23,9 +23,9 @@
                     <ul class="menu">
                         <a href="?ctrl=news&act=news"><li class=" menu-li">ГЛАВНАЯ</li></a>
                         <a href="?ctrl=news&act=Districts"><li class="menu-li">РАЙОНЫ</li></a>
-                        <a href="?ctrl=news&act=MyTasks"><li class="menu-li">ЗАДАЧИ</li></a>
+                        <a href="?ctrl=news&act=MyTasks"><li class="active menu-li">ЗАДАЧИ</li></a>
                         <a href=""><li class="menu-li">УЧАСНИКИ</li></a>
-                        <a href="?ctrl=news&act=MyPosts"><li class="active menu-li">МОИ ЗАПИСИ</li></a>
+                        <a href="?ctrl=news&act=MyPosts"><li class="menu-li">МОИ ЗАПИСИ</li></a>
                     </ul>
 
                     <div class="search">
@@ -35,19 +35,6 @@
                 <img src="img/loader2.gif" alt="" id="loader" class="hide loader">
 
                 </div>
-
-            </div>
-        </div>
-        <div class="bottom-head">
-            <div class="content">
-                <ul class="menu">
-                    <a href="?ctrl=news&act=news"><li class="active menu-li">ГЛАВНАЯ</li></a>
-                    <a href="?ctrl=news&act=Districts"><li class="menu-li">РАЙОНЫ</li></a>
-                    <a href=""><li class="menu-li">ЗАДАЧИ</li></a>
-                    <a href=""><li class="menu-li">УЧАСНИКИ</li></a>
-                    <a href="?ctrl=news&act=MyPosts"><li class="menu-li">МОИ ЗАПИСИ</li></a>
-                </ul>
-
 
             </div>
         </div>
@@ -67,8 +54,6 @@
                 </div>
             
             
-            
-            
             <h1 class="h1">Лента новостей</br>Выводятся новости 1ой рубрики, кратко</h1>
             <div class="side-post">
                 <h2 class="h2">Section 1.10.32 of "de Finibus Bonorum et Malorum" <span class="span-time">14:32</span></h2>
@@ -86,14 +71,12 @@
         </aside>
         <section class=" news-section">
 
-            <a href="?ctrl=news&act=MakePost"><input class="My-posts-button submit" id="addPost" value="Добавить запись" type="button"></a>
-
             <div id="newsContent">
                   <?php 
                   
-                       $count_current_posts = count($this->view->current_user_news);
+                       $count_current_posts = count($this->view->my_tasks);
                        if($count_current_posts == 0){
-                           echo "<h2 class=\"post-h2 h2\" style=\"margin: 15px 0px\">У вас пока нет записей!</h2>";
+                           echo "<h2 class=\"post-h2 h2\" style=\"margin: 15px 0px\">У вас пока нет заданий!</h2>";
                        }//if
                        else{
                            
