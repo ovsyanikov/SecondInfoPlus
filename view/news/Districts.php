@@ -140,13 +140,14 @@
                                 $d_title = $one_news->getTitle();
                                 
                                 if(strlen($d_title)>100){
-                                    $d_title = substr($d_title, 0, 100);
+                                    $d_title = iconv_substr($title,0, 100, 'UTF-8');
                                     $d_title .= '...';
                                 }
 
                                 $d_description = $one_news->getDescription();
                                 if(strlen($d_description)>500){
-                                    $d_description = substr($d_description, 0, 500);
+                                    
+                                    $d_description = iconv_substr($d_description,0, 500, 'UTF-8');
                                     $d_description .= '...';
                                 }
                                 $d_id = $one_news->getId();
@@ -197,6 +198,7 @@
                         }//foreach
                         
                     }//if
+                    
                 ?>
             </div>
         </section>

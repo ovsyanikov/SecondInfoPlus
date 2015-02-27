@@ -120,7 +120,7 @@
                             
                             if(strlen($title) > 50){
                                 
-                                $title = iconv_substr($title,0, 50, 'UTF-8');
+                                $title = iconv_substr($title,0, 47, 'UTF-8');
                                 
                                 $title .= "...";
                                 
