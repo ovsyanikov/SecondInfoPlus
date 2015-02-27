@@ -28,9 +28,16 @@ foreach ($districts as $district){//Проходим по всем района�
         if($my_item->owner_id < 0){//Отсеивание групп
             
             //Описание новости
-            $text = $my_item->text;            
+            $text = $my_item->text;   
+            
+            
             //Заголовок
             $title = explode('.', $text)[0];
+            $contains = $glob_service->IsContainsNews($title);
+            
+            if($contains){
+                continue;
+            }//if
             
             if(strlen($title) > 100){
                 
@@ -76,7 +83,6 @@ foreach ($districts as $district){//Проходим по всем района�
     
 }//foreach
 
-
 $settings = array(
     'oauth_access_token' => "3062725937-L6VtUnZ6xx644GWDU2Y3NHhz14yx1KADWeAnoxm",
     'oauth_access_token_secret' => "Q54JmVltQyKZjE5ymPAuCcWsipCOLo5GOfFWeUuLpdhqo",
@@ -104,20 +110,35 @@ foreach ($districts as $district){
    foreach($js_obj->statuses as $status){
        
        $text = $status->text;
+       
+       $contains = $glob_service->IsContainsNews($text);
+            
+        if($contains){
+            continue;
+        }//if
+       
        $user_id = $status->user->id;
        $screen_name = $status->user->screen_name;
        $user_image = $status->user->profile_image_url_https;
        $created_at = $status->created_at;
        $source = "https://twitter.com/" . $status->user->id_str . "/status/" . $status->id_str;
        
+       if($status->entities->media->media_url != NULL){
+            $new_global_news->setImage($status->entities->media->media_url);
+       }//if
+       else{
+           
+           $new_global_news->setImage($user_image);  
+           
+       }//else
        
-        $new_global_news = new global_news();
-        $new_global_news->setTitle($screen_name);
-        $new_global_news->setDescription($text);
-        $new_global_news->setImage($user_image);
-        $new_global_news->setSource($source);
-        $new_global_news->setDistrict($district->getId());
-        $glob_service->AddGlobalNews($new_global_news);
+       $new_global_news = new global_news();
+       $new_global_news->setTitle($screen_name);
+       $new_global_news->setDescription($text);
+      
+       $new_global_news->setSource($source);
+       $new_global_news->setDistrict($district->getId());
+       $glob_service->AddGlobalNews($new_global_news);
 
    }//foreach
     

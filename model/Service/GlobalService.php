@@ -27,6 +27,25 @@ class GlobalService{
         
     }
     
+    public function IsContainsNews($text){
+        
+        $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
+        $stmt->execute();
+        
+        $stmt = \util\MySQL::$db->prepare("SELECT * FROM global_news WHERE description Like ?");
+        $params = array("%$text%");
+        $stmt->execute($params);
+        
+        $news = $stmt->fetchObject(global_news::class);
+        
+        if(is_a($news,'model\entity\global_news')){
+            return true;
+        }//if
+        else{
+            return false;
+        }
+    }//IsContainsNews
+    
     public function GetDistrictById($id){
         
         
