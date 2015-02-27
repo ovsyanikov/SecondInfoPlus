@@ -10,6 +10,7 @@ class news{
     private $Owner;
     private $Description;
     private $PublicDateTime;
+  
     
     function getFiles() {
         return $this->Files;
@@ -50,7 +51,8 @@ class news{
         function getId() {
         return $this->id;
     }
-
+     
+    
     function getTitle() {
         return $this->Title;
     }
@@ -63,7 +65,7 @@ class news{
         $this->Title = $Title;
     }
 
-  
+
 
 
     

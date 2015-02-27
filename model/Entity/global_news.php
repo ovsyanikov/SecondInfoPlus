@@ -8,10 +8,11 @@ class global_news{
     public $id;
     public $title;
     public $description;
-    public $public_date;
+    public $public_date;    
     public $district;
     public $Source;
     public $Images;
+    public $Date;    
     
     function getImage() {
         return $this->Images;
@@ -38,6 +39,10 @@ class global_news{
         return $this->description;
     }
 
+    function getDate() {
+        return $this->Date;
+    }
+
     function getPublic_date() {
         return $this->public_date;
     }
@@ -54,6 +59,10 @@ class global_news{
         $this->id = $id;
     }
 
+    function setDate($date) {
+        $this->Date = $date;
+    }
+    
     function setTitle($title) {
         $this->title = $title;
     }

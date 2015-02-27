@@ -134,6 +134,9 @@
                                 $description .= "...";
                                 
                             }//if
+                            $date = date("H:i:s",$news->getDate());
+                           
+                            
                             $image = $news->getImage();
                             if(strripos($ch_social,'twitter') != false){
                                 echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"twitter post-icon\">R</span></a>";
@@ -142,7 +145,9 @@
                                 echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">Q</span></a>";
                             }                            
                             //qr
+                            echo "<span  class=\"post-date2\">$date</span>";    
                             if($image != null){
+                                
                                 echo "<img  class=\"post-img\" src=\"$image\" alt=\"\"/>";
                                 echo "<a href=\"?ctrl=news&act=SpecificPostHome&id={$d_id}\"><h2 id=\"postTitle\" class=\"post-h2 h2\">$title</h2></a>";
                                 echo "<p id=\"postContent\" class=\"post-text\">$description</p>";
@@ -152,7 +157,9 @@
                                 echo "<a href=\"?ctrl=news&act=SpecificPostHome&id={$d_id}\"><h2 id=\"postTitle\" class=\"post-h2 h2\">$title</h2></a>";
                                 echo "<p id=\"postContent\" class=\"post-text\">$description</p>";
                             }//else
+                            //echo "<span  class=\"post-date\">$date</span></a>";
                             echo '</div>';
+                            
                         }//foreach
                     }//else
                 ?>

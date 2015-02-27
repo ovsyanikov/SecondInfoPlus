@@ -20,7 +20,7 @@ $districts = $glob_service->GetDistricts();
 foreach ($districts as $district){//Проходим по всем районам
     //3600
 
-    $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q={$district->getTitle()}&start_time=".(time()-299)."&extended=0&count=10&v=5.28");    
+    $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q={$district->getTitle()}&start_time=".(time()-10)."&extended=0&count=10&v=5.28");    
     $result_from_json = json_decode($result);
     
     foreach ($result_from_json->response->items as $my_item){
@@ -29,7 +29,8 @@ foreach ($districts as $district){//Проходим по всем района�
             
             //Описание новости
             $text = $my_item->text;
-            
+            $date = $my_item->date; 
+            //$date = date(DATE_RFC2822,$date);
             //Заголовок
             $title = explode('.', $text)[0];
             $contains = $glob_service->IsContainsNews($title);
@@ -73,6 +74,7 @@ foreach ($districts as $district){//Проходим по всем района�
             $new_global_news->setImage($img);
             $new_global_news->setSource("http://vk.com/feed?w=wall{$my_item->owner_id}_{$my_item->id}");
             $new_global_news->setDistrict($district->getId());
+            $new_global_news->setDate($date);
             $glob_service->AddGlobalNews($new_global_news);
             
         }//if
@@ -120,7 +122,10 @@ foreach ($districts as $district){
        $screen_name = $status->user->screen_name;
        $user_image = $status->user->profile_image_url_https;
        $created_at = $status->created_at;
+       $created_at = strtotime($created_at);
+       //$created_at = date(DATE_RFC2822,$date);
        $source = "https://twitter.com/" . $status->user->id_str . "/status/" . $status->id_str;
+       $date = $status -> created_at;
        
        if($status->entities->media->media_url != NULL){
             $new_global_news->setImage($status->entities->media->media_url);
@@ -134,9 +139,10 @@ foreach ($districts as $district){
        $new_global_news = new global_news();
        $new_global_news->setTitle($screen_name);
        $new_global_news->setDescription($text);
-      
        $new_global_news->setSource($source);
        $new_global_news->setDistrict($district->getId());
+       $new_global_news->setDate($created_at);
+       
        $glob_service->AddGlobalNews($new_global_news);
 
    }//foreach

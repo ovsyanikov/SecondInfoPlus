@@ -162,8 +162,8 @@ class GlobalService{
         $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
         $stmt->execute();
         
-        $stmt = \util\MySQL::$db->prepare("INSERT INTO global_news(id,title,description,public_date,district,Source,Images)".
-                " VALUES(NULL,:title,:description,now(),:distr,:src,:img) ");
+        $stmt = \util\MySQL::$db->prepare("INSERT INTO global_news(id,title,description,public_date,district,Source,Images,Date)".
+                " VALUES(NULL,:title,:description,now(),:distr,:src,:img,:date) ");
         
         $title = $news->getTitle();
         $stmt->bindParam(":title",$title);
@@ -179,6 +179,10 @@ class GlobalService{
         
         $img = $news->getImage();
         $stmt->bindParam(":img",$img);
+        
+        $public_date = $news->getDate();
+        $stmt->bindParam(":date",$public_date);
+        
         
         $res = $stmt->execute();
         
@@ -372,4 +376,3 @@ class GlobalService{
 }
 
 }
-
