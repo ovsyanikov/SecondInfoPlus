@@ -145,7 +145,7 @@
                                 echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">Q</span></a>";
                             }                            
                             //qr
-                            echo "<span  class=\"post-date2\">$date</span>";    
+                            echo "<span  class=\"post-date2\" title=\"Время публикации\">$date</span>";    
                             if($image != null){
                                 
                                 echo "<img  class=\"post-img\" src=\"$image\" alt=\"\"/>";
