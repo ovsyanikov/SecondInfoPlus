@@ -20,7 +20,7 @@ $districts = $glob_service->GetDistricts();
 foreach ($districts as $district){//Проходим по всем районам
     //3600
 
-    $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q={$district->getTitle()}&start_time=".(time()-10)."&extended=0&count=10&v=5.28");    
+    $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q={$district->getTitle()}&start_time=".(time()-299)."&extended=0&count=10&v=5.28");    
     $result_from_json = json_decode($result);
     
     foreach ($result_from_json->response->items as $my_item){

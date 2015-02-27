@@ -120,7 +120,7 @@ function StartAllServices(){
              
          });
          
-     },10000);
+     },300000);
      
  }//StartAllServices
  
