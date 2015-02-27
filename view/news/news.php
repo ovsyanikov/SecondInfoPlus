@@ -134,7 +134,7 @@
                                 $description .= "...";
                                 
                             }//if
-                            $date = date("d/m H:i:s",$news->getDate());
+                            $date = date("D H:i:s",$news->getDate());
                            
                             
                             $image = $news->getImage();
