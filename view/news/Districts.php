@@ -150,7 +150,7 @@
                                 }
                                 $d_id = $one_news->getId();
 
-                                $ch_social = $news->getSource();                            
+                                $ch_social = $one_news->getSource();                            
                                 if(strripos($ch_social,'twitter') != false){
                                     echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"twitter post-icon\">R</span></a>";
                                 }
