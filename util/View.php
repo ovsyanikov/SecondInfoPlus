@@ -12,7 +12,7 @@ class View{
             return $this->storage[$name];
         }//if
         
-        return '';
+        return NULL;
         
     }//__get
     

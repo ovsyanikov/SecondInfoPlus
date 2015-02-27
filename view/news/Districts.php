@@ -130,7 +130,7 @@
             </div>
             <div id="newsContent">
                 <?php
-                    
+                                 
                     if(is_array($this->view->finded_news)){
                         
                         foreach($this->view->finded_news as $news){
@@ -138,6 +138,7 @@
                             foreach($news as $one_news){
 
                                 $d_title = $one_news->getTitle();
+                                
                                 if(strlen($d_title)>100){
                                     $d_title = substr($d_title, 0, 100);
                                     $d_title .= '...';
@@ -153,6 +154,7 @@
                                 $ch_social = $one_news->getSource();   
                                 
                                 $image = $one_news->getImage();
+                                
                                 if(!empty($image)){
                                                                                                    
                                     if(strripos($ch_social,'twitter') != false){
@@ -191,7 +193,6 @@
                         }//foreach
                         
                     }//if
-                    
                 ?>
             </div>
         </section>
