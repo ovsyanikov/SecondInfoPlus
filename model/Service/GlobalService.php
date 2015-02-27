@@ -208,7 +208,7 @@ class GlobalService{
         return $globalNews;
     }
     
-public function GetGlobalNewsByStopWord($word,$district){
+    public function GetGlobalNewsByStopWord($word,$district){
     
         $globalNews=[];
         
@@ -227,7 +227,7 @@ public function GetGlobalNewsByStopWord($word,$district){
     
 }
     
-public function GetGlobalNewsBetweenDate($date_left, $date_right){
+    public function GetGlobalNewsBetweenDate($date_left, $date_right){
 
     $globalNews=[];
 
@@ -246,7 +246,7 @@ public function GetGlobalNewsBetweenDate($date_left, $date_right){
     return $globalNews;
 }
 
-public function GetStopWordById($id){
+    public function GetStopWordById($id){
 
     $stmt = \util\MySQL::$db->prepare("SELECT * FROM stop_words WHERE id = :id");
     $stmt->bindParam(":id",$id);
@@ -263,7 +263,7 @@ public function GetStopWordById($id){
 
 }
 
-public function GetStopWordByTitle($word){
+    public function GetStopWordByTitle($word){
 
     $stmt = \util\MySQL::$db->prepare("SELECT * FROM stop_words WHERE word = :word");
     $stmt->bindParam(":word",$word);
@@ -280,7 +280,7 @@ public function GetStopWordByTitle($word){
 
 }
 
-public function AddStopWord($word){
+    public function AddStopWord($word){
 
     $stmt = \util\MySQL::$db->prepare("SELECT * FROM stop_words WHERE word = :word");
     $stmt->bindParam(":word",$word);
@@ -310,7 +310,7 @@ public function AddStopWord($word){
 
 }//AddStopWord
 
-public function AddStatisticWord($user_id,$word_id) {
+    public function AddStatisticWord($user_id,$word_id) {
 
     $stmt = \util\MySQL::$db->prepare("INSERT INTO statistic_stop_words(user_id,word_id) VALUES(:ui,:wi)");
     $stmt->bindParam(":ui",$user_id);
@@ -321,7 +321,7 @@ public function AddStatisticWord($user_id,$word_id) {
 
 }//
 
-public function GetStatisticWordsByUserId($id) {
+    public function GetStatisticWordsByUserId($id) {
 
     $stat_wrd = [];
 
@@ -339,7 +339,7 @@ public function GetStatisticWordsByUserId($id) {
 
 }
 
-public function GetStatisticByStopWordId($id) {
+    public function GetStatisticByStopWordId($id) {
 
     $stmt = \util\MySQL::$db->prepare("SELECT COUNT(id) FROM statistic_stop_words WHERE word_id = :wId");
     $stmt->bindParam(":wId",$id);
@@ -351,7 +351,7 @@ public function GetStatisticByStopWordId($id) {
 
 }//public
 
-public function GetStopWords(){
+    public function GetStopWords(){
 
     $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
     $stmt->execute();
@@ -370,7 +370,6 @@ public function GetStopWords(){
     return $stop_words;
 
 }
-
 
 }
 

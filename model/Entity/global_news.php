@@ -25,6 +25,7 @@ class global_news{
     function __construct() {
         
     }
+    
     function getId() {
         return $this->id;
     }
