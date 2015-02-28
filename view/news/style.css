@@ -241,7 +241,7 @@ form a:hover{
     background: #fff;
     display: inline-block;
     width: 315px;
-    min-height: 609px;
+    min-height: 450px;
     vertical-align: top;
     padding: 25px;
     box-sizing: border-box;
@@ -256,7 +256,6 @@ form a:hover{
 .h2{
     color: #BE1000;
     /* padding: 5px 0px; */
-    font-weight: 400;
 }
 .top-3{
    // height: 450px;
@@ -488,7 +487,7 @@ opacity:1;
     background: rgb(227, 227, 227);
     display: inline-block;
     padding: 10px 20px;
-    font-size: 12pt;
+    font-size: 14pt;
     width: 500px;    
 }
 .correct{
