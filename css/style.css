@@ -14,7 +14,7 @@ a{
         text-decoration: none;
 }
 html{
-    min-width: 1200px;
+    /* min-width: 1200px; */
 }
 .welc{
     background: url(../img/footer_lodyas.png);
@@ -29,8 +29,8 @@ html{
 }
 .block{
 	width: 39%;
-	margin: 5% 0px 0px 0px;
-	padding: 2.5%;
+	margin: 6% 0px 0px 0px;
+	padding: 2.0%;
 	/*background: rgb(192, 67, 50);*/
         
 	background: #CF1000;
@@ -96,12 +96,14 @@ form a:hover{
 	font-size: 1.4vw;
 	text-align: center;
 	margin-bottom: 25px;	
+	font-weight: 400;
 }
 .text{
 	width: 50%;
 	font-size: 16pt;
 	color: #fff;
 	float: right;
+	margin-top: -20px;
 	/* margin-right: 150px; */	
 }
 .in{
