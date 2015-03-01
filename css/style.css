@@ -847,3 +847,6 @@ span#minimize{
     margin-left: 800px;
     margin-top: -30px;
 }
+input,textArea:focus{
+    outline:none;
+}
