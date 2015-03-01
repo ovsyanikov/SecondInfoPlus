@@ -31,7 +31,7 @@ class NewsController extends \controller\BaseController{
            }//
            $this->view->current_user = $this->GetUserService()->getUser($user);
            $this->view->all_news = $glob_sevice->GetGlobalNews(0,10);
-           $this->getRequest()->setSessionValue('offset',0);
+           $this->getRequest()->setCookiesWithKey('offset',0);
            
            return 'news';
            

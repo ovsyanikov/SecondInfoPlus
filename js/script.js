@@ -387,41 +387,38 @@ $(function() {
                             if(ch_social.indexOf("vk") != -1){
                                 
                                 if(image != null){
-                                    $("#newsContent").append("<div class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
+                                    $("#newsContent").append("<div class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">id=("+d_id+")"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
                                 }//if
                                 else{
-                                    $("#newsContent").append("<div class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
+                                    $("#newsContent").append("<div class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">id=("+d_id+")"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
                                 }
                                 
                                 
                             }//if vk.com
                             else{
                                  if(image != null){
-                                    $("#newsContent").append("<div class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
+                                    $("#newsContent").append("<div class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">id=("+d_id+")"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
                                 }//if
                                 else{
-                                    $("#newsContent").append("<div class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
+                                    $("#newsContent").append("<div class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">id=("+d_id+")"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
                                 }
                             }
 
                         });
+                        cur_height = $(this).scrollTop();
                         
                     });
                 }//if
                 
                 if($(this).scrollTop() > 700) {
                         $('#toTop').removeClass("hidden");
-                        $('#toTop').fadeIn();
-                        
-
-                        
+                        $('#toTop').fadeIn(); 
                 } else {
                         $('#toTop').fadeOut();
-                }
+                }//else
                 if($(this).scrollTop() > 650) {
                         $('aside.sidebar').css("display" , "none");
                         $('.news-section').css({margin : "auto", display : "block"});
-                       
 
                 } else {
                         $('aside.sidebar').css({display : "inline-block"});
@@ -431,11 +428,11 @@ $(function() {
 
                 $('#toTop').click(function() {
                 $('body,html').animate({scrollTop:0},800);
+                
         });
 });
 
 $(document).ready(function(){
-    
     $("#AddDistrict").click(function(){
         
         new_district_title = new String($("#NewDistrictTitle").val());

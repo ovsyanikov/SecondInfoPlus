@@ -131,7 +131,7 @@ class GlobalService{
         $stmt->execute();
         
         $districts = [];
-        $stmt = \util\MySQL::$db->prepare("SELECT * FROM global_news PRDER BY id desc");
+        $stmt = \util\MySQL::$db->prepare("SELECT * FROM global_news ORDER BY id desc");
         $stmt->execute();
         
         $last_news = $stmt->fetchObject(global_news::class);
@@ -166,10 +166,7 @@ class GlobalService{
     }//GetGlobalNewsById
     
     public function GetGlobalNews($offset=0,$limit=0){
-        
-        $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
-        $stmt->execute();
-        
+       
         $global_news_array = [];
         
         $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
