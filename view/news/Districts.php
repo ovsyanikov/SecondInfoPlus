@@ -47,19 +47,14 @@
 
 
     <div class="content">
-    <aside class="sidebar">
-            
-
-                <div class="personal">
-                    <a href="?ctrl=user&act=MyProfile">Личный кабинет(<?php
-                        echo "{$this->view->current_user->getLogin()}"
-                        ?>)</a> / 
-                    <a href="?ctrl=user&act=leave">Выйти</a>
-                </div>
-            
-            
-            
-            
+    <aside class="sidebar"> 
+        <div class="personal">
+            <a href="?ctrl=user&act=MyProfile">Личный кабинет(<?php
+                echo "{$this->view->current_user->getLogin()}"
+                ?>)</a> / 
+            <a href="?ctrl=user&act=leave">Выйти</a>
+        </div>
+                        
         <h1 class="h1">Лента новостей</br>Найдено новостей - <span id="count">0</span></h1>
             <div class="side-post">
                 <h2 class="h2">Section 1.10.32 of "de Finibus Bonorum et Malorum" <span class="span-time">14:32</span></h2>
@@ -75,24 +70,21 @@
             </div>
 
         </aside>
-        <section class=" news-section">
-            <div class="srch">
-                <h1 class="h1">Панель поиска <span id="minimize" title="Скрыть панель">─</span></h1>
-                <div id="search-panel" class="post">
-                    
-                        <h2 class="h2">Введите стоп слова, разделяя их запятыми, и выберите район:</h2>  
+    <section class=" news-section">
+        <div class="srch">
+            <h1 class="h1">Панель поиска <span id="minimize" title="Скрыть панель">─</span></h1>
+            <div id="search-panel" class="post">
 
-                        <div>
-                            <div id="DistrictSectionConfirm">
-                                <h2 class="srch-h2 pers-h2 h2">Добавить район</h2><input id="NewDistrictTitle" name="Distr_inp" type="text" class="srch_panel pers-input" placeholder="Введите новый район"><span id="AddDistrict" class="srch_ok ok" title="Подтвердить изменения">N</span>
-                            </div>
-                            
-                            <div>
-                                
-                            <div id="StopWordSectionConfirm">
-                                <h2 class="srch-h2 pers-h2 h2">Добавить стоп слово</h2><input id="NewStopWord" name="Stop_word_inp" type="text" class="srch_panel pers-input" placeholder="Введите новое стоп-слово"><span id="AddStopWord" class="srch_ok ok" title="Подтвердить изменения">N</span>
-                            </div>
-                            
+                <h2 class="h2">Введите стоп слова, разделяя их запятыми, и выберите район:</h2>  
+
+                <div id="DistrictSectionConfirm">
+                    <h2 class="srch-h2 pers-h2 h2">Добавить район</h2><input id="NewDistrictTitle" name="Distr_inp" type="text" class="srch_panel pers-input" placeholder="Введите новый район"><span id="AddDistrict" class="srch_ok ok" title="Подтвердить изменения">N</span>
+                </div>
+
+                <div id="StopWordSectionConfirm">
+                    <h2 class="srch-h2 pers-h2 h2">Добавить стоп слово</h2><input id="NewStopWord" name="Stop_word_inp" type="text" class="srch_panel pers-input" placeholder="Введите новое стоп-слово"><span id="AddStopWord" class="srch_ok ok" title="Подтвердить изменения">N</span>
+                </div>
+
                 <form id="start_search_news" method="POST" action="?ctrl=news&act=getNewsByStopWords">
                     <div id="districts" class="selectDistrict">
 
@@ -112,7 +104,7 @@
                                 }//foreach
                             ?>               
                         </ul>
-                        
+
                     </div>
                         <div id="stopWords" class="selectDistrict">
                         <input style="display: none" id="District" name="District" />
@@ -132,89 +124,61 @@
                                 }//foreach
                             ?>               
                         </ul>
-                        
+
                     </div>
                     <input class="distr-button submit" id="search_news_by_stop_words" value="Найти" type="button">
                 </form>       
-                       
-                    
-
-                </div>
             </div>
-            <div id="newsContent">
-                <?php
-                                 
-                    if(is_array($this->view->finded_news)){
-                        
-                        foreach($this->view->finded_news as $news){
-                            
-                            foreach($news as $one_news){
+        </div>
+        <div id="newsContent">
+            <?php
 
-                                $d_title = $one_news->getTitle();
-                                
-                                if(strlen($d_title)>100){
-                                    $d_title = iconv_substr($title,0, 100, 'UTF-8');
-                                    $d_title .= '...';
-                                }
+                if(is_array($this->view->finded_news)){
 
-                                $d_description = $one_news->getDescription();
-                                if(strlen($d_description)>500){
-                                    
-                                    $d_description = iconv_substr($d_description,0, 500, 'UTF-8');
-                                    $d_description .= '...';
-                                }
-                                $d_id = $one_news->getId();
-                                $date = date("D H:i:s",$one_news->getDate());
-                                $ch_social = $one_news->getSource();   
-                                
-                                $image = $one_news->getImage();
-                                
-                                if(!empty($image)){
-                                                                                                   
-                                    if(strripos($ch_social,'twitter') != false){
-                                        echo "<div class=\"post\">"
-                                        . "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"twitter post-icon\">R</span></a>"
-                                        . "<span  class=\"post-date2\" title=\"Время публикации\">$date</span>"
-                                        . "<img class=\"post-img\" alt=\"\" src=\"{$one_news->getImage()}\"/>"
-                                        . "<a href=\"?ctrl=news&act=SpecificPostHome&id={$d_id}\"><h2 class=\"post-h2 h2\">{$d_title}</h2></a>"
-                                        . "<p class=\"post-text\">{$d_description}</p></div>";
-                                    }
-                                    if(strripos($ch_social,'vk') != false){
-                                        echo "<div class=\"post\">"
-                                        . "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">Q</span></a>"
-                                        . "<span  class=\"post-date2\" title=\"Время публикации\">$date</span>"
-                                        . "<img class=\"post-img\" alt=\"\" src=\"{$one_news->getImage()}\"/>"
-                                        . "<a href=\"?ctrl=news&act=SpecificPostHome&id={$d_id}\"><h2 class=\"post-h2 h2\">{$d_title}</h2></a>"
-                                        . "<p class=\"post-text\">{$d_description}</p></div>";
-                                    } 
-                                }
-                                else{
-                                    if(strripos($ch_social,'twitter') != false){
-                                        echo "<div class=\"post\">"
-                                        . "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"twitter post-icon\">R</span></a>"
-                                        . "<span  class=\"post-date2\" title=\"Время публикации\">$date</span>"                                        
-                                        . "<a href=\"?ctrl=news&act=SpecificPostHome&id={$d_id}\"><h2 class=\"post-h2 h2\">{$d_title}</h2></a>"
-                                        . "<p class=\"post-text\">{$d_description}</p></div>";
-                                    }
-                                    if(strripos($ch_social,'vk') != false){
-                                        echo "<div class=\"post\">"
-                                        . "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">Q</span></a>"
-                                        . "<span  class=\"post-date2\" title=\"Время публикации\">$date</span>"                                        
-                                        . "<a href=\"?ctrl=news&act=SpecificPostHome&id={$d_id}\"><h2 class=\"post-h2 h2\">{$d_title}</h2></a>"
-                                        . "<p class=\"post-text\">{$d_description}</p></div>";
-                                    }                                 
-                                    
-                                }
-                            
-                            }//foreach
-                            
+                    foreach($this->view->finded_news as $news){
+
+                        foreach($news as $one_news){
+                            echo "<div class=\"post\">";   
+                            $d_title = $one_news->getTitle();
+
+                            if(strlen($d_title)>100){
+                                $d_title = iconv_substr($title,0, 100, 'UTF-8');
+                                $d_title .= '...';
+                            }
+
+                            $d_description = $one_news->getDescription();
+                            if(strlen($d_description)>500){
+
+                                $d_description = iconv_substr($d_description,0, 500, 'UTF-8');
+                                $d_description .= '...';
+                            }
+                            $d_id = $one_news->getId();
+                            $date = date("D H:i:s",$one_news->getDate());
+                            $ch_social = $one_news->getSource();   
+
+                            $image = $one_news->getImage();
+                            if(strripos($ch_social,'twitter') != false){
+                                echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"twitter post-icon\">R</span></a>";
+                            }
+                            if(strripos($ch_social,'vk') != false){
+                                echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">Q</span></a>";
+                            }                                 
+                            echo "<span  class=\"post-date2\" title=\"Время публикации\">$date</span>";
+                            if(!empty($image)){
+                                echo "<img class=\"post-img\" alt=\"\" src=\"{$one_news->getImage()}\"/>";
+                            }
+
+                            echo "<a href=\"?ctrl=news&act=SpecificPostHome&id={$d_id}\"><h2 class=\"post-h2 h2\">{$d_title}</h2></a>"
+                            . "<p class=\"post-text\">{$d_description}</p></div>";
                         }//foreach
-                        
-                    }//if
-                    
-                ?>
-            </div>
-        </section>
+
+                    }//foreach
+
+                }//if
+
+            ?>
+        </div>
+    </section>
     </div>
     <footer class="footer">
         <h2 class="foot copyright">© Info-pulse 2015</h2>
