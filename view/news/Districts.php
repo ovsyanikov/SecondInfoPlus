@@ -89,7 +89,6 @@
 
         </aside>
         <section class=" news-section">
-
             <div class="srch">
                 <h1 class="h1">Панель поиска <span id="minimize" title="Скрыть панель">─</span></h1>
                 <div id="search-panel" class="post">
