@@ -58,20 +58,20 @@ class NewsController extends \controller\BaseController{
            
            $r = new Request();
            
-           $stop_words = $r->getPostValue('stop_words');
+           $stop_words = $this->GetGlobalService()->GetStopWords();
            $distr =  $global_service->GetDistrictByName($r->getPostValue('District'));
            
-           $arr_sw = explode(',', $stop_words);
            $news = [];
            
-           foreach($arr_sw as $word){
+           foreach($stop_words as $word){
                
-               $word = trim($word);
+               $word = trim($word->getWord());
                
                $news[] = $global_service->GetGlobalNewsByStopWord($word, $distr->getId());
                
            }//for
            $this->view->finded_news = $news;
+           $this->view->stop_words = $this->GetGlobalService()->GetStopWords(); 
            return 'Districts';
            
        }//else'
@@ -272,6 +272,7 @@ class NewsController extends \controller\BaseController{
            $this->view->current_user = $this->GetUserService()->getUser($user);
            
            $this->view->districts = $this->GetGlobalService()->GetDistricts();
+           $this->view->stop_words = $this->GetGlobalService()->GetStopWords();
            
            return 'Districts';
        }//else

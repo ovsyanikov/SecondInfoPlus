@@ -377,39 +377,99 @@ $(function() {
 
 $(document).ready(function(){
     
+    
     $("#AddDistrict").click(function(){
         
         new_district_title = new String($("#NewDistrictTitle").val());
         
         if(new_district_title.length != 0){
             
+            $.post("ajax.php",{ADD_DISTRICT: 'SET',District: new_district_title},function(data){
+                if(data == "inserted"){
+                    ShowPersonalRoomMessage($("#DistrictSectionConfirm"),'Район добавлен','success');
+                    $("#DistrictSectionConfirm").children().last().addClass("srch_success");
+                    $("#DistrictSectionConfirm").children().last().delay(2000).fadeOut(500);
+                }//if
+                else if(data == "exist"){
+                    ShowPersonalRoomMessage($("#DistrictSectionConfirm"),'Такой район уже есть','error');
+                    $("#DistrictSectionConfirm").children().last().addClass("srch_error");
+                    $("#DistrictSectionConfirm").children().last().delay(2000).fadeOut(500);
+                }//else
+                else{
+                    ShowPersonalRoomMessage($("#DistrictSectionConfirm"),'Ошибка на сервере','error');
+                    $("#DistrictSectionConfirm").children().last().addClass("srch_error");
+                    $("#DistrictSectionConfirm").children().last().delay(2000).fadeOut(500);
+                }//else
+            });
+            
+            
+           
         }//if
         else{
+            ShowPersonalRoomMessage($("#DistrictSectionConfirm"),'Поле не может быть путым','error');
+             $("#DistrictSectionConfirm").children().last().addClass("srch_error");
+             $("#DistrictSectionConfirm").children().last().delay(2000).fadeOut(500);
+        }//else
+        
+    });
+    
+    $("#AddStopWord").click(function(){
+        
+        new_stop_word = new String($("#NewStopWord").val());
+        
+        if(new_stop_word.length != 0){
             
+            $.post("ajax.php",{ADD_STOP_WORD: 'SET',stop_word: new_stop_word},function(data){
+                
+                if(data == "inserted"){
+                    ShowPersonalRoomMessage($("#StopWordSectionConfirm"),'Стоп слово добавлено','success');
+                    $("#StopWordSectionConfirm").children().last().addClass("srch_success");
+                    $("#StopWordSectionConfirm").children().last().delay(2000).fadeOut(500);
+                }//if
+                else if(data == "exist" || data == "not inserted"){
+                    ShowPersonalRoomMessage($("#StopWordSectionConfirm"),'Такое стоп слово уже есть','error');
+                    $("#StopWordSectionConfirm").children().last().addClass("srch_error");
+                    $("#StopWordSectionConfirm").children().last().delay(2000).fadeOut(500);
+                }//else
+                else{
+
+                    ShowPersonalRoomMessage($("#StopWordSectionConfirm"),'Ошибка на сервере','error');
+                    $("#StopWordSectionConfirm").children().last().addClass("srch_error");
+                    $("#StopWordSectionConfirm").children().last().delay(2000).fadeOut(500);
+                }//else
+            });
+           
+        }//if
+        else{
+             ShowPersonalRoomMessage($("#StopWordSectionConfirm"),'Стоп слово не может быть путым','error');
+             $("#StopWordSectionConfirm").children().last().addClass("srch_error");
+             $("#StopWordSectionConfirm").children().last().delay(2000).fadeOut(500);
         }//else
         
     });
     
      
-$("#search_news_by_stop_words").click(function(){
+    $("#search_news_by_stop_words").click(function(){
             
-        district = $("div.selectDistrict h2.h2-distr").text();
+        district =  $("#districts h2.h2-distr").text();
             
-        if(district != 'Выберите район' && $("#stop_words").val()){
+        if(district != 'Районы'){
                 
                 $("#District").val(district);
                 $("#start_search_news").submit();
                 
-                
             }//if
             else{//error
-                alert("Не получен район или стоп слова");
+                ShowPersonalRoomMessage($("#start_search_news"),'Выбирите район','error');
+                $("#start_search_news").children().last().addClass("srch_success");
+                $("#start_search_news").children().last().delay(2000).fadeOut(500);
+                
             }//else
         });
         
-        $("div.selectDistrict ul.district li").click(function(){
+        $("#districts ul.district li").click(function(){
             
-            $("div.selectDistrict h2.h2-distr").text($(this).text());
+            $("#districts h2.h2-distr").text($(this).text());
             
         });
         

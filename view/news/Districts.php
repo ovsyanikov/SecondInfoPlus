@@ -81,17 +81,21 @@
                 <div id="search-panel" class="post">
                     
                         <h2 class="h2">Введите стоп слова, разделяя их запятыми, и выберите район:</h2>  
-<!--                    <textarea id="stop_words" name="stop_words" class="stop-area" placeholder="Стоп слова"></textarea>
-                    -->
-                    
-                        <div><h2 class="srch-h2 pers-h2 h2">Добавить район</h2><input id="NewDistrictTitle" name="Distr_inp" type="text" class="srch_panel pers-input" placeholder="Введите новый район"><span id="AddDistrict" class="srch_ok ok" title="Подтвердить изменения">N</span>
-                        <div><h2 class="srch-h2 pers-h2 h2">Добавить стоп слово</h2><input id="" name="Stop_word_inp" type="text" class="srch_panel pers-input" placeholder="Введите новое стоп-слово"><span id="ConfirmEmail" class="srch_ok ok" title="Подтвердить изменения">N</span>
-                        <div class="srch_error pers-error"><h2 class="h2">Поле не может быть пустым</h2></div>
-                        <div class="srch_success pers-success"><h2 class="h2">Поле не может быть пустым</h2></div>
-                <form id="start_search_news" method="POST" action="?ctrl=news&act=getNewsByStopWords">
-                    <div class="selectDistrict">
 
-                        <input style="display: none" id="District" name="District" />
+                        <div>
+                            <div id="DistrictSectionConfirm">
+                                <h2 class="srch-h2 pers-h2 h2">Добавить район</h2><input id="NewDistrictTitle" name="Distr_inp" type="text" class="srch_panel pers-input" placeholder="Введите новый район"><span id="AddDistrict" class="srch_ok ok" title="Подтвердить изменения">N</span>
+                            </div>
+                            
+                            <div>
+                                
+                            <div id="StopWordSectionConfirm">
+                                <h2 class="srch-h2 pers-h2 h2">Добавить стоп слово</h2><input id="NewStopWord" name="Stop_word_inp" type="text" class="srch_panel pers-input" placeholder="Введите новое стоп-слово"><span id="AddStopWord" class="srch_ok ok" title="Подтвердить изменения">N</span>
+                            </div>
+                            
+                <form id="start_search_news" method="POST" action="?ctrl=news&act=getNewsByStopWords">
+                    <div id="districts" class="selectDistrict">
+
                         <h2 class="h2-distr">Районы</h2>
                         <input id="" name="Stop_word_inp" type="text" class="srch_panel_srch pers-input" placeholder="Поиск по районам">
                         <ul class="district">
@@ -111,21 +115,20 @@
                         
                     </div>
                         <div class="selectDistrict">
-
                         <input style="display: none" id="District" name="District" />
                         <h2 class="h2-distr">Стоп-слова</h2>
                         <input id="" name="Stop_word_inp" type="text" class="srch_panel_srch pers-input" placeholder="Поиск по стоп-словам">
                         <ul class="district">
                             <?php   
-                                foreach ($this->view->districts as $district){
-                                    echo "<li data-district-id = \"{$district->getId()}\">{$district->getTitle()}</li>";
+                                foreach ($this->view->stop_words as $stop_word){
+                                    echo "<li data-district-id = \"{$stop_word->getId()}\">{$stop_word->getWord()}</li>";
                                 }//foreach
                             ?>               
                         </ul>
                         <ul class="district">
                             <?php   
-                                foreach ($this->view->districts as $district){
-                                    echo "<li data-district-id = \"{$district->getId()}\">{$district->getTitle()}</li>";
+                                foreach ($this->view->stop_words as $stop_word){
+                                    echo "<li data-district-id = \"{$stop_word->getId()}\">{$stop_word->getWord()}</li>";
                                 }//foreach
                             ?>               
                         </ul>

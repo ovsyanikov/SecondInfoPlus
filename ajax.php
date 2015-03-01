@@ -7,6 +7,7 @@ require_once './model/entity/news.php';
 require_once './model/entity/global_news.php';
 require_once './model/service/GlobalService.php';
 require_once './model/entity/district.php';
+require_once './model/entity/stopword.php';
 
 \util\MySQL::$db = new PDO('mysql:host=localhost;dbname=u304199710_info', 'u304199710_alex', '1qaz2wsx');
 
@@ -15,6 +16,7 @@ use model\entity\news;
 use model\entity\global_news;
 use model\entity\district;
 use model\service\GlobalService;
+use model\entity\stopword;
 
 use util\Request;
 
@@ -329,20 +331,6 @@ else if(!empty ($_POST['GetCountOfNews'])){
     }//else
 }//else if
 
-else if(!empty ($_POST['STOP_WORD_EXP'])){
-    
-    $glob_serv = new GlobalService();
-    $r = new Request();
-    
-    $distr =  $glob_serv->GetDistrictByName($r->getPostValue('District'));
-    $stop_word = $r->getPostValue('stop_word');
-    $to_return = $glob_serv->GetGlobalNewsByStopWord($stop_word, $distr->getId());
-    $json_result[] = json_encode($news);
-    
-    echo print_r($json_result);
-    
-}//else
-
 else if(!empty ($_POST['ADD_DISTRICT'])){
     
     $glob_serv = new GlobalService();
@@ -365,3 +353,28 @@ else if(!empty ($_POST['ADD_DISTRICT'])){
         echo "exist";
     }//else
 }//else
+
+else if(!empty ($_POST['ADD_STOP_WORD'])){
+    
+    $glob_serv = new GlobalService();
+    $r = new Request();
+    $new_stop_word = $r->getPostValue('stop_word');
+    
+    $ex_stop_word =  $glob_serv->GetStopWordByTitle($new_stop_word);
+    
+    if(!is_a($ex_stop_word,'model\entity\district')){
+        
+        $result_insert = $glob_serv->AddStopWord($new_stop_word);
+        
+        if($result_insert){
+            echo "inserted";
+        }//if
+        else{
+            echo "not inserted";
+        }//else
+    }//if
+    else{
+        echo "exist";
+    }//else
+    
+}

@@ -311,7 +311,10 @@ class GlobalService{
 }
 
     public function GetStopWordByTitle($word){
-
+        
+    $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
+    $stmt->execute();
+    
     $stmt = \util\MySQL::$db->prepare("SELECT * FROM stop_words WHERE word = :word");
     $stmt->bindParam(":word",$word);
     $stmt->execute();
