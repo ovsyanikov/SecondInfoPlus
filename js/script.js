@@ -389,6 +389,7 @@ $(document).ready(function(){
                     ShowPersonalRoomMessage($("#DistrictSectionConfirm"),'Район добавлен','success');
                     $("#DistrictSectionConfirm").children().last().addClass("srch_success");
                     $("#DistrictSectionConfirm").children().last().delay(2000).fadeOut(500);
+                    $("#districts ul.district").append("<li>"+new_district_title+"</li>");
                 }//if
                 else if(data == "exist"){
                     ShowPersonalRoomMessage($("#DistrictSectionConfirm"),'Такой район уже есть','error');
@@ -425,6 +426,7 @@ $(document).ready(function(){
                     ShowPersonalRoomMessage($("#StopWordSectionConfirm"),'Стоп слово добавлено','success');
                     $("#StopWordSectionConfirm").children().last().addClass("srch_success");
                     $("#StopWordSectionConfirm").children().last().delay(2000).fadeOut(500);
+                    $("#stopWords ul.district").append("<li>"+new_stop_word+"</li>");
                 }//if
                 else if(data == "exist" || data == "not inserted"){
                     ShowPersonalRoomMessage($("#StopWordSectionConfirm"),'Такое стоп слово уже есть','error');
