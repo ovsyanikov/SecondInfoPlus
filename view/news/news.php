@@ -134,8 +134,7 @@
                                 $description .= "...";
                                 
                             }//if
-                            $date = date("D H:i:s",$news->getDate());
-                           
+                            $date = $news->getDate();
                             
                             $image = $news->getImage();
                             if(strripos($ch_social,'twitter') != false){

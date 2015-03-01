@@ -362,12 +362,13 @@ $(function() {
                         news = $.parseJSON(data);
                         
                         $.each(news, function(idx, glob_news) {
-                            alert(glob_news.Date);
+                            
                             d_id = glob_news.id;
                             ch_social = new String(glob_news.Source);
                             title =  new String(glob_news.title);
                             description = new String(glob_news.description);
                             image = glob_news.Images;
+                            date_public = glob_news.Date;
                             
                             if(title.length > 50){
                                 
@@ -383,9 +384,25 @@ $(function() {
                                 
                             }//if
                             
-                            
-                            
-                            $("#newsContent").append("<div class=\"post\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+glob_news.title+"</h2><p id=\"postContent\" class=\"post-text\">"+glob_news.description+"</p></div>");
+                            if(ch_social.indexOf("vk") != -1){
+                                
+                                if(image != null){
+                                    $("#newsContent").append("<div class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
+                                }//if
+                                else{
+                                    $("#newsContent").append("<div class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
+                                }
+                                
+                                
+                            }//if vk.com
+                            else{
+                                 if(image != null){
+                                    $("#newsContent").append("<div class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
+                                }//if
+                                else{
+                                    $("#newsContent").append("<div class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
+                                }
+                            }
 
                         });
                         

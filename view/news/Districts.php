@@ -166,7 +166,7 @@
                                 $d_description .= '...';
                             }
                             $d_id = $one_news->getId();
-                            $date = date("D H:i:s",$one_news->getDate());
+                            $date = $one_news->getDate();
                             $ch_social = $one_news->getSource();   
 
                             $image = $one_news->getImage();

@@ -14,7 +14,8 @@ use util\Request;
 
 $request = new Request();
 $offset = $request->getSessionValue('offset');
-$offset = ( intval($offset) + 10);
+$offset = ( intval($offset) + 10 );
+$request->setSessionValue('offset', $offset);
 
 $global_service = new GlobalService();
 
