@@ -711,22 +711,24 @@ opacity:1;
 }
 .selectDistrict{
     display: inline-block;
-    width: 578px;
+    width: 351px;
     height: 42px;
     overflow: hidden;
 
     transition: height ease 0.3s;
+    margin-top: 10px;
+    vertical-align: top;
 }
 .selectDistrict:hover{
-    height: 241px;
+    height: 250px;
     transition: height ease 0.3s;
 }
 .selectDistrict li{
-    width: 139px;
+    width: 125px;
     list-style: none;
     padding: 5px 20px;
     background: #CF1000;
-    margin: 1px 5px;
+    margin: 1px 4px;
     color: #fff;
     cursor: pointer;
     transition: transform ease-in-out 0.2s;
@@ -769,8 +771,9 @@ opacity:1;
     display: inline-block;
     float: none;
     vertical-align: top;
-    max-width: 235px;
+    max-width: 107px;
     margin-left: 10px;
+    margin-top: 10px;
 }
 span#minimize{
     font: inherit;
@@ -811,4 +814,28 @@ span#minimize{
     float: right;
     padding: 5px 10px 5px 0px;
     color: rgb(184, 184, 184);
+}
+.srch-h2{
+    width: 198px;
+}
+.srch_panel{
+    width: 540px;
+    margin: 0px;
+    font-size: 12pt;
+    border: none;
+    padding-right: 30px;
+}
+.srch_panel_srch{
+    margin: 0px;
+    font-size: 10pt;
+    margin: 5px 4px;
+    padding: 5px 10px;
+    width: 322px;
+    border: none;
+}
+.srch_ok{
+    margin: 0px;
+    position: absolute;
+    margin-top: -31px;
+    margin-left: 800px;
 }

@@ -38,37 +38,19 @@
 
             </div>
         </div>
-        <div class="bottom-head">
-            <div class="content">
-                <ul class="menu">
-                    <a href="?ctrl=news&act=news"><li class="active menu-li">ГЛАВНАЯ</li></a>
-                    <a href="?ctrl=news&act=Districts"><li class="menu-li">РАЙОНЫ</li></a>
-                    <a href=""><li class="menu-li">ЗАДАЧИ</li></a>
-                    <a href=""><li class="menu-li">УЧАСНИКИ</li></a>
-                    <a href="?ctrl=news&act=MyPosts"><li class="menu-li">МОИ ЗАПИСИ</li></a>
-                </ul>
-
-
-            </div>
-        </div>
     </heder>
 
 
 
     <div class="content">
         <aside class="sidebar">
-            
-            
-                            <div class="personal">
+                <div class="personal">
                     <a href="?ctrl=user&act=MyProfile">Личный кабинет(<?php
                         echo "{$this->view->current_user->getLogin()}"
                         ?>)</a> / 
                     <a href="?ctrl=user&act=leave">Выйти</a>
                 </div>
-            
-            
-            
-            
+
             <h1 class="h1">Лента новостей</br>Выводятся новости 1ой рубрики, кратко</h1>
             <div class="side-post">
                 <h2 class="h2">Section 1.10.32 of "de Finibus Bonorum et Malorum" <span class="span-time">14:32</span></h2>

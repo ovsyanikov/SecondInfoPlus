@@ -42,19 +42,6 @@
 
             </div>
         </div>
-        <div class="bottom-head">
-            <div class="content">
-                <ul class="menu">
-                    <a href="?ctrl=news&act=news"><li class="active menu-li">ГЛАВНАЯ</li></a>
-                    <a href="?ctrl=news&act=Districts"><li class="menu-li">РАЙОНЫ</li></a>
-                    <a href=""><li class="menu-li">ЗАДАЧИ</li></a>
-                    <a href=""><li class="menu-li">УЧАСНИКИ</li></a>
-                    <a href="?ctrl=news&act=MyPosts"><li class="menu-li">МОИ ЗАПИСИ</li></a>
-                </ul>
-
-
-            </div>
-        </div>
     </heder>
 
 
@@ -94,11 +81,16 @@
                 <div id="search-panel" class="post">
                     <form id="start_search_news" method="POST" action="?ctrl=news&act=getNewsByStopWords">
                         <h2 class="h2">Введите стоп слова, разделяя их запятыми, и выберите район:</h2>  
-                    <textarea id="stop_words" name="stop_words" class="stop-area" placeholder="Стоп слова"></textarea>
-                    
+<!--                    <textarea id="stop_words" name="stop_words" class="stop-area" placeholder="Стоп слова"></textarea>
+                    -->
+                        <div><h2 class="srch-h2 pers-h2 h2">Добавить район</h2><input id="" name="Distr_inp" type="text" class="srch_panel pers-input" placeholder="Введите новый район"><span id="ConfirmEmail" class="srch_ok ok" title="Подтвердить изменения">N</span>
+                        <div><h2 class="srch-h2 pers-h2 h2">Добавить стоп слово</h2><input id="" name="Stop_word_inp" type="text" class="srch_panel pers-input" placeholder="Введите новое стоп-слово"><span id="ConfirmEmail" class="srch_ok ok" title="Подтвердить изменения">N</span>
+
                     <div class="selectDistrict">
+
                         <input style="display: none" id="District" name="District" />
-                        <h2 class="h2-distr">Выберите район</h2>
+                        <h2 class="h2-distr">Районы</h2>
+                        <input id="" name="Stop_word_inp" type="text" class="srch_panel_srch pers-input" placeholder="Поиск по районам">
                         <ul class="district">
                             <?php   
                                 foreach ($this->view->districts as $district){
@@ -106,6 +98,20 @@
                                 }//foreach
                             ?>               
                         </ul>
+                        <ul class="district">
+                            <?php   
+                                foreach ($this->view->districts as $district){
+                                    echo "<li data-district-id = \"{$district->getId()}\">{$district->getTitle()}</li>";
+                                }//foreach
+                            ?>               
+                        </ul>
+                        
+                    </div>
+                    <div class="selectDistrict">
+
+                        <input style="display: none" id="District" name="District" />
+                        <h2 class="h2-distr">Стоп-слова</h2>
+                        <input id="" name="Stop_word_inp" type="text" class="srch_panel_srch pers-input" placeholder="Поиск по стоп-словам">
                         <ul class="district">
                             <?php   
                                 foreach ($this->view->districts as $district){
@@ -124,7 +130,7 @@
                     </div>
                     <input class="distr-button submit" id="search_news_by_stop_words" value="Найти" type="button">
                     </form>
-                    
+
                 </div>
             </div>
             <div id="newsContent">
