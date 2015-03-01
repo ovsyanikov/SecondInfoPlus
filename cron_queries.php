@@ -29,8 +29,8 @@ foreach ($districts as $district){//Проходим по всем района�
             
             //Описание новости
             $text = $my_item->text;
-            $date = $my_item->date; 
-            //$date = date(DATE_RFC2822,$date);
+            $date = date("D H:i:s",$my_item->date);
+            
             //Заголовок
             $title = explode('.', $text)[0];
             $contains = $glob_service->IsContainsNews($title);
@@ -123,7 +123,8 @@ foreach ($districts as $district){
        $user_image = $status->user->profile_image_url_https;
        $created_at = $status->created_at;
        $created_at = strtotime($created_at);
-       //$created_at = date(DATE_RFC2822,$date);
+       $created_at = date("D H:i:s",$created_at);
+       
        $source = "https://twitter.com/" . $status->user->id_str . "/status/" . $status->id_str;
        $date = $status -> created_at;
        

@@ -352,17 +352,59 @@ function GetPostByStopWord(){
 
 $(function() {
         $(window).scroll(function() {
+            
+                cur_height = $(this).scrollTop();
+                
+                if(cur_height >= $("#newsContent").height()){
+                    
+                    $.post("get_news.php",null,function(data){
+                        
+                        news = $.parseJSON(data);
+                        
+                        $.each(news, function(idx, glob_news) {
+                            alert(glob_news.Date);
+                            d_id = glob_news.id;
+                            ch_social = new String(glob_news.Source);
+                            title =  new String(glob_news.title);
+                            description = new String(glob_news.description);
+                            image = glob_news.Images;
+                            
+                            if(title.length > 50){
+                                
+                                title = title.substr(0,47);
+                                title += "...";
+                                
+                            }//if
+                            
+                            if(description.length > 300){
+                                
+                                description = description.substr(0,297);
+                                description += "...";
+                                
+                            }//if
+                            
+                            
+                            
+                            $("#newsContent").append("<div class=\"post\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+glob_news.title+"</h2><p id=\"postContent\" class=\"post-text\">"+glob_news.description+"</p></div>");
+
+                        });
+                        
+                    });
+                }//if
+                
                 if($(this).scrollTop() > 700) {
                         $('#toTop').removeClass("hidden");
                         $('#toTop').fadeIn();
+                        
+
+                        
                 } else {
                         $('#toTop').fadeOut();
                 }
                 if($(this).scrollTop() > 650) {
                         $('aside.sidebar').css("display" , "none");
                         $('.news-section').css({margin : "auto", display : "block"});
-                        //$('#news-section').css({display : "block"});
-                        //$('#news-section').animate({ marginTop: 'auto', marginRight: 'auto', marginBottom: 'auto', marginLeft: 250},500);
+                       
 
                 } else {
                         $('aside.sidebar').css({display : "inline-block"});
@@ -376,7 +418,6 @@ $(function() {
 });
 
 $(document).ready(function(){
-    
     
     $("#AddDistrict").click(function(){
         

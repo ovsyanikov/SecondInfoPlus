@@ -88,10 +88,11 @@
                 <form id="start_search_news" method="POST" action="?ctrl=news&act=getNewsByStopWords">
                     <div id="districts" class="selectDistrict">
                         <?php
-                                        require_once 'util\Request.php';
-                                        use util\Request;
-                                        $r = new Request();
-                                        $cd = $r->getSessionValue('currecnt_district');
+                        
+                        require_once 'util/Request.php';
+                        use util\Request;
+                        $r = new Request();
+                        $cd = $r->getSessionValue('currecnt_district');
                                         
                         if(isset($cd)){
                             echo "<h2 class=\"h2-distr\">$cd</h2>";

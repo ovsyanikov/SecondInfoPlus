@@ -172,30 +172,16 @@ class GlobalService{
         
         $global_news_array = [];
         
-        if($offset == 0){//DefaultParam
+        $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
+        $stmt->execute();
 
-            $stmt = \util\MySQL::$db->prepare("SELECT * FROM global_news");
-            $stmt->execute();
+        $stmt = \util\MySQL::$db->prepare("SELECT * FROM global_news LIMIT $offset,$limit");
+        $stmt->execute();
+
+        while($glob_news = $stmt->fetchObject(global_news::class)){
+            $global_news_array[] = $glob_news;
+        }//while
             
-            while($glob_news = $stmt->fetchObject(global_news::class)){
-                $global_news_array[] = $glob_news;
-            }//while
-            
-        }//if
-        else{
-            
-            $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
-            $stmt->execute();
-            
-            $stmt = \util\MySQL::$db->prepare("SELECT * FROM global_news LIMIT $offset,$limit");
-            $stmt->execute();
-            
-            while($glob_news = $stmt->fetchObject(global_news::class)){
-                $global_news_array[] = $glob_news;
-            }//while
-            
-        }//else
-        
         return $global_news_array;
         
     }
@@ -255,11 +241,11 @@ class GlobalService{
         return $globalNews;
     }
     
-    public function GetGlobalNewsByStopWord($word,$district){
+    public function GetGlobalNewsByStopWord($word,$district,$offset=0,$limit=30){
     
         $globalNews=[];
         
-        $stmt = \util\MySQL::$db->prepare("SELECT * FROM global_news WHERE description Like ? and district = ?; ");
+        $stmt = \util\MySQL::$db->prepare("SELECT * FROM global_news WHERE description Like ? and district = ? LIMIT $offset,$limit; ");
         $params = array("%$word%","$district");
         $stmt->execute($params);
         

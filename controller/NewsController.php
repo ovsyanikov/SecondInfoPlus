@@ -30,7 +30,9 @@ class NewsController extends \controller\BaseController{
                $user = $this->getRequest()->getCookieValue('user_info_plus');
            }//
            $this->view->current_user = $this->GetUserService()->getUser($user);
-           $this->view->all_news = $glob_sevice->GetGlobalNews();
+           $this->view->all_news = $glob_sevice->GetGlobalNews(0,10);
+           $this->getRequest()->setSessionValue('offset',0);
+           
            return 'news';
            
        }//else
@@ -67,9 +69,10 @@ class NewsController extends \controller\BaseController{
                
                $word = trim($word->getWord());
                
-               $news[] = $global_service->GetGlobalNewsByStopWord($word, $distr->getId());
+               $news[] = $global_service->GetGlobalNewsByStopWord($word, $distr->getId(),0,30);
                
-           }//for
+           }//foreach
+           
            $this->view->finded_news = $news;
            $this->view->stop_words = $this->GetGlobalService()->GetStopWords();
            $r->setSessionValue('currecnt_district', $distr->getTitle());
