@@ -351,64 +351,11 @@ function GetPostByStopWord(){
 }//GetPostByStopWord
 
 $(function() {
+    
         $(window).scroll(function() {
-            
-                cur_height = $(this).scrollTop();
+           
                 
-                if(cur_height >= $("#newsContent").height()){
-                    
-                    $.post("get_news.php",null,function(data){
-                        
-                        news = $.parseJSON(data);
-                        
-                        $.each(news, function(idx, glob_news) {
-                            
-                            d_id = glob_news.id;
-                            ch_social = new String(glob_news.Source);
-                            title =  new String(glob_news.title);
-                            description = new String(glob_news.description);
-                            image = glob_news.Images;
-                            date_public = glob_news.Date;
-                            
-                            if(title.length > 50){
-                                
-                                title = title.substr(0,47);
-                                title += "...";
-                                
-                            }//if
-                            
-                            if(description.length > 300){
-                                
-                                description = description.substr(0,297);
-                                description += "...";
-                                
-                            }//if
-                            
-                            if(ch_social.indexOf("vk") != -1){
-                                
-                                if(image != null){
-                                    $("#newsContent").append("<div class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">id=("+d_id+")"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
-                                }//if
-                                else{
-                                    $("#newsContent").append("<div class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">id=("+d_id+")"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
-                                }
-                                
-                                
-                            }//if vk.com
-                            else{
-                                 if(image != null){
-                                    $("#newsContent").append("<div class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">id=("+d_id+")"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
-                                }//if
-                                else{
-                                    $("#newsContent").append("<div class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">id=("+d_id+")"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
-                                }
-                            }
-
-                        });
-                        cur_height = $(this).scrollTop();
-                        
-                    });
-                }//if
+                
                 
                 if($(this).scrollTop() > 700) {
                         $('#toTop').removeClass("hidden");
@@ -433,6 +380,71 @@ $(function() {
 });
 
 $(document).ready(function(){
+    
+    $("#more_news").click(function(){
+        
+    
+    $.post("get_news.php",null,function(data){
+                        
+        news = $.parseJSON(data);
+
+        $.each(news, function(idx, glob_news) {
+
+            d_id = glob_news.id;
+
+                ch_social = new String(glob_news.Source);
+                title =  new String(glob_news.title);
+                description = new String(glob_news.description);
+                image = glob_news.Images;
+                date_public = glob_news.Date;
+
+                if(title.length > 50){
+
+                    title = title.substr(0,47);
+                    title += "...";
+
+                }//if
+
+                if(description.length > 300){
+
+                    description = description.substr(0,297);
+                    description += "...";
+
+                }//if
+
+
+                if(ch_social.indexOf("vk") != -1){
+
+                    if(image != null){
+                        $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
+                    }//if
+                    else{
+                        $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
+                    }
+
+
+                }//if vk.com
+                else{
+                     if(image != null){
+                        $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
+                    }//if
+                    else{
+                        $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
+                    }
+                }
+
+
+
+        });
+        $("#newsContent").children().last().after($("#more_news"));
+
+    });
+    
+    
+    
+    
+    });
+    
     $("#AddDistrict").click(function(){
         
         new_district_title = new String($("#NewDistrictTitle").val());

@@ -148,12 +148,12 @@
                             if($image != null){
                                 
                                 echo "<img  class=\"post-img\" src=\"$image\" alt=\"\"/>";
-                                echo "<a href=\"?ctrl=news&act=SpecificPostHome&id={$d_id}\"><h2 id=\"postTitle\" class=\"post-h2 h2\">(id={$d_id})$title</h2></a>";
+                                echo "<a href=\"?ctrl=news&act=SpecificPostHome&id={$d_id}\"><h2 id=\"postTitle\" class=\"post-h2 h2\">$title</h2></a>";
                                 echo "<p id=\"postContent\" class=\"post-text\">$description</p>";
                                 
                             }//if
                             else{
-                                echo "<a href=\"?ctrl=news&act=SpecificPostHome&id={$d_id}\"><h2 id=\"postTitle\" class=\"post-h2 h2\">(id={$d_id})$title</h2></a>";
+                                echo "<a href=\"?ctrl=news&act=SpecificPostHome&id={$d_id}\"><h2 id=\"postTitle\" class=\"post-h2 h2\">$title</h2></a>";
                                 echo "<p id=\"postContent\" class=\"post-text\">$description</p>";
                             }//else
                             //echo "<span  class=\"post-date\">$date</span></a>";
@@ -161,6 +161,8 @@
                             
                         }//foreach
                     }//else
+                    echo '<input class="My-posts-button submit" id="more_news" value="Следующие новости" type="button">';
+                    
                 ?>
             </div>
 <!--            <div class="post">
