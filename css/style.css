@@ -53,8 +53,8 @@ heder{
 	margin-top: 8px;
 	height: 72px;
 }
-.submit{
-	font-size: 14pt;	
+.submit{	
+	font-size: 14pt;
 	padding: 10px;
 	background: #890B00;
 	border: none;
@@ -559,12 +559,12 @@ opacity:1;
     transition: opacity ease-in-out 0.3s;   
 }
 .pers-success{
-    padding: 5px 20px;
+    padding: 10px 20px;
     margin: 5px 0px 0px 180px;
     background: #dff0d8;  
 }
 .pers-error{
-    padding: 5px 20px;
+    padding: 10px 20px;
     margin: 5px 0px 0px 180px;
     width: 500px;
     background: #FFE6E4;  
@@ -772,7 +772,6 @@ opacity:1;
     float: none;
     vertical-align: top;
     max-width: 117px;
-    /* margin-left: 10px; */
     margin-top: 10px;
 }
 span#minimize{
@@ -833,9 +832,18 @@ span#minimize{
     width: 322px;
     border: none;
 }
+.srch_error{
+    margin: 5px 0px;
+    padding: 10px 25px;
+    width: 100%;
+}
+.srch_success{
+    margin: 5px 0px;
+    width: 100%;
+    padding: 10px 25px;
+}
 .srch_ok{
-    margin: 0px;
     position: absolute;
-    margin-top: -31px;
     margin-left: 800px;
+    margin-top: -30px;
 }
