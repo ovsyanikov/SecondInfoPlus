@@ -332,13 +332,36 @@ else if(!empty ($_POST['GetCountOfNews'])){
 else if(!empty ($_POST['STOP_WORD_EXP'])){
     
     $glob_serv = new GlobalService();
+    $r = new Request();
     
-    $distr =  $glob_serv->GetDistrictByName($_POST['District']);
-    $stop_word = $_POST['stop_word'];
-    
+    $distr =  $glob_serv->GetDistrictByName($r->getPostValue('District'));
+    $stop_word = $r->getPostValue('stop_word');
     $to_return = $glob_serv->GetGlobalNewsByStopWord($stop_word, $distr->getId());
     $json_result[] = json_encode($news);
     
     echo print_r($json_result);
     
+}//else
+
+else if(!empty ($_POST['ADD_DISTRICT'])){
+    
+    $glob_serv = new GlobalService();
+    $r = new Request();
+    $new_district = $r->getPostValue('District');
+    
+    $distr =  $glob_serv->GetDistrictByName($new_district);
+    
+    if(!is_a($distr,'model\entity\district')){
+        
+        $result_insert = $glob_serv->AddDistrict($new_district);
+        if($result_insert){
+            echo "inserted";
+        }//if
+        else{
+            echo "not inserted";
+        }//else
+    }//if
+    else{
+        echo "exist";
+    }//else
 }//else

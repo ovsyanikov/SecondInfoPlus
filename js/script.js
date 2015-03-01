@@ -377,6 +377,19 @@ $(function() {
 
 $(document).ready(function(){
     
+    $("#AddDistrict").click(function(){
+        
+        new_district_title = new String($("#NewDistrictTitle").val());
+        
+        if(new_district_title.length != 0){
+            
+        }//if
+        else{
+            
+        }//else
+        
+    });
+    
      
 $("#search_news_by_stop_words").click(function(){
             

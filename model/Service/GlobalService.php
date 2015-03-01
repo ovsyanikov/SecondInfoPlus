@@ -27,6 +27,24 @@ class GlobalService{
         
     }
     
+    public function AddDistrict($title){
+        
+        $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
+        $stmt->execute();
+        
+        $stmt = \util\MySQL::$db->prepare("INSERT INTO districts(id,Title) VALUES(NULL,:TITLE)");
+        $stmt->bindParam(":TITLE",$title);
+        $district = $stmt->execute();
+        
+        if($district == 1){
+            return true;
+        }//if
+        else{
+            return false;
+        }//else
+        
+    }
+    
     public function IsContainsNews($text){
         
         $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
