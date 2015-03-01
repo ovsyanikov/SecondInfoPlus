@@ -87,8 +87,20 @@
 
                 <form id="start_search_news" method="POST" action="?ctrl=news&act=getNewsByStopWords">
                     <div id="districts" class="selectDistrict">
-
-                        <h2 class="h2-distr">Районы</h2>
+                        <?php
+                                        require_once 'util\Request.php';
+                                        use util\Request;
+                                        $r = new Request();
+                                        $cd = $r->getSessionValue('currecnt_district');
+                                        
+                        if(isset($cd)){
+                            echo "<h2 class=\"h2-distr\">$cd</h2>";
+                        }//else
+                        else{
+                            echo "<h2 class=\"h2-distr\">Районы</h2>";
+                        }//else
+                        ?>
+                        
                         <input id="" name="Stop_word_inp" type="text" class="srch_panel_srch pers-input" placeholder="Поиск по районам">
                         <ul class="district">
                             <?php   

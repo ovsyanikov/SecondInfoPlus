@@ -71,7 +71,9 @@ class NewsController extends \controller\BaseController{
                
            }//for
            $this->view->finded_news = $news;
-           $this->view->stop_words = $this->GetGlobalService()->GetStopWords(); 
+           $this->view->stop_words = $this->GetGlobalService()->GetStopWords();
+           $r->setSessionValue('currecnt_district', $distr->getTitle());
+           
            return 'Districts';
            
        }//else'

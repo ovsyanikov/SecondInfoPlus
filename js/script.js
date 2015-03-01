@@ -452,7 +452,7 @@ $(document).ready(function(){
     
      
     $("#search_news_by_stop_words").click(function(){
-            
+        
         district =  $("#districts h2.h2-distr").text();
             
         if(district != 'Районы'){
