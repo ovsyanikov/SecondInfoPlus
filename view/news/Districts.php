@@ -106,7 +106,7 @@
                         </ul>
 
                     </div>
-                        <div id="stopWords" class="selectDistrict">
+                    <div id="stopWords" class="selectDistrict">
                         <input style="display: none" id="District" name="District" />
                         <h2 class="h2-distr">Стоп-слова</h2>
                         <input id="" name="Stop_word_inp" type="text" class="srch_panel_srch pers-input" placeholder="Поиск по стоп-словам">
