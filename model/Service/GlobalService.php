@@ -46,6 +46,31 @@ class GlobalService{
         }
     }//IsContainsNews
     
+    public function IsContainsStopWord($stopWord){
+        
+        $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
+        $stmt->execute();
+
+        
+        $stmt = \util\MySQL::$db->prepare("SELECT * FROM stop_words where word = :word");
+        $stmt->bindParam(':word',$stopWord);
+        $stmt->execute();
+        
+        $stopWordContains = $stmt->fetchObject(stopword::class);
+        
+        if(is_a($stopWordContains,'model\entity\stopword')){
+            
+            return true;
+            
+        }//if
+        else{
+            
+            return false;
+            
+        }//else
+        
+    }
+    
     public function GetDistrictById($id){
         
         
