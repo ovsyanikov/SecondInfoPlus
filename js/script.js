@@ -430,13 +430,24 @@ $(document).ready(function(){
                     }//if
                     else{
                         $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
-                    }
-                }
-
-
-
+                    }//else if not image
+                    
+                }//else        
+                
         });
-        $("#newsContent").children().last().after($("#more_news"));
+        
+        $.post("ajax.php",{GetCountOfNews: 'set'},function(ajax_data){
+            posts_count =  $("#newsContent div.post").length;
+            
+            if(posts_count < ajax_data){
+                $("#newsContent").children().last().after($("#more_news"));
+            }//if
+            else{
+               $("#more_news").remove();
+            }
+        });
+        
+        
 
     });
     
