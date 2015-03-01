@@ -170,6 +170,7 @@
 
                             echo "<a href=\"?ctrl=news&act=SpecificPostHome&id={$d_id}\"><h2 class=\"post-h2 h2\">{$d_title}</h2></a>"
                             . "<p class=\"post-text\">{$d_description}</p></div>";
+                            echo "";
                         }//foreach
 
                     }//foreach
