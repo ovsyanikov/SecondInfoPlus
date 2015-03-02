@@ -894,3 +894,10 @@ input,textArea:focus{
     height: 0px;
     overflow: hidden;
 }
+.tit{
+    text-align: center;
+    
+    background: rgb(137, 11, 0);
+    color: #fff;
+    margin-bottom: 8px;
+}

@@ -64,7 +64,7 @@
             </div>
     </aside>
     <section class=" news-section">
-        <h1 class="h1">Список всех районов, содержащихся в базе данных:</h1>
+        <h1 class="h1">Список всех районов и стоп-слов:</h1>
         <div id="search-panel" class="post">
             <form id="start_search_news" method="POST" action="?ctrl=news&act=getNewsByStopWords">
                 <div id="districts" class="chng_distr">
@@ -76,6 +76,7 @@
                     $cd = $r->getSessionValue('currecnt_district');
                     ?>
                     <ul class="chng_distr_div">
+                        <li class="tit chng_distr_li">Раоны</li>
                         <?php   
                             foreach ($this->view->districts as $district){
                                 echo "<li class=\"chng_distr_li\">{$district->getTitle()}<span class=\"chng_distr_correct correct\" title=\"Изменить\">M</span></li>";
@@ -86,6 +87,7 @@
                         ?>               
                     </ul>
                     <ul class="chng_distr_div">
+                        <li class="tit chng_distr_li">Квартиры</li>
                         <?php   
                             foreach ($this->view->stop_words as $stopWord){
                                 echo "<li class=\"chng_distr_li\">{$stopWord->getWord()}<span class=\"chng_distr_correct correct\" title=\"Изменить\">M</span></li>";
@@ -97,6 +99,9 @@
                     </ul>
                 </div>
             
+                <div id="StopWordSectionConfirm">
+                    <h2 class="srch-h2 pers-h2 h2">Добавить район</h2><input id="NewStopWord" name="Stop_word_inp" type="text" class="srch_panel pers-input" placeholder="Введите новый район"><span id="AddStopWord" class="srch_ok ok" title="Подтвердить изменения">N</span>
+                </div>
                 <div id="StopWordSectionConfirm">
                     <h2 class="srch-h2 pers-h2 h2">Добавить район</h2><input id="NewStopWord" name="Stop_word_inp" type="text" class="srch_panel pers-input" placeholder="Введите новый район"><span id="AddStopWord" class="srch_ok ok" title="Подтвердить изменения">N</span>
                 </div>
