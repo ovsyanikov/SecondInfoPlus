@@ -342,8 +342,10 @@ else if(!empty ($_POST['ADD_DISTRICT'])){
     if(!is_a($distr,'model\entity\district')){
         
         $result_insert = $glob_serv->AddDistrict($new_district);
+        
         if($result_insert){
-            echo "inserted";
+            $distr = $glob_serv->GetDistrictByName($new_district);
+            echo "{$distr->getId()}";
         }//if
         else{
             echo "not inserted";

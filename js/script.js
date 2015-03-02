@@ -384,11 +384,11 @@ $(document).ready(function(){
         if(new_district_title.length != 0){
             
             $.post("ajax.php",{ADD_DISTRICT: 'SET',District: new_district_title},function(data){
-                if(data == "inserted"){
+                if(data != "exist" && data != "not inserted"){
                     ShowPersonalRoomMessage($("#DistrictSectionConfirm"),'Район добавлен','success');
                     $("#DistrictSectionConfirm").children().last().addClass("srch_success");
                     $("#DistrictSectionConfirm").children().last().delay(2000).fadeOut(500);
-                    $("#districts ul.district").append("<li>"+new_district_title+"</li>");
+                    $("#districts_order").append('<div><li data-district-id=\"'+data+'\" class=\"chng_distr_li\">'+new_district_title+'<span class=\"chng_distr_correct correct\" title=\"Изменить\">M</span></li><div class=\"hg_null\"><input id=\"\" type=\"text\" class=\"chng_distr_inp pers-input\" placeholder=\"Редактирование района\"><span id=\"ConfirmName\" class=\"dis chnd_distr_ok ok\" title=\"Подтвердить изменения\">N</span></div></div>');
                 }//if
                 else if(data == "exist"){
                     ShowPersonalRoomMessage($("#DistrictSectionConfirm"),'Такой район уже есть','error');

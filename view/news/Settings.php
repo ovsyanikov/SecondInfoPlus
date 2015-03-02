@@ -83,7 +83,7 @@
                     $r = new Request();
                     $cd = $r->getSessionValue('currecnt_district');
                     ?>
-                    <ul class="chng_distr_div">
+                    <ul id="districts_order" class="chng_distr_div">
                         <li class="tit chng_distr_li">Районы</li>
                         <?php   
                             foreach ($this->view->districts as $district){
