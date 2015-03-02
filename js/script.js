@@ -595,7 +595,7 @@ $(document).ready(function(){
                     }//if
                     else{
                         if($("#newsContent div.post").length == 0){
-                             $("#newsContent").append("<div class=\"post\">Новости по заданному запросу не найдены</div>");
+                             $("#newsContent").append("<div class=\"post\"><h2 class=\"post-h2 h2\">Новости по заданному запросу не найдены<h2></div>");
                         }
                        $("#more_news_by_stop_words").css("display","none");
                     }//else
@@ -679,7 +679,7 @@ $(document).ready(function(){
                         $("#more_news_by_stop_words").css("display","none");
                     }//else
                     if($("#newsContent div.post").length == 0){
-                        $("#newsContent").append("<div class=\"post\">Новости по заданному запросу не найдены</div>");
+                        $("#newsContent").append("<div class=\"post\"><h2 class=\"post-h2 h2\">Новости по заданному запросу не найдены<h2></div>");
                     }
                     
                 });
