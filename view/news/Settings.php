@@ -87,9 +87,9 @@
                         <li class="tit chng_distr_li">Районы</li>
                         <?php   
                             foreach ($this->view->districts as $district){
-                                echo "<li class=\"chng_distr_li\">{$district->getTitle()}<span class=\"chng_distr_correct correct\" title=\"Изменить\">M</span></li>";
+                                echo "<div><li class=\"chng_distr_li\">{$district->getTitle()}<span class=\"chng_distr_correct correct\" title=\"Изменить\">M</span></li>";
                                 echo "<div class=\"hg_null\"><input id=\"\" type=\"text\" class=\"chng_distr_inp pers-input\" placeholder=\"Редактирование района\">"
-                                    . "<span id=\"ConfirmName\" class=\"chnd_distr_ok ok\" title=\"Подтвердить изменения\">N</span></div>";
+                                    . "<span id=\"ConfirmName\" class=\"chnd_distr_ok ok\" title=\"Подтвердить изменения\">N</span></div></div>";
 
                             }//foreach
                         ?>               
@@ -98,9 +98,9 @@
                         <li class="tit chng_distr_li">Cтоп-слова</li>
                         <?php   
                             foreach ($this->view->stop_words as $stopWord){
-                                echo "<li data-stop-id=\"{$stopWord->getId()}\" class=\"chng_distr_li\">{$stopWord->getWord()}<span class=\"chng_distr_correct correct\" title=\"Изменить\">M</span></li>";
+                                echo "<div><li data-stop-id=\"{$stopWord->getId()}\" class=\"chng_distr_li\">{$stopWord->getWord()}<span class=\"chng_distr_correct correct\" title=\"Изменить\">M</span></li>";
                                 echo "<div class=\"hg_null\"><input id=\"\" type=\"text\" class=\"chng_distr_inp pers-input\" placeholder=\"Редактирование стоп слова\">"
-                                    . "<span class=\"chnd_distr_ok ok\" title=\"Подтвердить изменения\">N</span></div>";
+                                    . "<span class=\"chnd_distr_ok ok\" title=\"Подтвердить изменения\">N</span></div></div>";
                                 
                             }//foreach
                         ?>               
