@@ -103,10 +103,11 @@ foreach ($districts as $district){
     $dist = $district->getTitle();
     $q_param = urlencode($dist);
     
+    
+    
     if($cookie_last_news != null){
         $getfield = "?since_id=$cookie_last_news&q=$q_param&count=10&lang=ru";
     }//if
-    
     else{
         $getfield = "?lang=ru&q=$q_param&count=10";
     }//else
@@ -129,7 +130,7 @@ foreach ($districts as $district){
         if($contains){
             continue;
         }//if
-       
+        
        $user_id = $status->user->id;
        $screen_name = $status->user->screen_name;
        $user_image = $status->user->profile_image_url_https;
@@ -158,11 +159,10 @@ foreach ($districts as $district){
        $new_global_news->setDate($created_at);
        
        $glob_service->AddGlobalNews($new_global_news);
-       $last_news = $status->id;
+       $last_news = $status->id_str;
+       $request->setCookiesWithKey('last_record_id', $last_news);
        
    }//foreach
-   
-   $request->setCookiesWithKey('last_record_id', $last_news);
    
 }//foreach
 
