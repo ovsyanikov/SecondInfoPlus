@@ -10,10 +10,6 @@
         <script type="text/javascript" src="js/script.js"></script> 
         <title>Info-Pulse</title>
     </head>
-    <script>
-        StartAllServices();
-    </script>
-
 
     <body id="body" class="news-bg"> 
     <heder>
@@ -36,10 +32,8 @@
                         <input id="search" type="search" class="isearch" placeholder="Поиск">
                         <span class="search-icon">A</span>
                     </div>
-                <img src="img/loader2.gif" alt="" id="loader" class="hide loader">
-
+                    <img src="img/loader2.gif" alt="" id="loader" class="hide loader">
                 </div>
-
             </div>
         </div>
     </heder>
@@ -68,80 +62,44 @@
             <div class="side-post last">
                 <h2 class="h2">Section 1.10.32 of "de Finibus Bonorum et Malorum" <span class="span-time">14:32</span></h2>
             </div>
-
-        </aside>
+    </aside>
     <section class=" news-section">
-        <div class="srch">
-            <h1 class="h1">Панель поиска <span id="minimize" title="Скрыть панель">─</span></h1>
-            <div id="search-panel" class="post">
+        <h1 class="h1"">Список всех районов, содержащихся в базе данных:</h1>
+        <div id="search-panel" class="post">
+            <form id="start_search_news" method="POST" action="?ctrl=news&act=getNewsByStopWords">
+                <div id="districts" class="chng_distr">
+                    <?php
 
-                <h2 class="h2">Введите стоп слова, разделяя их запятыми, и выберите район:</h2>  
-
-                <div id="DistrictSectionConfirm">
-                    <h2 class="srch-h2 pers-h2 h2">Добавить район</h2><input id="NewDistrictTitle" name="Distr_inp" type="text" class="srch_panel pers-input" placeholder="Введите новый район"><span id="AddDistrict" class="srch_ok ok" title="Подтвердить изменения">N</span>
-                </div>
-
-                <div id="StopWordSectionConfirm">
-                    <h2 class="srch-h2 pers-h2 h2">Добавить стоп слово</h2><input id="NewStopWord" name="Stop_word_inp" type="text" class="srch_panel pers-input" placeholder="Введите новое стоп-слово"><span id="AddStopWord" class="srch_ok ok" title="Подтвердить изменения">N</span>
-                </div>
-
-                <form id="start_search_news" method="POST" action="?ctrl=news&act=getNewsByStopWords">
-                    <div id="districts" class="selectDistrict">
-                        <?php
-                        
-                        require_once 'util/Request.php';
-                        use util\Request;
-                        $r = new Request();
-                        $cd = $r->getSessionValue('currecnt_district');
-                                        
-                        if(isset($cd)){
-                            echo "<h2 class=\"h2-distr\">$cd</h2>";
-                        }//else
-                        else{
-                            echo "<h2 class=\"h2-distr\">Районы</h2>";
-                        }//else
-                        ?>
-                        
-                        <input id="" name="Stop_word_inp" type="text" class="srch_panel_srch pers-input" placeholder="Поиск по районам">
-                        <ul class="district">
-                            <?php   
-                                foreach ($this->view->districts as $district){
-                                    echo "<li data-district-id = \"{$district->getId()}\">{$district->getTitle()}</li>";
-                                }//foreach
-                            ?>               
-                        </ul>
-                        <ul class="district">
-                            <?php   
-                                foreach ($this->view->districts as $district){
-                                    echo "<li data-district-id = \"{$district->getId()}\">{$district->getTitle()}</li>";
-                                }//foreach
-                            ?>               
-                        </ul>
-
+                    require_once 'util/Request.php';
+                    use util\Request;
+                    $r = new Request();
+                    $cd = $r->getSessionValue('currecnt_district');
+                    ?>
+                    <div class="chng_distr_div">
+                        <?php   
+                            foreach ($this->view->districts as $district){
+                                echo "<input type=\"text\" class=\"chng_distr_inp\" value=\"{$district->getTitle()}\">";
+                                //echo "<li data-district-id = \"{$district->getId()}\">{$district->getTitle()}</li>";
+                            }//foreach
+                        ?>               
                     </div>
-                    <div id="stopWords" class="selectDistrict">
-                        <input style="display: none" id="District" name="District" />
-                        <h2 class="h2-distr">Стоп-слова</h2>
-                        <input id="" name="Stop_word_inp" type="text" class="srch_panel_srch pers-input" placeholder="Поиск по стоп-словам">
-                        <ul class="district">
-                            <?php   
-                                foreach ($this->view->stop_words as $stop_word){
-                                    echo "<li data-district-id = \"{$stop_word->getId()}\">{$stop_word->getWord()}</li>";
-                                }//foreach
-                            ?>               
-                        </ul>
-                        <ul class="district">
-                            <?php   
-                                foreach ($this->view->stop_words as $stop_word){
-                                    echo "<li data-district-id = \"{$stop_word->getId()}\">{$stop_word->getWord()}</li>";
-                                }//foreach
-                            ?>               
-                        </ul>
-
+                    <div class="chng_distr_div">
+                        <?php   
+                            foreach ($this->view->districts as $district){
+                                echo "<input type=\"text\" class=\"chng_distr_inp\" value=\"{$district->getTitle()}\">";
+                                //echo "<li data-district-id = \"{$district->getId()}\">{$district->getTitle()}</li>";
+                            }//foreach
+                        ?>               
                     </div>
-                    <input class="distr-button submit" id="search_news_by_stop_words" value="Найти" type="button">
-                </form>       
-            </div>
+                </div>
+            
+
+            </form>   
+<!--            <div id="StopWordSectionConfirm">
+                <h2 class="srch-h2 pers-h2 h2">Добавить стоп слово</h2><input id="NewStopWord" name="Stop_word_inp" type="text" class="srch_panel pers-input" placeholder="Введите новое стоп-слово"><span id="AddStopWord" class="srch_ok ok" title="Подтвердить изменения">N</span>
+            </div>-->
+
+    
         </div>
         <div id="newsContent">
         </div>

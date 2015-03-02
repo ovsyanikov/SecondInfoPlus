@@ -850,3 +850,20 @@ span#minimize{
 input,textArea:focus{
     outline:none;
 }
+.chng_distr_div{
+    width: 49%;
+    display: inline-block;
+}
+.chng_distr_inp{
+    font-size: 12pt;
+    background: rgb(227, 227, 227);
+    padding: 10px 25px;
+    border: none;
+    width: 100%;
+    margin: 2px 0px;
+    box-sizing: border-box;
+}
+.chng_distr{
+    width: 81%;
+    margin: auto;
+}
