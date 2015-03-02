@@ -595,7 +595,7 @@ $(document).ready(function(){
                     }//if
                     else{
                         if($("#newsContent div.post").length == 0){
-                            $("#newsContent").append("<p>Новости по заданному запросу не найдены</p>");
+                             $("#newsContent").append("<div class=\"post\">Новости по заданному запросу не найдены</div>");
                         }
                        $("#more_news_by_stop_words").css("display","none");
                     }//else
@@ -675,12 +675,12 @@ $(document).ready(function(){
                     }//if
                     else{
                         
-                        if(("#newsContent div.post").length == 0){
-                            $("#newsContent").append("<p>Новости по заданному запросу не найдены</p>");
-                        }//if
+                        
                         $("#more_news_by_stop_words").css("display","none");
                     }//else
-                    
+                    if($("#newsContent div.post").length == 0){
+                        $("#newsContent").append("<div class=\"post\">Новости по заданному запросу не найдены</div>");
+                    }
                     
                 });
                 
