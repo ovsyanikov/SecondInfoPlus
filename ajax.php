@@ -423,11 +423,11 @@ else if(!empty ($_POST['CHECK_STOP_WORD'])){
 else if(!empty ($_POST['UPDATE_DISTRICT'])){
     
     $request = new Request();
-    $id_to_update = $request->getPostValue('stop_id');
-    $update_stop_word = $request->getPostValue('new_word');
+    $id_to_update = $request->getPostValue('district_id');
+    $new_title = $request->getPostValue('new_district_title');
     $glob_news_service = new GlobalService();
     
-    $result = $glob_news_service->UpdateStopWord($id_to_update, $update_stop_word);
+    $result = $glob_news_service->UpdateDistrict($id_to_update, $new_title);
     
     if($result){
         echo "ok";
