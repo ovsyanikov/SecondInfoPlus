@@ -870,7 +870,7 @@ input,textArea:focus{
     width: 100;
     margin: auto;
 }
-#districts ul:last-child{
+.chng_distr ul:last-child{
     margin-left: 12px;
 }
 .chng_distr_inp{
