@@ -377,6 +377,79 @@ $(function() {
 
 $(document).ready(function(){
     
+    $("#AddNewDistrictSettings").click(function(){
+        
+        new_district_title = new String($("#NewDistrict").val());
+        
+        if(new_district_title.length != 0){
+            
+            $.post("ajax.php",{ADD_DISTRICT: 'SET',District: new_district_title},function(data){
+                if(data == "inserted"){
+                    ShowPersonalRoomMessage($("#DistrictSectionConfirm"),'Район добавлен','success');
+                    $("#DistrictSectionConfirm").children().last().addClass("srch_success");
+                    $("#DistrictSectionConfirm").children().last().delay(2000).fadeOut(500);
+                    $("#districts ul.district").append("<li>"+new_district_title+"</li>");
+                }//if
+                else if(data == "exist"){
+                    ShowPersonalRoomMessage($("#DistrictSectionConfirm"),'Такой район уже есть','error');
+                    $("#DistrictSectionConfirm").children().last().addClass("srch_error");
+                    $("#DistrictSectionConfirm").children().last().delay(2000).fadeOut(500);
+                }//else
+                else{
+                    ShowPersonalRoomMessage($("#DistrictSectionConfirm"),'Ошибка на сервере','error');
+                    $("#DistrictSectionConfirm").children().last().addClass("srch_error");
+                    $("#DistrictSectionConfirm").children().last().delay(2000).fadeOut(500);
+                }//else
+            });
+            
+            
+           
+        }//if
+        else{
+            ShowPersonalRoomMessage($("#DistrictSectionConfirm"),'Поле не может быть путым','error');
+             $("#DistrictSectionConfirm").children().last().addClass("srch_error");
+             $("#DistrictSectionConfirm").children().last().delay(2000).fadeOut(500);
+        }//else
+        
+    });
+    
+    $("#AddStopWordSettings").click(function(){
+        
+        new_stop_word = new String($("#NewStopWord").val());
+        
+        if(new_stop_word.length != 0){
+            
+            $.post("ajax.php",{ADD_STOP_WORD: 'SET',stop_word: new_stop_word},function(data){
+                
+                if(data == "inserted"){
+                    $("#StopWordsOrder").append('<li class="chng_distr_li">'+new_stop_word+'<span class="chng_distr_correct correct" title="Изменить">M</span></li><div class="hg_null"><input type="text" class="chng_distr_inp pers-input" placeholder="Редактирование стоп слова"><span id="ConfirmName" class="chnd_distr_ok ok" title="Подтвердить изменения">N</span></div>');
+                    ShowPersonalRoomMessage($("#StopWordSectionConfirm"),'Стоп слово добавлено','success');
+                    $("#StopWordSectionConfirm").children().last().addClass("srch_success");
+                    $("#StopWordSectionConfirm").children().last().delay(2000).fadeOut(500);
+                    
+                }//if
+                else if(data == "exist" || data == "not inserted"){
+                    ShowPersonalRoomMessage($("#StopWordSectionConfirm"),'Такое стоп слово уже есть','error');
+                    $("#StopWordSectionConfirm").children().last().addClass("srch_error");
+                    $("#StopWordSectionConfirm").children().last().delay(2000).fadeOut(500);
+                }//else
+                else{
+
+                    ShowPersonalRoomMessage($("#StopWordSectionConfirm"),'Ошибка на сервере','error');
+                    $("#StopWordSectionConfirm").children().last().addClass("srch_error");
+                    $("#StopWordSectionConfirm").children().last().delay(2000).fadeOut(500);
+                }//else
+            });
+           
+        }//if
+        else{
+             ShowPersonalRoomMessage($("#StopWordSectionConfirm"),'Стоп слово не может быть путым','error');
+             $("#StopWordSectionConfirm").children().last().addClass("srch_error");
+             $("#StopWordSectionConfirm").children().last().delay(2000).fadeOut(500);
+        }//else
+        
+    });
+    
     $("#more_news").click(function(){
         
     
@@ -853,17 +926,41 @@ $(document).ready(function(){
         });
         
         var b = true; 
-        
-        $("span.chng_distr_correct").click(function(){
+        $('body').on('click','span.chnd_distr_ok',function(){
+            elem = $(this).parent().parent();
+            word_to_update = $(this).parent().prev().data("stop-id");
+            new_stop_word = $(this).prev().val();
+            
+            $.post("ajax.php",{CHECK_STOP_WORD: 'SET',stop_word: new_stop_word},function(data){
+                
+                if(data == "ok"){
+                    $.post('ajax.php',{UPDATE_STOP_WORD: 'set',stop_id: word_to_update, new_word: new_stop_word},function(data){
+                        if(data == "ok"){
+                           $(elem).append("<div>Hello!</div>");
+                        }//if
+                        else{
+                             $(elem).append("<div>Error!</div>");
+                        }
+                    });
+                }//if
+                else{
+                    $(elem).append("<div>Error!</div>");
+                }
+            });
+            
+        });
+        $('body').on('click','span.chng_distr_correct',function(){
+           
             if(b){
                 $(this).parent().next().css({display: "block"}).animate({height: "44px"},200);
                 b = false; 
-            }
+            }//if
             else
             {
                 $(this).parent().next().animate({height: "0px"},200);
                 b = true;                
-            }            
+                
+            }//else            
         });
         
         window.onbeforeunload = function() {

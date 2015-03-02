@@ -385,3 +385,37 @@ else if(!empty ($_POST['SET_COOKIE_OFFSET'])){
     $request->setCookiesWithKey('offset', 0);
     
 }
+
+else if(!empty ($_POST['UPDATE_STOP_WORD'])){
+    
+    $request = new Request();
+    $id_to_update = $request->getPostValue('stop_id');
+    $update_stop_word = $request->getPostValue('new_word');
+    $glob_news_service = new GlobalService();
+    
+    $result = $glob_news_service->UpdateStopWord($id_to_update, $update_stop_word);
+    
+    if($result){
+        echo "ok";
+    }//if
+    else{
+        echo "error";
+    }//else
+}
+
+else if(!empty ($_POST['CHECK_STOP_WORD'])){
+    
+    $request = new Request();
+    $word_to_update = $request->getPostValue('stop_word');
+    
+    $glob_news_service = new GlobalService();
+    
+    $word = $glob_news_service->GetStopWordByTitle($word_to_update);
+    
+    if(is_a($word,'model\entity\stopword')){
+        echo "exist";
+    }
+    else{
+        echo "ok";
+    }
+}

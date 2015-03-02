@@ -89,6 +89,25 @@ class GlobalService{
         
     }
     
+    public function UpdateStopWord($word_id,$word) {
+        
+        $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
+        $stmt->execute();
+        
+        $stmt = \util\MySQL::$db->prepare("UPDATE stop_words SET word = :word WHERE id = :id");
+        $stmt->bindParam(":word",$word);
+        $stmt->bindParam(":id",$word_id);
+        $res = $stmt->execute();
+        
+        if($res == 1){
+            return true;
+        }//if
+        else{
+            return false;
+        }//else
+        
+    }
+    
     public function GetDistrictById($id){
         
         

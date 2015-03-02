@@ -66,11 +66,11 @@
     <section class=" news-section">
 
         <h1 class="h1">Список всех районов и стоп-слов:</h1>
-        <div id="StopWordSectionConfirm">
-            <h2 class="srch-h2 pers-h2 h2">Добавить район</h2><input id="NewStopWord" name="Stop_word_inp" type="text" class="srch_panel pers-input" placeholder="Введите новый район"><span id="AddStopWord" class="srch_ok ok" title="Подтвердить изменения">N</span>
+        <div id="DistrictSectionConfirm">
+            <h2 class="srch-h2 pers-h2 h2">Добавить район</h2><input id="NewDistrict" name="Stop_word_inp" type="text" class="srch_panel pers-input" placeholder="Введите новый район"><span id="AddNewDistrictSettings" class="srch_ok ok" title="Подтвердить изменения">N</span>
         </div>
         <div id="StopWordSectionConfirm">
-            <h2 class="srch-h2 pers-h2 h2">Добавить стоп-слова</h2><input id="NewStopWord" name="Stop_word_inp" type="text" class="srch_panel pers-input" placeholder="Введите новый район"><span id="AddStopWord" class="srch_ok ok" title="Подтвердить изменения">N</span>
+            <h2 class="srch-h2 pers-h2 h2">Добавить стоп-слова</h2><input id="NewStopWord" name="Stop_word_inp" type="text" class="srch_panel pers-input" placeholder="Введите новый район"><span id="AddStopWordSettings" class="srch_ok ok" title="Подтвердить изменения">N</span>
         </div>
 
         <div id="search-panel" class="post">
@@ -94,13 +94,13 @@
                             }//foreach
                         ?>               
                     </ul>
-                    <ul class="chng_distr_div">
+                    <ul id="StopWordsOrder" class="chng_distr_div">
                         <li class="tit chng_distr_li">Cтоп-слова</li>
                         <?php   
                             foreach ($this->view->stop_words as $stopWord){
-                                echo "<li class=\"chng_distr_li\">{$stopWord->getWord()}<span class=\"chng_distr_correct correct\" title=\"Изменить\">M</span></li>";
+                                echo "<li data-stop-id=\"{$stopWord->getId()}\" class=\"chng_distr_li\">{$stopWord->getWord()}<span class=\"chng_distr_correct correct\" title=\"Изменить\">M</span></li>";
                                 echo "<div class=\"hg_null\"><input id=\"\" type=\"text\" class=\"chng_distr_inp pers-input\" placeholder=\"Редактирование стоп слова\">"
-                                    . "<span id=\"ConfirmName\" class=\"chnd_distr_ok ok\" title=\"Подтвердить изменения\">N</span></div>";
+                                    . "<span class=\"chnd_distr_ok ok\" title=\"Подтвердить изменения\">N</span></div>";
                                 
                             }//foreach
                         ?>               
