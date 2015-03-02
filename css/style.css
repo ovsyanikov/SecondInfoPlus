@@ -835,7 +835,7 @@ span#minimize{
 .srch_error{
     margin: 5px 0px;
     padding: 10px 25px;
-    margin-top: 0;
+    margin-top: 5px;
     width: 100%;
     box-sizing: border-box;
 }
