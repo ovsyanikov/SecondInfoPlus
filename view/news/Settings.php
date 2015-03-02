@@ -95,7 +95,7 @@
                         ?>               
                     </ul>
                     <ul class="chng_distr_div">
-                        <li class="tit chng_distr_li">СТоП-слова</li>
+                        <li class="tit chng_distr_li">Cтоп-слова</li>
                         <?php   
                             foreach ($this->view->stop_words as $stopWord){
                                 echo "<li class=\"chng_distr_li\">{$stopWord->getWord()}<span class=\"chng_distr_correct correct\" title=\"Изменить\">M</span></li>";
