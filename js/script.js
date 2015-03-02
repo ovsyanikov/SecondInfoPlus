@@ -936,15 +936,21 @@ $(document).ready(function(){
                 if(data == "ok"){
                     $.post('ajax.php',{UPDATE_STOP_WORD: 'set',stop_id: word_to_update, new_word: new_stop_word},function(data){
                         if(data == "ok"){
-                           $(elem).append("<div>Hello!</div>");
+    //                         $(elem).append("<div>Hello!</div>");
+                             $(elem).append("<div class=\"srch_success pers-success\"><h2 class=\"h2\">Изменения успешно внесены</h2></div>");
+                             $(elem).children().last().delay(2000).fadeOut(500);
                         }//if
                         else{
-                             $(elem).append("<div>Error!</div>");
+  //                            $(elem).append("<div>Error!</div>");
+                            $(elem).append("<div class=\"srch_error pers-error\"><h2 class=\"h2\">Блёёёёёёёёёё!!!!!!</h2></div>");                              
+                            $(elem).children().last().delay(2000).fadeOut(500);
                         }
                     });
                 }//if
                 else{
-                    $(elem).append("<div>Error!</div>");
+//                    $(elem).append("<div>Error!!!</div>");
+                    $(elem).append("<div class=\"srch_error pers-error\"><h2 class=\"h2\">Блёёёёёёёёёё!!!!!!</h2></div>");                    
+                    $(elem).children().last().delay(2000).fadeOut(500);
                 }
             });
             

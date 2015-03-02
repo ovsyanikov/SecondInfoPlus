@@ -835,6 +835,7 @@ span#minimize{
 .srch_error{
     margin: 5px 0px;
     padding: 10px 25px;
+    margin-top: 0;
     width: 100%;
     box-sizing: border-box;
 }
@@ -842,6 +843,7 @@ span#minimize{
     margin: 5px 0px;
     width: 100%;
     padding: 10px 25px;
+    margin-top: 0px;
 }
 .srch_ok{
     position: absolute;
