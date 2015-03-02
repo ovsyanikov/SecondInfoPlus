@@ -71,7 +71,7 @@
                 <h1 class="pers-title-h1 h1">Личный кабинет</h1>
                 <div><h2 class="pers-h2 h2">Логин</h2><p class="pers-text" id="login"><?php echo"{$this->view->current_user->getLogin()}" ;?></p></div>
                 <div id="emailSection">
-                    <h2 class="pers-h2 h2">E-mail</h2><p class="pers-text" id="email"><?php echo"{$this->view->current_user->getEmail()}"; ?><span class="correct" title="Изменить">M</span></p>
+                    <h2 class="pers-h2 h2">E-mail</h2><p class="pers-text" id="email"><?php echo"{$this->view->current_user->getEmail()}"; ?><span class="correct_js correct" title="Изменить">M</span></p>
                     <div class="pers-input-block">
                         <form id="ChangeEmail">
                             <input id="NewMailInPersonal" name="NewMailInPersonal" type="text" class="pers-input" placeholder="Введите новый e-mail">
@@ -79,7 +79,7 @@
                         </form>
                     </div>
                 </div>
-                <div id="PasswordSection" ><h2 class="pers-h2 h2">Пароль</h2><p class="pers-text" id="password">******<span class="correct" title="Изменить">M</span></p>
+                <div id="PasswordSection" ><h2 class="pers-h2 h2">Пароль</h2><p class="pers-text" id="password">******<span class="correct_js correct" title="Изменить">M</span></p>
                     
                         <div class="pers-input-block password-chng">
                             <input id="CurrentPassword" type="password" class="pers-input" placeholder="Введите текущий пароль">
@@ -91,7 +91,7 @@
                 
                 </div>
 
-                <div id="FirstNameSection"><h2 class="pers-h2 h2">Имя</h2><p class="pers-text" id="FirstName"><?php echo"{$this->view->current_user->getFirstName()}"; ?><span class="correct" title="Изменить">M</span></p>
+                <div id="FirstNameSection"><h2 class="pers-h2 h2">Имя</h2><p class="pers-text" id="FirstName"><?php echo"{$this->view->current_user->getFirstName()}"; ?><span class="correct_js correct" title="Изменить">M</span></p>
                     <div class="pers-input-block">
                         <input id="NewFirstName" type="text" class="pers-input" placeholder="Введите новое имя">
                         <span id="ConfirmName" class="ok" title="Подтвердить изменения">N</span>
@@ -99,7 +99,7 @@
 
                 </div>
                 
-                <div id="LastNameSection"><h2 class="pers-h2 h2">Фамилия</h2><p class="pers-text" id="LastName"><?php echo"{$this->view->current_user->getLastName()}";?><span class="correct" title="Изменить">M</span></p>
+                <div id="LastNameSection"><h2 class="pers-h2 h2">Фамилия</h2><p class="pers-text" id="LastName"><?php echo"{$this->view->current_user->getLastName()}";?><span class="correct_js correct" title="Изменить">M</span></p>
                                     <div class="pers-input-block">
                         <input id="NewLastName" type="text" class="pers-input" placeholder="Введите новую фамилию">
                         <span id="ConfirmLastName" class="ok" title="Подтвердить изменения">N</span>

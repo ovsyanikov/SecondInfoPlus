@@ -506,7 +506,7 @@ opacity:1;
 }
 
 
-.pers-text:hover .correct{
+.pers-text,.chng_distr_li:hover .correct{
     opacity: 1;
     transition: opacity ease-in-out 0.3s;
 }
@@ -853,17 +853,44 @@ input,textArea:focus{
 .chng_distr_div{
     width: 49%;
     display: inline-block;
+    vertical-align: top;
 }
-.chng_distr_inp{
+.chng_distr_li{
     font-size: 12pt;
     background: rgb(227, 227, 227);
-    padding: 10px 25px;
+    padding: 10px 5px 10px 25px;
     border: none;
     width: 100%;
-    margin: 2px 0px;
+    margin: 4px 0px;
     box-sizing: border-box;
+    list-style: none;
+    color: rgb(137, 11, 0);
 }
 .chng_distr{
-    width: 81%;
+    width: 100;
     margin: auto;
+}
+#districts ul:last-child{
+    margin-left: 12px;
+}
+.chng_distr_inp{
+    margin: 0px;
+    border: none;
+    width: 65%;
+    box-sizing: border-box;
+    font-size: 11pt;
+    padding: 10px 25px;
+}
+.chnd_distr_ok{
+    margin: 0px 5px;
+    display: inline-block;
+    float: none;
+    vertical-align: sub;
+}
+.chng_distr_correct{
+    margin: 2px;
+}
+.hg_null{
+    height: 0px;
+    overflow: hidden;
 }

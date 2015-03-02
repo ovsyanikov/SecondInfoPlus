@@ -828,7 +828,7 @@ $(document).ready(function(){
         
         var a = true; 
         
-        $("span.correct").click(function(){
+        $("span.correct_js").click(function(){
             if(a){
                 
                 if($(this).parent().next().hasClass("password-chng")){
@@ -850,6 +850,20 @@ $(document).ready(function(){
                 }
                 a = true;                
             }
+        });
+        
+        var b = true; 
+        
+        $("span.chng_distr_correct").click(function(){
+            if(b){
+                $(this).parent().next().css({display: "block"}).animate({height: "44px"},200);
+                b = false; 
+            }
+            else
+            {
+                $(this).parent().next().animate({height: "0px"},200);
+                b = true;                
+            }            
         });
         
         window.onbeforeunload = function() {

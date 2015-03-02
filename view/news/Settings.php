@@ -64,7 +64,7 @@
             </div>
     </aside>
     <section class=" news-section">
-        <h1 class="h1"">Список всех районов, содержащихся в базе данных:</h1>
+        <h1 class="h1">Список всех районов, содержащихся в базе данных:</h1>
         <div id="search-panel" class="post">
             <form id="start_search_news" method="POST" action="?ctrl=news&act=getNewsByStopWords">
                 <div id="districts" class="chng_distr">
@@ -75,35 +75,36 @@
                     $r = new Request();
                     $cd = $r->getSessionValue('currecnt_district');
                     ?>
-                    <div class="chng_distr_div">
+                    <ul class="chng_distr_div">
                         <?php   
                             foreach ($this->view->districts as $district){
-                                echo "<input type=\"text\" class=\"chng_distr_inp\" value=\"{$district->getTitle()}\">";
-                                //echo "<li data-district-id = \"{$district->getId()}\">{$district->getTitle()}</li>";
+                                echo "<li class=\"chng_distr_li\">{$district->getTitle()}<span class=\"chng_distr_correct correct\" title=\"Изменить\">M</span></li>";
+                                echo "<div class=\"hg_null\"><input id=\"\" type=\"text\" class=\"chng_distr_inp pers-input\" placeholder=\"Редактирование района\">"
+                                    . "<span id=\"ConfirmName\" class=\"chnd_distr_ok ok\" title=\"Подтвердить изменения\">N</span></div>";
+
                             }//foreach
                         ?>               
-                    </div>
-                    <div class="chng_distr_div">
+                    </ul>
+                    <ul class="chng_distr_div">
                         <?php   
                             foreach ($this->view->districts as $district){
-                                echo "<input type=\"text\" class=\"chng_distr_inp\" value=\"{$district->getTitle()}\">";
-                                //echo "<li data-district-id = \"{$district->getId()}\">{$district->getTitle()}</li>";
+                                echo "<li class=\"chng_distr_li\">{$district->getTitle()}<span class=\"chng_distr_correct correct\" title=\"Изменить\">M</span></li>";
+                                echo "<div class=\"hg_null\"><input id=\"\" type=\"text\" class=\"chng_distr_inp pers-input\" placeholder=\"Редактирование района\">"
+                                    . "<span id=\"ConfirmName\" class=\"chnd_distr_ok ok\" title=\"Подтвердить изменения\">N</span></div>";
+                                
                             }//foreach
                         ?>               
-                    </div>
+                    </ul>
                 </div>
             
-
+                <div id="StopWordSectionConfirm">
+                    <h2 class="srch-h2 pers-h2 h2">Добавить район</h2><input id="NewStopWord" name="Stop_word_inp" type="text" class="srch_panel pers-input" placeholder="Введите новый район"><span id="AddStopWord" class="srch_ok ok" title="Подтвердить изменения">N</span>
+                </div>
             </form>   
-<!--            <div id="StopWordSectionConfirm">
-                <h2 class="srch-h2 pers-h2 h2">Добавить стоп слово</h2><input id="NewStopWord" name="Stop_word_inp" type="text" class="srch_panel pers-input" placeholder="Введите новое стоп-слово"><span id="AddStopWord" class="srch_ok ok" title="Подтвердить изменения">N</span>
-            </div>-->
+
 
     
-        </div>
-        <div id="newsContent">
-        </div>
-            <input class="My-posts-button submit" style="display: none" id="more_news_by_stop_words" value="Следующие новости" type="button">
+        </div>    
     </section>
     </div>
     <footer class="footer">

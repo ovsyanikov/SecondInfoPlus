@@ -107,6 +107,7 @@
                             <?php   
                                 foreach ($this->view->districts as $district){
                                     echo "<li data-district-id = \"{$district->getId()}\">{$district->getTitle()}</li>";
+                                  
                                 }//foreach
                             ?>               
                         </ul>
