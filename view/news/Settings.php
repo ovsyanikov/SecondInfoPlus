@@ -87,9 +87,9 @@
                     </ul>
                     <ul class="chng_distr_div">
                         <?php   
-                            foreach ($this->view->districts as $district){
-                                echo "<li class=\"chng_distr_li\">{$district->getTitle()}<span class=\"chng_distr_correct correct\" title=\"Изменить\">M</span></li>";
-                                echo "<div class=\"hg_null\"><input id=\"\" type=\"text\" class=\"chng_distr_inp pers-input\" placeholder=\"Редактирование района\">"
+                            foreach ($this->view->stop_words as $stopWord){
+                                echo "<li class=\"chng_distr_li\">{$stopWord->getWord()}<span class=\"chng_distr_correct correct\" title=\"Изменить\">M</span></li>";
+                                echo "<div class=\"hg_null\"><input id=\"\" type=\"text\" class=\"chng_distr_inp pers-input\" placeholder=\"Редактирование стопслова\">"
                                     . "<span id=\"ConfirmName\" class=\"chnd_distr_ok ok\" title=\"Подтвердить изменения\">N</span></div>";
                                 
                             }//foreach

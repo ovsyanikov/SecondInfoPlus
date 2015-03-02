@@ -276,13 +276,10 @@ class NewsController extends \controller\BaseController{
            
            $this->view->current_user = $this->GetUserService()->getUser($user);
            $this->view->districts = $global_service->GetDistricts();
+           $this->view->stop_words = $global_service->GetStopWords();
            
            $r = new Request();
            
-//           $stop_words = $this->GetGlobalService()->GetStopWords();
-//           $distr =  $global_service->GetDistrictByName($r->getPostValue('District'));
-           
-          
            return 'Settings';
            
        }//else'
