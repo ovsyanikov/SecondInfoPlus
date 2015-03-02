@@ -142,6 +142,7 @@
                     </div>
                     <input class="distr-button submit" id="search_news_by_stop_words" value="Найти" type="button">
                 </form>       
+                <a href="?ctrl=news&act=Setting"><h2 class="h2" style="margin-top:10px">Больше районов и стоп слов...</h2></a>
             </div>
         </div>
         <div id="newsContent">
