@@ -444,7 +444,7 @@ $(document).ready(function(){
             }//if
             else{
                $("#more_news").remove();
-            }
+            }//else
         });
         
         
@@ -531,12 +531,78 @@ $(document).ready(function(){
      
     $("#search_news_by_stop_words").click(function(){
         
+        $("#search_news_by_stop_words").blur();
+        
         district =  $("#districts h2.h2-distr").text();
             
         if(district != 'Районы'){
                 
                 $("#District").val(district);
-                $("#start_search_news").submit();
+                
+                $.post("get_news_by_stop_words.php",{District: district},function(data){
+                    
+                    if(data != "end"){
+                    $("#more_news").css("display","inline-block");
+                    news = $.parseJSON(data);
+                    for(i = 0; i< news.length; i++){
+                        
+                        $.each(news[i],function(idx,glob_news){
+                                
+                                d_id = glob_news.id;
+
+                                ch_social = new String(glob_news.Source);
+                                title =  new String(glob_news.title);
+                                description = new String(glob_news.description);
+                                image = glob_news.Images;
+                                date_public = glob_news.Date;
+
+                                if(title.length > 50){
+
+                                    title = title.substr(0,47);
+                                    title += "...";
+
+                                }//if
+
+                                if(description.length > 300){
+
+                                    description = description.substr(0,297);
+                                    description += "...";
+
+                                }//if
+
+
+                                if(ch_social.indexOf("vk") != -1){
+
+                                    if(image != null){
+                                        $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">Q</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
+                                    }//if
+                                    else{
+                                        $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">Q</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
+                                    }//else
+
+
+                                }//if vk.com
+                                else{
+                                     if(image != null){
+                                        $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
+                                    }//if
+                                    else{
+                                        $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
+                                    }//else if not image
+
+                                }//else       
+
+                        });
+                        
+                        
+                    }//for
+                        $("#newsContent").children().last().after($("#more_news"));
+                    }//if
+                    else{
+                        
+                        $("#more_news").remove();
+                    }
+                });
                 
             }//if
             else{//error
@@ -752,30 +818,6 @@ $(document).ready(function(){
                 $(this).parent().animate({opacity: 1},200);
                 
             }
-//            var post_id = $(this).data('post-id');
-//            
-//            $.post("ajax.php",{DeleteMyNews: 'set',post_id: post_id},function(data){
-//                
-//                  if(data == '1'){
-//                      
-//                     $("div.delete-post[data-post-id=\""+post_id+"\"]").parent().animate({opacity: 0.5},200);
-//                     $("div.delete-post[data-post-id=\""+post_id+"\"]").next().attr("href","?ctrl=news&act=MyPosts");
-//                     $("div.delete-post[data-post-id=\""+post_id+"\"]").remove();
-//                     
-//                     var el_count = $("div.delete-post").length;
-//                     
-//                     if(el_count == 0){
-//                         
-//                        $("#newsContent").append("<h2 class=\"post-h2 h2\" style=\"margin: 15px 0px\">У вас пока нет записей!</h2>");
-//                        
-//                     }//if
-//                     
-//                  }//if deleted succesful
-//                  
-//                  else {alert("Ошибка сервера! Не возможно удалить запись!");}
-//                  
-//            });
-            
         });
         
         $("#addPost").click(function(){

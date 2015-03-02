@@ -378,3 +378,9 @@ else if(!empty ($_POST['ADD_STOP_WORD'])){
     }//else
     
 }
+
+else if(!empty ($_POST['GET_OTHER_COUNT'])){
+    
+    
+    
+}

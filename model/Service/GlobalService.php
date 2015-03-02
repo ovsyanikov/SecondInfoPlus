@@ -275,6 +275,27 @@ class GlobalService{
 
     return $globalNews;
 }
+    
+    public function GetCountOfNewsByStopWord($district){
+        
+        $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
+        $stmt->execute();
+        $stop_words = $this->GetStopWords();
+        $count = 0;
+        
+        foreach($stop_words as $sw){
+            
+            $stmt = \util\MySQL::$db->prepare("SELECT COUNT(*) FROM global_news WHERE district = ? and description Like ?");
+            $params = array("$district","%{$sw->getWord()}%");
+            $stmt->execute($params);
+            
+            $count += intval($stmt->fetch(\PDO::FETCH_BOTH));
+            
+        }//foreach
+        
+        return $count;
+        
+    }
 
     public function GetStopWordById($id){
 

@@ -144,54 +144,8 @@
             </div>
         </div>
         <div id="newsContent">
-            <?php
-
-                if(is_array($this->view->finded_news)){
-
-                    foreach($this->view->finded_news as $news){
-
-                        foreach($news as $one_news){
-                            echo "<div class=\"post\">";   
-                            $d_title = $one_news->getTitle();
-
-                            if(strlen($d_title)>100){
-                                $d_title = iconv_substr($title,0, 100, 'UTF-8');
-                                $d_title .= '...';
-                            }
-
-                            $d_description = $one_news->getDescription();
-                            if(strlen($d_description)>500){
-
-                                $d_description = iconv_substr($d_description,0, 500, 'UTF-8');
-                                $d_description .= '...';
-                            }
-                            $d_id = $one_news->getId();
-                            $date = $one_news->getDate();
-                            $ch_social = $one_news->getSource();   
-
-                            $image = $one_news->getImage();
-                            if(strripos($ch_social,'twitter') != false){
-                                echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"twitter post-icon\">R</span></a>";
-                            }
-                            if(strripos($ch_social,'vk') != false){
-                                echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">Q</span></a>";
-                            }                                 
-                            echo "<span  class=\"post-date2\" title=\"Время публикации\">$date</span>";
-                            if(!empty($image)){
-                                echo "<img class=\"post-img\" alt=\"\" src=\"{$one_news->getImage()}\"/>";
-                            }
-
-                            echo "<a href=\"?ctrl=news&act=SpecificPostHome&id={$d_id}\"><h2 class=\"post-h2 h2\">{$d_title}</h2></a>"
-                            . "<p class=\"post-text\">{$d_description}</p></div>";
-                            echo "";
-                        }//foreach
-
-                    }//foreach
-
-                }//if
-
-            ?>
         </div>
+        <input class="My-posts-button submit" style="display: none" id="more_news" value="Следующие новости" type="button">
     </section>
     </div>
     <footer class="footer">

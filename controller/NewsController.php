@@ -68,14 +68,13 @@ class NewsController extends \controller\BaseController{
            foreach($stop_words as $word){
                
                $word = trim($word->getWord());
-               
-               $news[] = $global_service->GetGlobalNewsByStopWord($word, $distr->getId(),0,30);
+               $news[] = $global_service->GetGlobalNewsByStopWord($word, $distr->getId(),0,10);
                
            }//foreach
            
            $this->view->finded_news = $news;
            $this->view->stop_words = $this->GetGlobalService()->GetStopWords();
-           $r->setSessionValue('currecnt_district', $distr->getTitle());
+           $r->setCookiesWithKey('currecnt_district', $distr->getTitle());
            
            return 'Districts';
            
@@ -278,6 +277,7 @@ class NewsController extends \controller\BaseController{
            
            $this->view->districts = $this->GetGlobalService()->GetDistricts();
            $this->view->stop_words = $this->GetGlobalService()->GetStopWords();
+           $this->getRequest()->setCookiesWithKey('offset',0);
            
            return 'Districts';
        }//else
