@@ -6,9 +6,11 @@ require_once './model/entity/global_news.php';
 require_once './model/service/GlobalService.php';
 require_once './model/entity/district.php';
 require_once './twitter-api/TwitterAPIExchange.php';
+require_once './util/Request.php';
 
 use model\service\GlobalService;
 use model\entity\global_news;
+use util\Request;
 
 \util\MySQL::$db = new \PDO('mysql:host=localhost;dbname=u304199710_info', 'u304199710_alex', '1qaz2wsx');
 
@@ -92,13 +94,22 @@ $settings = array(
 );
 
 $url = 'https://api.twitter.com/1.1/search/tweets.json';
+$request = new Request();
+
+$cookie_last_news = $request->getCookieValue('last_record_id');
 
 foreach ($districts as $district){
     
     $dist = $district->getTitle();
     $q_param = urlencode($dist);
     
-    $getfield = "?lang=ru&q=$q_param&count=10";
+    if($cookie_last_news != null){
+        $getfield = "?since_id=$cookie_last_news&q=$q_param&count=10&lang=ru";
+    }//if
+    
+    else{
+        $getfield = "?lang=ru&q=$q_param&count=10";
+    }//else
     $requestMethod = 'GET';
 
     $twitter = new TwitterAPIExchange($settings);
@@ -107,6 +118,7 @@ foreach ($districts as $district){
     $oAuth = $fields->buildOauth($url, $requestMethod);
     $response = $oAuth->performRequest();
     $js_obj = json_decode($response);
+    $last_news = NULL;
     
    foreach($js_obj->statuses as $status){
        
@@ -126,7 +138,8 @@ foreach ($districts as $district){
        $created_at = date("D H:i:s",$created_at);
        
        $source = "https://twitter.com/" . $status->user->id_str . "/status/" . $status->id_str;
-       $date = $status -> created_at;
+       
+       $date = $status->created_at;
        
        if($status->entities->media->media_url != NULL){
             $new_global_news->setImage($status->entities->media->media_url);
@@ -145,8 +158,11 @@ foreach ($districts as $district){
        $new_global_news->setDate($created_at);
        
        $glob_service->AddGlobalNews($new_global_news);
-
+       $last_news = $status->id;
+       
    }//foreach
-    
+   
+   $request->setCookiesWithKey('last_record_id', $last_news);
+   
 }//foreach
 
