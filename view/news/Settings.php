@@ -64,6 +64,12 @@
             </div>
     </aside>
     <section class=" news-section">
+                <div id="StopWordSectionConfirm">
+                    <h2 class="srch-h2 pers-h2 h2">Добавить район</h2><input id="NewStopWord" name="Stop_word_inp" type="text" class="srch_panel pers-input" placeholder="Введите новый район"><span id="AddStopWord" class="srch_ok ok" title="Подтвердить изменения">N</span>
+                </div>
+                <div id="StopWordSectionConfirm">
+                    <h2 class="srch-h2 pers-h2 h2">Добавить район</h2><input id="NewStopWord" name="Stop_word_inp" type="text" class="srch_panel pers-input" placeholder="Введите новый район"><span id="AddStopWord" class="srch_ok ok" title="Подтвердить изменения">N</span>
+                </div>
         <h1 class="h1">Список всех районов и стоп-слов:</h1>
         <div id="search-panel" class="post">
             <form id="start_search_news" method="POST" action="?ctrl=news&act=getNewsByStopWords">
@@ -99,17 +105,12 @@
                     </ul>
                 </div>
             
-                <div id="StopWordSectionConfirm">
-                    <h2 class="srch-h2 pers-h2 h2">Добавить район</h2><input id="NewStopWord" name="Stop_word_inp" type="text" class="srch_panel pers-input" placeholder="Введите новый район"><span id="AddStopWord" class="srch_ok ok" title="Подтвердить изменения">N</span>
-                </div>
-                <div id="StopWordSectionConfirm">
-                    <h2 class="srch-h2 pers-h2 h2">Добавить район</h2><input id="NewStopWord" name="Stop_word_inp" type="text" class="srch_panel pers-input" placeholder="Введите новый район"><span id="AddStopWord" class="srch_ok ok" title="Подтвердить изменения">N</span>
-                </div>
+
             </form>   
 
 
     
-        </div>    
+        </div>  
     </section>
     </div>
     <footer class="footer">
