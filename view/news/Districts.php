@@ -145,7 +145,7 @@
         </div>
         <div id="newsContent">
         </div>
-        <input class="My-posts-button submit" style="display: none" id="more_news" value="Следующие новости" type="button">
+            <input class="My-posts-button submit" style="display: none" id="more_news_by_stop_words" value="Следующие новости" type="button">
     </section>
     </div>
     <footer class="footer">

@@ -379,8 +379,9 @@ else if(!empty ($_POST['ADD_STOP_WORD'])){
     
 }
 
-else if(!empty ($_POST['GET_OTHER_COUNT'])){
+else if(!empty ($_POST['SET_COOKIE_OFFSET'])){
     
-    
+    $request = new Request();
+    $request->setCookiesWithKey('offset', 0);
     
 }
