@@ -369,7 +369,9 @@ else if(!empty ($_POST['ADD_STOP_WORD'])){
         $result_insert = $glob_serv->AddStopWord($new_stop_word);
         
         if($result_insert){
-            echo "inserted";
+            $result_insert = $glob_serv->GetStopWordByTitle($new_stop_word);
+            
+            echo "{$result_insert->getId()}";
         }//if
         else{
             echo "not inserted";

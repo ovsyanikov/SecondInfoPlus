@@ -421,14 +421,14 @@ $(document).ready(function(){
             
             $.post("ajax.php",{ADD_STOP_WORD: 'SET',stop_word: new_stop_word},function(data){
                 
-                if(data == "inserted"){
-                    $("#StopWordsOrder").append('<li class="chng_distr_li">'+new_stop_word+'<span class="chng_distr_correct correct" title="Изменить">M</span></li><div class="hg_null"><input type="text" class="chng_distr_inp pers-input" placeholder="Редактирование стоп слова"><span id="ConfirmName" class="chnd_distr_ok ok" title="Подтвердить изменения">N</span></div>');
+                if(data != "not inserted" && data != "exist"){
+                    $("#StopWordsOrder").append('<div><li data-stop-id=\"'+data+'\" class="chng_distr_li">'+new_stop_word+'<span class="chng_distr_correct correct" title="Изменить">M</span></li><div class="hg_null"><input type="text" class="chng_distr_inp pers-input" placeholder="Редактирование стоп слова"><span id="ConfirmName" class="chnd_distr_ok ok" title="Подтвердить изменения">N</span></div><div>');
                     ShowPersonalRoomMessage($("#StopWordSectionConfirm"),'Стоп слово добавлено','success');
                     $("#StopWordSectionConfirm").children().last().addClass("srch_success");
                     $("#StopWordSectionConfirm").children().last().delay(2000).fadeOut(500);
                     
                 }//if
-                else if(data == "exist" || data == "not inserted"){
+                else if(data == "exist"){
                     ShowPersonalRoomMessage($("#StopWordSectionConfirm"),'Такое стоп слово уже есть','error');
                     $("#StopWordSectionConfirm").children().last().addClass("srch_error");
                     $("#StopWordSectionConfirm").children().last().delay(2000).fadeOut(500);
