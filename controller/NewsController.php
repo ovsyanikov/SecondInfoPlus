@@ -346,5 +346,4 @@ class NewsController extends \controller\BaseController{
     }
     
     
-    
 }
