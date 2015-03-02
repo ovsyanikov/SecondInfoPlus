@@ -257,6 +257,38 @@ class NewsController extends \controller\BaseController{
        }//else
     }
     
+    public function SettingAction(){
+        
+       $user_serv = $this->GetUserService();
+       $access = $user_serv->isAccessDenied();
+       $global_service = new GlobalService();
+       
+       if($access){//Если доступ запрещен
+           $this->redirect("index");
+       }//if
+       else{//Если доступ разрешен
+           
+           $user = $this->getRequest()->getSessionValue('user_info_plus');
+           
+           if(empty($user)){
+               $user = $this->getRequest()->getCookieValue('user_info_plus');
+           }//if
+           
+           $this->view->current_user = $this->GetUserService()->getUser($user);
+           $this->view->districts = $global_service->GetDistricts();
+           
+           $r = new Request();
+           
+//           $stop_words = $this->GetGlobalService()->GetStopWords();
+//           $distr =  $global_service->GetDistrictByName($r->getPostValue('District'));
+           
+          
+           return 'Settings';
+           
+       }//else'
+        
+    }
+    
     public function DistrictsAction(){
         
        $user_serv = $this->GetUserService();
@@ -312,4 +344,7 @@ class NewsController extends \controller\BaseController{
         }//if
         return $this->globalService;
     }
+    
+    
+    
 }

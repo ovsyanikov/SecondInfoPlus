@@ -151,8 +151,6 @@ function getpost(response){
              $("div.post").append("<div class=\"top-3\"><img id=\"post_image\" src=\""+response.response[0].attachments[0].photo.photo_604+"\" alt=\"\"></div>");
          }//if
          
-         
-         
      }//if
          
      }catch (ex){}
@@ -190,8 +188,6 @@ function getpost(response){
      }catch(ex){
         
      }
-     
-     
      
      $("div.post").append("<p id=\"postContent\" class=\"post-text\">"+response.response[0].text+"</p>");
          

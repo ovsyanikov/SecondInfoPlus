@@ -169,7 +169,7 @@
             
                     if($("#newsContent div.post").length != 0){
                         $("#newsContent").append('<input class="My-posts-button submit" id="more_news" value="Следующие новости" type="button">');
-                    }
+                    }//if
                     
             </script>
 <!--            <div class="post">
