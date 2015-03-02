@@ -419,3 +419,37 @@ else if(!empty ($_POST['CHECK_STOP_WORD'])){
         echo "ok";
     }
 }
+
+else if(!empty ($_POST['UPDATE_DISTRICT'])){
+    
+    $request = new Request();
+    $id_to_update = $request->getPostValue('stop_id');
+    $update_stop_word = $request->getPostValue('new_word');
+    $glob_news_service = new GlobalService();
+    
+    $result = $glob_news_service->UpdateStopWord($id_to_update, $update_stop_word);
+    
+    if($result){
+        echo "ok";
+    }//if
+    else{
+        echo "error";
+    }//else
+}
+
+else if(!empty ($_POST['CHECK_DISTRICT'])){
+    
+    $request = new Request();
+    $distr = $request->getPostValue('district');
+    
+    $glob_news_service = new GlobalService();
+    
+    $word = $glob_news_service->GetDistrictByName($distr);
+    
+    if(is_a($word,'model\entity\district')){
+        echo "exist";
+    }
+    else{
+        echo "ok";
+    }
+}

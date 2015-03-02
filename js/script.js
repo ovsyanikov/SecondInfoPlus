@@ -927,33 +927,66 @@ $(document).ready(function(){
         
         var b = true; 
         $('body').on('click','span.chnd_distr_ok',function(){
+            
+            if(!$(this).hasClass("dis")){
             elem = $(this).parent().parent();
             word_to_update = $(this).parent().prev().data("stop-id");
             new_stop_word = $(this).prev().val();
             
             $.post("ajax.php",{CHECK_STOP_WORD: 'SET',stop_word: new_stop_word},function(data){
                 
-                if(data == "ok"){
+                    if(data == "ok" && new_stop_word != ''){
                     $.post('ajax.php',{UPDATE_STOP_WORD: 'set',stop_id: word_to_update, new_word: new_stop_word},function(data){
-                        if(data == "ok"){
-    //                         $(elem).append("<div>Hello!</div>");
+                        if(data == "ok" && new_stop_word != ''){
                              $(elem).append("<div class=\"srch_success pers-success\"><h2 class=\"h2\">Изменения успешно внесены</h2></div>");
                              $(elem).children().last().delay(2000).fadeOut(500);
                         }//if
                         else{
-  //                            $(elem).append("<div>Error!</div>");
-                            $(elem).append("<div class=\"srch_error pers-error\"><h2 class=\"h2\">Блёёёёёёёёёё!!!!!!</h2></div>");                              
+                            $(elem).append("<div class=\"srch_error pers-error\"><h2 class=\"h2\">Такое стоп-слово есть или пустое поле</h2></div>");                              
                             $(elem).children().last().delay(2000).fadeOut(500);
                         }
                     });
-                }//if
-                else{
-//                    $(elem).append("<div>Error!!!</div>");
-                    $(elem).append("<div class=\"srch_error pers-error\"><h2 class=\"h2\">Блёёёёёёёёёё!!!!!!</h2></div>");                    
-                    $(elem).children().last().delay(2000).fadeOut(500);
-                }
-            });
-            
+                    }//if
+                    else{
+                        $(elem).append("<div class=\"srch_error pers-error\"><h2 class=\"h2\">Такое стоп-слово есть или пустое поле</h2></div>");                    
+                        $(elem).children().last().delay(2000).fadeOut(500);
+                    }
+               
+                
+                });
+             }//if has not class dis
+        });
+        
+        $('body').on('click','span.dis',function(){
+             
+            if($(this).hasClass("dis")){
+                
+                elem = $(this).parent().parent();
+                dist_id = $(this).parent().prev().data("district-id");
+                new_district_title = $(this).prev().val();
+
+                $.post("ajax.php",{CHECK_DISTRICT: 'SET',district: new_district_title},function(data){
+
+                        if(data == "ok"){
+                        $.post('ajax.php',{UPDATE_DISTRICT: 'set',new_district_title: new_district_title, district_id: dist_id},function(data){
+                            if(data == "ok" && new_district_title != ''){
+                                 $(elem).append("<div class=\"srch_success pers-success\"><h2 class=\"h2\">Изменения успешно внесены</h2></div>");
+                                 $(elem).children().last().delay(2000).fadeOut(500);
+                            }//if
+                            else{
+                                $(elem).append("<div class=\"srch_error pers-error\"><h2 class=\"h2\">Такое район есть или пустое поле</h2></div>");                              
+                                $(elem).children().last().delay(2000).fadeOut(500);
+                            }
+                        });
+                        }//if
+                        else{
+                            $(elem).append("<div class=\"srch_error pers-error\"><h2 class=\"h2\">Такое район есть или пустое поле</h2></div>");                    
+                            $(elem).children().last().delay(2000).fadeOut(500);
+                        }
+
+
+                    });
+             }//if has not class dis
         });
         $('body').on('click','span.chng_distr_correct',function(){
            

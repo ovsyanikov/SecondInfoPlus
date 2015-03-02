@@ -108,6 +108,25 @@ class GlobalService{
         
     }
     
+    public function UpdateDistrict($id_district,$new_title){
+        
+        $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
+        $stmt->execute();
+        
+        $stmt = \util\MySQL::$db->prepare("UPDATE districts SET Title = :word WHERE id = :id");
+        $stmt->bindParam(":word",$new_title);
+        $stmt->bindParam(":id",$id_district);
+        $res = $stmt->execute();
+        
+        if($res == 1){
+            return true;
+        }//if
+        else{
+            return false;
+        }//else
+        
+    }
+    
     public function GetDistrictById($id){
         
         
