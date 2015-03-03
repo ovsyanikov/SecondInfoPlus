@@ -75,15 +75,18 @@
             <h1 class="h1">Панель поиска <span id="minimize" title="Скрыть панель">─</span></h1>
             <div id="search-panel" class="post">
 
-                <a href="?ctrl=news&act=Setting"><h2 class="h2">Перейти к списку районов и стоп-слов</h2></a>
 
-                <div id="DistrictSectionConfirm">
+                <h2 class="h2">Для начала поиска выберите район</h2>             
+
+<!--                <div id="DistrictSectionConfirm">
                     <h2 class="srch-h2 pers-h2 h2">Добавить район</h2><input id="NewDistrictTitle" name="Distr_inp" type="text" class="srch_panel pers-input" placeholder="Введите новый район"><span id="AddDistrict" class="srch_ok ok" title="Подтвердить изменения">N</span>
                 </div>
 
                 <div id="StopWordSectionConfirm">
                     <h2 class="srch-h2 pers-h2 h2">Добавить стоп слово</h2><input id="NewStopWord" name="Stop_word_inp" type="text" class="srch_panel pers-input" placeholder="Введите новое стоп-слово"><span id="AddStopWord" class="srch_ok ok" title="Подтвердить изменения">N</span>
-                </div>
+                </div>-->
+                    <a href="?ctrl=news&act=Setting"><input class="distr-button submit mr" id="" value="Редактировать" type="button"></a>
+                    <input class="distr-button submit " id="search_news_by_stop_words" value="Найти" type="button">
 
                 <form id="start_search_news" method="POST" action="?ctrl=news&act=getNewsByStopWords">
                     <div id="districts" class="selectDistrict">
@@ -102,7 +105,6 @@
                         }//else
                         ?>
                         
-                        <input id="" name="Stop_word_inp" type="text" class="srch_panel_srch pers-input" placeholder="Поиск по районам">
                         <ul class="district">
                             <?php   
                                 foreach ($this->view->districts as $district){
@@ -120,10 +122,9 @@
                         </ul>
 
                     </div>
-                    <div id="stopWords" class="selectDistrict">
+                    <div id="stopWords" class="right selectDistrict">
                         <input style="display: none" id="District" name="District" />
                         <h2 class="h2-distr">Стоп-слова</h2>
-                        <input id="" name="Stop_word_inp" type="text" class="srch_panel_srch pers-input" placeholder="Поиск по стоп-словам">
                         <ul class="district">
                             <?php   
                                 foreach ($this->view->stop_words as $stop_word){
@@ -140,9 +141,8 @@
                         </ul>
 
                     </div>
-                    <input class="distr-button submit" id="search_news_by_stop_words" value="Найти" type="button">
                 </form>       
-                
+
             </div>
         </div>
         <div id="newsContent">
