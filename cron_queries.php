@@ -31,67 +31,69 @@ foreach ($districts as $district){//Проходим по всем района�
     foreach ($result_from_json->response->items as $my_item){
         
         if($my_item->owner_id < 0){//Отсеивание групп
-            
+            $pos = false;
             //Описание новости
             $text = $my_item->text;
             foreach($stop_word_for_search as $sw){
-                
+                //поиск в тексте стоп-слова, если тру останавлеваем поиск, сохранаяем запись в базе
                 $pos = stripos($text, $sw->getWord());
-                if($pos === true){
+                if($pos  != false){
                     break;
-                }//if
-                
+                }//if                
             }//foreach
-            $date = date("D H:i:s",$my_item->date);
-            
-            //Заголовок
-            $title = explode('.', $text)[0];
-            $contains = $glob_service->IsContainsNews($title);
-            
-            if($contains){
-                continue;
-            }//if
-            
-            if(strlen($title) > 100){
-                
-                $title = substr($title, 0, 97);
-                $title .= "...";
-                
-            }//if
-            
-            $img = NULL;
-            
-            try{
-                
-                if($my_item->attachments[0]->photo){
-                
-                if($my_item->attachments[0]->photo->photo_1280){
+            if ($pos != false){
 
-                    $img = $my_item->attachments[0]->photo->photo_1280;
-                    
+                $date = date("D H:i:s",$my_item->date);
+
+
+                //Заголовок
+                $title = explode('.', $text)[0];
+                $contains = $glob_service->IsContainsNews($title);
+
+                if($contains){
+                    continue;
                 }//if
-                else if($my_item->attachments[0]->photo->photo_604){
-                    $img = $my_item->attachments[0]->photo->photo_604;
+
+                if(strlen($title) > 100){
+
+                    $title = substr($title, 0, 97);
+                    $title .= "...";
+
                 }//if
-                
-                
-            }//if
-                
-            }catch(\Exception $ex){
-                
-            }
-            
-            $new_global_news = new global_news();
-            $new_global_news->setTitle($title);
-            $new_global_news->setDescription($text);
-            $new_global_news->setImage($img);
-            $new_global_news->setSource("http://vk.com/feed?w=wall{$my_item->owner_id}_{$my_item->id}");
-            $new_global_news->setDistrict($district->getId());
-            $new_global_news->setDate($date);
-            $glob_service->AddGlobalNews($new_global_news);
-            
-        }//if
-        
+
+                $img = NULL;
+
+                try{
+
+                    if($my_item->attachments[0]->photo){
+
+                    if($my_item->attachments[0]->photo->photo_1280){
+
+                        $img = $my_item->attachments[0]->photo->photo_1280;
+
+                    }//if
+                    else if($my_item->attachments[0]->photo->photo_604){
+                        $img = $my_item->attachments[0]->photo->photo_604;
+                    }//if
+
+
+                }//if
+
+                }catch(\Exception $ex){
+
+                }
+
+                $new_global_news = new global_news();
+                $new_global_news->setTitle($title);
+                $new_global_news->setDescription($text);
+                $new_global_news->setImage($img);
+                $new_global_news->setSource("http://vk.com/feed?w=wall{$my_item->owner_id}_{$my_item->id}");
+                $new_global_news->setDistrict($district->getId());
+                $new_global_news->setDate($date);
+                $glob_service->AddGlobalNews($new_global_news);
+
+            }//if стоп-слова
+        }//if группы   
         
     }//foreach
     
@@ -134,45 +136,52 @@ foreach ($districts as $district){
     
    foreach($js_obj->statuses as $status){
        
-       $text = $status->text;
-       
-       $contains = $glob_service->IsContainsNews($text);
-            
-        if($contains){
-            continue;
+        $text = $status->text;
+        foreach($stop_word_for_search as $sw){
+            //поиск в тексте стоп-слова, если тру останавлеваем поиск, сохранаяем запись в базе
+            $pos = stripos($text, $sw->getWord());
+            if($pos  != false){
+                break;
+            }//if                
+        }//foreach
+        if ($pos != false){
+            $contains = $glob_service->IsContainsNews($text);
+
+            if($contains){
+                continue;
+            }//if
+
+            $user_id = $status->user->id;
+            $screen_name = $status->user->screen_name;
+            $user_image = $status->user->profile_image_url_https;
+            $created_at = $status->created_at;
+            $created_at = strtotime($created_at);
+            $created_at = date("D H:i:s",$created_at);
+
+            $source = "https://twitter.com/" . $status->user->id_str . "/status/" . $status->id_str;
+
+            $date = $status->created_at;
+
+            if($status->entities->media->media_url != NULL){
+                $new_global_news->setImage($status->entities->media->media_url);
+            }//if
+            else{
+
+               $new_global_news->setImage($user_image);  
+
+            }//else
+
+            $new_global_news = new global_news();
+            $new_global_news->setTitle($screen_name);
+            $new_global_news->setDescription($text);
+            $new_global_news->setSource($source);
+            $new_global_news->setDistrict($district->getId());
+            $new_global_news->setDate($created_at);
+
+            $glob_service->AddGlobalNews($new_global_news);
+            $last_news = $status->id_str;
+            $request->setCookiesWithKey('last_record_id', $last_news);
         }//if
-        
-       $user_id = $status->user->id;
-       $screen_name = $status->user->screen_name;
-       $user_image = $status->user->profile_image_url_https;
-       $created_at = $status->created_at;
-       $created_at = strtotime($created_at);
-       $created_at = date("D H:i:s",$created_at);
-       
-       $source = "https://twitter.com/" . $status->user->id_str . "/status/" . $status->id_str;
-       
-       $date = $status->created_at;
-       
-       if($status->entities->media->media_url != NULL){
-            $new_global_news->setImage($status->entities->media->media_url);
-       }//if
-       else{
-           
-           $new_global_news->setImage($user_image);  
-           
-       }//else
-       
-       $new_global_news = new global_news();
-       $new_global_news->setTitle($screen_name);
-       $new_global_news->setDescription($text);
-       $new_global_news->setSource($source);
-       $new_global_news->setDistrict($district->getId());
-       $new_global_news->setDate($created_at);
-       
-       $glob_service->AddGlobalNews($new_global_news);
-       $last_news = $status->id_str;
-       $request->setCookiesWithKey('last_record_id', $last_news);
-       
    }//foreach
    
 }//foreach
