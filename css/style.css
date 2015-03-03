@@ -498,7 +498,8 @@ opacity:1;
     display: inline-block;
     padding: 10px 20px;
     font-size: 12pt;
-    width: 500px;    
+    //width: 500px;    
+    width: 608px;
 }
 .correct{
     opacity: 0;
