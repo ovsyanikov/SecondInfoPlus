@@ -377,6 +377,7 @@ $(function() {
 
 $(document).ready(function(){
     
+    //Добавить район в "Настройках"
     $("#AddNewDistrictSettings").click(function(){
         
         new_district_title = new String($("#NewDistrict").val());
@@ -412,7 +413,7 @@ $(document).ready(function(){
         }//else
         
     });
-    
+    //Добавить стопслово в "Настройках"
     $("#AddStopWordSettings").click(function(){
         
         new_stop_word = new String($("#NewStopWord").val());
@@ -449,10 +450,10 @@ $(document).ready(function(){
         }//else
         
     });
-    
+    //Получить новости (Главная)
     $("#more_news").click(function(){
         
-    
+    //
     $.post("get_news.php",null,function(data){
                         
         news = $.parseJSON(data);
@@ -521,7 +522,7 @@ $(document).ready(function(){
     });
     
     });
-    
+    //Добавить район в "Районы"
     $("#AddDistrict").click(function(){
         
         new_district_title = new String($("#NewDistrictTitle").val());
@@ -557,7 +558,7 @@ $(document).ready(function(){
         }//else
         
     });
-    
+    //Добавить стопслово в "Районы"
     $("#AddStopWord").click(function(){
         
         new_stop_word = new String($("#NewStopWord").val());
@@ -593,7 +594,7 @@ $(document).ready(function(){
         }//else
         
     });
-    
+    //Показать остальнае новости по нажатию кнопки
     $("#more_news_by_stop_words").click(function(){
         
         $("#more_news_by_stop_words").blur();
@@ -668,7 +669,7 @@ $(document).ready(function(){
                 });
                 
     });
-    
+    //поиск по стопсловам
     $("#search_news_by_stop_words").click(function(){
         
         $("#search_news_by_stop_words").blur();
@@ -758,8 +759,8 @@ $(document).ready(function(){
                 
             }//else
         });
-        
-        $("#districts ul.district li").click(function(){
+    //Выбор района и установка его имни в блоке
+    $("#districts ul.district li").click(function(){
             
             $("#districts h2.h2-distr").text($(this).text());
             $("#newsContent div.post").remove();
@@ -767,10 +768,10 @@ $(document).ready(function(){
             
             $.post("ajax.php",{SET_COOKIE_OFFSET: 'set'},function(data){});
             
-        });
+    });
         
         $fl = true;
-        
+        //Сокрытие панели поиска в "райнонах"
         $("#minimize").click(function(){
             if($fl){
                 $("#search-panel").fadeOut(200);
@@ -784,7 +785,7 @@ $(document).ready(function(){
                 $("#minimize").text('─');
             }
         });
-        
+        //Изменение имэйла в личном кабинете
         $("#ConfirmEmail").click(function(){
             
             if(!$("#NewMailInPersonal").val()){
@@ -809,7 +810,7 @@ $(document).ready(function(){
             }//else
             
         });
-        
+        //Изменение пароля в личном кабинете
         $("#ConfirmPassword").click(function(){
            
             if($("#CurrentPassword").val()){
@@ -858,7 +859,7 @@ $(document).ready(function(){
                 ShowPersonalRoomMessage($("#PasswordSection"),'Укажите текущий пароль пользователя','error');
             }//else
         });
-        
+        //Изменение имени в личном кабинете
         $("#ConfirmName").click(function(){
             
             if($("#NewFirstName").val()){
@@ -878,7 +879,7 @@ $(document).ready(function(){
             }//else
             
         });
-        
+        //Изменение Фамилии в личном кабинете
         $("#ConfirmLastName").click(function(){
             
             if($("#NewLastName").val()){
@@ -900,7 +901,7 @@ $(document).ready(function(){
         });
         
         var a = true; 
-        
+        //Анимация блока с редактированием стопслов и районов
         $("span.correct_js").click(function(){
             if(a){
                 
@@ -926,10 +927,13 @@ $(document).ready(function(){
         });
         
         var b = true; 
+        //Редактирование СтопСлов
         $('body').on('click','span.chnd_distr_ok',function(){
             
             if(!$(this).hasClass("dis")){
             elem = $(this).parent().parent();
+            elem_to_change = $(this).parent().parent();
+            
             word_to_update = $(this).parent().prev().data("stop-id");
             new_stop_word = $(this).prev().val();
             
@@ -938,6 +942,8 @@ $(document).ready(function(){
                     if(data == "ok" && new_stop_word != ''){
                     $.post('ajax.php',{UPDATE_STOP_WORD: 'set',stop_id: word_to_update, new_word: new_stop_word},function(data){
                         if(data == "ok" && new_stop_word != ''){
+                            
+                             $(elem).first().html('<div><li data-stop-id=\"'+word_to_update+'\" class="chng_distr_li">'+new_stop_word+'<span class="chng_distr_correct correct" title="Изменить">M</span></li><div class="hg_null"><input type="text" class="chng_distr_inp pers-input" placeholder="Редактирование стоп слова"><span id="ConfirmName" class="chnd_distr_ok ok" title="Подтвердить изменения">N</span></div><div>');
                              $(elem).append("<div class=\"srch_success pers-success\"><h2 class=\"h2\">Изменения успешно внесены</h2></div>");
                              $(elem).children().last().delay(2000).fadeOut(500);
                         }//if
@@ -956,7 +962,7 @@ $(document).ready(function(){
                 });
              }//if has not class dis
         });
-        
+        //Редактирование районов
         $('body').on('click','span.dis',function(){
              
             if($(this).hasClass("dis")){
@@ -964,12 +970,13 @@ $(document).ready(function(){
                 elem = $(this).parent().parent();
                 dist_id = $(this).parent().prev().data("district-id");
                 new_district_title = $(this).prev().val();
-
+                
                 $.post("ajax.php",{CHECK_DISTRICT: 'SET',district: new_district_title},function(data){
 
                         if(data == "ok"){
                         $.post('ajax.php',{UPDATE_DISTRICT: 'set',new_district_title: new_district_title, district_id: dist_id},function(data){
                             if(data == "ok" && new_district_title != ''){
+                                 $(elem).first().html('<div><li data-district-id=\"'+dist_id+'\" class=\"chng_distr_li\">'+new_district_title+'<span class=\"chng_distr_correct correct\" title=\"Изменить\">M</span></li><div class=\"hg_null\"><input id=\"\" type=\"text\" class=\"chng_distr_inp pers-input\" placeholder=\"Редактирование района\"><span id=\"ConfirmName\" class=\"dis chnd_distr_ok ok\" title=\"Подтвердить изменения\">N</span></div></div>');
                                  $(elem).append("<div class=\"srch_success pers-success\"><h2 class=\"h2\">Изменения успешно внесены</h2></div>");
                                  $(elem).children().last().delay(2000).fadeOut(500);
                             }//if
@@ -988,6 +995,7 @@ $(document).ready(function(){
                     });
              }//if has not class dis
         });
+        
         $('body').on('click','span.chng_distr_correct',function(){
            
             if(b){
@@ -1001,7 +1009,7 @@ $(document).ready(function(){
                 
             }//else            
         });
-        
+        //Удаление поста
         window.onbeforeunload = function() {
             
             $("div.delete-post:contains(\"N\")").each(function(i,e){
@@ -1029,7 +1037,7 @@ $(document).ready(function(){
             });
             
         };
-
+        //Анимация удаления
         $("div.delete-post").click(function(){
             
             if($(this).text() == "J"){
@@ -1046,7 +1054,7 @@ $(document).ready(function(){
                 
             }
         });
-        
+        //добавление записи
         $("#addPost").click(function(){
             
             if($("#postTitle").val() && $("#makePostArea").val()){
@@ -1059,7 +1067,7 @@ $(document).ready(function(){
                 ShowPostMessage("Поля не должны быть пустыми!");
             }
         });
-        
+        //Поиск по нажатию клавиши (Правый верхний угол)
         $("#search").keypress(function (e) {
                
                 if (e.keyCode == 13) {
@@ -1078,7 +1086,7 @@ $(document).ready(function(){
                 }
                 
         });
-        
+        //Авторизация
         $('#Authorise').click(function(){
           
         if ($('#userPS').val() && $('#userLE').val()){ //if not empty
@@ -1109,7 +1117,7 @@ $(document).ready(function(){
             
             
         });
-        
+        //регистрация на welcome.php
         $('#register').click(function(){
             
            if($('#RLogin').val() && $('#RMail').val() && $('#RPass').val()){
@@ -1167,7 +1175,7 @@ $(document).ready(function(){
            }//else
             
         });
-        
+        //Полная регистрация 
         $("#registerNewUser").click(function(){
             
             if($("#newUserLogin").val() && $("#newUserLogin").val().length < 50){
