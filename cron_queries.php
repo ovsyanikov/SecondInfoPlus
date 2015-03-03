@@ -138,6 +138,7 @@ foreach ($districts as $district){
        
         $text = $status->text;
         foreach($stop_word_for_search as $sw){
+            $pos = false;
             //поиск в тексте стоп-слова, если тру останавлеваем поиск, сохранаяем запись в базе
             $pos = stripos($text, $sw->getWord());
             if($pos  != false){
