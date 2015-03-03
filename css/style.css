@@ -20,11 +20,11 @@ html{
     background: url(../img/footer_lodyas.png);
 }
 .news-bg{
-    background: url(../img/footer_lodyas.png);  
-    /* background: url(../img/halftone.png); */
-    /* background: url(../img/sos.png); */
-    /* background: url(../img/ticks.png); */
-    /* background: url(../img/binding_light.png); */
+    background: url(../img/footer_lodyas.png) fixed;  
+    /* background: url(../img/halftone.png) fixed; */
+    /* background: url(../img/sos.png) fixed; */
+    /* background: url(../img/ticks.png) fixed; */
+    /* background: url(../img/binding_light.png) fixed; */
 
 }
 .block{
@@ -264,13 +264,13 @@ form a:hover{
 .main-img{
     height: 500px;
     width: 878px;
+    position: relative;
+    top: -25px;
+    left: -25px;
 }
 .top-3{
     overflow: hidden;
     text-align: center;
-    position: relative;
-    top: -25px;
-    left: -25px;
     /* padding: 10px 0px; */
 }
 .top-3 img{
