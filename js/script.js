@@ -955,13 +955,14 @@ $(document).ready(function(){
             elem_to_change = $(this).parent().parent();
             
             word_to_update = $(this).parent().prev().data("stop-id");
-            new_stop_word = $(this).prev().val();
-            
-            $.post("ajax.php",{CHECK_STOP_WORD: 'SET',stop_word: new_stop_word},function(data){
+            new_stop_word = new String($(this).prev().val());
+            new_stop_word = new_stop_word.trim();
+            if(new_stop_word.length != 0){
+                $.post("ajax.php",{CHECK_STOP_WORD: 'SET',stop_word: new_stop_word},function(data){
                 
-                    if(data == "ok" && new_stop_word != ''){
+                    if(data == "ok"){
                     $.post('ajax.php',{UPDATE_STOP_WORD: 'set',stop_id: word_to_update, new_word: new_stop_word},function(data){
-                        if(data == "ok" && new_stop_word != ''){
+                        if(data == "ok"){
                             
                              $(elem).first().html('<div><li data-stop-id=\"'+word_to_update+'\" class="chng_distr_li">'+new_stop_word+'<span class="chng_distr_correct correct" title="Изменить">M</span></li><div class="hg_null"><input type="text" class="chng_distr_inp pers-input" placeholder="Редактирование стоп слова"><span id="ConfirmName" class="chnd_distr_ok ok" title="Подтвердить изменения">N</span></div><div>');
                              $(elem).append("<div class=\"srch_success pers-success\"><h2 class=\"h2\">Изменения успешно внесены</h2></div>");
@@ -974,12 +975,18 @@ $(document).ready(function(){
                     });
                     }//if
                     else{
-                        $(elem).append("<div class=\"srch_error pers-error\"><h2 class=\"h2\">Такое стоп-слово есть или пустое поле</h2></div>");                    
+                        $(elem).append("<div class=\"srch_error pers-error\"><h2 class=\"h2\">Такое стоп-слово есть</h2></div>");                    
                         $(elem).children().last().delay(2000).fadeOut(500);
                     }
                
                 
                 });
+            }//if length not 0
+            else{
+                $(elem).append("<div class=\"srch_error pers-error\"><h2 class=\"h2\">Поле не может быть пустым<h2></div>");                    
+                $(elem).children().last().delay(2000).fadeOut(500);
+            }
+            
              }//if has not class dis
         });
         //Редактирование районов
