@@ -261,16 +261,17 @@ form a:hover{
     /* padding: 5px 0px; */
     font-weight: 400;
 }
+.main-img{
+    height: 500px;
+    width: 878px;
+}
 .top-3{
-   // height: 450px;
-    width: 106%;
     overflow: hidden;
     text-align: center;
     position: relative;
     top: -25px;
     left: -25px;
     /* padding: 10px 0px; */
-    height: 500px;
 }
 .top-3 img{
     max-width: 100%; 
@@ -511,7 +512,7 @@ opacity:1;
 }
 
 
-.pers-text,.chng_distr_li:hover .correct{
+.pers-text:hover .correct,.chng_distr_li:hover .correct{
     opacity: 1;
     transition: opacity ease-in-out 0.3s;
 }

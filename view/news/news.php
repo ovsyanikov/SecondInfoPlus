@@ -99,7 +99,7 @@
 
         </aside>
         <section class="news-section" id="news-section">
-            <div class="top-3">
+            <div class="main-img top-3">
                 <img src="img/moscow_1.jpg" alt="">
             </div>
             <h1 class="h1">Все новости по дате</h1>
