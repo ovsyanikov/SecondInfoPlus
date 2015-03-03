@@ -316,25 +316,25 @@ function ShowPersonalRoomMessage(controll,message,type){
         $("#" + $(controll).attr('id')).children(".pers-error").remove();
         
         if($("#" + $(controll).attr('id')).children().last().attr("class") == "pers-success"){
-            $("#" + $(controll).attr('id')).children().last().html("<h2 class=\"h2\">"+message+"</h2>");
+            $("#" + $(controll).attr('id')).children().last().html("<h2 class=\"h2\">"+message+"</h2>");;
         }
         
         else{
             $("#" + $(controll).attr('id')).append("<div class=\"pers-success\"><h2 class=\"h2\">"+message+"</h2></div>");
         }//else
-         
+        $(controll).children().last().fadeOut(0).fadeIn(300); 
     }//if
     else{
         
         $("#" + $(controll).attr('id')).children(".pers-success").remove();
         
         if($("#" + $(controll).attr('id')).children().last().attr("class") == "pers-error"){
-            $("#" + $(controll).attr('id')).children().last().html("<h2 class=\"h2\">"+message+"</h2>");;
+            $("#" + $(controll).attr('id')).children().last().html("<h2 class=\"h2\">"+message+"</h2>");
         }//if
         else {
             $("#" + $(controll).attr('id')).append("<div class=\"pers-error\"><h2 class=\"h2\">"+message+"</h2></div>");
         }//else
-        
+        $(controll).children().last().fadeOut(0).fadeIn(300);
        
     }//if
 }
@@ -790,9 +790,11 @@ $(document).ready(function(){
             
             if(!$("#NewMailInPersonal").val()){
                 ShowPersonalRoomMessage($("#emailSection"),'Поле не может быть пустым','error');
+                $("#emailSection").children().last().delay(2000).fadeOut(300);
             }//if
             else if($("#NewMailInPersonal").val().indexOf('@') == -1){
                 ShowPersonalRoomMessage($("#emailSection"),'E-mail должен содержать символ @','error');
+                $("#emailSection").children().last().delay(2000).fadeOut(300);
             }//if
             else{
                 
@@ -800,9 +802,11 @@ $(document).ready(function(){
                     
                     if(data == "ok"){
                         ShowPersonalRoomMessage($("#emailSection"),'Изменения успешно внесены!','success');
+                        $("#emailSection").children().last().delay(2000).fadeOut(300);
                     }//if
                     else{
                         ShowPersonalRoomMessage($("#emailSection"),'Ошибка на сервере!','error');
+                        $("#emailSection").children().last().delay(2000).fadeOut(300);
                     }//else
                     
                 });
@@ -828,9 +832,11 @@ $(document).ready(function(){
                                        
                                        if(data == "ok"){
                                            ShowPersonalRoomMessage($("#PasswordSection"),'Пароль успешно изменен','success');
+                                           $("#PasswordSection").children().last().delay(2000).fadeOut(300);
                                        }//if
                                        else{
                                            ShowPersonalRoomMessage($("#PasswordSection"),'Ошибка сервера','error');
+                                           $("#PasswordSection").children().last().delay(2000).fadeOut(300);
                                        }//else
                                        
                                    });
@@ -838,25 +844,30 @@ $(document).ready(function(){
                                }//if
                                else{
                                    ShowPersonalRoomMessage($("#PasswordSection"),'Длина нового пароля должна быть больше 6-ти символов','error');
-                               }//else
+                                    $("#PasswordSection").children().last().delay(2000).fadeOut(300);
+                                }//else
                            }//if
                            else{
                                ShowPersonalRoomMessage($("#PasswordSection"),'Пароли не совпадают','error');
+                               $("#PasswordSection").children().last().delay(2000).fadeOut(300);
                            }//else
                        }//if
                        else{
                            ShowPersonalRoomMessage($("#PasswordSection"),'Заполните поля с новым паролем','error');
+                           $("#PasswordSection").children().last().delay(2000).fadeOut(300);
                        }//else
                        
                     }//if
                     else{
                         ShowPersonalRoomMessage($("#PasswordSection"),'Текущий пароль указан не верно','error');
+                        $("#PasswordSection").children().last().delay(2000).fadeOut(300);
                     }//else
                 });//post
                 
             }//if
             else{
                 ShowPersonalRoomMessage($("#PasswordSection"),'Укажите текущий пароль пользователя','error');
+                $("#PasswordSection").children().last().delay(2000).fadeOut(300);
             }//else
         });
         //Изменение имени в личном кабинете
@@ -868,14 +879,20 @@ $(document).ready(function(){
                    
                    if(data == "ok"){
                        ShowPersonalRoomMessage($("#FirstNameSection"),'Имя успешно изменено','success');
+                       $("#FirstNameSection").children().last().delay(2000).fadeOut(300);
                    }//if
                    else{
                        ShowPersonalRoomMessage($("#FirstNameSection"),'Ошибка сервера','error');
+                       $("#FirstNameSection").children().last().delay(2000).fadeOut(300);
                    }
                });
             }//if
             else{
                 ShowPersonalRoomMessage($("#FirstNameSection"),'Введите новое имя','error');
+                $("#FirstNameSection").children().last().delay(2000).fadeOut(300);
+                
+               // $("#FirstNameSection").children().last().empty();
+
             }//else
             
         });
@@ -888,14 +905,17 @@ $(document).ready(function(){
                    
                    if(data == "ok"){
                        ShowPersonalRoomMessage($("#LastNameSection"),'Фамилия успешно изменена','success');
+                       $("#LastNameSection").children().last().delay(2000).fadeOut(300);
                    }//if
                    else{
                        ShowPersonalRoomMessage($("#LastNameSection"),'Ошибка сервера','error');
+                       $("#LastNameSection").children().last().delay(2000).fadeOut(300);
                    }
                });
             }//if
             else{
                 ShowPersonalRoomMessage($("#LastNameSection"),'Введите новую фамилию','error');
+                $("#LastNameSection").children().last().delay(2000).fadeOut(300);
             }//else
             
         });
@@ -1252,5 +1272,5 @@ $(document).ready(function(){
             
         });//register click
 
-
+        $('section.news-section').children().first().children().first().css("padding-top","0px");
 });

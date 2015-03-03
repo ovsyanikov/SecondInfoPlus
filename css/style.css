@@ -255,6 +255,7 @@ form a:hover{
     font-weight: 600;
     font-stretch: condensed;
     padding: 10px 0px;
+    line-height: 1;
 }
 .h2{
     color: #BE1000;
@@ -538,7 +539,7 @@ opacity:1;
 
 .pers-input{
     width: 240px;
-    font-size: 14pt;
+    font-size: 12pt;
     padding: 10px 20px;
     border: none;
     background: #E3E3E3;
@@ -573,7 +574,7 @@ opacity:1;
 .pers-error{
     padding: 10px 20px;
     margin: 5px 0px 0px 180px;
-    width: 500px;
+    width: 607px;
     background: #FFE6E4;  
 }
 .pers-success h2{
