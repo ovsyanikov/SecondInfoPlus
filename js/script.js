@@ -365,7 +365,7 @@ $(function() {
 
                 } else {
                         $('aside.sidebar').css({display : "inline-block"});
-                        $('.news-section').css({margin : "10px 0px 0px 2px", display : "inline-block"});
+                        $('.news-section').css({margin : "8px 0px 0px 2px", display : "inline-block"});
                 }
                 });
 
