@@ -728,8 +728,13 @@ opacity:1;
     vertical-align: top;
 }
 .selectDistrict:hover{
-    height: 250px;
+    height: 300px;
+    overflow: scroll;
     transition: height ease 0.3s;
+}
+.selectDistrict::-webkit-scrollbar{
+    width: 0px;
+    //background: rgba(0,0,0,0.4);
 }
 .selectDistrict li{
     width: 125px;

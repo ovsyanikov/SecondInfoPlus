@@ -1271,6 +1271,4 @@ $(document).ready(function(){
             
             
         });//register click
-
-        $('section.news-section').children().first().children().first().css("padding-top","0px");
 });
