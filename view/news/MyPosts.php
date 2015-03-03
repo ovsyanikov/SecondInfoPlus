@@ -102,11 +102,11 @@
                            $post_description = $specific_news->getDescription();
                            
                            if(strlen($post_title) > 50){
-                              $post_title = (substr($post_title, 0, 40) . "...");
+                              $post_title = (iconv_substr($post_title, 0, 40,'UTF-8') . "...");
                            }//if
                            
                            if(strlen($post_description) > 150){
-                              $post_description = (substr($post_description, 0, 140) . "...");
+                              $post_description = (iconv_substr($post_description, 0, 140,'UTF-8') . "...");
                            }//if
                            
                            if($specific_news->getFiles() != NULL){

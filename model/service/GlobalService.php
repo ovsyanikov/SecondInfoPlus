@@ -15,7 +15,7 @@ class GlobalService{
         $stmt->execute();
         
         $districts = [];
-        $stmt = \util\MySQL::$db->prepare("SELECT * FROM Districts");
+        $stmt = \util\MySQL::$db->prepare("SELECT * FROM districts");
         $stmt->execute();
         
         while($district = $stmt->fetchObject(district::class)){
@@ -130,7 +130,7 @@ class GlobalService{
     public function GetDistrictById($id){
         
         
-        $stmt = \util\MySQL::$db->prepare("SELECT * FROM Districts WHERE id = :id");
+        $stmt = \util\MySQL::$db->prepare("SELECT * FROM districts WHERE id = :id");
         $stmt->bindParam(":id",$id);
         $stmt->execute();
         
@@ -149,7 +149,7 @@ class GlobalService{
         $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
         $stmt->execute();
         
-        $stmt = \util\MySQL::$db->prepare("SELECT * FROM Districts WHERE Title = :name");
+        $stmt = \util\MySQL::$db->prepare("SELECT * FROM districts WHERE Title = :name");
         $stmt->bindParam(":name",$name);
         $stmt->execute();
         

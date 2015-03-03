@@ -133,17 +133,20 @@ foreach ($districts as $district){
    foreach($js_obj->statuses as $status){
        
         $text = $status->text;
+        
         foreach($stop_word_for_search as $sw){
             $pos = false;
             //поиск в тексте стоп-слова, если тру останавлеваем поиск, сохранаяем запись в базе
             $pos = stripos($text, $sw->getWord());
             if($pos  != false){
                 break;
-            }//if                
+            }//if
+            
         }//foreach
         if ($pos != false){
+            
             $contains = $glob_service->IsContainsNews($text);
-
+            
             if($contains){
                 continue;
             }//if
