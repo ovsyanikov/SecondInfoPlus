@@ -1107,25 +1107,6 @@ $(document).ready(function(){
                 ShowPostMessage("Поля не должны быть пустыми!");
             }
         });
-        //Поиск по нажатию клавиши (Правый верхний угол)
-        $("#search").keypress(function (e) {
-               
-                if (e.keyCode == 13) {
-
-                for(i = 0;i < 3;i++){
-                    if(i==0){
-                        LoaderOn();
-                        
-                    }
-                    if(i==1){
-                        SEARCH();
-                    }
-
-                } 
-                    
-                }
-                
-        });
         //Авторизация
         $('#Authorise').click(function(){
           
