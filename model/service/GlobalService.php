@@ -210,7 +210,7 @@ class GlobalService{
         $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
         $stmt->execute();
 
-        $stmt = \util\MySQL::$db->prepare("SELECT * FROM global_news LIMIT $offset,$limit");
+        $stmt = \util\MySQL::$db->prepare("SELECT * FROM global_news ORDER BY id desc LIMIT $offset,$limit");
         $stmt->execute();
 
         while($glob_news = $stmt->fetchObject(global_news::class)){

@@ -112,9 +112,7 @@ $cookie_last_news = $request->getCookieValue('last_record_id');
 foreach ($districts as $district){
     
     $dist = $district->getTitle();
-    $q_param = urlencode($dist);
-    
-    
+    $q_param = urlencode($dist);    
     
     if($cookie_last_news != null){
         $getfield = "?since_id=$cookie_last_news&q=$q_param&count=10&lang=ru";
