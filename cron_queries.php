@@ -44,8 +44,6 @@ foreach ($districts as $district){//Проходим по всем района�
             if ($pos != false){
 
                 $date = date("D H:i:s",$my_item->date);
-
-
                 //Заголовок
                 $title = explode('.', $text)[0];
                 $contains = $glob_service->IsContainsNews($title);
@@ -163,6 +161,15 @@ foreach ($districts as $district){
 
             $date = $status->created_at;
 
+           
+
+            $new_global_news = new global_news();
+            $new_global_news->setTitle($screen_name);
+            $new_global_news->setDescription($text);
+            $new_global_news->setSource($source);
+            $new_global_news->setDistrict($district->getId());
+            $new_global_news->setDate($created_at);
+            
             if($status->entities->media->media_url != NULL){
                 $new_global_news->setImage($status->entities->media->media_url);
             }//if
@@ -171,14 +178,7 @@ foreach ($districts as $district){
                $new_global_news->setImage($user_image);  
 
             }//else
-
-            $new_global_news = new global_news();
-            $new_global_news->setTitle($screen_name);
-            $new_global_news->setDescription($text);
-            $new_global_news->setSource($source);
-            $new_global_news->setDistrict($district->getId());
-            $new_global_news->setDate($created_at);
-
+            
             $glob_service->AddGlobalNews($new_global_news);
             $last_news = $status->id_str;
             $request->setCookiesWithKey('last_record_id', $last_news);
