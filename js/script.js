@@ -990,8 +990,11 @@ $(document).ready(function(){
                 elem = $(this).parent().parent();
                 dist_id = $(this).parent().prev().data("district-id");
                 new_district_title = $(this).prev().val();
+                new_district_title = new  String (new_district_title);
+                new_district_title = new_district_title.trim();
                 
-                $.post("ajax.php",{CHECK_DISTRICT: 'SET',district: new_district_title},function(data){
+                if( new_district_title.length != 0){
+                     $.post("ajax.php",{CHECK_DISTRICT: 'SET',district: new_district_title},function(data){
 
                         if(data == "ok"){
                         $.post('ajax.php',{UPDATE_DISTRICT: 'set',new_district_title: new_district_title, district_id: dist_id},function(data){
@@ -1007,12 +1010,17 @@ $(document).ready(function(){
                         });
                         }//if
                         else{
-                            $(elem).append("<div class=\"srch_error pers-error\"><h2 class=\"h2\">Такое район есть или пустое поле</h2></div>");                    
+                            $(elem).append("<div class=\"srch_error pers-error\"><h2 class=\"h2\">Такое район уже есть</h2></div>");                    
                             $(elem).children().last().delay(2000).fadeOut(500);
                         }
 
 
                     });
+                }
+                else{
+                     $(elem).append("<div class=\"srch_error pers-error\"><h2 class=\"h2\">Поле не может быть пустым</h2></div>");                    
+                     $(elem).children().last().delay(2000).fadeOut(500);
+                }
              }//if has not class dis
         });
         
