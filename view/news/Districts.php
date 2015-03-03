@@ -107,16 +107,26 @@
                         
                         <ul class="district">
                             <?php   
+                                
+                                $cnt = round(count($this->view->districts)/2);
+                                $i = 0;
                                 foreach ($this->view->districts as $district){
+                                    
                                     echo "<li data-district-id = \"{$district->getId()}\">{$district->getTitle()}</li>";
-                                  
+                                    $i++;
+                                    if($i == $cnt){break;}
                                 }//foreach
                             ?>               
                         </ul>
                         <ul class="district">
-                            <?php   
+                            <?php
+                                $i=0;
                                 foreach ($this->view->districts as $district){
-                                    echo "<li data-district-id = \"{$district->getId()}\">{$district->getTitle()}</li>";
+                                    if($i>=$cnt)
+                                    {
+                                        echo "<li data-district-id = \"{$district->getId()}\">{$district->getTitle()}</li>";
+                                    }
+                                    $i++;
                                 }//foreach
                             ?>               
                         </ul>
@@ -127,15 +137,25 @@
                         <h2 class="h2-distr">Стоп-слова</h2>
                         <ul class="district">
                             <?php   
+                                $cnt = round(count($this->view->stop_words)/2);
+                                $i = 0;                            
                                 foreach ($this->view->stop_words as $stop_word){
                                     echo "<li data-district-id = \"{$stop_word->getId()}\">{$stop_word->getWord()}</li>";
+                                    $i++;
+                                    if($i == $cnt){
+                                        break;
+                                    }
                                 }//foreach
                             ?>               
                         </ul>
                         <ul class="district">
-                            <?php   
+                            <?php
+                                $i=0;
                                 foreach ($this->view->stop_words as $stop_word){
-                                    echo "<li data-district-id = \"{$stop_word->getId()}\">{$stop_word->getWord()}</li>";
+                                    if($i>=$cnt){
+                                        echo "<li data-district-id = \"{$stop_word->getId()}\">{$stop_word->getWord()}</li>";
+                                    }
+                                    $i++;
                                 }//foreach
                             ?>               
                         </ul>

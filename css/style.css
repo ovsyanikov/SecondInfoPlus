@@ -807,6 +807,7 @@ span#minimize{
 }
 .district{
     display: inline-block;
+    vertical-align: top;
 }
 .post-icon{
     float: right;
