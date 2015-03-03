@@ -381,6 +381,7 @@ $(document).ready(function(){
     $("#AddNewDistrictSettings").click(function(){
         
         new_district_title = new String($("#NewDistrict").val());
+        new_district_title = new_district_title.trim();
         
         if(new_district_title.length != 0){
             
@@ -417,12 +418,13 @@ $(document).ready(function(){
     $("#AddStopWordSettings").click(function(){
         
         new_stop_word = new String($("#NewStopWord").val());
+        new_stop_word = new_stop_word.trim();
         
         if(new_stop_word.length != 0){
             
             $.post("ajax.php",{ADD_STOP_WORD: 'SET',stop_word: new_stop_word},function(data){
                 
-                if(data != "not inserted" && data != "exist"){
+                if(data != "exist"){
                     $("#StopWordsOrder").append('<div><li data-stop-id=\"'+data+'\" class="chng_distr_li">'+new_stop_word+'<span class="chng_distr_correct correct" title="Изменить">M</span></li><div class="hg_null"><input type="text" class="chng_distr_inp pers-input" placeholder="Редактирование стоп слова"><span id="ConfirmName" class="chnd_distr_ok ok" title="Подтвердить изменения">N</span></div><div>');
                     ShowPersonalRoomMessage($("#StopWordSectionConfirm"),'Стоп слово добавлено','success');
                     $("#StopWordSectionConfirm").children().last().addClass("srch_success");
@@ -431,12 +433,6 @@ $(document).ready(function(){
                 }//if
                 else if(data == "exist"){
                     ShowPersonalRoomMessage($("#StopWordSectionConfirm"),'Такое стоп слово уже есть','error');
-                    $("#StopWordSectionConfirm").children().last().addClass("srch_error");
-                    $("#StopWordSectionConfirm").children().last().delay(2000).fadeOut(500);
-                }//else
-                else{
-
-                    ShowPersonalRoomMessage($("#StopWordSectionConfirm"),'Ошибка на сервере','error');
                     $("#StopWordSectionConfirm").children().last().addClass("srch_error");
                     $("#StopWordSectionConfirm").children().last().delay(2000).fadeOut(500);
                 }//else
@@ -526,6 +522,7 @@ $(document).ready(function(){
     $("#AddDistrict").click(function(){
         
         new_district_title = new String($("#NewDistrictTitle").val());
+        new_district_title = new_district_title.trim();
         
         if(new_district_title.length != 0){
             
@@ -562,6 +559,7 @@ $(document).ready(function(){
     $("#AddStopWord").click(function(){
         
         new_stop_word = new String($("#NewStopWord").val());
+        new_stop_word = new_stop_word.trim();
         
         if(new_stop_word.length != 0){
             
@@ -787,18 +785,20 @@ $(document).ready(function(){
         });
         //Изменение имэйла в личном кабинете
         $("#ConfirmEmail").click(function(){
+            new_mail = new String($("#NewMailInPersonal").val());
+            new_mail = new_mail.trim();
             
-            if(!$("#NewMailInPersonal").val()){
+            if(new_mail.length == 0){
                 ShowPersonalRoomMessage($("#emailSection"),'Поле не может быть пустым','error');
                 $("#emailSection").children().last().delay(2000).fadeOut(300);
             }//if
-            else if($("#NewMailInPersonal").val().indexOf('@') == -1){
+            else if(new_mail.indexOf('@') == -1){
                 ShowPersonalRoomMessage($("#emailSection"),'E-mail должен содержать символ @','error');
                 $("#emailSection").children().last().delay(2000).fadeOut(300);
             }//if
             else{
                 
-                $.post("ajax.php",{EmailSuccess: 'set', NewPersonalMail: $("#NewMailInPersonal").val() , Owner:  $("#login").text()},function(data){
+                $.post("ajax.php",{EmailSuccess: 'set', NewPersonalMail: new_mail , Owner:  $("#login").text()},function(data){
                     
                     if(data == "ok"){
                         ShowPersonalRoomMessage($("#emailSection"),'Изменения успешно внесены!','success');
@@ -816,7 +816,7 @@ $(document).ready(function(){
         });
         //Изменение пароля в личном кабинете
         $("#ConfirmPassword").click(function(){
-           
+            
             if($("#CurrentPassword").val()){
                 
                 $.post("ajax.php",{CheckPassword: 'set', Owner: $("#login").text(), UserPassword: $("#CurrentPassword").val()},function(data){
@@ -873,7 +873,10 @@ $(document).ready(function(){
         //Изменение имени в личном кабинете
         $("#ConfirmName").click(function(){
             
-            if($("#NewFirstName").val()){
+            new_name = new String($("#NewFirstName").val());
+            new_name = new_name.trim();
+            
+            if(new_name.length != 0){
                 
                $.post("ajax.php",{ChangeFirstName: 'set', Owner: $("#login").text(), NewFirstName: $("#NewFirstName").val()}, function(data){
                    
@@ -888,7 +891,7 @@ $(document).ready(function(){
                });
             }//if
             else{
-                ShowPersonalRoomMessage($("#FirstNameSection"),'Введите новое имя','error');
+                ShowPersonalRoomMessage($("#FirstNameSection"),'Поле не может быть пустым','error');
                 $("#FirstNameSection").children().last().delay(2000).fadeOut(300);
                 
                // $("#FirstNameSection").children().last().empty();
@@ -898,8 +901,10 @@ $(document).ready(function(){
         });
         //Изменение Фамилии в личном кабинете
         $("#ConfirmLastName").click(function(){
+            new_last_name = new String($("#NewLastName").val());
+            new_last_name = new_last_name.trim();
             
-            if($("#NewLastName").val()){
+            if(new_last_name.length != 0){
                 
                $.post("ajax.php",{ChangeLastName: 'set', Owner: $("#login").text(), NewLastName: $("#NewLastName").val()}, function(data){
                    
@@ -914,7 +919,7 @@ $(document).ready(function(){
                });
             }//if
             else{
-                ShowPersonalRoomMessage($("#LastNameSection"),'Введите новую фамилию','error');
+                ShowPersonalRoomMessage($("#LastNameSection"),'Поле не может быть пустым','error');
                 $("#LastNameSection").children().last().delay(2000).fadeOut(300);
             }//else
             

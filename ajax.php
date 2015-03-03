@@ -374,7 +374,7 @@ else if(!empty ($_POST['ADD_STOP_WORD'])){
             echo "{$result_insert->getId()}";
         }//if
         else{
-            echo "not inserted";
+            echo "exist";
         }//else
     }//if
     else{
