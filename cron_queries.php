@@ -3,6 +3,7 @@
 
 require_once './util/MySQL.php';
 require_once './model/entity/global_news.php';
+require_once './model/entity/stopword.php';
 require_once './model/service/GlobalService.php';
 require_once './model/entity/district.php';
 require_once './twitter-api/TwitterAPIExchange.php';
@@ -11,10 +12,12 @@ require_once './util/Request.php';
 use model\service\GlobalService;
 use model\entity\global_news;
 use util\Request;
+use model\entity\stopword;
 
 \util\MySQL::$db = new \PDO('mysql:host=localhost;dbname=u304199710_info', 'u304199710_alex', '1qaz2wsx');
 
 $glob_service = new GlobalService();
+$stop_word_for_search = $glob_service->GetStopWords();
 
 //Получаем все районы из БД
 $districts = $glob_service->GetDistricts();
@@ -31,6 +34,14 @@ foreach ($districts as $district){//Проходим по всем района�
             
             //Описание новости
             $text = $my_item->text;
+            foreach($stop_word_for_search as $sw){
+                
+                $pos = stripos($text, $sw->getWord());
+                if($pos === true){
+                    break;
+                }//if
+                
+            }//foreach
             $date = date("D H:i:s",$my_item->date);
             
             //Заголовок

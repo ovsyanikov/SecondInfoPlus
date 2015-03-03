@@ -37,9 +37,6 @@
             </div>
         </div>
     </heder>
-
-
-
     <div class="content">
     <aside class="sidebar"> 
         <div class="personal">
