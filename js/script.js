@@ -381,48 +381,56 @@ $(document).ready(function(){
     $("#AddNewDistrictSettings").click(function(){
         
         new_district_title = new String($("#NewDistrict").val());
-        new_district_title = new_district_title.trim();
-        
-        if(new_district_title.length != 0){
-            
-            $.post("ajax.php",{ADD_DISTRICT: 'SET',District: new_district_title},function(data){
-                if(data != "exist" && data != "not inserted"){
-                    ShowPersonalRoomMessage($("#DistrictSectionConfirm"),'Район добавлен','success');
-                    $("#DistrictSectionConfirm").children().last().addClass("srch_success");
-                    $("#DistrictSectionConfirm").children().last().delay(2000).fadeOut(500);
-                    $("#districts_order").append('<div><li data-district-id=\"'+data+'\" class=\"chng_distr_li\">'+new_district_title+'<span class=\"chng_distr_correct correct\" title=\"Изменить\">M</span></li><div class=\"hg_null\"><input id=\"\" type=\"text\" class=\"chng_distr_inp pers-input\" placeholder=\"Редактирование района\"><span id=\"ConfirmName\" class=\"dis chnd_distr_ok ok\" title=\"Подтвердить изменения\">N</span></div></div>');
-                }//if
-                else if(data == "exist"){
-                    ShowPersonalRoomMessage($("#DistrictSectionConfirm"),'Такой район уже есть','error');
-                    $("#DistrictSectionConfirm").children().last().addClass("srch_error");
-                    $("#DistrictSectionConfirm").children().last().delay(2000).fadeOut(500);
-                }//else
-                else{
-                    ShowPersonalRoomMessage($("#DistrictSectionConfirm"),'Ошибка на сервере','error');
-                    $("#DistrictSectionConfirm").children().last().addClass("srch_error");
-                    $("#DistrictSectionConfirm").children().last().delay(2000).fadeOut(500);
-                }//else
-            });
-            
-            
-           
-        }//if
-        else{
-            ShowPersonalRoomMessage($("#DistrictSectionConfirm"),'Поле не может быть путым','error');
-             $("#DistrictSectionConfirm").children().last().addClass("srch_error");
-             $("#DistrictSectionConfirm").children().last().delay(2000).fadeOut(500);
-        }//else
-        
+        new_district_title = new_district_title.split(',');
+        for (i=0; i<new_district_title.length; i++){
+
+            new_district_title[i].trim();
+         ///   alert(new_district_title[i]);            
+        //new_district_title = new_district_title.trim();
+            //if(i){
+//            if(new_district_title.length != 0){
+//
+                $.post("ajax.php",{ADD_DISTRICT: 'SET',District: new_district_title[i]},function(data){
+                    if(data != "exist" && data != "not inserted"){
+                        ShowPersonalRoomMessage($("#DistrictSectionConfirm"),'Район успешно добавлен','success');
+                        $("#DistrictSectionConfirm").children().last().addClass("srch_success");
+                        $("#DistrictSectionConfirm").children().last().delay(2000).fadeOut(500);
+                        $("#districts_order").append('<div><li data-district-id=\"'+data+'\" class=\"chng_distr_li\">'+new_district_title+'<span class=\"chng_distr_correct correct\" title=\"Изменить\">M</span></li><div class=\"hg_null\"><input id=\"\" type=\"text\" class=\"chng_distr_inp pers-input\" placeholder=\"Редактирование района\"><span id=\"ConfirmName\" class=\"dis chnd_distr_ok ok\" title=\"Подтвердить изменения\">N</span></div></div>');
+                    }//if
+                    else if(data == "exist"){
+                        ShowPersonalRoomMessage($("#DistrictSectionConfirm"),'Указанный район уже существует','error');
+                        $("#DistrictSectionConfirm").children().last().addClass("srch_error");
+                        $("#DistrictSectionConfirm").children().last().delay(2000).fadeOut(500);
+                    }//else
+                    else{
+                        ShowPersonalRoomMessage($("#DistrictSectionConfirm"),'Ошибка на сервере','error');
+                        $("#DistrictSectionConfirm").children().last().addClass("srch_error");
+                        $("#DistrictSectionConfirm").children().last().delay(2000).fadeOut(500);
+                    }//else
+             });
+
+
+
+       //        }//if
+//            else{
+//                ShowPersonalRoomMessage($("#DistrictSectionConfirm"),'Поле не может быть путым','error');
+//                 $("#DistrictSectionConfirm").children().last().addClass("srch_error");
+//                 $("#DistrictSectionConfirm").children().last().delay(2000).fadeOut(500);
+//            }//else
+    }
     });
     //Добавить стопслово в "Настройках"
     $("#AddStopWordSettings").click(function(){
         
-        new_stop_word = new String($("#NewStopWord").val());
-        new_stop_word = new_stop_word.trim();
+        new_stop_word = new String($("#NewStopWord").val());       
+        new_stop_word = new_stop_word.split(',');
         
-        if(new_stop_word.length != 0){
+        for (i=0; i<new_stop_word.length; i++){
+
+            new_stop_word[i].trim();        
+    //    if(new_stop_word.length != 0){
             
-            $.post("ajax.php",{ADD_STOP_WORD: 'SET',stop_word: new_stop_word},function(data){
+            $.post("ajax.php",{ADD_STOP_WORD: 'SET',stop_word: new_stop_word[i]},function(data){
                 
                 if(data != "exist"){
                     $("#StopWordsOrder").append('<div><li data-stop-id=\"'+data+'\" class="chng_distr_li">'+new_stop_word+'<span class="chng_distr_correct correct" title="Изменить">M</span></li><div class="hg_null"><input type="text" class="chng_distr_inp pers-input" placeholder="Редактирование стоп слова"><span id="ConfirmName" class="chnd_distr_ok ok" title="Подтвердить изменения">N</span></div><div>');
@@ -438,13 +446,13 @@ $(document).ready(function(){
                 }//else
             });
            
-        }//if
-        else{
-             ShowPersonalRoomMessage($("#StopWordSectionConfirm"),'Стоп слово не может быть путым','error');
-             $("#StopWordSectionConfirm").children().last().addClass("srch_error");
-             $("#StopWordSectionConfirm").children().last().delay(2000).fadeOut(500);
-        }//else
-        
+//        }//if
+//        else{
+//             ShowPersonalRoomMessage($("#StopWordSectionConfirm"),'Стоп слово не может быть путым','error');
+//             $("#StopWordSectionConfirm").children().last().addClass("srch_error");
+//             $("#StopWordSectionConfirm").children().last().delay(2000).fadeOut(500);
+//        }//else
+        }
     });
     //Получить новости (Главная)
     $("#more_news").click(function(){
