@@ -210,7 +210,7 @@ class GlobalService{
         $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
         $stmt->execute();
 
-        $stmt = \util\MySQL::$db->prepare("SELECT * FROM global_news ORDER BY id desc LIMIT $offset,$limit");
+        $stmt = \util\MySQL::$db->prepare("SELECT distinct(`description`),`id`,`title`,`public_date`,`district`,`Source`,`Images`,`Date` FROM `global_news` ORDER BY id desc LIMIT $offset,$limit");
         $stmt->execute();
 
         while($glob_news = $stmt->fetchObject(global_news::class)){
@@ -230,11 +230,11 @@ class GlobalService{
                 " VALUES(NULL,:title,:description,now(),:distr,:src,:img,:date) ");
         
         $title = $news->getTitle();
-        $title = addslashes($title);
         $stmt->bindParam(":title",$title);
         
         $description = $news->getDescription();
         $description = addslashes($description);
+        
         $stmt->bindParam(":description",$description );
         
         $destr = $news->getDistrict();

@@ -26,7 +26,7 @@ foreach ($districts as $district){//Проходим по всем района�
     //3600
     $d_title = $district->getTitle();
     $to_search = urlencode($d_title);
-    $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&start_time=".(time()-299)."&extended=0&count=10&v=5.28");    
+    $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&start_time=".(time()-299)."&extended=0&count=100&v=5.28");    
     $result_from_json = json_decode($result);
     
     foreach ($result_from_json->response->items as $my_item){
@@ -34,7 +34,7 @@ foreach ($districts as $district){//Проходим по всем района�
         if($my_item->owner_id < 0){//Отсеивание групп
             $pos = false;
             //Описание новости
-            $text = $my_item->text;
+            $text = addslashes($my_item->text);
             foreach($stop_word_for_search as $sw){
                 //поиск в тексте стоп-слова, если тру останавлеваем поиск, сохранаяем запись в базе
                 $pos = stripos($text, $sw->getWord());
@@ -83,8 +83,8 @@ foreach ($districts as $district){//Проходим по всем района�
                 }
 
                 $new_global_news = new global_news();
-                $new_global_news->setTitle(addslashes($title));
-                $new_global_news->setDescription(addslashes($text));
+                $new_global_news->setTitle($title);
+                $new_global_news->setDescription($text);
                 $new_global_news->setImage($img);
                 $new_global_news->setSource("http://vk.com/feed?w=wall{$my_item->owner_id}_{$my_item->id}");
                 $new_global_news->setDistrict($district->getId());
@@ -116,7 +116,7 @@ foreach ($districts as $district){
     $q_param = urlencode($dist);    
     
     if($cookie_last_news != null){
-        $getfield = "?since_id=$cookie_last_news&q=$q_param&count=10&lang=ru";
+        $getfield = "?since_id=$cookie_last_news&q=$q_param&count=100&lang=ru";
     }//if
     else{
         $getfield = "?lang=ru&q=$q_param&count=10";
@@ -165,7 +165,7 @@ foreach ($districts as $district){
             
             $new_global_news = new global_news();
             $new_global_news->setTitle($screen_name);
-            $new_global_news->setDescription(addslashes($text));
+            $new_global_news->setDescription($text);
             $new_global_news->setSource($source);
             $new_global_news->setDistrict($district->getId());
             $new_global_news->setDate($created_at);
