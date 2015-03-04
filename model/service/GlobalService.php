@@ -233,7 +233,7 @@ class GlobalService{
         $stmt->bindParam(":title",$title);
         
         $description = $news->getDescription();
-        $description = addslashes($description);
+        //$description = addslashes($description);
         
         $stmt->bindParam(":description",$description );
         

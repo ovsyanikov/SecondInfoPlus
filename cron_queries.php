@@ -116,7 +116,7 @@ foreach ($districts as $district){
     $q_param = urlencode($dist);    
     
     if($cookie_last_news != null){
-        $getfield = "?since_id=$cookie_last_news&q=$q_param&count=100&lang=ru";
+        $getfield = "?since_id=$cookie_last_news&q=$q_param&count=100&lang=ru&include_rts=false";
     }//if
     else{
         $getfield = "?lang=ru&q=$q_param&count=10";
