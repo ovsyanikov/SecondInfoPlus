@@ -464,8 +464,8 @@ $(document).ready(function(){
 
         $.each(news, function(idx, glob_news) {
 
-            d_id = glob_news.id;
-
+               
+                d_id = glob_news.id;
                 ch_social = new String(glob_news.Source);
                 title =  new String(glob_news.title);
                 description = new String(glob_news.description);
