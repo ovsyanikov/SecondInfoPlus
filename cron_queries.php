@@ -161,9 +161,7 @@ foreach ($districts as $district){
             $source = "https://twitter.com/" . $status->user->id_str . "/status/" . $status->id_str;
 
             $date = $status->created_at;
-
-           
-
+            
             $new_global_news = new global_news();
             $new_global_news->setTitle($screen_name);
             $new_global_news->setDescription($text);
