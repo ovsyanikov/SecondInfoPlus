@@ -95,7 +95,7 @@
                         if ($img){
                             echo "<div class=\"top-3\"><img id=\"post_image\" src=\"{$img}\" alt=\"\"></div>";                        
                         }
-                        echo "<p class=\"post-text\">{$this->view->global_news->getDescription()}</p>";
+                        echo "<pre><p class=\"post-text\">{$this->view->global_news->getDescription()}</p></pre>";
                         
                     ?>
                 </div>
