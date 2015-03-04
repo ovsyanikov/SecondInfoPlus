@@ -8,7 +8,7 @@ require_once './model/service/GlobalService.php';
 require_once './model/entity/district.php';
 require_once './twitter-api/TwitterAPIExchange.php';
 require_once './util/Request.php';
-
+require_once './model/entity/social_info.php';
 use model\service\GlobalService;
 use model\entity\global_news;
 use util\Request;
