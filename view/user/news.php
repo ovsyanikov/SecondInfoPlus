@@ -99,7 +99,7 @@
 
         </aside>
         <section class="news-section" id="news-section">
-            <div class="top-3">
+            <div class="main-img top-3">
                 <img src="img/moscow_1.jpg" alt="">
             </div>
             <h1 class="h1">Все новости по дате</h1>
@@ -109,17 +109,19 @@
                     $count = count($this->view->all_news);
                     
                     if($count == 0){
-                        echo '<h2 id="postTitle" class="post-h2 h2">База данных поку что пуста!</h2>';
+                        echo '<h2 id="postTitle" class="post-h2 h2">База данных пока что пуста!</h2>';
                     }//if
                     else{
                         foreach($this->view->all_news as $news){
                             echo '<div class="post">';
-                            
+                            $d_id = $news->getId();
+                            $ch_social = $news->getSource();
                             $title = $news->getTitle();
                             
                             if(strlen($title) > 50){
                                 
-                                $title = substr($title, 0, 50);
+                                $title = stripslashes(iconv_substr($title,0, 47, 'UTF-8'));
+                                
                                 $title .= "...";
                                 
                             }//if
@@ -128,28 +130,48 @@
                             
                             if(strlen($description) > 300){
                                 
-                                $description = substr($description, 0, 300);
+                                $description = stripslashes(iconv_substr($description,0, 300, 'UTF-8'));
                                 $description .= "...";
                                 
                             }//if
-                            $image = $news->getImage();
+                            $date = $news->getDate();
                             
+                            $image = $news->getImage();
+                            if(strripos($ch_social,'twitter') != false){
+                                echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"twitter post-icon\">R</span></a>";
+                            }
+                            if(strripos($ch_social,'vk') != false){
+                                echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">Q</span></a>";
+                            }                            
+                            //qr
+                            echo "<span  class=\"post-date2\" title=\"Время публикации\">$date</span>";    
                             if($image != null){
                                 
                                 echo "<img  class=\"post-img\" src=\"$image\" alt=\"\"/>";
-                                echo "<h2 id=\"postTitle\" class=\"post-h2 h2\">$title</h2>";
+                                echo "<a href=\"?ctrl=news&act=SpecificPostHome&id={$d_id}\"><h2 id=\"postTitle\" class=\"post-h2 h2\">$title</h2></a>";
                                 echo "<p id=\"postContent\" class=\"post-text\">$description</p>";
                                 
                             }//if
                             else{
-                                echo "<h2 id=\"postTitle\" class=\"post-h2 h2\">$title</h2>";
+                                echo "<a href=\"?ctrl=news&act=SpecificPostHome&id={$d_id}\"><h2 id=\"postTitle\" class=\"post-h2 h2\">$title</h2></a>";
                                 echo "<p id=\"postContent\" class=\"post-text\">$description</p>";
                             }//else
+                            //echo "<span  class=\"post-date\">$date</span></a>";
                             echo '</div>';
+                            
                         }//foreach
                     }//else
+                    
+                    
                 ?>
             </div>
+            <script>
+            
+                    if($("#newsContent div.post").length != 0){
+                        $("#newsContent").append('<input class="My-posts-button submit" id="more_news" value="Следующие новости" type="button">');
+                    }//if
+                    
+            </script>
 <!--            <div class="post">
                 <h2 id="postTitle" class="post-h2 h2"></h2>
                 <p id="postContent" class="post-text"></p>

@@ -111,7 +111,6 @@
                                 $cnt = round(count($this->view->districts)/2);
                                 $i = 0;
                                 foreach ($this->view->districts as $district){
-                                    
                                     echo "<li data-district-id = \"{$district->getId()}\">{$district->getTitle()}</li>";
                                     $i++;
                                     if($i == $cnt){break;}

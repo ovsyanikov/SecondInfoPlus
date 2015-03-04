@@ -24,8 +24,9 @@ $districts = $glob_service->GetDistricts();
 
 foreach ($districts as $district){//Проходим по всем районам
     //3600
-
-    $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q={$district->getTitle()}&start_time=".(time()-299)."&extended=0&count=10&v=5.28");    
+    $d_title = $district->getTitle();
+    $to_search = urlencode($d_title);
+    $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&start_time=".(time()-299)."&extended=0&count=10&v=5.28");    
     $result_from_json = json_decode($result);
     
     foreach ($result_from_json->response->items as $my_item){
@@ -42,7 +43,7 @@ foreach ($districts as $district){//Проходим по всем района�
                 }//if                
             }//foreach
             if ($pos != false){
-
+                
                 $date = date("D H:i:s",$my_item->date);
                 //Заголовок
                 $title = explode('.', $text)[0];
@@ -82,8 +83,8 @@ foreach ($districts as $district){//Проходим по всем района�
                 }
 
                 $new_global_news = new global_news();
-                $new_global_news->setTitle($title);
-                $new_global_news->setDescription($text);
+                $new_global_news->setTitle(addslashes($title));
+                $new_global_news->setDescription(addslashes($text));
                 $new_global_news->setImage($img);
                 $new_global_news->setSource("http://vk.com/feed?w=wall{$my_item->owner_id}_{$my_item->id}");
                 $new_global_news->setDistrict($district->getId());
@@ -131,7 +132,7 @@ foreach ($districts as $district){
     $last_news = NULL;
     
    foreach($js_obj->statuses as $status){
-       
+      
         $text = $status->text;
         
         foreach($stop_word_for_search as $sw){
@@ -164,7 +165,7 @@ foreach ($districts as $district){
             
             $new_global_news = new global_news();
             $new_global_news->setTitle($screen_name);
-            $new_global_news->setDescription($text);
+            $new_global_news->setDescription(addslashes($text));
             $new_global_news->setSource($source);
             $new_global_news->setDistrict($district->getId());
             $new_global_news->setDate($created_at);
@@ -183,6 +184,7 @@ foreach ($districts as $district){
             $request->setCookiesWithKey('last_record_id', $last_news);
         }//if
    }//foreach
+
    
 }//foreach
 

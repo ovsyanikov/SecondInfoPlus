@@ -49,7 +49,7 @@ class GlobalService{
         
         $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
         $stmt->execute();
-        
+        $text = stripcslashes($text);
         $stmt = \util\MySQL::$db->prepare("SELECT * FROM global_news WHERE description Like ?");
         $params = array("%$text%");
         $stmt->execute($params);
@@ -230,10 +230,12 @@ class GlobalService{
                 " VALUES(NULL,:title,:description,now(),:distr,:src,:img,:date) ");
         
         $title = $news->getTitle();
+        $title = addslashes($title);
         $stmt->bindParam(":title",$title);
         
         $description = $news->getDescription();
-        $stmt->bindParam(":description",$description);
+        $description = addslashes($description);
+        $stmt->bindParam(":description",$description );
         
         $destr = $news->getDistrict();
         $stmt->bindParam(":distr",$destr);
@@ -251,6 +253,8 @@ class GlobalService{
         $res = $stmt->execute();
         
         if($res == 1){
+            $stmt = \util\MySQL::$db->prepare("DELETE FROM global_news WHERE description = '' or title = ''");
+            $stmt->execute();
             return true;
         }//if
         else{
@@ -286,6 +290,8 @@ class GlobalService{
         
         while($news = $stmt->fetchObject(global_news::class)){
             
+            $text = $news->getDescription();
+            $news->setDescription(stripslashes($text));
             $globalNews[] = $news;
             
         }//while
