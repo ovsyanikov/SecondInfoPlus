@@ -44,15 +44,7 @@ foreach ($districts as $district){
         $dist = $district->getTitle();
         $q_param = urlencode($dist);
         $count = count($districts);
-
-    //    if($last_news != NULL){
-    //        
-    //    }//if
-    //    else{
-    //        $getfield = "?q=$q_param&count=50&lang=ru";
-    //    }//else
         
-
         $getfield = "?q=$q_param&count=80";
 
         $requestMethod = 'GET';

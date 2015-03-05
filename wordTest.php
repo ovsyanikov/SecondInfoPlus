@@ -17,10 +17,17 @@ $php_word->addTableStyle('myTable', $tableStyle);
 $table = $setcion->addTable('myTable');
 
 $first_row = $table->addRow();
-$first_row->addCell(2000)->addText('Район – вопрос');
-$first_row->addCell(2000)->addText('Кол-во новых постов');
-$first_row->addCell(2000)->addText('Из них наших информационных постов (онлайн) – т.е. кол-во информации от бот сети');
-$first_row->addCell(2000)->addText('Кол-во действия');
+$first_row->addCell(2500)->addText('Район – вопрос');
+$first_row->addCell(2500)->addText('Кол-во новых постов');
+$first_row->addCell(2500)->addText('Из них наших информационных постов (онлайн) – т.е. кол-во информации от бот сети');
+$first_row->addCell(2500)->addText('Кол-во действия');
+
+for($i = 0; $i < 4; $i++){
+    $first_row = $table->addRow();
+    for($j = 0; $j < 4; $j++){
+        $first_row->addCell(2500)->addText($j);
+    }//for 
+}
 
 $word_writer = \PhpOffice\PhpWord\IOFactory::createWriter($php_word,'Word2007');
 $word_writer->save("hello world.docx");
