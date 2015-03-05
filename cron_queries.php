@@ -126,7 +126,12 @@ foreach ($districts as $district){
 
     $fields = $twitter->setGetfield($getfield);
     $oAuth = $fields->buildOauth($url, $requestMethod);
-    $response = $oAuth->performRequest();
+    try{
+        $response = $oAuth->performRequest();
+    }//try
+    catch(Exception $ex){
+        echo "<div>(after performRequest)$ex</div><br>";
+    }//catch
     $js_obj = json_decode($response);
 
    if(property_exists($js_obj, 'statuses')){
