@@ -100,13 +100,31 @@ foreach ($districts as $district){
                 $new_global_news->setDistrict_str($district->getTitle());
                 $new_global_news->setStop_words($sw->getWord());
 
+                if(property_exists($status->entities, 'media')){
+                    $media = $status->entities->media;
+                        if(property_exists($media, 'media_url')){
+                            $media_url = $media->media_url;
 
-                if($status->entities->media->media_url != NULL){
-                    $new_global_news->setImage($status->entities->media->media_url);
-                }//if
+                            if($media_url != NULL){
+                            $new_global_news->setImage($status->entities->media->media_url);
+                            
+                            }//if
+                            else{
+
+                               $new_global_news->setImage($user_image);  
+
+                            }//else
+                    }//media_url
+                    else{
+
+                        $new_global_news->setImage($user_image);  
+
+                    }//else
+                }//if media
+                
                 else{
 
-                   $new_global_news->setImage($user_image);  
+                    $new_global_news->setImage($user_image);  
 
                 }//else
 
