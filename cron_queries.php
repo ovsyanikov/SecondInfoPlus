@@ -48,7 +48,7 @@ foreach ($districts as $district){//Проходим по всем района�
             }//foreach
             if ($pos != false){
                 
-                $date = date("D H:i:s",$my_item->date);
+                $date = date("D M Y H:i:s",$my_item->date);
                 //Заголовок
                 $title = explode('.', $text)[0];
                 $contains = $glob_service->IsContainsNews($title);

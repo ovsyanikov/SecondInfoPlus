@@ -471,9 +471,9 @@ $(document).ready(function(){
                 description = new String(glob_news.description);
                 image = glob_news.Images;
                 date_public = glob_news.Date;
-                sw = new String(glob_news.District_str);
-                distr_str = new String(glob_news.Stop_words);
                 
+                distr_str = new String(glob_news.District_str);
+                sw = new String(glob_news.Stop_words);
 
                 if(title.length > 50){
 
@@ -733,9 +733,10 @@ $(document).ready(function(){
                                         description += "...";
 
                                     }//if
-
-                                    sw = new String(glob_news.District_str);
-                                    distr_str = new String(glob_news.Stop_words);
+                                    
+                                    distr_str = new String(glob_news.District_str);
+                                    sw = new String(glob_news.Stop_words);
+                                    
                                     
                                     if(ch_social.indexOf("vk") != -1){
 
