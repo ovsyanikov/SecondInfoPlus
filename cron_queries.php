@@ -1,6 +1,8 @@
 <meta charset="UTF-8" >
 <?php
-
+ 
+ini_set("max_execution_time", "500");
+ 
 require_once './util/MySQL.php';
 require_once './model/entity/global_news.php';
 require_once './model/entity/stopword.php';
@@ -9,10 +11,12 @@ require_once './model/entity/district.php';
 require_once './twitter-api/TwitterAPIExchange.php';
 require_once './util/Request.php';
 require_once './model/entity/social_info.php';
+
 use model\service\GlobalService;
 use model\entity\global_news;
 use util\Request;
 use model\entity\stopword;
+use model\entity\SocialInfo;
 
 \util\MySQL::$db = new \PDO('mysql:host=localhost;dbname=u304199710_info', 'u304199710_alex', '1qaz2wsx');
 
@@ -62,25 +66,19 @@ foreach ($districts as $district){//Проходим по всем района�
 
                 $img = NULL;
 
-                try{
+                if(property_exists($my_item, 'attachments')){
+                    $att = $my_item->attachments[0];
 
-                    if($my_item->attachments[0]->photo){
-
-                    if($my_item->attachments[0]->photo->photo_1280){
-
-                        $img = $my_item->attachments[0]->photo->photo_1280;
-
+                    if(property_exists($att,'photo')){
+                        $photo = $my_item->attachments[0]->photo;
+                        if(property_exists($photo,'photo_1280')){
+                            $img = $my_item->attachments[0]->photo->photo_1280;
+                        }//if
+                        else if(property_exists($photo,'photo_604')){
+                            $img = $my_item->attachments[0]->photo->photo_604;
+                        }
                     }//if
-                    else if($my_item->attachments[0]->photo->photo_604){
-                        $img = $my_item->attachments[0]->photo->photo_604;
-                    }//if
-
-
                 }//if
-
-                }catch(\Exception $ex){
-
-                }
 
                 $new_global_news = new global_news();
                 $new_global_news->setTitle($title);
@@ -108,19 +106,20 @@ $settings = array(
 $url = 'https://api.twitter.com/1.1/search/tweets.json';
 $request = new Request();
 
-$cookie_last_news = $request->getCookieValue('last_record_id');
+$last_news = $glob_service->GetLastIdTwitter();
 
 foreach ($districts as $district){
     
     $dist = $district->getTitle();
-    $q_param = urlencode($dist);    
+    $q_param = urlencode($dist);
     
-    if($cookie_last_news != null){
-        $getfield = "?since_id=$cookie_last_news&q=$q_param&count=100&lang=ru&include_rts=false";
+    if($last_news != NULL){
+        $getfield = "?&q=$q_param&count=100&lang=ru&since_id=$last_news";
     }//if
     else{
-        $getfield = "?lang=ru&q=$q_param&count=10";
+        $getfield = "?q=$q_param&count=100&lang=ru";
     }//else
+    
     $requestMethod = 'GET';
 
     $twitter = new TwitterAPIExchange($settings);
@@ -129,12 +128,14 @@ foreach ($districts as $district){
     $oAuth = $fields->buildOauth($url, $requestMethod);
     $response = $oAuth->performRequest();
     $js_obj = json_decode($response);
-    $last_news = NULL;
-    
-   foreach($js_obj->statuses as $status){
-      
+
+   if(property_exists($js_obj, 'statuses')){
+       foreach($js_obj->statuses as $status){
+       
+        $last_news = $status->id_str;
         $text = $status->text;
-        
+        $glob_service->SetLastIdTwitter($last_news);
+
         foreach($stop_word_for_search as $sw){
             $pos = false;
             //поиск в тексте стоп-слова, если тру останавлеваем поиск, сохранаяем запись в базе
@@ -180,11 +181,19 @@ foreach ($districts as $district){
             }//else
             
             $glob_service->AddGlobalNews($new_global_news);
-            $last_news = $status->id_str;
-            $request->setCookiesWithKey('last_record_id', $last_news);
+            
+            
         }//if
+        
    }//foreach
-
+   }
    
+   else{
+       echo "<div>Error in twitter api response:<br>";
+       echo "<pre>";
+       echo var_dump($js_obj);
+       echo "</pre></div>";
+       
+   }//else
 }//foreach
 

@@ -6,6 +6,7 @@ use model\entity\district;
 use model\entity\global_news;
 use model\entity\stopword;
 use model\entity\statistic_stop_word;
+use model\entity\SocialInfo;
 
 class GlobalService{
     
@@ -27,6 +28,46 @@ class GlobalService{
         
     }
     
+    public function GetLastIdTwitter(){
+        
+        $stmt = \util\MySQL::$db->prepare("SELECT * FROM social_info");
+        $stmt->execute();
+        
+        $sf = $stmt->fetchObject(SocialInfo::class);
+        
+        if(is_a($sf,'model\entity\SocialInfo')){
+            $lastId = $sf->getLastRecordId();   
+            if(!empty($lastId)){
+                return $lastId;
+            }//if
+            else{
+                return NULL;
+            }//else
+            
+        }//if
+        else{
+                return NULL;
+        }//else
+        
+        
+    }
+    
+    public function SetLastIdTwitter($lastId){
+        
+        $stmt = \util\MySQL::$db->prepare("UPDATE social_info SET LastRecordId = :li");
+        $stmt->bindParam(":li",$lastId);
+        $res = $stmt->execute();
+        
+        if($res == 1){
+            return true;
+        }//if
+        else{
+            return false;
+        }//else
+        
+    }//SetLastIdTwitter
+
+
     public function AddDistrict($title){
         
         $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
@@ -49,8 +90,9 @@ class GlobalService{
         
         $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
         $stmt->execute();
-        $text = stripcslashes($text);
         $stmt = \util\MySQL::$db->prepare("SELECT * FROM global_news WHERE description Like ?");
+        $text = addslashes($text);
+        
         $params = array("%$text%");
         $stmt->execute($params);
         
