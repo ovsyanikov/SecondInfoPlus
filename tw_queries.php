@@ -51,7 +51,9 @@ foreach ($districts as $district){
     //    else{
     //        $getfield = "?q=$q_param&count=50&lang=ru";
     //    }//else
-        $getfield = "?q=$q_param&count=50";
+        
+
+        $getfield = "?q=$q_param&count=80";
 
         $requestMethod = 'GET';
 
@@ -157,7 +159,7 @@ foreach ($districts as $district){
     //    else{
     //        $getfield = "?q=$q_param&count=50&lang=ru";
     //    }//else
-        $getfield = "?q=$q_param&count=50";
+        $getfield = "?q=$q_param&count=80";
 
         $requestMethod = 'GET';
 

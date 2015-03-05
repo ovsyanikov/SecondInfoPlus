@@ -110,7 +110,7 @@ function StartAllServices(){
      
      setInterval(function(){
          
-         $.post("cron_queries.php",{},function(cron_data){
+         $.post("vk_queries.php",{},function(cron_data){
             
              $.post("ajax.php",{GetCountOfNews: 'set'},function(ajax_data){
                  
@@ -123,7 +123,30 @@ function StartAllServices(){
      },300000);
      
  }//StartAllServices
- 
+
+function StartAllServices_tw(){
+     
+     $.post("ajax.php",{GetCountOfNews: 'set'},function(ajax_data){
+                 
+        $('#count').text(ajax_data);        
+     });
+     
+     setInterval(function(){
+         
+         $.post("tw_queries.php",{},function(cron_data){
+            
+             $.post("ajax.php",{GetCountOfNews: 'set'},function(ajax_data){
+                 
+                 $('#count').text(ajax_data);
+                 
+             });
+             
+         });
+         
+     },1100000);
+     
+ }//StartAllServices
+
 function getpost(response){
 
      if(response.response[0].text){

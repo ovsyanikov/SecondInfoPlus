@@ -24,7 +24,7 @@ $stop_word_for_search = $glob_service->GetStopWords();
 
 //Получаем все районы из БД
 $districts = $glob_service->GetDistricts();
-
+$i=1;
 foreach ($districts as $district){//Проходим по всем районам
     
     $d_title = $district->getTitle();
@@ -95,5 +95,6 @@ foreach ($districts as $district){//Проходим по всем района�
         }//if группы   
         
     }//foreach
-    
+    echo "$i <br />";
+    $i++;
 }//foreach
