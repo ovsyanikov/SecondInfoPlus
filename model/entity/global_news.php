@@ -13,6 +13,9 @@ class global_news{
     public $Source;
     public $Images;
     public $Date;    
+    public $Stop_words;
+    public $District_str;
+    
     
     function getImage() {
         return $this->Images;
@@ -51,10 +54,17 @@ class global_news{
         return $this->district;
     }
 
+    function getStop_words() {
+        return $this->Stop_words;
+    }
+
+    function getDistrict_str() {
+        return $this->District_str;
+    }
     function getSource() {
         return $this->Source;
     }
-
+    
     function setId($id) {
         $this->id = $id;
     }
@@ -62,6 +72,7 @@ class global_news{
     function setDate($date) {
         $this->Date = $date;
     }
+    
     
     function setTitle($title) {
         $this->title = $title;
@@ -83,4 +94,11 @@ class global_news{
         $this->Source = $Source;
     }
     
+    function setStop_words($Stop_words) {
+        return $this->Stop_words = $Stop_words;
+    }
+
+    function setDistrict_str($District_str) {
+        return $this->District_str = $District_str;
+    }
 }

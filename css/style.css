@@ -814,7 +814,7 @@ span#minimize{
     font-family: 'search font';
     font-size: 14pt;
     padding: 5px 0px 5px 0px;
-    color: rgb(228, 228, 228);
+    color: rgb(202, 202, 202);
     transition: color ease-in-out 0.2s;    
 }
 .twitter:hover{
@@ -836,7 +836,7 @@ span#minimize{
 .post-date2{
     float: right;
     padding: 5px 10px 5px 0px;
-    color: rgb(184, 184, 184);
+    color: rgb(166, 166, 166);
 }
 .srch-h2{
     width: 198px;
@@ -928,4 +928,9 @@ input,textArea:focus{
     background: rgb(137, 11, 0);
     color: #fff;
     margin-bottom: 8px;
+}
+.post_bottom{
+    color: rgb(166, 166, 166);
+    display: inline-block;
+    width: 600px;
 }

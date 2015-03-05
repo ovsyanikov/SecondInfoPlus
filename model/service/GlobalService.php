@@ -252,7 +252,7 @@ class GlobalService{
         $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
         $stmt->execute();
 
-        $stmt = \util\MySQL::$db->prepare("SELECT distinct(`description`),`id`,`title`,`public_date`,`district`,`Source`,`Images`,`Date` FROM `global_news` ORDER BY id desc LIMIT $offset,$limit");
+        $stmt = \util\MySQL::$db->prepare("SELECT distinct(`description`),`id`,`title`,`public_date`,`district`,`Source`,`Images`,`Date`,`Stop_words`,`District_str` FROM `global_news` ORDER BY id desc LIMIT $offset,$limit");
         $stmt->execute();
 
         while($glob_news = $stmt->fetchObject(global_news::class)){
@@ -272,8 +272,8 @@ class GlobalService{
         $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
         $stmt->execute();
         
-        $stmt = \util\MySQL::$db->prepare("INSERT INTO global_news(id,title,description,public_date,district,Source,Images,Date)".
-                " VALUES(NULL,:title,:description,now(),:distr,:src,:img,:date) ");
+        $stmt = \util\MySQL::$db->prepare("INSERT INTO global_news(id,title,description,public_date,district,Source,Images,Date,Stop_words,District_str)".
+                " VALUES(NULL,:title,:description,now(),:distr,:src,:img,:date,:s_w,:dis_str) ");
         
         $title = $news->getTitle();
         $stmt->bindParam(":title",$title);
@@ -294,7 +294,12 @@ class GlobalService{
         $public_date = $news->getDate();
         $stmt->bindParam(":date",$public_date);
         
-        
+        $sw = $news->getStop_words();
+        $stmt->bindParam(":s_w",$sw);
+
+        $dis_str = $news->getDistrict_str();
+        $stmt->bindParam(":dis_str",$dis_str);
+
         $res = $stmt->execute();
         
         if($res == 1){
