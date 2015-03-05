@@ -32,6 +32,7 @@ $districts = $glob_service->GetDistricts();
 $url = 'https://api.twitter.com/1.1/search/tweets.json';
 $request = new Request();
 $i=1;
+$last_id = $glob_service->GetLastIdTwitter();
 
 foreach ($districts as $district){
     
@@ -47,7 +48,10 @@ foreach ($districts as $district){
         $q_param = urlencode($dist);
         $count = count($districts);
         
-        $getfield = "?q=$q_param&count=80";
+        if($last_id != NULL){
+            $getfield = "?q=$q_param&since_id=$last_id&count=80";
+        }
+        else{ $getfield = "?q=$q_param&count=80";}
 
         $requestMethod = 'GET';
 
@@ -59,11 +63,12 @@ foreach ($districts as $district){
         $js_obj = json_decode($response);
 
        if(property_exists($js_obj, 'statuses')){
+           
            foreach($js_obj->statuses as $status){
 
-            $last_news = $status->id_str;
+            $last_id = $status->id_str;
+            $glob_service->SetLastIdTwitter($last_id);
             $text = $status->text;
-            $glob_service->SetLastIdTwitter($last_news);
 
             foreach($stop_word_for_search as $sw){
                 $pos = false;
@@ -135,7 +140,9 @@ foreach ($districts as $district){
 
 
             }//if
-
+            
+           
+            
         }//foreach
        }
        else{
@@ -165,14 +172,11 @@ foreach ($districts as $district){
         $dist = $district->getTitle();
         $q_param = urlencode($dist);
         $count = count($districts);
-
-    //    if($last_news != NULL){
-    //        
-    //    }//if
-    //    else{
-    //        $getfield = "?q=$q_param&count=50&lang=ru";
-    //    }//else
-        $getfield = "?q=$q_param&count=80";
+        
+        if($last_id != NULL){
+            $getfield = "?q=$q_param&since_id=$last_id&count=80";
+        }//if
+        else{ $getfield = "?q=$q_param&count=80";}//else
 
         $requestMethod = 'GET';
 
@@ -186,7 +190,7 @@ foreach ($districts as $district){
        if(property_exists($js_obj, 'statuses')){
            foreach($js_obj->statuses as $status){
 
-            $last_news = $status->id_str;
+            $last_id = $status->id_str;
             $text = $status->text;
             $glob_service->SetLastIdTwitter($last_news);
 
@@ -241,9 +245,11 @@ foreach ($districts as $district){
 
 
             }//if
-
-       }//foreach
-       }
+            
+            
+        }//foreach
+       
+       }//if statuses is property
 
        else{
            echo "<div>Error in twitter api response:<br>";
@@ -257,9 +263,3 @@ foreach ($districts as $district){
        
    }//if второе приложение
 }//foreach
-
-
-
-
-
-
