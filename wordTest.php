@@ -11,7 +11,7 @@ $tableStyle = array(
     'borderSize' => 6,
     'cellMargin' => 50,
 );
-$firstRowStyle = array('width' => 'x1000');
+
 $php_word->addTableStyle('myTable', $tableStyle);
 
 $table = $setcion->addTable('myTable');
