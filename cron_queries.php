@@ -26,75 +26,75 @@ $stop_word_for_search = $glob_service->GetStopWords();
 //Получаем все районы из БД
 $districts = $glob_service->GetDistricts();
 
-foreach ($districts as $district){//Проходим по всем районам
-    //3600
-    $d_title = $district->getTitle();
-    $to_search = urlencode($d_title);
-    $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&start_time=".(time()-299)."&extended=0&count=100&v=5.28");    
-    $result_from_json = json_decode($result);
-    
-    foreach ($result_from_json->response->items as $my_item){
-        
-        if($my_item->owner_id < 0){//Отсеивание групп
-            $pos = false;
-            //Описание новости
-            $text = addslashes($my_item->text);
-            foreach($stop_word_for_search as $sw){
-                //поиск в тексте стоп-слова, если тру останавлеваем поиск, сохранаяем запись в базе
-                $pos = stripos($text, $sw->getWord());
-                if($pos  != false){
-                    break;
-                }//if                
-            }//foreach
-            if ($pos != false){
-                
-                $date = date("D H:i:s",$my_item->date);
-                //Заголовок
-                $title = explode('.', $text)[0];
-                $contains = $glob_service->IsContainsNews($title);
-
-                if($contains){
-                    continue;
-                }//if
-
-                if(strlen($title) > 100){
-
-                    $title = substr($title, 0, 97);
-                    $title .= "...";
-
-                }//if
-
-                $img = NULL;
-
-                if(property_exists($my_item, 'attachments')){
-                    $att = $my_item->attachments[0];
-
-                    if(property_exists($att,'photo')){
-                        $photo = $my_item->attachments[0]->photo;
-                        if(property_exists($photo,'photo_1280')){
-                            $img = $my_item->attachments[0]->photo->photo_1280;
-                        }//if
-                        else if(property_exists($photo,'photo_604')){
-                            $img = $my_item->attachments[0]->photo->photo_604;
-                        }
-                    }//if
-                }//if
-
-                $new_global_news = new global_news();
-                $new_global_news->setTitle($title);
-                $new_global_news->setDescription($text);
-                $new_global_news->setImage($img);
-                $new_global_news->setSource("http://vk.com/feed?w=wall{$my_item->owner_id}_{$my_item->id}");
-                $new_global_news->setDistrict($district->getId());
-                $new_global_news->setDate($date);
-                $glob_service->AddGlobalNews($new_global_news);
-
-            }//if стоп-слова
-        }//if группы   
-        
-    }//foreach
-    
-}//foreach
+//foreach ($districts as $district){//Проходим по всем районам
+//    
+//    $d_title = $district->getTitle();
+//    $to_search = urlencode($d_title);
+//    $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&start_time=".(time()-299)."&extended=0&count=50&v=5.28");    
+//    $result_from_json = json_decode($result);
+//    
+//    foreach ($result_from_json->response->items as $my_item){
+//        
+//        if($my_item->owner_id < 0){//Отсеивание групп
+//            $pos = false;
+//            //Описание новости
+//            $text = addslashes($my_item->text);
+//            foreach($stop_word_for_search as $sw){
+//                //поиск в тексте стоп-слова, если тру останавлеваем поиск, сохранаяем запись в базе
+//                $pos = stripos($text, $sw->getWord());
+//                if($pos  != false){
+//                    break;
+//                }//if                
+//            }//foreach
+//            if ($pos != false){
+//                
+//                $date = date("D H:i:s",$my_item->date);
+//                //Заголовок
+//                $title = explode('.', $text)[0];
+//                $contains = $glob_service->IsContainsNews($title);
+//
+//                if($contains){
+//                    continue;
+//                }//if
+//
+//                if(strlen($title) > 100){
+//
+//                    $title = substr($title, 0, 97);
+//                    $title .= "...";
+//
+//                }//if
+//
+//                $img = NULL;
+//
+//                if(property_exists($my_item, 'attachments')){
+//                    $att = $my_item->attachments[0];
+//
+//                    if(property_exists($att,'photo')){
+//                        $photo = $my_item->attachments[0]->photo;
+//                        if(property_exists($photo,'photo_1280')){
+//                            $img = $my_item->attachments[0]->photo->photo_1280;
+//                        }//if
+//                        else if(property_exists($photo,'photo_604')){
+//                            $img = $my_item->attachments[0]->photo->photo_604;
+//                        }
+//                    }//if
+//                }//if
+//
+//                $new_global_news = new global_news();
+//                $new_global_news->setTitle($title);
+//                $new_global_news->setDescription($text);
+//                $new_global_news->setImage($img);
+//                $new_global_news->setSource("http://vk.com/feed?w=wall{$my_item->owner_id}_{$my_item->id}");
+//                $new_global_news->setDistrict($district->getId());
+//                $new_global_news->setDate($date);
+//                $glob_service->AddGlobalNews($new_global_news);
+//
+//            }//if стоп-слова
+//        }//if группы   
+//        
+//    }//foreach
+//    
+//}//foreach
 
 $settings = array(
     'oauth_access_token' => "3062725937-L6VtUnZ6xx644GWDU2Y3NHhz14yx1KADWeAnoxm",
@@ -106,19 +106,20 @@ $settings = array(
 $url = 'https://api.twitter.com/1.1/search/tweets.json';
 $request = new Request();
 
-$last_news = $glob_service->GetLastIdTwitter();
-
 foreach ($districts as $district){
     
+    $last_news = $glob_service->GetLastIdTwitter();
     $dist = $district->getTitle();
     $q_param = urlencode($dist);
+    $count = count($districts);
     
-    if($last_news != NULL){
-        $getfield = "?&q=$q_param&count=100&lang=ru&since_id=$last_news";
-    }//if
-    else{
-        $getfield = "?q=$q_param&count=100&lang=ru";
-    }//else
+//    if($last_news != NULL){
+//        
+//    }//if
+//    else{
+//        $getfield = "?q=$q_param&count=50&lang=ru";
+//    }//else
+    $getfield = "?q=$q_param&count=50";
     
     $requestMethod = 'GET';
 
@@ -126,12 +127,7 @@ foreach ($districts as $district){
 
     $fields = $twitter->setGetfield($getfield);
     $oAuth = $fields->buildOauth($url, $requestMethod);
-    try{
-        $response = $oAuth->performRequest();
-    }//try
-    catch(Exception $ex){
-        echo "<div>(after performRequest)$ex</div><br>";
-    }//catch
+    $response = $oAuth->performRequest();
     $js_obj = json_decode($response);
 
    if(property_exists($js_obj, 'statuses')){
