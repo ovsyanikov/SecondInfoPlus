@@ -31,9 +31,11 @@ $districts = $glob_service->GetDistricts();
 
 $url = 'https://api.twitter.com/1.1/search/tweets.json';
 $request = new Request();
-$i==1;
+$i=1;
+
 foreach ($districts as $district){
-    if ($i<141){
+    
+   if ($i<141){
         $settings = array(
            'oauth_access_token' => "3062725937-L6VtUnZ6xx644GWDU2Y3NHhz14yx1KADWeAnoxm",
            'oauth_access_token_secret' => "Q54JmVltQyKZjE5ymPAuCcWsipCOLo5GOfFWeUuLpdhqo",
@@ -120,6 +122,7 @@ foreach ($districts as $district){
                         $new_global_news->setImage($user_image);  
 
                     }//else
+                    
                 }//if media
                 
                 else{
