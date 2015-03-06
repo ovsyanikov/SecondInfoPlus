@@ -27,18 +27,19 @@ $districts = $glob_service->GetDistricts();
 $i=1;
 foreach ($districts as $district){//Проходим по всем районам
     
+    //$q_param = urlencode($dist);
     $d_title = $district->getTitle();
     $to_search = urlencode($d_title);
-    $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&start_time=".(time()-299)."&extended=0&count=50&v=5.28");      
+    //$result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&start_time=".(time()-299)."&extended=0&count=50&v=5.28");    
+    $result = file_get_contents("https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=$to_search");    
     
     $result_from_json = json_decode($result);
     
-    foreach ($result_from_json->response->items as $my_item){
-        
-        if($my_item->owner_id < 0){//Отсеивание групп
+    foreach ($result_from_json->responseData->results as $my_item){
+
             $pos = false;
             //Описание новости
-            $text = addslashes($my_item->text);
+            $text = $my_item->content;
             foreach($stop_word_for_search as $sw){
                 //поиск в тексте стоп-слова, если тру останавлеваем поиск, сохранаяем запись в базе
                 $pos = stripos($text, $sw->getWord());
@@ -48,54 +49,34 @@ foreach ($districts as $district){//Проходим по всем района�
             }//foreach
             if ($pos != false){
                 
-                $date = date("D M Y H:i:s",$my_item->date);
+                $date = date("D M Y H:i:s");
                 //Заголовок
-                $title = explode('.', $text)[0];
+                $title = $my_item->titleNoFormatting;
                 $contains = $glob_service->IsContainsNews($title);
 
                 if($contains){
                     continue;
                 }//if
 
-                if(strlen($title) > 100){
-
-                    $title = substr($title, 0, 97);
-                    $title .= "...";
-
-                }//if
-
                 $img = NULL;
-
-                if(property_exists($my_item, 'attachments')){
-                    $att = $my_item->attachments[0];
-
-                    if(property_exists($att,'photo')){
-                        $photo = $my_item->attachments[0]->photo;
-                        if(property_exists($photo,'photo_1280')){
-                            $img = $my_item->attachments[0]->photo->photo_1280;
-                        }//if
-                        else if(property_exists($photo,'photo_604')){
-                            $img = $my_item->attachments[0]->photo->photo_604;
-                        }
-                    }//if
-                }//if
-
+                
                 $new_global_news = new global_news();
                 $new_global_news->setTitle($title);
                 $new_global_news->setDescription($text);
                 $new_global_news->setImage($img);
-                $new_global_news->setSource("http://vk.com/feed?w=wall{$my_item->owner_id}_{$my_item->id}");
+                $new_global_news->setSource($my_item->url);
                 $new_global_news->setDistrict($district->getId());
                 $new_global_news->setDate($date);
                 $new_global_news->setDistrict_str($district->getTitle());
                 $new_global_news->setStop_words($sw->getWord());   
-                
+
                 $glob_service->AddGlobalNews($new_global_news);
 
             }//if стоп-слова
-        }//if группы   
-        
+
     }//foreach
     echo "$i <br />";
     $i++;
+    
+            
 }//foreach

@@ -122,10 +122,12 @@
                             $image = $news->getImage();
                             if(strripos($ch_social,'twitter') != false){
                                 echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"twitter post-icon\">R</span></a>";
-                            }
-                            if(strripos($ch_social,'vk') != false){
-                                echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">Q</span></a>";
-                            }                            
+                            }else if(strripos($ch_social,'vk') != false){
+                                    echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">Q</span></a>";
+                                }else{
+                                    echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"google post-icon\">V</span></a>";
+                                }
+                            
                             //qr
                             echo "<span  class=\"post-date2\" title=\"Время публикации\">$date</span>";    
                             if($image != null){

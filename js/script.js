@@ -524,15 +524,23 @@ $(document).ready(function(){
 
 
                 }//if vk.com
-                else{
+                else if(ch_social.indexOf("twitter") != -1){
                      if(image != null){
-                        $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
+                        $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"twitter post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
                     }//if
                     else{
-                        $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
+                        $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"twitter post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
                     }//else if not image
                     
-                }//else        
+                }//else
+                else{
+                    if(image != null){
+                        $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"google post-icon\">V</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
+                    }//if
+                    else{
+                        $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"google post-icon\">V</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
+                    }//else if not image                    
+                }
                 
         });
         
@@ -668,23 +676,31 @@ $(document).ready(function(){
                                 if(ch_social.indexOf("vk") != -1){
 
                                     if(image != null){
-                                        $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">Q</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
+                                        $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">Q</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
                                     }//if
                                     else{
-                                        $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">Q</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
-                                    }//else
+                                        $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">Q</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
+                                    }
 
 
                                 }//if vk.com
-                                else{
+                                else if(ch_social.indexOf("twitter") != -1){
                                      if(image != null){
-                                        $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
+                                        $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"twitter post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
                                     }//if
                                     else{
-                                        $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p>");
+                                        $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"twitter post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
                                     }//else if not image
 
-                                }//else       
+                                }//else
+                                else{
+                                    if(image != null){
+                                        $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"google post-icon\">V</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
+                                    }//if
+                                    else{
+                                        $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"google post-icon\">V</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
+                                    }//else if not image                    
+                                }  
 
                         });
                         
@@ -768,19 +784,27 @@ $(document).ready(function(){
                                         }//if
                                         else{
                                             $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">Q</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
-                                        }//else
+                                        }
 
 
                                     }//if vk.com
-                                    else{
+                                    else if(ch_social.indexOf("twitter") != -1){
                                          if(image != null){
-                                            $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
+                                            $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"twitter post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
                                         }//if
                                         else{
-                                            $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
+                                            $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"twitter post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
                                         }//else if not image
 
-                                    }//else  
+                                    }//else
+                                    else{
+                                        if(image != null){
+                                            $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"google post-icon\">V</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
+                                        }//if
+                                        else{
+                                            $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"google post-icon\">V</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
+                                        }//else if not image                    
+                                    }
                                     
                                 }//if news not exist
                         });
