@@ -10,12 +10,14 @@ require_once './model/entity/district.php';
 require_once './twitter-api/TwitterAPIExchange.php';
 require_once './util/Request.php';
 require_once './model/entity/social_info.php';
+require_once './model/entity/CronProperties.php';
 
 use model\service\GlobalService;
 use model\entity\global_news;
 use util\Request;
 use model\entity\stopword;
 use model\entity\SocialInfo;
+use model\entity\CronProperties;
 
 \util\MySQL::$db = new \PDO('mysql:host=localhost;dbname=u304199710_info', 'u304199710_alex', '1qaz2wsx');
 
@@ -24,17 +26,24 @@ $stop_word_for_search = $glob_service->GetStopWords();
 
 //Получаем все районы из БД
 $districts = $glob_service->GetDistricts();
-$i=1;
-foreach ($districts as $district){//Проходим по всем районам
+//$cron_obj = $global->GetCronProperties();
+//$offset = $cron_obj->getOffset();    
+
+for($offset = 0;$offset <= 40; $offset+=4){
     
-    //$q_param = urlencode($dist);
+    foreach ($districts as $district){//Проходим по всем районам
+    
     $d_title = $district->getTitle();
     $to_search = urlencode($d_title);
-    //$result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&start_time=".(time()-299)."&extended=0&count=50&v=5.28");    
-    $result = file_get_contents("https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=$to_search");    
     
+    $global = new GlobalService();
+
+    //$cron = $global->IsCronEnable();
+
+    $result = file_get_contents("https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=$to_search&start=$offset");    
+
     $result_from_json = json_decode($result);
-    
+
     foreach ($result_from_json->responseData->results as $my_item){
 
             $pos = false;
@@ -47,8 +56,9 @@ foreach ($districts as $district){//Проходим по всем района�
                     break;
                 }//if                
             }//foreach
+            
             if ($pos != false){
-                
+
                 $date = date("D M Y H:i:s");
                 //Заголовок
                 $title = $my_item->titleNoFormatting;
@@ -59,7 +69,7 @@ foreach ($districts as $district){//Проходим по всем района�
                 }//if
 
                 $img = NULL;
-                
+
                 $new_global_news = new global_news();
                 $new_global_news->setTitle($title);
                 $new_global_news->setDescription($text);
@@ -75,8 +85,9 @@ foreach ($districts as $district){//Проходим по всем района�
             }//if стоп-слова
 
     }//foreach
-    echo "$i <br />";
-    $i++;
+        
+
+    }//foreach
     
-            
-}//foreach
+}//for
+

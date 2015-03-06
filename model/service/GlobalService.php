@@ -7,6 +7,7 @@ use model\entity\global_news;
 use model\entity\stopword;
 use model\entity\statistic_stop_word;
 use model\entity\SocialInfo;
+use model\entity\CronProperties;
 
 class GlobalService{
     
@@ -25,6 +26,39 @@ class GlobalService{
         
         
         return $districts;
+        
+    }
+    
+    public function GetCronProperties(){
+        
+        $stmt = \util\MySQL::$db->prepare("SELECT * FROM cronproperties");
+        $stmt->execute();
+        
+        $cron = $stmt->fetchObject(CronProperties::class);
+        
+        if(is_a($cron, 'model\entity\CronProperties')){
+            
+            if($cron->getTimeStart() == NULL){
+                return NULL;
+            }//if
+            else{
+                return $cron;
+            }//else
+        }
+        
+    }
+    
+    public function IsCronEnable(){
+        
+        $stmt = \util\MySQL::$db->prepare("SELECT NOW()");
+        $stmt->execute();
+        $date = $stmt->fetch(\PDO::FETCH_COLUMN);
+        
+        $stmt = \util\MySQL::$db->prepare("SELECT TimeEnd FROM cronproperties");
+        $stmt->execute();
+        $date_end = $stmt->fetch(\PDO::FETCH_COLUMN);
+        
+        return $date != $date_end;
         
     }
     
@@ -275,12 +309,10 @@ class GlobalService{
         $stmt = \util\MySQL::$db->prepare("INSERT INTO global_news(id,title,description,public_date,district,Source,Images,Date,Stop_words,District_str)".
                 " VALUES(NULL,:title,:description,now(),:distr,:src,:img,:date,:s_w,:dis_str) ");
         
-        $title = $news->getTitle();
-        $title = mysql_escape_string(htmlspecialchars($title));
+        $title = \util\MySQL::$db->quote($news->getTitle());
         $stmt->bindParam(":title",$title);
         
-        $description = $news->getDescription();
-        $description = mysql_escape_string(htmlspecialchars($description));
+        $description = \util\MySQL::$db->quote($news->getDescription());
         
         $stmt->bindParam(":description",$description );
         
