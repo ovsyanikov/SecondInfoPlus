@@ -276,9 +276,11 @@ class GlobalService{
                 " VALUES(NULL,:title,:description,now(),:distr,:src,:img,:date,:s_w,:dis_str) ");
         
         $title = $news->getTitle();
+        $title = mysql_escape_string(htmlspecialchars($title));
         $stmt->bindParam(":title",$title);
         
         $description = $news->getDescription();
+        $description = mysql_escape_string(htmlspecialchars($description));
         
         $stmt->bindParam(":description",$description );
         
