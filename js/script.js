@@ -719,6 +719,9 @@ $(document).ready(function(){
     });
     //поиск по стопсловам
     $("#search_news_by_stop_words").click(function(){
+        $("#search-panel").fadeOut(200);
+        $fl=false;
+        $("#minimize").text('+');
         
         $("#search_news_by_stop_words").blur();
         $("#more_news_by_stop_words").blur();
