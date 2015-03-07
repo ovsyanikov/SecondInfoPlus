@@ -95,7 +95,10 @@
                         if ($img){
                             echo "<div class=\"top-3\"><img id=\"post_image\" src=\"{$img}\" alt=\"\"></div>";                        
                         }
-                        echo "<p class=\"post-text\">{$this->view->global_news->getDescription()}</p>";
+                        $descr = $this->view->global_news->getDescription();
+                        $descr = str_replace("\n", "<br />", $descr);
+                                
+                        echo "<p class=\"post-text\">$descr</p>";
                         
                     ?>
                 </div>
