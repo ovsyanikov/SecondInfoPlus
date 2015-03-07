@@ -38,7 +38,8 @@ foreach ($districts as $district){//Проходим по всем района�
         //if($my_item->owner_id < 0){//Отсеивание групп
             $pos = false;
             //Описание новости
-            $text = addslashes($my_item->text);
+            $text = $my_item->text;
+            
             foreach($stop_word_for_search as $sw){
                 //поиск в тексте стоп-слова, если тру останавлеваем поиск, сохранаяем запись в базе
                 $pos = stripos($text, $sw->getWord());
@@ -52,7 +53,7 @@ foreach ($districts as $district){//Проходим по всем района�
                 //Заголовок
                 $title = explode('.', $text)[0];
                 $contains = false;
-                $contains = $glob_service->IsContainsNews($title);
+                $contains = $glob_service->IsContainsNews($text);
 
                 if($contains < 81){
                     

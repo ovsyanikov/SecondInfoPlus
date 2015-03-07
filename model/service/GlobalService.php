@@ -124,6 +124,7 @@ class GlobalService{
         
         $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
         $stmt->execute();
+        $text = \util\MySQL::$db->quote($text);
         
         $stmt = \util\MySQL::$db->prepare("SELECT * FROM global_news WHERE INSTR(description,:text)");
         $stmt->bindParam(":text",$text);
