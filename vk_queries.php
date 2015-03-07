@@ -53,9 +53,9 @@ foreach ($districts as $district){//Проходим по всем района�
                 //Заголовок
                 $title = explode('.', $text)[0];
                 $contains = false;
-                $contains = $glob_service->IsContainsNews($text);
+                $contains = $glob_service->IsContainsNews($title);
 
-                if($contains < 81){
+                if($contains < 10){
                     
                 if(strlen($title) > 100){
 

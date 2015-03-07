@@ -126,7 +126,7 @@ class GlobalService{
         $stmt->execute();
         $text = \util\MySQL::$db->quote($text);
         
-        $stmt = \util\MySQL::$db->prepare("SELECT * FROM global_news WHERE INSTR(description,:text)");
+        $stmt = \util\MySQL::$db->prepare("SELECT * FROM global_news WHERE INSTR(title,:text)");
         $stmt->bindParam(":text",$text);
         $stmt->execute();
         
@@ -320,10 +320,10 @@ class GlobalService{
         $stmt = \util\MySQL::$db->prepare("INSERT INTO global_news(id,title,description,public_date,district,Source,Images,Date,Stop_words,District_str)".
                 " VALUES(NULL,:title,:description,now(),:distr,:src,:img,:date,:s_w,:dis_str) ");
         
-        $title = \util\MySQL::$db->quote($news->getTitle());
+        $title = htmlspecialchars($news->getTitle());
         $stmt->bindParam(":title",$title);
         
-        $description = \util\MySQL::$db->quote($news->getDescription());
+        $description = htmlspecialchars($news->getDescription());
         
         $stmt->bindParam(":description",$description );
         
