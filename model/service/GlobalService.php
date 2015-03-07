@@ -124,10 +124,10 @@ class GlobalService{
         
         $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
         $stmt->execute();
-        $text = \util\MySQL::$db->quote($text);
+        $text = htmlspecialchars($text);
         
-        $stmt = \util\MySQL::$db->prepare("SELECT * FROM global_news WHERE INSTR(title,:text)");
-        $stmt->bindParam(":text",$text);
+        $stmt = \util\MySQL::$db->prepare("SELECT * FROM global_news WHERE title = :title");
+        $stmt->bindParam(":title",$text);
         $stmt->execute();
         
         $news = $stmt->fetchObject(global_news::class);
@@ -137,7 +137,7 @@ class GlobalService{
         }//if
         
         $stmt = \util\MySQL::$db->prepare("SELECT levenshtein_ratio(:first,:sec)");
-        $first = $news->getDescription();
+        $first = $news->getTitle();
         
         $stmt->bindParam(":first",$first);
         $stmt->bindParam(":sec",$text);
@@ -320,10 +320,10 @@ class GlobalService{
         $stmt = \util\MySQL::$db->prepare("INSERT INTO global_news(id,title,description,public_date,district,Source,Images,Date,Stop_words,District_str)".
                 " VALUES(NULL,:title,:description,now(),:distr,:src,:img,:date,:s_w,:dis_str) ");
         
-        $title = htmlspecialchars($news->getTitle());
+        $title = htmlspecialchars(\util\MySQL::$db->quote($news->getTitle()));
         $stmt->bindParam(":title",$title);
         
-        $description = htmlspecialchars($news->getDescription());
+        $description = $news->getDescription();
         
         $stmt->bindParam(":description",$description );
         
@@ -348,7 +348,7 @@ class GlobalService{
         $res = $stmt->execute();
         
         if($res == 1){
-            $stmt = \util\MySQL::$db->prepare("DELETE FROM global_news WHERE description = '' or title = ''");
+            $stmt = \util\MySQL::$db->prepare("DELETE FROM global_news WHERE description = ''' or title = ''");
             $stmt->execute();
             return true;
         }//if
@@ -375,7 +375,7 @@ class GlobalService{
         return $globalNews;
     }
     
-    public function GetGlobalNewsByStopWord($word,$district,$offset=0,$limit=30){
+    public function GetGlobalNewsByStopWord($word,$district,$offset,$limit=10){
     
         $globalNews=[];
         

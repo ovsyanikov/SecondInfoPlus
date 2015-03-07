@@ -17,7 +17,7 @@ use util\Request;
 $request = new Request();
 $glob_service = new GlobalService();
 
-$offset =  $request->getCookieValue('offset');
+$offset =  $request->getPostValue('OFFSET');
 
 $district = $request->getPostValue('District');
 
@@ -28,7 +28,8 @@ $news = [];
 foreach($stop_words as $word){
                
     $word = trim($word->getWord());
-    $new_news = $glob_service->GetGlobalNewsByStopWord($word, $main_district->getId(),intval($offset),10);
+    $new_news = $glob_service->GetGlobalNewsByStopWord($word, $main_district->getId(),0,10000);
+    
     if(count($new_news)!=0){
         
         $news[] = $new_news;
@@ -36,9 +37,6 @@ foreach($stop_words as $word){
     }//if
     
 }//foreach
-
-$offset = (intval($offset) + 10);
-$request->setCookiesWithKey('offset', $offset);
 
 if(count($news) == 0){
     echo "end";

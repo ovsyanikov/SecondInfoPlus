@@ -175,6 +175,7 @@ $(function() {
         });
 });
 
+
 $(document).ready(function(){
     
     //Добавить район в "Настройках"
@@ -417,7 +418,7 @@ $(document).ready(function(){
         $("#more_news_by_stop_words").blur();
         
         $("#District").val(district);
-                
+                alert(offset);
                 $.post("get_news_by_stop_words.php",{District: district},function(data){
                     
                     if(data != "end"){
@@ -483,7 +484,7 @@ $(document).ready(function(){
                         
                         
                     }//for
-                        $("#newsContent").children().last().after($("#more_news_by_stop_words"));
+//                        $("#newsContent").children().last().after($("#more_news_by_stop_words"));
                     }//if
                     else{
                         if($("#newsContent div.post").length == 0){
@@ -491,6 +492,7 @@ $(document).ready(function(){
                         }
                        $("#more_news_by_stop_words").css("display","none");
                     }//else
+                    
                 });
                 
     });
@@ -512,7 +514,7 @@ $(document).ready(function(){
                 $.post("get_news_by_stop_words.php",{District: district},function(data){
                     
                     if(data != "end"){
-                    $("#more_news_by_stop_words").css("display","inline-block");
+                    //$("#more_news_by_stop_words").css("display","inline-block");
                     news = $.parseJSON(data);
                     for(i = 0; i< news.length; i++){
                         
@@ -591,12 +593,12 @@ $(document).ready(function(){
                         
                         
                     }//for
-                        $("#newsContent").children().last().after($("#more_news_by_stop_words"));
+                        //$("#newsContent").children().last().after($("#more_news_by_stop_words"));
                     }//if
                     else{
                         
                         
-                        $("#more_news_by_stop_words").css("display","none");
+                        //$("#more_news_by_stop_words").css("display","none");
                     }//else
                     if($("#newsContent div.post").length == 0){
                         $("#newsContent").append("<div class=\"post\"><h2 class=\"post-h2 h2\">Новости по заданному запросу не найдены<h2></div>");
@@ -614,7 +616,6 @@ $(document).ready(function(){
         });
     //Выбор района и установка его имни в блоке
     $("#districts ul.district li").click(function(){
-            
             $("#districts h2.h2-distr").text($(this).text());
             $("#newsContent div.post").remove();
             $("#more_news_by_stop_words").css("display","none");
