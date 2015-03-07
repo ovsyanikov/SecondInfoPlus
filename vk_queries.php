@@ -1,6 +1,6 @@
 <?php
 
-ini_set("max_execution_time", "500");
+ini_set("max_execution_time", "2500");
  
 require_once './util/MySQL.php';
 require_once './model/entity/global_news.php';
@@ -26,16 +26,16 @@ $stop_word_for_search = $glob_service->GetStopWords();
 $districts = $glob_service->GetDistricts();
 $i=1;
 foreach ($districts as $district){//Проходим по всем районам
-    
+    //&start_time=".(time()-299)."
     $d_title = $district->getTitle();
     $to_search = urlencode($d_title);
-    $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&start_time=".(time()-299)."&extended=0&count=50&v=5.28");      
+    $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&extended=0&count=90&v=5.28");      
     
     $result_from_json = json_decode($result);
     
     foreach ($result_from_json->response->items as $my_item){
         
-        if($my_item->owner_id < 0){//Отсеивание групп
+        //if($my_item->owner_id < 0){//Отсеивание групп
             $pos = false;
             //Описание новости
             $text = addslashes($my_item->text);
@@ -51,12 +51,11 @@ foreach ($districts as $district){//Проходим по всем района�
                 $date = date("D M Y H:i:s",$my_item->date);
                 //Заголовок
                 $title = explode('.', $text)[0];
+                $contains = false;
                 $contains = $glob_service->IsContainsNews($title);
 
-                if($contains){
-                    continue;
-                }//if
-
+                if($contains < 81){
+                    
                 if(strlen($title) > 100){
 
                     $title = substr($title, 0, 97);
@@ -91,9 +90,12 @@ foreach ($districts as $district){//Проходим по всем района�
                 $new_global_news->setStop_words($sw->getWord());   
                 
                 $glob_service->AddGlobalNews($new_global_news);
+                echo "In base <br />";
+                            }//if
 
+                
             }//if стоп-слова
-        }//if группы   
+       // }//if группы   
         
     }//foreach
     echo "$i <br />";
