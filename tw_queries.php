@@ -48,10 +48,13 @@ foreach ($districts as $district){
         $q_param = urlencode($dist);
         $count = count($districts);
         
-        if($last_id != NULL){
-            $getfield = "?q=$q_param&since_id=$last_id&count=80";
-        }
-        else{ $getfield = "?q=$q_param&count=80";}
+//        if($last_id != NULL){
+//            $getfield = "?q=$q_param&since_id=$last_id&count=80";
+//        }
+//        else{ 
+            $getfield = "?q=$q_param&count=80";
+            
+        //}
 
         $requestMethod = 'GET';
 
@@ -173,10 +176,13 @@ foreach ($districts as $district){
         $q_param = urlencode($dist);
         $count = count($districts);
         
-        if($last_id != NULL){
-            $getfield = "?q=$q_param&since_id=$last_id&count=80";
-        }//if
-        else{ $getfield = "?q=$q_param&count=80";}//else
+//        if($last_id != NULL){
+//            $getfield = "?q=$q_param&since_id=$last_id&count=80";
+//        }//if
+//        else{ 
+            $getfield = "?q=$q_param&count=80";
+            
+        //}//else
 
         $requestMethod = 'GET';
 
