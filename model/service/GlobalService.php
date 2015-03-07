@@ -131,6 +131,10 @@ class GlobalService{
         
         $news = $stmt->fetchObject(global_news::class);
         
+        if(!is_a($news,'model\entity\global_news')){
+            return 0;
+        }//if
+        
         $stmt = \util\MySQL::$db->prepare("SELECT levenshtein_ratio(:first,:sec)");
         $first = $news->getDescription();
         
