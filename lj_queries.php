@@ -29,7 +29,7 @@ $districts = $glob_service->GetDistricts();
 //$cron_obj = $global->GetCronProperties();
 //$offset = $cron_obj->getOffset();    
 
-for($offset = 0;$offset <= 400; $offset+=8){
+for($offset = 0;$offset <= 40; $offset+=8){
     $i = 1;
     foreach ($districts as $district){//Проходим по всем районам
     
