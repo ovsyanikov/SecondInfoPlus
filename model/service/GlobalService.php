@@ -124,20 +124,26 @@ class GlobalService{
         
         $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
         $stmt->execute();
-        $stmt = \util\MySQL::$db->prepare("SELECT * FROM global_news WHERE description Like ?");
-        $text = addslashes($text);
         
-        $params = array("%$text%");
-        $stmt->execute($params);
+        $stmt = \util\MySQL::$db->prepare("SELECT * FROM global_news WHERE INSTR(description,:text)");
+        $stmt->bindParam(":text",$text);
+        $stmt->execute();
         
         $news = $stmt->fetchObject(global_news::class);
         
-        if(is_a($news,'model\entity\global_news')){
-            return true;
-        }//if
-        else{
-            return false;
-        }
+        $stmt = \util\MySQL::$db->prepare("SELECT levenshtein_ratio(:first,:sec)");
+        $first = $news->getDescription();
+        
+        $stmt->bindParam(":first",$first);
+        $stmt->bindParam(":sec",$text);
+        
+        $stmt->execute();
+        
+        $precent = $stmt->fetch(\PDO::FETCH_BOTH);
+        
+        return $precent;
+        
+        
     }//IsContainsNews
     
     public function IsContainsStopWord($stopWord){
