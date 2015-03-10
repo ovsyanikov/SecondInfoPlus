@@ -77,9 +77,10 @@ for($offset = 0;$offset <= 400; $offset+=8){
 
                 $new_global_news = new global_news();
                 $new_global_news->setTitle($title);
+                $text = html_entity_decode($text);
                 $new_global_news->setDescription($text);
                 $new_global_news->setImage($img);
-                $new_global_news->setSource(htmlspecialchars_decode($my_item->url));
+                $new_global_news->setSource(urldecode($my_item->url));
                 $new_global_news->setDistrict($district->getId());
                 $new_global_news->setDate($date);
                 $new_global_news->setDistrict_str($district->getTitle());

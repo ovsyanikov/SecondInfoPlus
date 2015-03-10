@@ -125,7 +125,6 @@
                             }else if(strripos($ch_social,'vk.com') != false){
                                     echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">Q</span></a>";
                                 }else{
-                                    $ch_social = htmlspecialchars_decode($ch_social);
                                     echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"google post-icon\">V</span></a>";
                                 }
                             
