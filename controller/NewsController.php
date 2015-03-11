@@ -274,6 +274,11 @@ class NewsController extends \controller\BaseController{
             }//foreach
             
            $this->view->all_news = $glob_sevice->GetGlobalNews(0,10);
+           $this->view->vk_posts = $glob_sevice->GetVkPostsCount();
+           $this->view->tw_posts = $glob_sevice->GetTwitterPostsCount();
+           $this->view->google_posts = $glob_sevice->GetGooglePostsCount();
+           $this->view->fb_posts = $glob_sevice->GetFaceBookPostsCount();
+           
            $this->getRequest()->setCookiesWithKey('offset',0);
            $this->getRequest()->setCookiesWithKey('vk_records',$i);
            
