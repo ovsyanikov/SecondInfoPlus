@@ -64,18 +64,18 @@
                 <a href="?ctrl=user&act=leave">Выйти</a>
             </div>
             
-            <h1 class="h1">Лента новостей</br>Выводятся новости 1ой рубрики, кратко</h1>
+            <h1 class="h1">Сервисы поиска сайта</h1>
             <div class="side-post">
-                <h2 class="h2">Section 1.10.32 of "de Finibus Bonorum et Malorum" <span class="span-time">14:32</span></h2>
+                <a href="?ctrl=news&act=GetVkNews"><h2 class="h2">Вконтакте поиск ( <?php echo "{$this->view->vk_posts}"; ?> )</h2></a>
             </div>
             <div class="side-post">
-                <h2 class="h2">Section 1.10.32 of "de Finibus Bonorum et Malorum" <span class="span-time">14:32</span></h2>
+                <h2 class="h2">Twitter поиск ( <?php echo "{$this->view->tw_posts}"; ?> )</h2>
             </div>
             <div class="side-post">
-                <h2 class="h2">Section 1.10.32 of "de Finibus Bonorum et Malorum" <span class="span-time">14:32</span></h2>
+                <h2 class="h2">Google поиск ( <?php echo "{$this->view->google_posts}"; ?> )</h2>
             </div>
-            <div class="side-post last">
-                <h2 class="h2">Section 1.10.32 of "de Finibus Bonorum et Malorum" <span class="span-time">14:32</span></h2>
+            <div class="side-post">
+                <h2 class="h2">Facebook поиск ( <?php echo "{$this->view->fb_posts}"; ?> )</h2>
             </div>
             
         </aside>
@@ -88,8 +88,18 @@
             <h1 class="h1">Все новости по дате</h1>
             <div id="newsContent">
                 <?php
-                
+                    require_once 'util/Request.php';
+                    use util\Request;
+                    $request = new Request();                
                     $count = count($this->view->all_news);
+                    $count_vk_records = $request->getCookieValue('vk_records');
+                    
+                    if($count_vk_records != 0){
+                        
+                        echo "<h2 id=\"postTitle\" class=\"post-h2 h2\">Новых записей из Вконтакте - $count_vk_records</h2>";
+                        $request->unsetCookie('vk_records');
+                        
+                    }//if
                     
                     if($count == 0){
                         echo '<h2 id="postTitle" class="post-h2 h2">База данных пока что пуста!</h2>';
@@ -99,8 +109,8 @@
                             echo '<div class="post">';
                             $d_id = $news->getId();
                             $ch_social = $news->getSource();
-                            $title = $news->getTitle();
-                            
+                           //$title = html_entity_decode($news->getTitle());
+                            $title =  htmlspecialchars_decode($news->getTitle());
                             if(strlen($title) > 50){
                                 
                                 $title = iconv_substr($title,0, 47, 'UTF-8');

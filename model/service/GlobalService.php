@@ -29,6 +29,42 @@ class GlobalService{
         
     }
     
+    public function GetVkPostsCount(){
+        
+        $stmt = \util\MySQL::$db->prepare("SELECT Count(*) FROM global_news WHERE INSTR(Source,'vk.com') ");
+        $stmt->execute();
+        
+        return $stmt->fetch(\PDO::FETCH_BOTH)[0];
+        
+    }
+    
+    public function GetTwitterPostsCount(){
+        
+        $stmt = \util\MySQL::$db->prepare("SELECT Count(*) FROM global_news WHERE INSTR(Source,'twitter.com') ");
+        $stmt->execute();
+        
+        return $stmt->fetch(\PDO::FETCH_BOTH)[0];
+        
+    }
+    
+    public function GetGooglePostsCount(){
+        
+        $stmt = \util\MySQL::$db->prepare("SELECT Count(*) FROM global_news WHERE not INSTR(Source,'vk.com') and not INSTR(Source,'twitter.com')");
+        $stmt->execute();
+        
+        return $stmt->fetch(\PDO::FETCH_BOTH)[0];
+        
+    }
+    
+     public function GetFaceBookPostsCount(){
+        
+        $stmt = \util\MySQL::$db->prepare("SELECT Count(*) FROM global_news WHERE INSTR(Source,'facebook.com')");
+        $stmt->execute();
+        
+        return $stmt->fetch(\PDO::FETCH_BOTH)[0];
+        
+    }
+    
     public function GetCronProperties(){
         
         $stmt = \util\MySQL::$db->prepare("SELECT * FROM cronproperties");

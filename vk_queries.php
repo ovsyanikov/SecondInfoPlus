@@ -24,8 +24,10 @@ $stop_word_for_search = $glob_service->GetStopWords();
 
 //Получаем все районы из БД
 $districts = $glob_service->GetDistricts();
-$i=1;
+$i=0;
+
 foreach ($districts as $district){//Проходим по всем районам
+
     //&start_time=".(time()-299)."
     $d_title = $district->getTitle();
     $to_search = urlencode($d_title);
@@ -91,14 +93,15 @@ foreach ($districts as $district){//Проходим по всем района�
                 $new_global_news->setStop_words($sw->getWord());   
                 
                 $glob_service->AddGlobalNews($new_global_news);
-                echo "In base <br />";
-                            }//if
+                $i++;
+                    
+                }//if
 
                 
             }//if стоп-слова
+            
        // }//if группы   
         
     }//foreach
-    echo "$i <br />";
-    $i++;
+    
 }//foreach
