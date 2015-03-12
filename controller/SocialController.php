@@ -37,7 +37,6 @@ class SocialController extends \controller\BaseController{
            }//if
            $this->view->current_user = $this->GetUserService()->getUser($user);
            
-           
            ini_set("max_execution_time", "2500");
            
            $districts = $glob_sevice->GetDistricts();
@@ -52,17 +51,17 @@ class SocialController extends \controller\BaseController{
                 $d_title = $district->getTitle();
                 $to_search = urlencode($d_title);
                 
-                $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&extended=0&start_time=$first_time&last_time=$last_time&count=200&v=5.28");
+                $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&extended=0&start_time=$first_time&end_time=$last_time&count=200&v=5.28");
                 $result_from_json = json_decode($result);
-                
-                $total_count = $result_from_json->response->total_count;
                 $count = count($result_from_json->response->items);
                 
+                $total_count = (property_exists($result_from_json->response, 'total_count'))?($result_from_json->response->total_count):$count;
                 do{
                     
                   foreach ($result_from_json->response->items as $my_item){
-                    
-                    $start_time = $my_item->date;
+                      
+                      $last_post_time = $my_item->date;
+//                    $start_time = $my_item->date;
                     
                     //if($my_item->owner_id < 0){//Отсеивание групп
                         $pos = false;
@@ -128,11 +127,11 @@ class SocialController extends \controller\BaseController{
 
                         }//if стоп-слова
                     //}//if группы   
-                    $last_post_time = $my_item->date;
+                    
                     
                 }//foreach
                 
-                  $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&extended=0&start_time=$last_post_time&last_time=$last_time&count=200&v=5.28");
+                  $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&extended=0&start_time=$last_post_time&end_time=$last_time&count=200&v=5.28");
                   $result_from_json = json_decode($result);
                   
                   $total_count = $result_from_json->total_count;
