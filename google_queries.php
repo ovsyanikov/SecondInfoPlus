@@ -26,8 +26,6 @@ $stop_word_for_search = $glob_service->GetStopWords();
 
 //Получаем все районы из БД
 $districts = $glob_service->GetDistricts();
-//$cron_obj = $global->GetCronProperties();
-//$offset = $cron_obj->getOffset();    
 
 for($offset = 0;$offset <= 400; $offset+=8){
     

@@ -22,14 +22,13 @@ use model\entity\CronProperties;
 \util\MySQL::$db = new \PDO('mysql:host=localhost;dbname=u304199710_info', 'u304199710_alex', '1qaz2wsx');
 
 $glob_service = new GlobalService();
+
+
 $stop_word_for_search = $glob_service->GetStopWords();
-
-//Получаем все районы из БД
 $districts = $glob_service->GetDistricts();
-//$cron_obj = $global->GetCronProperties();
-//$offset = $cron_obj->getOffset();    
 
-for($offset = 0;$offset <= 40; $offset+=8){
+
+for($offset = 0;$offset <= 400; $offset+=8){
     $i = 1;
     foreach ($districts as $district){//Проходим по всем районам
     
@@ -38,24 +37,10 @@ for($offset = 0;$offset <= 40; $offset+=8){
     
     $global = new GlobalService();
 
-    //$cron = $global->IsCronEnable();
-
-//    
-//    $url = "http://0s.mfvgc6a.m5xw6z3mmvqxa2ltfzrw63i.cmle.ru/ajax/services/search/web?v=1.0&"
-//    . "q=Paris%20Hilton&userip=USERS-IP-ADDRESS";
-    //$data    = MyDB::get() -> selectOne('*',self::TABLE,'`id_mod` = '.$this->id_mod);
-//    $siteUrl = 'http://www.livejournal.com/';
-//    $ch = curl_init();
-//    curl_setopt($ch, CURLOPT_URL, "http://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=$to_search&rsz=large&userip=USERS-IP-ADDRESS");
-//    curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-//    curl_setopt($ch, CURLOPT_REFERER, $siteUrl);
-//    $result = curl_exec($ch);
-//    curl_close($ch);
-
     $result = file_get_contents("https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=$to_search%20site:http://www.livejournal.com/&start=$offset");    
 
     $result_from_json = json_decode($result);
-//    if(property_exists($js_obj, 'responseData')){
+
     foreach ($result_from_json->responseData->results as $my_item){
 
             $pos = false;
