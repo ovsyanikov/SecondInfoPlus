@@ -9,7 +9,7 @@ use util\Request;
 use model\entity\global_news;
 use model\entity\stopword;
 use model\entity\SocialInfo;
-
+    
 class SocialController extends \controller\BaseController{
     
     private $startService;
@@ -17,7 +17,7 @@ class SocialController extends \controller\BaseController{
     private $userService;
     private $globalService;
     
-  
+    
     public function GetVkNewsAction() {
         
        $user_serv = $this->GetUserService();
@@ -41,21 +41,30 @@ class SocialController extends \controller\BaseController{
            ini_set("max_execution_time", "2500");
            
            $districts = $glob_sevice->GetDistricts();
+           $first_time = time() - 299;
+           $last_time = time();
            
            $i=0;
-
+           
            foreach ($districts as $district){//Проходим по всем районам
 
                 //&start_time=".(time()-299)."
                 $d_title = $district->getTitle();
                 $to_search = urlencode($d_title);
-                $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&extended=0&count=90&v=5.28");      
-
+                
+                $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&extended=0&start_time=$first_time&last_time=$last_time&count=200&v=5.28");
                 $result_from_json = json_decode($result);
-
-                foreach ($result_from_json->response->items as $my_item){
-
-                    if($my_item->owner_id < 0){//Отсеивание групп
+                
+                $total_count = $result_from_json->response->total_count;
+                $count = count($result_from_json->response->items);
+                
+                do{
+                    
+                  foreach ($result_from_json->response->items as $my_item){
+                    
+                    $start_time = $my_item->date;
+                    
+                    //if($my_item->owner_id < 0){//Отсеивание групп
                         $pos = false;
                         //Описание новости
                         $text = $my_item->text;
@@ -118,9 +127,18 @@ class SocialController extends \controller\BaseController{
 
 
                         }//if стоп-слова
-                    }//if группы   
-
+                    //}//if группы   
+                    $last_post_time = $my_item->date;
+                    
                 }//foreach
+                
+                  $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&extended=0&start_time=$last_post_time&last_time=$last_time&count=200&v=5.28");
+                  $result_from_json = json_decode($result);
+                  
+                  $total_count = $result_from_json->total_count;
+                  $count = count($result_from_json->response->items);
+                  
+                }while($total_count > $count);
 
             }//foreach
             
@@ -138,5 +156,34 @@ class SocialController extends \controller\BaseController{
        }//else
         
     }//GetVkNewsAction   
+    
+    public function GetUserService(){
+        
+        if(empty($this->userService)){
+            $this->userService = new UserService();
+        }//if
+        
+        return $this->userService;
+        
+    }
+    
+    public function GetNewsService(){
+        
+        if(empty($this->newsService)){
+            $this->newsService = new NewsService();
+        }//if
+        
+        return $this->newsService;
+    }
+    
+    public function GetGlobalService() {
+        
+        if(empty($this->globalService)){
+            
+            $this->globalService = new GlobalService();
+            
+        }//if
+        return $this->globalService;
+    }
     
 }

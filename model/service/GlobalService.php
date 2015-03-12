@@ -286,13 +286,13 @@ class GlobalService{
         }
     }//GetDistrict
     
-    public function GetLastNews(){
+    public function GetLastVkNews(){
         
         $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
         $stmt->execute();
         
         $districts = [];
-        $stmt = \util\MySQL::$db->prepare("SELECT * FROM global_news ORDER BY id desc");
+        $stmt = \util\MySQL::$db->prepare("SELECT * FROM global_news WHERE INSTR(Source,'vk.com') ORDER BY id desc");
         $stmt->execute();
         
         $last_news = $stmt->fetchObject(global_news::class);

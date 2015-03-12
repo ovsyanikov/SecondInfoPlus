@@ -40,6 +40,9 @@ class FrontController{
             case 'user':
                  $ctrl = new UserController($this->view);
                  break;
+            case 'social':
+                 $ctrl = new SocialController($this->view);
+                 break;
             default:
                 header("Location: index.php?ctrl=start&act=welcome");
                 
