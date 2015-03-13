@@ -385,7 +385,7 @@ class SocialController extends \controller\BaseController{
                     //}
 
                     $requestMethod = 'GET';
-
+                    
                     $twitter = new TwitterAPIExchange($settings);
 
                     $fields = $twitter->setGetfield($getfield);
