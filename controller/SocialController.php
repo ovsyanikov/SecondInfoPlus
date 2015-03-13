@@ -164,7 +164,7 @@ class SocialController extends \controller\BaseController{
             //Получаем все районы из БД
             $districts = $glob_service->GetDistricts();
 
-            for($offset = 0;$offset <= 400; $offset+=8){
+            for($offset = 0;$offset <= 40; $offset+=8){
 
                 foreach ($districts as $district){//Проходим по всем районам
 
@@ -253,7 +253,7 @@ class SocialController extends \controller\BaseController{
   
             $count = 0;
 
-            for($offset = 0;$offset <= 400; $offset+=8){
+            for($offset = 0;$offset <= 40; $offset+=8){
 
                 foreach ($districts as $district){//Проходим по всем районам
 
@@ -623,7 +623,7 @@ class SocialController extends \controller\BaseController{
             $stop_word_for_search = $glob_service->GetStopWords();
             $districts = $glob_service->GetDistricts();
 
-            for($offset = 0;$offset <= 400; $offset+=8){
+            for($offset = 0;$offset <= 40; $offset+=8){
                 $i = 1;
                 foreach ($districts as $district){//Проходим по всем районам
 
