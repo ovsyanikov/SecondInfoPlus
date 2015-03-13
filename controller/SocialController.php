@@ -11,6 +11,12 @@ use model\entity\global_news;
 use model\entity\stopword;
 use model\entity\SocialInfo;
 
+function multiexplode ($delimiters,$string) {
+    
+    $ready = str_replace($delimiters, $delimiters[0], $string);
+    $launch = explode($delimiters[0], $ready);
+    return  $launch;
+}
     
 class SocialController extends \controller\BaseController{
     
@@ -59,17 +65,40 @@ class SocialController extends \controller\BaseController{
                     $pos = false;
                     //Описание новости
                     $text = $my_item->text;
+                    $found = false;
 
                     foreach($stop_word_for_search as $sw){
                         //поиск в тексте стоп-слова, если тру останавлеваем поиск, сохранаяем запись в базе
                         
                         $pos = stripos($text,$sw->getWord());
+                        
                         if($pos  != false){
                             
-                            break;
-                        }//if            
+                            $words = multiexplode('/., !@#$%^&*+_', $text);
+                            
+                            foreach ($words as $value) {
+                                //Сове3
+                                //Совет
+                                if(strlen($value) == strlen($sw->getWord())){
+                                    
+                                    if(stristr($value,$sw->getWord()) != false){
+                                        $found = true;
+                                        break;
+                                    }//if
+                                    
+                                }//if
 
+                                
+                            }//foreach
+
+                        }//if            
+                        
+                        if($found){
+                            break;
+                        }//if
+                        
                     }//foreach
+                    
                     if ($pos != false){
                         
                         $date = date("D M Y H:i:s",$my_item->date);
