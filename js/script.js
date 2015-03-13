@@ -289,7 +289,8 @@ $(document).ready(function(){
                     description += "...";
 
                 }//if
-
+                description = description.replace(distr_str, "<span class=\"bold\">"+distr_str+"</span>");
+                description = description.replace(sw, "<span class=\"bold\">"+sw+"</span>");
 
                 if(ch_social.indexOf("vk") != -1){
 
@@ -310,7 +311,15 @@ $(document).ready(function(){
                         $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"twitter post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
                     }//else if not image
                     
-                }//else
+                }//if facebook
+                else if(ch_social.indexOf("facebook") != -1){
+                     if(image != null){
+                        $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"facebook post-icon\">S</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
+                    }//if
+                    else{
+                        $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"facebook post-icon\">S</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
+                    }//else if not image                    
+                }
                 else{
                     if(image != null){
                         $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"google post-icon\">V</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
@@ -472,7 +481,8 @@ $(document).ready(function(){
                                     
                                     distr_str = new String(glob_news.District_str);
                                     sw = new String(glob_news.Stop_words);
-                                    
+                                    description = description.replace(distr_str, "<span class=\"bold\">"+distr_str+"</span>");
+                                    description = description.replace(sw, "<span class=\"bold\">"+sw+"</span>");
                                     
                                     if(ch_social.indexOf("vk") != -1){
 
@@ -494,6 +504,14 @@ $(document).ready(function(){
                                         }//else if not image
 
                                     }//else
+                                    else if(ch_social.indexOf("facebook") != -1){
+                                         if(image != null){
+                                            $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"facebook post-icon\">S</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
+                                        }//if
+                                        else{
+                                            $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"facebook post-icon\">S</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
+                                        }//else if not image                    
+                                    }
                                     else{
                                         if(image != null){
                                             $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"google post-icon\">V</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");

@@ -89,15 +89,23 @@
             <div id="newsContent">
                 <div class="specific-post post">
                     <?php 
+                        $post_distr = $this->view->global_news->getDistrict_str();
+                        $post_sw = $this->view->global_news->getStop_words();
                         echo "<h2 class=\"post-h2 h2\">{$this->view->global_news->getTitle()}</h2><br />";
+                        echo "<p  class=\"post_bottom\">Район: $post_distr, cтоп-слово:$post_sw</p>";
                         $img = $this->view->global_news->getImage();
                         
                         if ($img){
                             echo "<div class=\"top-3\"><img id=\"post_image\" src=\"{$img}\" alt=\"\"></div>";                        
                         }
+                        $ch_sw = "<span class=\"bold\">".$post_sw."</span>";
                         $descr = $this->view->global_news->getDescription();
+                        $descr = str_replace($post_sw, $ch_sw, $descr);
+                        //$descr = str_replace($post_distr, "<span class=\"bold\">$post_distr</span>", $descr);
                         $descr = str_replace("\n", "<br />", $descr);
-                                
+
+                        
+        
                         echo "<p class=\"post-text\">$descr</p>";
                         
                     ?>

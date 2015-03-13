@@ -41,7 +41,7 @@ class SocialController extends \controller\BaseController{
            ini_set("max_execution_time", "2500");
            
            $districts = $glob_service->GetDistricts();
-           $first_time = time() - 299;
+           $first_time = time() - 14400;
            
            $i=0;
            
@@ -51,8 +51,8 @@ class SocialController extends \controller\BaseController{
                 $d_title = $district->getTitle();
                 $to_search = urlencode($d_title);
                 
-//                $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&extended=0&start_time=$first_time&count=200&v=5.28");
-                $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&extended=0&count=200&v=5.28");
+                $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&extended=0&start_time=$first_time&count=200&v=5.28");
+//                $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&extended=0&count=200&v=5.28");
                 
                 $result_from_json = json_decode($result);
                 
@@ -67,7 +67,8 @@ class SocialController extends \controller\BaseController{
 
                     foreach($stop_word_for_search as $sw){
                         //поиск в тексте стоп-слова, если тру останавлеваем поиск, сохранаяем запись в базе
-                        $pos = stripos($text, $sw->getWord());
+                        
+                        $pos = stripos($text,$sw->getWord());
                         if($pos  != false){
                             break;
                         }//if            
@@ -79,7 +80,7 @@ class SocialController extends \controller\BaseController{
                         //Заголовок
                         $title = explode('.', $text)[0];
                         $contains = false;
-                        $contains = $glob_service->IsContainsNews($title);
+                        //////////////$contains = $glob_service->IsContainsNews($title);
 
                         ///if($contains < 10){
 
@@ -177,7 +178,7 @@ class SocialController extends \controller\BaseController{
                 $result = file_get_contents("https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=$to_search&start=$offset&rsz=large");    
 
                 $result_from_json = json_decode($result);
-
+                if(property_exists($result_from_json, "responseData")){
                 foreach ($result_from_json->responseData->results as $my_item){
 
                         $pos = false;
@@ -196,11 +197,8 @@ class SocialController extends \controller\BaseController{
                             $date = date("D M Y H:i:s");
                             //Заголовок
                             $title = $my_item->titleNoFormatting;
-                            $contains = $glob_service->IsContainsNews($title);
+                            ////////////$contains = $glob_service->IsContainsNews($title);
 
-                            if($contains){
-                                continue;
-                            }//if
 
                             $img = NULL;
 
@@ -222,7 +220,7 @@ class SocialController extends \controller\BaseController{
 
 
                 }//foreach
-
+                }//if
 
                 }
             
@@ -292,11 +290,8 @@ class SocialController extends \controller\BaseController{
                             $date = date("D M Y H:i:s");
                             //Заголовок
                             $title = $my_item->titleNoFormatting;
-                            $contains = $glob_service->IsContainsNews($title);
+                            //$contains = $glob_service->IsContainsNews($title);
 
-                            if($contains){
-                                continue;
-                            }//if
 
                             $img = NULL;
 
@@ -419,11 +414,8 @@ class SocialController extends \controller\BaseController{
                         }//foreach
                         if ($pos != false){
 
-                            $contains = $glob_service->IsContainsNews($text);
+                            ////////////$contains = $glob_service->IsContainsNews($text);
 
-                            if($contains){
-                                continue;
-                            }//if
 
                             $user_id = $status->user->id;
                             $screen_name = $status->user->screen_name;
@@ -546,7 +538,7 @@ class SocialController extends \controller\BaseController{
                         }//foreach
                         if ($pos != false){
 
-                            $contains = $glob_service->IsContainsNews($text);
+                            ////////////$contains = $glob_service->IsContainsNews($text);
 
                             if($contains){
                                 continue;
@@ -662,11 +654,9 @@ class SocialController extends \controller\BaseController{
                             $date = date("D M Y H:i:s");
                             //Заголовок
                             $title = $my_item->titleNoFormatting;
-                            $contains = $glob_service->IsContainsNews($title);
+                            //$contains = $glob_service->IsContainsNews($title);
 
-                            if($contains){
-                                continue;
-                            }//if
+
 
                             $img = NULL;
 

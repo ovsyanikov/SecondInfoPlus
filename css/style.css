@@ -821,6 +821,10 @@ span#minimize{
     color: rgb(85, 172, 238);
     transition: color ease-in-out 0.2s;
 }
+.facebook:hover{
+    color: rgb(63, 92, 154);
+    transition: color ease-in-out 0.2s;
+}
 .vk:hover{
     color: rgb(89, 125, 163);
     transition: color ease-in-out 0.2s;    
@@ -937,4 +941,7 @@ input,textArea:focus{
     color: rgb(166, 166, 166);
     display: inline-block;
     width: 600px;
+}
+.bold{
+    font-weight: 700;
 }

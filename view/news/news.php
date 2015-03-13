@@ -112,6 +112,8 @@
                             echo '<div class="post">';
                             $d_id = $news->getId();
                             $ch_social = $news->getSource();
+                            $post_distr = $news->getDistrict_str();
+                            $post_sw = $news->getStop_words();
                            //$title = html_entity_decode($news->getTitle());
                             $title =  htmlspecialchars_decode($news->getTitle());
                             if(strlen($title) > 50){
@@ -130,6 +132,9 @@
                                 $description .= "...";
                                 
                             }//if
+                            $description = str_replace($post_distr, "<span class=\"bold\">$post_distr</span>", $description);
+                            $description = str_replace($post_sw, "<span class=\"bold\">$post_sw</span>", $description);
+
                             $date = $news->getDate();
                             
                             $image = $news->getImage();
@@ -137,11 +142,11 @@
                                 echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"twitter post-icon\">R</span></a>";
                             }else if(strripos($ch_social,'vk.com') != false){
                                     echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">Q</span></a>";
-                                }if(strripos($ch_social,'facebook.com') != false){
-                                    echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"facebook post-icon\">S</span></a>";
-                                }else{
-                                    echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"google post-icon\">V</span></a>";
-                                }
+                            }else if(strripos($ch_social,'facebook.com') != false){
+                                echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"facebook post-icon\">S</span></a>";
+                            }else{
+                                echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"google post-icon\">V</span></a>";
+                            }
                             
                             //qr
                             echo "<span  class=\"post-date2\" title=\"Время публикации\">$date</span>";    
@@ -157,8 +162,7 @@
                                 echo "<p id=\"postContent\" class=\"post-text\">$description</p>";
                             }//else
                             
-                            $post_distr = $news->getDistrict_str();
-                            $post_sw = $news->getStop_words();
+
                             echo "<p  class=\"post_bottom\">Район: $post_distr, cтоп-слово:$post_sw</p>";
                             //echo "<p  class=\"post_bottom\">Стоп-слово: $post_sw</p>";                            
                             echo '</div>';
