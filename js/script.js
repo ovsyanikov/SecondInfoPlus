@@ -178,6 +178,15 @@ $(function() {
 
 $(document).ready(function(){
     
+    //Выбор новостей из вк
+    
+    $('#GetVkPosts').click(function(){
+        $.get("index.php?ctrl=social&act=GetVkNews",null,function(data){
+            
+        });
+        
+    });
+    
     //Добавить район в "Настройках"
     $("#AddNewDistrictSettings").click(function(){
         

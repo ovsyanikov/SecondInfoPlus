@@ -66,7 +66,7 @@
             
             <h1 class="h1">Сервисы поиска сайта</h1>
             <div class="side-post">
-                <a href="?ctrl=social&act=GetVkNews"><h2 class="h2">Вконтакте поиск ( <?php echo "{$this->view->vk_posts}"; ?> )</h2></a>
+                <a id="GetVkPosts"><h2 id="CountVkPosts" class="h2">Вконтакте поиск ( <?php echo "{$this->view->vk_posts}"; ?> )</h2></a>
             </div>
             <div class="side-post">
                 <a href="?ctrl=social&act=GetTwitterNews"><h2 class="h2">Twitter поиск ( <?php echo "{$this->view->tw_posts}"; ?> )</h2></a>

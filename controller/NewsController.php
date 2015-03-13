@@ -17,6 +17,16 @@ class NewsController extends \controller\BaseController{
     private $userService;
     private $globalService;
     
+    public function GetVkPostsCountAction(){
+        
+        $gl_service = $this->GetGlobalService();
+        
+        $count = $gl_service->GetVkPostsCount();
+        
+        echo "$count";
+        
+    }
+    
     public function newsAction(){
         
        $user_serv = $this->GetUserService();

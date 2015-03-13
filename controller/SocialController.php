@@ -1,6 +1,7 @@
 <?php
-require_once '../twitter-api/TwitterAPIExchange.php';
 namespace controller;
+require_once 'twitter-api/TwitterAPIExchange.php';
+
 
 use model\service\NewsService;
 use model\service\UserService;
