@@ -65,12 +65,13 @@ class SocialController extends \controller\BaseController{
                         
                         $pos = stripos($text,$sw->getWord());
                         if($pos  != false){
+                            
                             break;
                         }//if            
 
                     }//foreach
                     if ($pos != false){
-
+                        
                         $date = date("D M Y H:i:s",$my_item->date);
                         //Заголовок
                         $title = explode('.', $text)[0];
