@@ -1,5 +1,5 @@
 <?php
-
+require_once '../twitter-api/TwitterAPIExchange.php';
 namespace controller;
 
 use model\service\NewsService;
@@ -22,16 +22,10 @@ class SocialController extends \controller\BaseController{
     public function GetVkNewsAction() {
         
        $user_serv = $this->GetUserService();
-       $access = $user_serv->isAccessDenied();
        $glob_service = $this->GetGlobalService();
        $stop_word_for_search = $glob_service->GetStopWords();
        
-       if($access){//Если доступ запрещен
-           $this->redirect("index");
-       }//if
        
-       else{//Если доступ разрешен
-           
            $user = $this->getRequest()->getSessionValue('user_info_plus');
            if(empty($user)){
                $user = $this->getRequest()->getCookieValue('user_info_plus');
@@ -131,28 +125,17 @@ class SocialController extends \controller\BaseController{
                 
 
             }//foreach
-
-           $this->getRequest()->setCookiesWithKey('offset',0);
            
-           $this->redirect("index");
-           
-           
-       }//else
+           echo "final";
         
     }//GetVkNewsAction
     
     public function GetGoogleWebNewsAction() {
         
        $user_serv = $this->GetUserService();
-       $access = $user_serv->isAccessDenied();
+       
        $glob_service = $this->GetGlobalService();
        $stop_word_for_search = $glob_service->GetStopWords();
-       
-       if($access){//Если доступ запрещен
-           $this->redirect("index");
-       }//if
-       
-       else{//Если доступ разрешен
            ini_set("max_execution_time", "2500");
            $user = $this->getRequest()->getSessionValue('user_info_plus');
            if(empty($user)){
@@ -223,24 +206,17 @@ class SocialController extends \controller\BaseController{
                 }//if
 
                 }
+
+            echo "final";
             
-            $this->getRequest()->setCookiesWithKey('offset',0);
-            $this->redirect("index");
-            }
     }
     
     public function GetGoogleNewsNewsAction() {
         
         $user_serv = $this->GetUserService();
-        $access = $user_serv->isAccessDenied();
         $glob_service = $this->GetGlobalService();
         $stop_word_for_search = $glob_service->GetStopWords();
        
-        if($access){//Если доступ запрещен
-            $this->redirect("index");
-        }//if
-       
-        else{//Если доступ разрешен
             ini_set("max_execution_time", "2500");
             $user = $this->getRequest()->getSessionValue('user_info_plus');
             if(empty($user)){
@@ -324,10 +300,8 @@ class SocialController extends \controller\BaseController{
                 }//foreach
 
             }//for
-                   $this->getRequest()->setCookiesWithKey('offset',0);
-            $this->redirect("index");
-            }
-
+           echo "final";
+           
 
     }
     
@@ -335,16 +309,9 @@ class SocialController extends \controller\BaseController{
         
 
         $user_serv = $this->GetUserService();
-        $access = $user_serv->isAccessDenied();
         $glob_service = $this->GetGlobalService();
         $stop_word_for_search = $glob_service->GetStopWords();
-       
-        if($access){//Если доступ запрещен
-            $this->redirect("index");
-        }//if
-       
-        else{//Если доступ разрешен
-           
+        
             $user = $this->getRequest()->getSessionValue('user_info_plus');
             if(empty($user)){
                $user = $this->getRequest()->getCookieValue('user_info_plus');
@@ -584,35 +551,20 @@ class SocialController extends \controller\BaseController{
 
                    }//if statuses is property
 
-                   else{
-                       echo "<div>Error in twitter api response:<br>";
-                       echo "<pre>";
-                       echo var_dump($js_obj);
-                       echo "</pre></div>";
-
-                   }//else
-                   echo "$i<br/>";
-                   $i++;
 
                }//if второе приложение
             }//for
-                               $this->getRequest()->setCookiesWithKey('offset',0);
-            $this->redirect("index");
-       }
+            
+            echo "final";
     }
     
     public function GetFacebookNewsAction() {
         
        $user_serv = $this->GetUserService();
-       $access = $user_serv->isAccessDenied();
        $glob_service = $this->GetGlobalService();
        $stop_word_for_search = $glob_service->GetStopWords();
        
-       if($access){//Если доступ запрещен
-           $this->redirect("index");
-       }//if
        
-       else{//Если доступ разрешен
             ini_set("max_execution_time", "2500");
             $user = $this->getRequest()->getSessionValue('user_info_plus');
             if(empty($user)){
@@ -682,12 +634,9 @@ class SocialController extends \controller\BaseController{
                 }//foreach
 
             }//for
-            $this->getRequest()->setCookiesWithKey('offset',0);
-            $this->redirect("index");
-       }
+            
+            echo "final";
     }
-
-    
        
     public function GetUserService(){
         
