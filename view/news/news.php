@@ -137,6 +137,8 @@
                                 echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"twitter post-icon\">R</span></a>";
                             }else if(strripos($ch_social,'vk.com') != false){
                                     echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">Q</span></a>";
+                                }if(strripos($ch_social,'facebook.com') != false){
+                                    echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"facebook post-icon\">S</span></a>";
                                 }else{
                                     echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"google post-icon\">V</span></a>";
                                 }
