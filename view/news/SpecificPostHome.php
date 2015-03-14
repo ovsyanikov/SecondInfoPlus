@@ -94,7 +94,7 @@
                         $tit = $this->view->global_news->getTitle();
                         $tit = preg_replace("/[^а-яa-z\\\\.,;\\/!@#$%^&*()_+-=\\\'\\\"«»]/ius",' ',$tit);;
                         $tit = str_replace("\\n", " ", $tit);
-                        echo "<h2 class=\"post-h2 h2\">$tit</h2><br />";
+                        echo "<h2 class=\"sp_h2 post-h2 h2\">$tit</h2><br />";
                         echo "<p  class=\"post_bottom\">Район: $post_distr, cтоп-слово:$post_sw</p>";
                         $img = $this->view->global_news->getImage();
                         

@@ -945,3 +945,7 @@ input,textArea:focus{
 .bold{
     font-weight: 700;
 }
+.sp_h2{
+    max-width: none;
+    margin-bottom: 5px;
+}
