@@ -69,7 +69,8 @@ foreach ($districts as $district){
             $last_id = $status->id_str;
             $glob_service->SetLastIdTwitter($last_id);
             $text = $status->text;
-$found = false;
+            $found = false;
+            
             foreach($stop_word_for_search as $sw){
             //поиск в тексте стоп-слова, если тру останавлеваем поиск, сохранаяем запись в базе
             $stop_word = trim( $sw->getWord() );
@@ -198,7 +199,7 @@ $found = false;
             $last_id = $status->id_str;
             $text = $status->text;
             //$glob_service->SetLastIdTwitter($last_news);
-
+            $found = false;
             foreach($stop_word_for_search as $sw){
             //поиск в тексте стоп-слова, если тру останавлеваем поиск, сохранаяем запись в базе
             $stop_word = trim( $sw->getWord() );
