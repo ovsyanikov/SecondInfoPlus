@@ -113,13 +113,7 @@
                             $post_distr = $news->getDistrict_str();
                             $post_sw = $news->getStop_words();
                             $title = str_replace('\n', '<br>', $news->getTitle());
-                            if(strlen($title) > 50){
-                                
-                                $title = iconv_substr($title,0, 47, 'UTF-8');
-                                
-                                $title .= "...";
-                                
-                            }//if
+                           
                             
                             $description = $news->getDescription();
                             

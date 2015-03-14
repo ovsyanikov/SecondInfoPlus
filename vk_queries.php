@@ -91,18 +91,11 @@ foreach ($districts as $district){//Проходим по всем района�
 
             $date = date("D M Y H:i:s",$my_item->date);
             //Заголовок
-            $title = explode('.', $text)[0];
+            $title = substr($text, 0, 50) . "...";
             $contains = false;
             //////////////$contains = $glob_service->IsContainsNews($title);
 
             ///if($contains < 10){
-
-            if(strlen($title) > 100){
-
-                $title = substr($title, 0, 97);
-                $title .= "...";
-
-            }//if
 
             $img = NULL;
 
