@@ -39,7 +39,7 @@ for($offset = 0;$offset <= 40; $offset+=8){
 
     $result = file_get_contents("https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=$to_search&start=$offset&rsz=large");    
     $result_from_json = json_decode($result);
-
+    if (property_exists($result_from_json->responseData, 'results')){
     foreach ($result_from_json->responseData->results as $my_item){
 
             $pos = false;
@@ -75,7 +75,8 @@ for($offset = 0;$offset <= 40; $offset+=8){
                 echo "in base<br />";
             }//if стоп-слова
 
-    }//foreach
+    }//foreach}
+    }
     $i++;
     echo "$i<br />";     
 
