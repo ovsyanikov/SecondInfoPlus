@@ -40,14 +40,12 @@ foreach ($districts as $district){//Проходим по всем района�
     $d_title = $district->getTitle();
     $to_search = urlencode($d_title);
 
-    $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&extended=0&start_time=$first_time&count=200&v=5.28");
-//                $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&extended=0&count=200&v=5.28");
+    //$result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&extended=0&start_time=$first_time&count=200&v=5.28");
+                $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&extended=0&count=200&v=5.28");
 
     $result_from_json = json_decode($result);
 
     foreach ($result_from_json->response->items as $my_item){
-
-
 
     //if($my_item->owner_id < 0){//Отсеивание групп
         $pos = false;
@@ -61,41 +59,27 @@ foreach ($districts as $district){//Проходим по всем района�
             $pos = stripos($text,$sw->getWord());
 
             if($pos  != false){
-
-                $words = multiexplode(
-                        array(
-                            '/',
-                            '.',
-                            '!',
-                            '@',
-                            '#',
-                            '$',
-                            '%',
-                            '^',
-                            '&',
-                            '*',
-                            '+',
-                            '_',
-                            ' '), $text);
-
-                foreach ($words as $value) {
-                    //Сове3
-                    //Совет
-                    if(strlen($value) == strlen($sw->getWord())){
-
-                        if(stristr($value,$sw->getWord()) != false){
+                
+                $words = strtok($text,' ,.!;-)({}@\'\":^$');
+                       
+                while($words !== false){
+                    
+                    if(strlen($words) == strlen($sw->getWord())){
+                        
+                        if(stristr($words, $sw->getWord()) != false){
                             $found = true;
                             break;
-                        }//if
-
+                        }//
+                        
                     }//if
-
-
-                }//foreach
-
+                    $words = strtok(' ,.!;-)({}@\'\":^$');
+                    
+                }//while
+                
             }//if            
 
             if($found){
+                $found = false;
                 break;
             }//if
 
@@ -145,7 +129,6 @@ foreach ($districts as $district){//Проходим по всем района�
             $new_global_news->setStop_words($sw->getWord());   
 
             $glob_service->AddGlobalNews($new_global_news);
-
             //}//if
 
 
@@ -154,6 +137,7 @@ foreach ($districts as $district){//Проходим по всем района�
 
 
     }//foreach
+    
 }//foreach
 
 echo "final";

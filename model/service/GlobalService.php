@@ -355,10 +355,10 @@ class GlobalService{
         $stmt = \util\MySQL::$db->prepare("INSERT INTO global_news(id,title,description,public_date,district,Source,Images,Date,Stop_words,District_str)".
                 " VALUES(NULL,:title,:description,now(),:distr,:src,:img,:date,:s_w,:dis_str) ");
         
-        $title = \util\MySQL::$db->quote($news->getTitle());
+        $title = \util\MySQL::$db->quote($news->getTitle(),\PDO::PARAM_STR);
         $stmt->bindParam(":title",$title);
         
-        $description = \util\MySQL::$db->quote($news->getDescription());
+        $description = \util\MySQL::$db->quote($news->getDescription(),\PDO::PARAM_STR);
         
         $stmt->bindParam(":description",$description );
         
@@ -383,8 +383,6 @@ class GlobalService{
         $res = $stmt->execute();
         
         if($res == 1){
-            $stmt = \util\MySQL::$db->prepare("DELETE FROM global_news WHERE description = ''' or title = ''");
-            $stmt->execute();
             return true;
         }//if
         else{
