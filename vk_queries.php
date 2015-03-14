@@ -41,7 +41,7 @@ foreach ($districts as $district){//Проходим по всем района�
     $to_search = urlencode($d_title);
 
     //$result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&extended=0&start_time=$first_time&count=200&v=5.28");
-                $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&extended=0&count=200&v=5.28");
+    $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&extended=0&count=200&v=5.28");
 
     $result_from_json = json_decode($result);
 
@@ -55,8 +55,8 @@ foreach ($districts as $district){//Проходим по всем района�
 
         foreach($stop_word_for_search as $sw){
             //поиск в тексте стоп-слова, если тру останавлеваем поиск, сохранаяем запись в базе
-
-            $pos = stripos($text,$sw->getWord());
+            $stop_word = trim( $sw->getWord() );
+            $pos = stripos($text,$stop_word);
 
             if($pos  != false){
                 
@@ -64,12 +64,12 @@ foreach ($districts as $district){//Проходим по всем района�
                        
                 while($words !== false){
                     
-                    if(strlen($words) == strlen($sw->getWord())){
+                    if(strlen($words) == strlen($stop_word)){
                         
-                        if(stristr($words, $sw->getWord()) != false){
+                        if(stristr($words, $stop_word) != false){
                             $found = true;
                             break;
-                        }//
+                        }//if
                         
                     }//if
                     $words = strtok(' ,.!;-)({}@\'\":^$');
