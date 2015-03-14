@@ -113,8 +113,7 @@
                             $ch_social = $news->getSource();
                             $post_distr = $news->getDistrict_str();
                             $post_sw = $news->getStop_words();
-                           //$title = html_entity_decode($news->getTitle());
-                            $title =  htmlspecialchars_decode($news->getTitle());
+                            $title = str_replace('\n', '<br>', $news->getTitle());
                             if(strlen($title) > 50){
                                 
                                 $title = iconv_substr($title,0, 47, 'UTF-8');

@@ -185,8 +185,8 @@ $(document).ready(function(){
         $.get("vk_queries.php",null,function(data_global){
             
             if(data_global == "final"){
-                alert("final!");
-                $.post("index.php?ctrl=news&act=GetVkPostsCount",null,function(data){
+                alert("vk search final!");
+                $.post("ajax.php",{GET_VK_POST_ACTION: 'SET'},function(data){
                     $("#GetVkPosts").val("Вконтакте поиск ( " + data + " )");
                 });
             }//if
@@ -203,9 +203,11 @@ $(document).ready(function(){
         $.get("tw_queries.php",null,function(data_global){
             
             if(data_global == "final"){
-//                $.post("index.php?ctrl=social&act=GetVkPostsCount",null,function(data){
-//                    $("#GetVkPosts").val("Вконтакте поиск ( " + data + " )");
-//                });
+                alert("twitter search final!");
+                $.post("ajax.php",{GET_TW_POST_ACTION: 'SET'},function(data){
+                    $("#GetTWPosts").val("Twitter поиск ( " + data + " )");
+                });
+                
             }//if
             else{
                 alert(data_global);

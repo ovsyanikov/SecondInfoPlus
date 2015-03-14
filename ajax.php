@@ -457,3 +457,18 @@ else if(!empty ($_POST['CHECK_DISTRICT'])){
         echo "ok";
     }
 }
+else if(!empty ($_POST['GET_VK_POST_ACTION'])){
+        $gl_service = new GlobalService();
+        
+        $count = $gl_service->GetVkPostsCount();
+        
+        echo "$count";
+}//else if
+else if(!empty ($_POST['GET_TW_POST_ACTION'])){
+    
+        $gl_service = new GlobalService();
+        
+        $count = $gl_service->GetTwitterPostsCount();
+        
+        echo "$count";
+}//else if

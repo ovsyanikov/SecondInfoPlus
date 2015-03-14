@@ -356,10 +356,10 @@ class GlobalService{
         $stmt = \util\MySQL::$db->prepare("INSERT INTO global_news(id,title,description,public_date,district,Source,Images,Date,Stop_words,District_str)".
                 " VALUES(NULL,:title,:description,now(),:distr,:src,:img,:date,:s_w,:dis_str) ");
         
-        $title = htmlspecialchars(\util\MySQL::$db->quote($news->getTitle()));
+        $title = \util\MySQL::$db->quote($news->getTitle());
         $stmt->bindParam(":title",$title);
         
-        $description = $news->getDescription();
+        $description = \util\MySQL::$db->quote($news->getDescription());
         
         $stmt->bindParam(":description",$description );
         

@@ -190,7 +190,7 @@ foreach ($districts as $district){
 
             $last_id = $status->id_str;
             $text = $status->text;
-            $glob_service->SetLastIdTwitter($last_news);
+            //$glob_service->SetLastIdTwitter($last_news);
 
             foreach($stop_word_for_search as $sw){
                 $pos = false;
