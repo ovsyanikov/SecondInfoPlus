@@ -1,6 +1,6 @@
 <?php
 
-ini_set("max_execution_time", "500");
+ini_set("max_execution_time", "2500");
  
 require_once './util/MySQL.php';
 require_once './model/entity/global_news.php';
@@ -27,8 +27,8 @@ $stop_word_for_search = $glob_service->GetStopWords();
 //Получаем все районы из БД
 $districts = $glob_service->GetDistricts();
 
-for($offset = 0;$offset <= 400; $offset+=8){
-    
+for($offset = 0;$offset <= 40; $offset+=8){
+    $i=0;
     foreach ($districts as $district){//Проходим по всем районам
     
     $d_title = $district->getTitle();
@@ -36,10 +36,8 @@ for($offset = 0;$offset <= 400; $offset+=8){
     
     $global = new GlobalService();
 
-    //$cron = $global->IsCronEnable();
 
     $result = file_get_contents("https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=$to_search&start=$offset&rsz=large");    
-
     $result_from_json = json_decode($result);
 
     foreach ($result_from_json->responseData->results as $my_item){
@@ -60,11 +58,6 @@ for($offset = 0;$offset <= 400; $offset+=8){
                 $date = date("D M Y H:i:s");
                 //Заголовок
                 $title = $my_item->titleNoFormatting;
-                $contains = $glob_service->IsContainsNews($title);
-
-                if($contains){
-                    continue;
-                }//if
 
                 $img = NULL;
 
@@ -79,11 +72,12 @@ for($offset = 0;$offset <= 400; $offset+=8){
                 $new_global_news->setStop_words($sw->getWord());   
 
                 $glob_service->AddGlobalNews($new_global_news);
-
+                echo "in base<br />";
             }//if стоп-слова
 
     }//foreach
-        
+    $i++;
+    echo "$i<br />";     
 
     }//foreach
     

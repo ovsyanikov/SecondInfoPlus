@@ -99,10 +99,13 @@
                             echo "<div class=\"top-3\"><img id=\"post_image\" src=\"{$img}\" alt=\"\"></div>";                        
                         }
                         $ch_sw = "<span class=\"bold\">".$post_sw."</span>";
+                        
                         $descr = $this->view->global_news->getDescription();
+                        $descr = str_replace("\\n", "<br />", $descr);
+                        $descr = str_replace("\\", "", $descr);
                         $descr = str_replace($post_sw, $ch_sw, $descr);
                         //$descr = str_replace($post_distr, "<span class=\"bold\">$post_distr</span>", $descr);
-                        $descr = str_replace("\n", "<br />", $descr);
+                        
 
                         
         

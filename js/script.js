@@ -66,8 +66,6 @@ function ShowPostMessage(message){
     
 }
 
- 
-
 function StartAllServices(){
      
      $.post("ajax.php",{GetCountOfNews: 'set'},function(ajax_data){
@@ -114,7 +112,6 @@ function StartAllServices_tw(){
      
  }//StartAllServices
  
-
 function ShowPersonalRoomMessage(controll,message,type){
    
     if(type == "success"){
@@ -145,7 +142,6 @@ function ShowPersonalRoomMessage(controll,message,type){
     }//if
 }
 
-
 $(function() {
     
         $(window).scroll(function() {
@@ -175,15 +171,12 @@ $(function() {
         });
 });
 
-
 $(document).ready(function(){
     
     //Выбор новостей из вк
     
     $('#GetVkPosts').click(function(){
-        
-        $.get("vk_queries.php",null,function(data_global){
-            
+        $.get("vk_queries.php",null,function(data_global){ 
             if(data_global == "final"){
                 alert("vk search final!");
                 $.post("ajax.php",{GET_VK_POST_ACTION: 'SET'},function(data){
@@ -192,16 +185,12 @@ $(document).ready(function(){
             }//if
             else{
                 alert(data_global);
-            }//else
-            
+            }//else 
         });
-        
     });
     
     $('#GetTWPosts').click(function(){
-        
-        $.get("tw_queries.php",null,function(data_global){
-            
+        $.get("tw_queries.php",null,function(data_global){ 
             if(data_global == "final"){
                 alert("twitter search final!");
                 $.post("ajax.php",{GET_TW_POST_ACTION: 'SET'},function(data){
@@ -211,11 +200,35 @@ $(document).ready(function(){
             }//if
             else{
                 alert(data_global);
-            }//else
-            
+            }//else 
         });
-        
     });
+    $('#GetGoogleWebPosts').click(function(){
+        $.get("google_queries.php",null,function(data_global){ 
+            if(data_global == "final"){
+                alert("google-web search final!");
+//                $.post("ajax.php",{GET_VK_POST_ACTION: 'SET'},function(data){
+//                    $("#GetVkPosts").val("Вконтакте поиск ( " + data + " )");
+//                });
+            }//if
+            else{
+                alert(data_global);
+            }//else 
+        });
+    });
+    $('#GetGoogleNewsPosts').click(function(){
+        $.get("google_news_queries.php",null,function(data_global){ 
+            if(data_global == "final"){
+                alert("google-news search final!");
+//                $.post("ajax.php",{GET_VK_POST_ACTION: 'SET'},function(data){
+//                    $("#GetVkPosts").val("Вконтакте поиск ( " + data + " )");
+//                });
+            }//if
+            else{
+                alert(data_global);
+            }//else 
+        });
+    });    
     
     //Добавить район в "Настройках"
     $("#AddNewDistrictSettings").click(function(){

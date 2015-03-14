@@ -66,19 +66,19 @@
             
             <h1 class="h1">Сервисы поиска сайта</h1>
             <div class="side-post">
-                <input class="My-posts-button submit" id="GetVkPosts" value="Вконтакте поиск ( <?php echo "{$this->view->vk_posts}"; ?> ) " type="button">
+                <a href="vk_queries.php">Вконтакте поиск <?php echo "{$this->view->vk_posts}"; ?></a>
             </div>
             <div class="side-post">
-                <input class="My-posts-button submit" id="GetTWPosts" value="Twitter поиск ( <?php echo "{$this->view->tw_posts}"; ?> )" type="button">
+                <a  href="tw_queries.php">Twitter поиск <?php echo "{$this->view->tw_posts}"; ?></a>
             </div>
             <div class="side-post">
-                <input class="My-posts-button submit" id="GetGoogleWebPosts" value="Google-web поиск ( <?php echo "{$this->view->google_posts}"; ?> )" type="button">
+                <a  href="google_queries.php">Google-web поиск <?php echo "{$this->view->google_posts}"; ?></a>
             </div>
             <div class="side-post">
-                <input class="My-posts-button submit" id="GetGoogleNewsPosts" value="Google-news поиск ( <?php echo "{$this->view->google_posts}"; ?> )" type="button">
+                <a  href="google_news_queries.php">Google-news поиск <?php echo "{$this->view->google_posts}"; ?></a>
             </div>            
             <div class="side-post">
-                <input class="My-posts-button submit" id="GetFBPosts" value="Facebook поиск ( <?php echo "{$this->view->fb_posts}"; ?> )" type="button">
+                <a  href="fb_queries.php">Facebook поиск <?php echo "{$this->view->fb_posts}"; ?></a>
             </div>
         </aside>
         
