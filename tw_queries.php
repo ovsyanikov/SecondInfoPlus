@@ -45,18 +45,13 @@ foreach ($districts as $district){
            'consumer_key' => "lW5B5TUxOdwjKxVN9ufGEmYLy",
            'consumer_secret' => "BiJCp5uwPJ8bjufMzDbgRl4P7IzdhH0uawjr31hHHkhkdavYe4"
         );   
-        //$last_news = $glob_service->GetLastIdTwitter();
+        
         $dist = $district->getTitle();
         $q_param = urlencode($dist);
         $count = count($districts);
 
-//        if($last_id != NULL){
-//            $getfield = "?q=$q_param&since_id=$last_id&count=80";
-//        }
-//        else{ 
-            $getfield = "?q=$q_param&count=80";
+        $getfield = "?q=$q_param&count=80";
 
-        //}
 
         $requestMethod = 'GET';
 
@@ -85,62 +80,63 @@ foreach ($districts as $district){
 
             }//foreach
             if ($pos != false){
+                
+                if($glob_service->IsContainsNews($text) == 0 || $glob_service->IsContainsNews($text) < 90){
+                    
+                    $user_id = $status->user->id;
+                    $screen_name = $status->user->screen_name;
+                    $user_image = $status->user->profile_image_url_https;
+                    $created_at = $status->created_at;
+                    $created_at = strtotime($created_at);
+                    $created_at = date("D M Y H:i:s",$created_at);
 
-                ////////////$contains = $glob_service->IsContainsNews($text);
+                    $source = "https://twitter.com/" . $status->user->id_str . "/status/" . $status->id_str;
 
+                    $date = $status->created_at;
 
-                $user_id = $status->user->id;
-                $screen_name = $status->user->screen_name;
-                $user_image = $status->user->profile_image_url_https;
-                $created_at = $status->created_at;
-                $created_at = strtotime($created_at);
-                $created_at = date("D M Y H:i:s",$created_at);
+                    $new_global_news = new global_news();
+                    $new_global_news->setTitle($screen_name);
+                    $new_global_news->setDescription($text);
+                    $new_global_news->setSource($source);
+                    $new_global_news->setDistrict($district->getId());
+                    $new_global_news->setDate($created_at);
+                    $new_global_news->setDistrict_str($district->getTitle());
+                    $new_global_news->setStop_words($sw->getWord());
 
-                $source = "https://twitter.com/" . $status->user->id_str . "/status/" . $status->id_str;
+                    if(property_exists($status->entities, 'media')){
+                        $media = $status->entities->media;
+                            if(property_exists($media, 'media_url')){
+                                $media_url = $media->media_url;
 
-                $date = $status->created_at;
+                                if($media_url != NULL){
+                                $new_global_news->setImage($status->entities->media->media_url);
 
-                $new_global_news = new global_news();
-                $new_global_news->setTitle($screen_name);
-                $new_global_news->setDescription($text);
-                $new_global_news->setSource($source);
-                $new_global_news->setDistrict($district->getId());
-                $new_global_news->setDate($created_at);
-                $new_global_news->setDistrict_str($district->getTitle());
-                $new_global_news->setStop_words($sw->getWord());
+                                }//if
+                                else{
 
-                if(property_exists($status->entities, 'media')){
-                    $media = $status->entities->media;
-                        if(property_exists($media, 'media_url')){
-                            $media_url = $media->media_url;
+                                   $new_global_news->setImage($user_image);  
 
-                            if($media_url != NULL){
-                            $new_global_news->setImage($status->entities->media->media_url);
+                                }//else
+                        }//media_url
+                        else{
 
-                            }//if
-                            else{
+                            $new_global_news->setImage($user_image);  
 
-                               $new_global_news->setImage($user_image);  
+                        }//else
 
-                            }//else
-                    }//media_url
+                    }//if media
+
                     else{
 
                         $new_global_news->setImage($user_image);  
 
                     }//else
 
-                }//if media
-
-                else{
-
-                    $new_global_news->setImage($user_image);  
-
-                }//else
-
-                $glob_service->AddGlobalNews($new_global_news);
+                    $glob_service->AddGlobalNews($new_global_news);
 
 
+                }
+                
             }//if
 
 
@@ -163,19 +159,12 @@ foreach ($districts as $district){
         $url = 'https://api.twitter.com/1.1/search/tweets.json';
         $request = new Request();
 
-        //$last_news = $glob_service->GetLastIdTwitter();
         $dist = $district->getTitle();
         $q_param = urlencode($dist);
         $count = count($districts);
 
-//        if($last_id != NULL){
-//            $getfield = "?q=$q_param&since_id=$last_id&count=80";
-//        }//if
-//        else{ 
-            $getfield = "?q=$q_param&count=80";
 
-        //}//else
-
+        $getfield = "?q=$q_param&count=80";
         $requestMethod = 'GET';
 
         $twitter = new TwitterAPIExchange($settings);
@@ -201,48 +190,62 @@ foreach ($districts as $district){
                 }//if
 
             }//foreach
-            if ($pos != false){
+            
+           if($glob_service->IsContainsNews($text) == 0 || $glob_service->IsContainsNews($text) < 90){
+                    
+                    $user_id = $status->user->id;
+                    $screen_name = $status->user->screen_name;
+                    $user_image = $status->user->profile_image_url_https;
+                    $created_at = $status->created_at;
+                    $created_at = strtotime($created_at);
+                    $created_at = date("D M Y H:i:s",$created_at);
 
-                ////////////$contains = $glob_service->IsContainsNews($text);
+                    $source = "https://twitter.com/" . $status->user->id_str . "/status/" . $status->id_str;
 
-                if($contains){
-                    continue;
-                }//if
+                    $date = $status->created_at;
 
-                $user_id = $status->user->id;
-                $screen_name = $status->user->screen_name;
-                $user_image = $status->user->profile_image_url_https;
-                $created_at = $status->created_at;
-                $created_at = strtotime($created_at);
-                $created_at = date("D M Y H:i:s",$created_at);
+                    $new_global_news = new global_news();
+                    $new_global_news->setTitle($screen_name);
+                    $new_global_news->setDescription($text);
+                    $new_global_news->setSource($source);
+                    $new_global_news->setDistrict($district->getId());
+                    $new_global_news->setDate($created_at);
+                    $new_global_news->setDistrict_str($district->getTitle());
+                    $new_global_news->setStop_words($sw->getWord());
 
-                $source = "https://twitter.com/" . $status->user->id_str . "/status/" . $status->id_str;
+                    if(property_exists($status->entities, 'media')){
+                        $media = $status->entities->media;
+                            if(property_exists($media, 'media_url')){
+                                $media_url = $media->media_url;
 
-                $date = $status->created_at;
+                                if($media_url != NULL){
+                                $new_global_news->setImage($status->entities->media->media_url);
 
-                $new_global_news = new global_news();
-                $new_global_news->setTitle($screen_name);
-                $new_global_news->setDescription($text);
-                $new_global_news->setSource($source);
-                $new_global_news->setDistrict($district->getId());
-                $new_global_news->setDate($created_at);
-                $new_global_news->setDistrict_str($district->getTitle());
-                $new_global_news->setStop_words($sw->getWord());
+                                }//if
+                                else{
+
+                                   $new_global_news->setImage($user_image);  
+
+                                }//else
+                        }//media_url
+                        else{
+
+                            $new_global_news->setImage($user_image);  
+
+                        }//else
+
+                    }//if media
+
+                    else{
+
+                        $new_global_news->setImage($user_image);  
+
+                    }//else
+
+                    $glob_service->AddGlobalNews($new_global_news);
 
 
-                if($status->entities->media->media_url != NULL){
-                    $new_global_news->setImage($status->entities->media->media_url);
-                }//if
-                else{
-
-                   $new_global_news->setImage($user_image);  
-
-                }//else
-
-                $glob_service->AddGlobalNews($new_global_news);
-
-
-            }//if
+                }
 
 
         }//foreach

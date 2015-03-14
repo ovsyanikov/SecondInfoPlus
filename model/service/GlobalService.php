@@ -160,11 +160,10 @@ class GlobalService{
         
         $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
         $stmt->execute();
-        $text = htmlspecialchars($text);
         
-        $stmt = \util\MySQL::$db->prepare("SELECT * FROM global_news WHERE title = :title");
-        $stmt->bindParam(":title",$text);
-        $stmt->execute();
+        $stmt = \util\MySQL::$db->prepare("SELECT * FROM global_news WHERE description Like ?");
+        $params = array("%$text%");
+        $stmt->execute($params);
         
         $news = $stmt->fetchObject(global_news::class);
         
@@ -180,7 +179,7 @@ class GlobalService{
         
         $stmt->execute();
         
-        $precent = $stmt->fetch(\PDO::FETCH_BOTH);
+        $precent = $stmt->fetch(\PDO::FETCH_BOTH)[0];
         
         return $precent;
         
