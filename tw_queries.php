@@ -69,20 +69,41 @@ foreach ($districts as $district){
             $last_id = $status->id_str;
             $glob_service->SetLastIdTwitter($last_id);
             $text = $status->text;
-
+$found = false;
             foreach($stop_word_for_search as $sw){
-                $pos = false;
-                //поиск в тексте стоп-слова, если тру останавлеваем поиск, сохранаяем запись в базе
-                $pos = stripos($text, $sw->getWord());
-                if($pos  != false){
-                    break;
-                }//if
+            //поиск в тексте стоп-слова, если тру останавлеваем поиск, сохранаяем запись в базе
+            $stop_word = trim( $sw->getWord() );
+            $pos = stripos($text,$stop_word);
 
-            }//foreach
+            if($pos  != false){
+                
+                $words = strtok($text,' ,.!;-)({}@\'\":^$');
+                       
+                while($words !== false){
+                    
+                    if(strlen($words) == strlen($stop_word)){
+                        
+                        if(stristr($words, $stop_word) != false){
+                            $found = true;
+                            break;
+                        }//if
+                        
+                    }//if
+                    $words = strtok(' ,.!;-)({}@\'\":^$');
+                    
+                }//while
+                
+            }//if            
+
+            if($found){
+                $found = false;
+                break;
+            }//if
+
+        }//foreach
+        
             if ($pos != false){
                 
-                if($glob_service->IsContainsNews($text) == 0 || $glob_service->IsContainsNews($text) < 90){
-                    
                     $user_id = $status->user->id;
                     $screen_name = $status->user->screen_name;
                     $user_image = $status->user->profile_image_url_https;
@@ -133,9 +154,6 @@ foreach ($districts as $district){
                     }//else
 
                     $glob_service->AddGlobalNews($new_global_news);
-
-
-                }
                 
             }//if
 
@@ -182,17 +200,39 @@ foreach ($districts as $district){
             //$glob_service->SetLastIdTwitter($last_news);
 
             foreach($stop_word_for_search as $sw){
-                $pos = false;
-                //поиск в тексте стоп-слова, если тру останавлеваем поиск, сохранаяем запись в базе
-                $pos = stripos($text, $sw->getWord());
-                if($pos  != false){
-                    break;
-                }//if
+            //поиск в тексте стоп-слова, если тру останавлеваем поиск, сохранаяем запись в базе
+            $stop_word = trim( $sw->getWord() );
+            $pos = stripos($text,$stop_word);
 
-            }//foreach
-            
-           if($glob_service->IsContainsNews($text) == 0 || $glob_service->IsContainsNews($text) < 90){
+            if($pos  != false){
+                
+                $words = strtok($text,' ,.!;-)({}@\'\":^$');
+                       
+                while($words !== false){
                     
+                    if(strlen($words) == strlen($stop_word)){
+                        
+                        if(stristr($words, $stop_word) != false){
+                            $found = true;
+                            break;
+                        }//if
+                        
+                    }//if
+                    $words = strtok(' ,.!;-)({}@\'\":^$');
+                    
+                }//while
+                
+            }//if            
+
+            if($found){
+                $found = false;
+                break;
+            }//if
+
+        }//foreach
+        
+            if ($pos != false){
+                
                     $user_id = $status->user->id;
                     $screen_name = $status->user->screen_name;
                     $user_image = $status->user->profile_image_url_https;
@@ -243,9 +283,8 @@ foreach ($districts as $district){
                     }//else
 
                     $glob_service->AddGlobalNews($new_global_news);
-
-
-                }
+                
+            }//if
 
 
         }//foreach
