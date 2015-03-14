@@ -127,7 +127,7 @@
                             $description = str_replace($post_distr, "<span class=\"bold\">$post_distr</span>", $description);
                             $description = str_replace($post_sw, "<span class=\"bold\">$post_sw</span>", $description);
                             
-                            $description = str_replace("\n", " ", $description);
+                            $description = str_replace("\\n", " ", $description);
                             $date = $news->getDate();
                             
                             $image = $news->getImage();
