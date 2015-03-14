@@ -359,7 +359,9 @@ class GlobalService{
         $title = \util\MySQL::$db->quote($title,\PDO::PARAM_STR);
         $stmt->bindParam(":title",$title);
         
-        $description = \util\MySQL::$db->quote($news->getDescription(),\PDO::PARAM_STR);
+        $description = preg_replace("/[^а-яa-z\\\\.,;\\/!@#$%^&*()_+-=\\\'\\\"«»]/ius",' ',$news->getDescription());
+        
+        $description = \util\MySQL::$db->quote($description,\PDO::PARAM_STR);
         
         $stmt->bindParam(":description",$description );
         
