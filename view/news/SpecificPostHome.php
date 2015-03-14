@@ -91,7 +91,10 @@
                     <?php 
                         $post_distr = $this->view->global_news->getDistrict_str();
                         $post_sw = $this->view->global_news->getStop_words();
-                        echo "<h2 class=\"post-h2 h2\">{$this->view->global_news->getTitle()}</h2><br />";
+                        $tit = $this->view->global_news->getTitle();
+                        $tit = preg_replace("/[^а-яa-z\\\\.,;\\/!@#$%^&*()_+-=\\\'\\\"«»]/ius",' ',$tit);;
+                        $tit = str_replace("\\n", " ", $tit);
+                        echo "<h2 class=\"post-h2 h2\">$tit</h2><br />";
                         echo "<p  class=\"post_bottom\">Район: $post_distr, cтоп-слово:$post_sw</p>";
                         $img = $this->view->global_news->getImage();
                         

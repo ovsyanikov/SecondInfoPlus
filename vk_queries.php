@@ -51,6 +51,8 @@ foreach ($districts as $district){//Проходим по всем района�
         $pos = false;
         //Описание новости
         $text = $my_item->text;
+        
+        $text = str_replace('(^A-Za-zА-Яа-я0-9/!@#$%^&*()_+"|\}{[]:;.,)','',$text);
         $found = false;
 
         foreach($stop_word_for_search as $sw){
