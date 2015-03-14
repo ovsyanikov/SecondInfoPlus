@@ -354,11 +354,11 @@ class GlobalService{
         
         $stmt = \util\MySQL::$db->prepare("INSERT INTO global_news(id,title,description,public_date,district,Source,Images,Date,Stop_words,District_str)".
                 " VALUES(NULL,:title,:description,now(),:distr,:src,:img,:date,:s_w,:dis_str) ");
-        $title = preg_replace("/[^а-яa-z\\\\.,;\\/!@#$%^&*()_+-=\\\'\\\"«»]/ius",' ',$news->getTitle());
+        $title = preg_replace("/[^а-яa-z\\\\.,;\\/!@#$%^&*()_+-=\\\'\\\"«»\n\t\r]/ius",' ',$news->getTitle());
         
         $stmt->bindParam(":title",$title);
         
-        $description = preg_replace("/[^а-яa-z\\\\.,;\\/!@#$%^&*()_+-=\\\'\\\"«»]/ius",' ',$news->getDescription());
+        $description = preg_replace("/[^а-яa-z\\\\.,;\\/!@#$%^&*()_+-=\\\'\\\"«»\n\t\r]/ius",' ',$news->getDescription());
         
         $description = \util\MySQL::$db->quote($description,\PDO::PARAM_STR);
         

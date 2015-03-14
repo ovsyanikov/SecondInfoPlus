@@ -105,7 +105,7 @@
                         
                         $descr = $this->view->global_news->getDescription();
                         $descr = str_replace("\\n", "<br />", $descr);
-                        $descr = str_replace("\\", "", $descr);
+                        //$descr = str_replace("\", "", $descr);
                         $descr = str_replace($post_sw, $ch_sw, $descr);
                         //$descr = str_replace($post_distr, "<span class=\"bold\">$post_distr</span>", $descr);
                         

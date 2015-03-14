@@ -292,6 +292,7 @@ display: inline-block;
     
 font-weight: 600;
     font-size: 14pt;
+overflow: hidden;
 }
 .post-text{
     font-size: 12pt;
