@@ -40,8 +40,8 @@ foreach ($districts as $district){//Проходим по всем района�
     $d_title = $district->getTitle();
     $to_search = urlencode($d_title);
 
-    //$result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&extended=0&start_time=$first_time&count=200&v=5.28");
-    $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&extended=0&count=200&v=5.28");
+    $result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&extended=0&start_time=$first_time&count=200&v=5.28");
+    //$result = file_get_contents("https://api.vk.com/method/newsfeed.search?q=$to_search&extended=0&count=200&v=5.28");
 
     $result_from_json = json_decode($result);
 
