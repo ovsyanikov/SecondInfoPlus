@@ -112,7 +112,8 @@
                             $ch_social = $news->getSource();
                             $post_distr = $news->getDistrict_str();
                             $post_sw = $news->getStop_words();
-                            $title = str_replace('\n', '<br>', $news->getTitle());
+                            $title = str_replace('\n', '', $news->getTitle());
+                            
                            
                             
                             $description = $news->getDescription();
@@ -125,7 +126,8 @@
                             }//if
                             $description = str_replace($post_distr, "<span class=\"bold\">$post_distr</span>", $description);
                             $description = str_replace($post_sw, "<span class=\"bold\">$post_sw</span>", $description);
-
+                            
+                            $description = str_replace("\n", " ", $description);
                             $date = $news->getDate();
                             
                             $image = $news->getImage();
