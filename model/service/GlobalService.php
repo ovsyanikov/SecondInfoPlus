@@ -356,7 +356,6 @@ class GlobalService{
                 " VALUES(NULL,:title,:description,now(),:distr,:src,:img,:date,:s_w,:dis_str) ");
         $title = preg_replace("/[^а-яa-z\\\\.,;\\/!@#$%^&*()_+-=\\\'\\\"«»]/ius",' ',$news->getTitle());
         
-        $title = \util\MySQL::$db->quote($title,\PDO::PARAM_STR);
         $stmt->bindParam(":title",$title);
         
         $description = preg_replace("/[^а-яa-z\\\\.,;\\/!@#$%^&*()_+-=\\\'\\\"«»]/ius",' ',$news->getDescription());
