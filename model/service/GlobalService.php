@@ -337,8 +337,8 @@ class GlobalService{
 
         while($glob_news = $stmt->fetchObject(global_news::class)){
             
-            $glob_news->setTitle(stripslashes($glob_news->getTitle()));
-            $glob_news->setDescription(stripslashes($glob_news->getDescription()));
+            $glob_news->setTitle($glob_news->getTitle());
+            $glob_news->setDescription($glob_news->getDescription());
             
             $global_news_array[] = $glob_news;
         }//while
