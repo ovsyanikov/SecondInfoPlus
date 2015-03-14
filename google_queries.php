@@ -1,3 +1,4 @@
+<meta charset="UTF-8">
 <?php
 
 ini_set("max_execution_time", "2500");
@@ -35,13 +36,19 @@ for($offset = 0;$offset <= 40; $offset+=8){
     $to_search = urlencode($d_title);
     
     $global = new GlobalService();
-
-
+    
+    
+    sleep(5);
     $result = file_get_contents("https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=$to_search&start=$offset&rsz=large");    
     $result_from_json = json_decode($result);
+    echo "<pre>";
+    
+    print_r($result_from_json);
+    echo "</pre><br>";
+    
     if (property_exists($result_from_json->responseData, 'results')){
     foreach ($result_from_json->responseData->results as $my_item){
-
+            
             $pos = false;
             //Описание новости
             $text = $my_item->content;
@@ -79,7 +86,7 @@ for($offset = 0;$offset <= 40; $offset+=8){
     }
     $i++;
     echo "$i<br />";     
-
+    
     }//foreach
     
 }//for
