@@ -336,10 +336,6 @@ class GlobalService{
         $stmt->execute();
 
         while($glob_news = $stmt->fetchObject(global_news::class)){
-            
-            $glob_news->setTitle($glob_news->getTitle());
-            $glob_news->setDescription($glob_news->getDescription());
-            
             $global_news_array[] = $glob_news;
         }//while
             
@@ -354,7 +350,7 @@ class GlobalService{
         
         $stmt = \util\MySQL::$db->prepare("INSERT INTO global_news(id,title,description,public_date,district,Source,Images,Date,Stop_words,District_str)".
                 " VALUES(NULL,:title,:description,now(),:distr,:src,:img,:date,:s_w,:dis_str) ");
-        $title = preg_replace("/[^а-яa-z\\\\.,;\\/!@#$%^&*()_+-=\\\'\\\"«»\n\t\r ]/ius",'',$news->getTitle());
+        $title = preg_replace("/[^а-яa-z\\\\.,;\\/! @#$%^&*()_+-=\\\'\\\"«»\n\t\r ]/ius",'',$news->getTitle());
         
         $stmt->bindParam(":title",$title);
         
