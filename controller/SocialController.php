@@ -44,8 +44,6 @@ class SocialController extends \controller\BaseController{
            $districts = $glob_service->GetDistricts();
            $first_time = time() - 14400;
            
-           $i=0;
-           
            foreach ($districts as $district){//Проходим по всем районам
 
                 //&start_time=".(time()-299)."
@@ -143,7 +141,6 @@ class SocialController extends \controller\BaseController{
                         $new_global_news->setStop_words($sw->getWord());   
 
                         $glob_service->AddGlobalNews($new_global_news);
-                        $i++;
 
                         //}//if
 

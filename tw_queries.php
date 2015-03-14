@@ -1,7 +1,7 @@
 <meta charset="UTF-8" >
 <?php
  
-ini_set("max_execution_time", "900");
+ini_set("max_execution_time", "2500");
  
 require_once './util/MySQL.php';
 require_once './model/entity/global_news.php';
@@ -31,11 +31,13 @@ $districts = $glob_service->GetDistricts();
 
 $url = 'https://api.twitter.com/1.1/search/tweets.json';
 $request = new Request();
+ $url = 'https://api.twitter.com/1.1/search/tweets.json';
+$request = new Request();
 $i=1;
-$last_id = $glob_service->GetLastIdTwitter();
+//$last_id = $glob_service->GetLastIdTwitter();
 
 foreach ($districts as $district){
-    
+
    if ($i<141){
         $settings = array(
            'oauth_access_token' => "3062725937-L6VtUnZ6xx644GWDU2Y3NHhz14yx1KADWeAnoxm",
@@ -43,17 +45,17 @@ foreach ($districts as $district){
            'consumer_key' => "lW5B5TUxOdwjKxVN9ufGEmYLy",
            'consumer_secret' => "BiJCp5uwPJ8bjufMzDbgRl4P7IzdhH0uawjr31hHHkhkdavYe4"
         );   
-        $last_news = $glob_service->GetLastIdTwitter();
+        //$last_news = $glob_service->GetLastIdTwitter();
         $dist = $district->getTitle();
         $q_param = urlencode($dist);
         $count = count($districts);
-        
+
 //        if($last_id != NULL){
 //            $getfield = "?q=$q_param&since_id=$last_id&count=80";
 //        }
 //        else{ 
             $getfield = "?q=$q_param&count=80";
-            
+
         //}
 
         $requestMethod = 'GET';
@@ -66,7 +68,7 @@ foreach ($districts as $district){
         $js_obj = json_decode($response);
 
        if(property_exists($js_obj, 'statuses')){
-           
+
            foreach($js_obj->statuses as $status){
 
             $last_id = $status->id_str;
@@ -84,11 +86,8 @@ foreach ($districts as $district){
             }//foreach
             if ($pos != false){
 
-                $contains = $glob_service->IsContainsNews($text);
+                ////////////$contains = $glob_service->IsContainsNews($text);
 
-                if($contains){
-                    continue;
-                }//if
 
                 $user_id = $status->user->id;
                 $screen_name = $status->user->screen_name;
@@ -117,7 +116,7 @@ foreach ($districts as $district){
 
                             if($media_url != NULL){
                             $new_global_news->setImage($status->entities->media->media_url);
-                            
+
                             }//if
                             else{
 
@@ -130,9 +129,9 @@ foreach ($districts as $district){
                         $new_global_news->setImage($user_image);  
 
                     }//else
-                    
+
                 }//if media
-                
+
                 else{
 
                     $new_global_news->setImage($user_image);  
@@ -143,22 +142,15 @@ foreach ($districts as $district){
 
 
             }//if
-            
-           
-            
+
+
+
         }//foreach
        }
-       else{
-           echo "<div>Error in twitter api response:<br>";
-           echo "<pre>";
-           echo var_dump($js_obj);
-           echo "</pre></div>";
-
-       }//else
-       echo "$i<br/>";
        $i++;
+       
    }//if перое приложение
-   
+
    if($i>140){
         //инициализайия второго приложения
         $settings = array(
@@ -171,17 +163,17 @@ foreach ($districts as $district){
         $url = 'https://api.twitter.com/1.1/search/tweets.json';
         $request = new Request();
 
-        $last_news = $glob_service->GetLastIdTwitter();
+        //$last_news = $glob_service->GetLastIdTwitter();
         $dist = $district->getTitle();
         $q_param = urlencode($dist);
         $count = count($districts);
-        
+
 //        if($last_id != NULL){
 //            $getfield = "?q=$q_param&since_id=$last_id&count=80";
 //        }//if
 //        else{ 
             $getfield = "?q=$q_param&count=80";
-            
+
         //}//else
 
         $requestMethod = 'GET';
@@ -211,7 +203,7 @@ foreach ($districts as $district){
             }//foreach
             if ($pos != false){
 
-                $contains = $glob_service->IsContainsNews($text);
+                ////////////$contains = $glob_service->IsContainsNews($text);
 
                 if($contains){
                     continue;
@@ -251,21 +243,16 @@ foreach ($districts as $district){
 
 
             }//if
-            
-            
+
+
         }//foreach
-       
+
        }//if statuses is property
 
-       else{
-           echo "<div>Error in twitter api response:<br>";
-           echo "<pre>";
-           echo var_dump($js_obj);
-           echo "</pre></div>";
-
-       }//else
-       echo "$i<br/>";
-       $i++;
-       
+   $i++;
+   
    }//if второе приложение
-}//foreach
+   
+}//for
+
+echo "final";

@@ -182,7 +182,34 @@ $(document).ready(function(){
     
     $('#GetVkPosts').click(function(){
         
-        $.get("index.php?ctrl=social&act=GetVkNews",null,function(data){
+        $.get("vk_queries.php",null,function(data_global){
+            
+            if(data_global == "final"){
+                alert("final!");
+                $.post("index.php?ctrl=news&act=GetVkPostsCount",null,function(data){
+                    $("#GetVkPosts").val("Вконтакте поиск ( " + data + " )");
+                });
+            }//if
+            else{
+                alert(data_global);
+            }//else
+            
+        });
+        
+    });
+    
+    $('#GetTWPosts').click(function(){
+        
+        $.get("tw_queries.php",null,function(data_global){
+            
+            if(data_global == "final"){
+//                $.post("index.php?ctrl=social&act=GetVkPostsCount",null,function(data){
+//                    $("#GetVkPosts").val("Вконтакте поиск ( " + data + " )");
+//                });
+            }//if
+            else{
+                alert(data_global);
+            }//else
             
         });
         
