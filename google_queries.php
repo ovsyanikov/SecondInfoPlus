@@ -36,17 +36,14 @@ for($offset = 0;$offset <= 40; $offset+=8){
     $to_search = urlencode($d_title);
     
     $global = new GlobalService();
-    
-    
-    sleep(5);
-    $result = file_get_contents("https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=$to_search&start=$offset&rsz=large");    
+
+    $result = file_get_contents("https://ajax.googleapis.com/ajax/services/search/web?v=2.0&q=$to_search&start=$offset&rsz=large");    
     $result_from_json = json_decode($result);
     echo "<pre>";
     
     print_r($result_from_json);
     echo "</pre><br>";
-    
-    if (property_exists($result_from_json->responseData, 'results')){
+        
     foreach ($result_from_json->responseData->results as $my_item){
             
             $pos = false;
@@ -80,14 +77,16 @@ for($offset = 0;$offset <= 40; $offset+=8){
 
                 $glob_service->AddGlobalNews($new_global_news);
                 echo "in base<br />";
+               
+
             }//if стоп-слова
 
     }//foreach}
-    }
     $i++;
     echo "$i<br />";     
     
     }//foreach
+    sleep(60);
     
 }//for
 
