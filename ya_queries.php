@@ -1,3 +1,4 @@
+<meta charset="UTF-8">
 <?php
 
 ini_set("max_execution_time", "2500");
@@ -25,18 +26,25 @@ $stop_word_for_search = $glob_service->GetStopWords();
 $districts = $glob_service->GetDistricts();
            
 foreach ($districts as $district){//Проходим по всем районам
-
-    $d_title = $district->getTitle();
-    $to_search = urlencode($d_title);
     
-    $result = file_get_contents("https://blogs.yandex.ru/search.rss?text=$to_search&numdoc=50");
+    $d_title = $district->getTitle();
+    echo "<h2>РАЙОН - $d_title<br></h2>" ;
+    $d_title = trim($d_title);
+    
+    $d_title = str_replace(' ', '+', $d_title);
+    $d_title = urlencode($d_title);
+    
+    $result = file_get_contents("https://blogs.yandex.ru/search.rss?text=$d_title");
+    //$result = file_get_contents("https://xmlsearch.yandex.ru/xmlsearch?user=armen-g2008&key=03.308859073:c792a52e76f0489008aa66814558db5a");
+    
     $items = new SimpleXMLElement($result);
     $result_items = [];
     
     foreach ($items->channel->item as $yandex_item){
-        $result_items = $yandex_item;
+        $result_items[] = $yandex_item;
     }
     
+    var_dump($result_items);
     
 //    $xml = xml_parser_create();
 //    xml_parser_get_option($xml, XML_OPTION_SKIP_WHITE,1);
