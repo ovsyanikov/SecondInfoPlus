@@ -66,21 +66,24 @@ foreach ($districts as $district){//Проходим по всем района�
 
             if($pos  != false){
                 
-                $words = strtok($text,' ,.!;-)({}@\'\":^$');
+                if(stripos($text,"порно") == false){
+                    $words = strtok($text,' ,.!;-)({}@\'\":^$');
                        
-                while($words !== false){
-                    
-                    if(strlen($words) == strlen($stop_word)){
-                        
-                        if(stristr($words, $stop_word) != false){
-                            $found = true;
-                            break;
+                    while($words !== false){
+
+                        if(strlen($words) == strlen($stop_word)){
+
+                            if(stristr($words, $stop_word) != false){
+                                $found = true;
+                                break;
+                            }//if
+
                         }//if
-                        
-                    }//if
-                    $words = strtok(' ,.!;-)({}@\'\":^$');
-                    
-                }//while
+                        $words = strtok(' ,.!;-)({}@\'\":^$');
+
+                    }//while
+                }//if !порно
+                
                 
             }//if            
 
