@@ -836,6 +836,9 @@ span#minimize{
 }
 .yandex{
     font-family: arial,sans-serif,helvetica !important;
+    font-stretch: condensed;
+    font-weight: 500;
+    font-weight: bold;
 }
 .yandex:hover{
     color: red;
