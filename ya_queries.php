@@ -35,11 +35,8 @@ foreach ($districts as $district){//Проходим по всем района�
     
     $d_title = str_replace(' ', '+', $d_title);
     $d_title = urlencode($d_title);
-    if($i == 70){
-        
-        sleep(60);
-        
-    }
+    
+    
     $result = file_get_contents("https://blogs.yandex.ru/search.rss?text=$d_title&ft=all");
     $i++;
     //$result = file_get_contents("https://xmlsearch.yandex.ru/xmlsearch?user=ovsyanikov-alesha&key=03.309510372:32a5df722ab8ef27c85f504b572d5fe4&query=$d_title");
@@ -51,11 +48,11 @@ foreach ($districts as $district){//Проходим по всем района�
         $result_items[] = $yandex_item;
     }//foreach
     
-    foreach ($result_from_json->response->items as $my_item){
+    foreach ($result_items as $my_item){
 
         $pos = false;
         //Описание новости
-        $text = $my_item->text;
+        $text = $my_item->description;
         
         $text = str_replace('(^A-Za-zА-Яа-я0-9/!@#$%^&*()_+"|\}{[]:;.,)','',$text);
         $found = false;
@@ -94,40 +91,21 @@ foreach ($districts as $district){//Проходим по всем района�
 
         if ($pos != false){
 
-            $date = date("D M Y H:i:s",$my_item->date);
+            $date = $my_item->pubDate;
             //Заголовок
-            $title = substr($text, 0, 50) . "...";
-            $contains = false;
-            //////////////$contains = $glob_service->IsContainsNews($title);
-
-            ///if($contains < 10){
-
-            $img = NULL;
-
-            if(property_exists($my_item, 'attachments')){
-                $att = $my_item->attachments[0];
-
-                if(property_exists($att,'photo')){
-                    $photo = $my_item->attachments[0]->photo;
-                    if(property_exists($photo,'photo_1280')){
-                        $img = $my_item->attachments[0]->photo->photo_1280;
-                    }//if
-                    else if(property_exists($photo,'photo_604')){
-                        $img = $my_item->attachments[0]->photo->photo_604;
-                    }
-                }//if
-            }//if
+            $title = $my_item->title;
 
             $new_global_news = new global_news();
             $new_global_news->setTitle($title);
             $new_global_news->setDescription($text);
-            $new_global_news->setImage($img);
-            $new_global_news->setSource("http://vk.com/feed?w=wall{$my_item->owner_id}_{$my_item->id}");
+            $new_global_news->setImage(NULL);
+            $new_global_news->setSource($my_item->link);
             $new_global_news->setDistrict($district->getId());
             $new_global_news->setDate($date);
             $new_global_news->setDistrict_str($district->getTitle());
             $new_global_news->setStop_words($sw->getWord());   
-
+            $new_global_news->setSearchType('y');
+            
             $glob_service->AddGlobalNews($new_global_news);
             //}//if
 
@@ -137,6 +115,14 @@ foreach ($districts as $district){//Проходим по всем района�
 
 
     }//foreach
+    
+    if($i == 10){
+        
+        die;
+        
+    }//if
+    
+    $i++;
     
 }//foreach
 

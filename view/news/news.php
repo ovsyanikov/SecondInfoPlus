@@ -80,6 +80,9 @@
             <div class="side-post">
                 <a  href="fb_queries.php">Facebook поиск <?php echo "{$this->view->fb_posts}"; ?></a>
             </div>
+            <div class="side-post">
+                <a  href="ya_queries.php">Yandex поиск <?php echo "{$this->view->ya_posts}"; ?></a>
+            </div>
         </aside>
         
         <section class="news-section" id="news-section">
@@ -89,32 +92,15 @@
             <h1 class="h1">Все новости по дате</h1>
             <div id="newsContent">
                 <?php
-                    require_once 'util/Request.php';
-                    use util\Request;
-                    $request = new Request();                
-                    $count = count($this->view->all_news);
-                    $count_vk_records = $request->getCookieValue('vk_records');
-                    
-                    if($count_vk_records != 0){
-                        
-                        echo "<h2 id=\"postTitle\" class=\"post-h2 h2\">Новых записей из Вконтакте - $count_vk_records</h2>";
-                        $request->unsetCookie('vk_records');
-                        
-                    }//if
-                    
-                    if($count == 0){
-                        echo '<h2 id="postTitle" class="post-h2 h2">База данных пока что пуста!</h2>';
-                    }//if
-                    else{
+
                         foreach($this->view->all_news as $news){
                             echo '<div class="post">';
                             $d_id = $news->getId();
-                            $ch_social = $news->getSource();
+                            $ch_social = $news->getSearchType();
                             $post_distr = $news->getDistrict_str();
                             $post_sw = $news->getStop_words();
                             $title = str_replace('\n', '', $news->getTitle());
-                            
-                           
+                            $source = $news->getSource();
                             
                             $description = $news->getDescription();
                             
@@ -131,15 +117,22 @@
                             $date = $news->getDate();
                             
                             $image = $news->getImage();
-                            if(strripos($ch_social,'twitter') != false){
-                                echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"twitter post-icon\">R</span></a>";
-                            }else if(strripos($ch_social,'vk.com') != false){
-                                    echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">Q</span></a>";
-                            }else if(strripos($ch_social,'facebook.com') != false){
-                                echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"facebook post-icon\">S</span></a>";
-                            }else{
-                                echo "<a href=\"$ch_social\" title=\"Ссылка на первоисточник\"><span  class=\"google post-icon\">V</span></a>";
-                            }
+                            
+                            if($ch_social == 't'){
+                                echo "<a href=\"$source\" title=\"Ссылка на первоисточник\"><span  class=\"twitter post-icon\">R</span></a>";
+                            }//if
+                            else if($ch_social == 'v'){
+                                    echo "<a href=\"$source\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">Q</span></a>";
+                            }//else if
+                            else if($ch_social == 'f'){
+                                echo "<a href=\"$source\" title=\"Ссылка на первоисточник\"><span  class=\"facebook post-icon\">S</span></a>";
+                            }//else if
+                            else if($ch_social == 'g'){
+                                echo "<a href=\"$source\" title=\"Ссылка на первоисточник\"><span  class=\"google post-icon\">V</span></a>";
+                            }//else if
+                            else if($ch_social == 'y'){
+                                echo "<a href=\"$source\" title=\"Ссылка на первоисточник\"><span  class=\"google post-icon\">Y</span></a>";
+                            }//else if
                             
                             //qr
                             echo "<span  class=\"post-date2\" title=\"Время публикации\">$date</span>";    
@@ -161,7 +154,6 @@
                             echo '</div>';
                             
                         }//foreach
-                    }//else
                     
                     
                 ?>

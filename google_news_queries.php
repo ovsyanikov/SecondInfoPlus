@@ -85,7 +85,8 @@ for($offset = 0;$offset <= 400; $offset+=8){
                 $new_global_news->setDate($date);
                 $new_global_news->setDistrict_str($district->getTitle());
                 $new_global_news->setStop_words($sw->getWord());   
-
+                $new_global_news->setSearchType('n');
+                
                 $glob_service->AddGlobalNews($new_global_news);
                 $count++;
                 echo "Count appebded record's - $count<br>";

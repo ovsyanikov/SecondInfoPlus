@@ -320,6 +320,7 @@ $(document).ready(function(){
                
                 d_id = glob_news.id;
                 ch_social = new String(glob_news.Source);
+                type_search = new String(glob_news.SearchType);
                 title =  new String(glob_news.title);
                 description = new String(glob_news.description);
                 image = glob_news.Images;
@@ -344,7 +345,7 @@ $(document).ready(function(){
                 description = description.replace(distr_str, "<span class=\"bold\">"+distr_str+"</span>");
                 description = description.replace(sw, "<span class=\"bold\">"+sw+"</span>");
 
-                if(ch_social.indexOf("vk") != -1){
+                if(type_search == "v"){
 
                     if(image != null){
                         $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">Q</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
@@ -355,7 +356,7 @@ $(document).ready(function(){
 
 
                 }//if vk.com
-                else if(ch_social.indexOf("twitter") != -1){
+                else if(type_search == "t"){
                      if(image != null){
                         $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"twitter post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
                     }//if
@@ -364,7 +365,7 @@ $(document).ready(function(){
                     }//else if not image
                     
                 }//if facebook
-                else if(ch_social.indexOf("facebook") != -1){
+                else if(type_search == 'f'){
                      if(image != null){
                         $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"facebook post-icon\">S</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
                     }//if

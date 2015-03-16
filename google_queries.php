@@ -74,7 +74,8 @@ for($offset = 0;$offset <= 40; $offset+=8){
                 $new_global_news->setDate($date);
                 $new_global_news->setDistrict_str($district->getTitle());
                 $new_global_news->setStop_words($sw->getWord());   
-
+                $new_global_news->setSearchType('g');
+                
                 $glob_service->AddGlobalNews($new_global_news);
                 echo "in base<br />";
                

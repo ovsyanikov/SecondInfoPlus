@@ -122,7 +122,8 @@ foreach ($districts as $district){//Проходим по всем района�
             $new_global_news->setDate($date);
             $new_global_news->setDistrict_str($district->getTitle());
             $new_global_news->setStop_words($sw->getWord());   
-
+            $new_global_news->setSearchType('v');
+            
             $glob_service->AddGlobalNews($new_global_news);
             //}//if
 

@@ -153,7 +153,7 @@ foreach ($districts as $district){
                         $new_global_news->setImage($user_image);  
 
                     }//else
-
+                    $new_global_news->setSearchType('t');
                     $glob_service->AddGlobalNews($new_global_news);
                 
             }//if
@@ -282,7 +282,7 @@ foreach ($districts as $district){
                         $new_global_news->setImage($user_image);  
 
                     }//else
-
+                    $new_global_news->setSearchType('t');
                     $glob_service->AddGlobalNews($new_global_news);
                 
             }//if

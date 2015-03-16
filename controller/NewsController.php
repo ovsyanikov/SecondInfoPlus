@@ -17,16 +17,6 @@ class NewsController extends \controller\BaseController{
     private $userService;
     private $globalService;
     
-    public function GetVkPostsCountAction(){
-        
-        $gl_service = $this->GetGlobalService();
-        
-        $count = $gl_service->GetVkPostsCount();
-        
-        echo "$count";
-        
-    }
-    
     public function newsAction(){
         
        $user_serv = $this->GetUserService();
@@ -48,6 +38,7 @@ class NewsController extends \controller\BaseController{
            $this->view->tw_posts = $glob_sevice->GetTwitterPostsCount();
            $this->view->google_posts = $glob_sevice->GetGooglePostsCount();
            $this->view->fb_posts = $glob_sevice->GetFaceBookPostsCount();
+           $this->view->ya_posts = $glob_sevice->GetYandexPostsCount();
            
            $this->getRequest()->setCookiesWithKey('offset',0);
            
