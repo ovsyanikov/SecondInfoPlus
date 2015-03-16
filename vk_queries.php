@@ -73,7 +73,7 @@ foreach ($districts as $district){//Проходим по всем района�
                         
                         if(strlen($words) == strlen($stop_word)){
 
-                            if(stristr($words, $stop_word) != false && stripos($words,"порно") == false){
+                            if(stristr($words, $stop_word) != false && stristr($words,"порно") == false){
                                 $found = true;
                                 break;
                             }//if
