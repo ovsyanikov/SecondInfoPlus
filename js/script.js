@@ -323,9 +323,13 @@ $(document).ready(function(){
                 type_search = new String(glob_news.SearchType);
                 title =  new String(glob_news.title);
                 description = new String(glob_news.description);
-                description.replace('\n', '');
-                title.replace('\n', '');
-
+                description = description.replace(/\\n/g," ");
+                description = description.replace(/\"/g,'"');
+                
+                
+                //description.replace('\"','"');
+                
+                
             
                 image = glob_news.Images;
                 date_public = glob_news.Date;
