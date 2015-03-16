@@ -15,13 +15,21 @@ class global_news{
     public $Date;    
     public $Stop_words;
     public $District_str;
-    
-    
+    public $SearchType;
+            
     function getImage() {
         return $this->Images;
     }
+    
+    function getSearchType() {
+        return $this->SearchType;
+    }
+    
+    function setSearchType($SearchType) {
+        $this->SearchType = $SearchType;
+    }
 
-    function setImage($Images) {
+            function setImage($Images) {
         $this->Images = $Images;
     }
 

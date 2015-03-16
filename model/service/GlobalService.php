@@ -136,8 +136,7 @@ class GlobalService{
         }//else
         
     }//SetLastIdTwitter
-
-
+    
     public function AddDistrict($title){
         
         $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
@@ -347,9 +346,10 @@ class GlobalService{
         
         $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
         $stmt->execute();
+        $search_type = $news->getSearchType();
         
-        $stmt = \util\MySQL::$db->prepare("INSERT INTO global_news(id,title,description,public_date,district,Source,Images,Date,Stop_words,District_str)".
-                " VALUES(NULL,:title,:description,now(),:distr,:src,:img,:date,:s_w,:dis_str) ");
+        $stmt = \util\MySQL::$db->prepare("INSERT INTO global_news(id,title,description,public_date,district,Source,Images,Date,Stop_words,District_str,SearchType)".
+                " VALUES(NULL,:title,:description,now(),:distr,:src,:img,:date,:s_w,:dis_str,'$search_type') ");
         $title = preg_replace("/[^а-яa-z\\\\.,;\\/!@#$%^&*()_+-=\\\'\\\"«»\n\t\r ]/ius",'',$news->getTitle());
         
         $stmt->bindParam(":title",$title);
