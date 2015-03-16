@@ -19,7 +19,7 @@ use model\entity\stopword;
 use model\entity\SocialInfo;
 use model\entity\CronProperties;
 
-\util\MySQL::$db = new \PDO('mysql:host=localhost;dbname=u304199710_info', 'u304199710_alex', '1qaz2wsx');
+\util\MySQL::$db = new \PDO('mysql:host=localhost;dbname=user1187254_u304199710_info', 'u304199710_alex', '1qaz2wsx');
 
 $glob_service = new GlobalService();
 $stop_word_for_search = $glob_service->GetStopWords();

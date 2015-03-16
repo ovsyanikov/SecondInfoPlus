@@ -17,7 +17,7 @@ use util\Request;
 use model\entity\stopword;
 use model\entity\SocialInfo;
 
-\util\MySQL::$db = new \PDO('mysql:host=localhost;dbname=u304199710_info', 'u304199710_alex', '1qaz2wsx');
+\util\MySQL::$db = new \PDO('mysql:host=localhost;dbname=user1187254_u304199710_info', 'u304199710_alex', '1qaz2wsx');
 
 $glob_service = new GlobalService();
 $stop_word_for_search = $glob_service->GetStopWords();
@@ -37,7 +37,7 @@ foreach ($districts as $district){//Проходим по всем района�
     $d_title = urlencode($d_title);
     
     
-    $result = file_get_contents("https://blogs.yandex.ru/search.rss?text=$d_title~~erver=\"vk.com\"&ft=all");
+    $result = file_get_contents("https://blogs.yandex.ru/search.rss?text=$d_title&numdoc=99~~erver=\"vk.com\"&ft=all");
     $i++;
     //$result = file_get_contents("https://xmlsearch.yandex.ru/xmlsearch?user=ovsyanikov-alesha&key=03.309510372:32a5df722ab8ef27c85f504b572d5fe4&query=$d_title");
     

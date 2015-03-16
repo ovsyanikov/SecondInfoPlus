@@ -10,7 +10,7 @@ use model\entity\district;
 use model\service\GlobalService;
 use util\Request;
 
-\util\MySQL::$db = new PDO('mysql:host=localhost;dbname=u304199710_info', 'u304199710_alex', '1qaz2wsx');
+\util\MySQL::$db = new PDO('mysql:host=localhost;dbname=user1187254_u304199710_info', 'u304199710_alex', '1qaz2wsx');
 
 $request = new Request();
 $offset = $request->getCookieValue('offset');

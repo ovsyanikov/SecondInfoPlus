@@ -12,7 +12,7 @@ class FrontController{
     
     function start(){
         
-        \util\MySQL::$db = new \PDO('mysql:host=localhost;dbname=u304199710_info', 'u304199710_alex', '1qaz2wsx');
+        \util\MySQL::$db = new \PDO('mysql:host=localhost;dbname=user1187254_u304199710_info', 'u304199710_alex', '1qaz2wsx');
         $this->view = new View();
         
         session_start();
