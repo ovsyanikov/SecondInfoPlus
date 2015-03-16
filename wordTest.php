@@ -1,6 +1,12 @@
 <meta charset="UTF-8">
 <?php 
-
+foreach ($bad_words as $word) {
+                            
+                            if(stristr($words, $word->getWord())){
+                                $bad_word = true;
+                                break;
+                            }//if
+                        }//
 //
 //
 //function multiexplode ($delimiters,$string) {
@@ -52,5 +58,3 @@
 //    echo "$key <br/>";
 //    
 //}//foreach
-$str = str_replace('//i', '!' ,"⭐Лучшие Сериалы И Фильмы⭐\nВсе новые фильмы и сериал");
-echo $str . "|⭐Лучшие Сериалы И Фильмы⭐\nВсе новые фильмы и сериал";

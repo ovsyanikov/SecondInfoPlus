@@ -37,7 +37,7 @@ $stop_word_for_search = $glob_service->GetStopWords();
 //Получаем все районы из БД
 $districts = $glob_service->GetDistricts();
 $first_time = time() - 14400;
-           
+
 foreach ($districts as $district){//Проходим по всем районам
 
     //&start_time=".(time()-299)."
@@ -65,29 +65,22 @@ foreach ($districts as $district){//Проходим по всем района�
             $pos = stripos($text,$stop_word);
 
             if($pos  != false){
-               
-                    $words = strtok($text,' ,.!;-)({}@\'\":^$');
-                       
-                    while($words !== false){
-                        
-                        if(stripos($words,"порно") == false){
-                            
-                           if(strlen($words) == strlen($stop_word)){
-
-                                if(stristr($words, $stop_word) != false){
-                                        $found = true;
-                                        break;
-
-                                }//if
-
-                            }//if     
-                        }//
-                                
-                       
-                        $words = strtok(' ,.!;-)({}@\'\":^$');
-
-                    }//while
                 
+                $words = strtok($text,' ,.!;-)({}@\'\":^$');
+                       
+                while($words !== false){
+                    
+                    if(strlen($words) == strlen($stop_word)){
+                        
+                        if(stristr($words, $stop_word) != false){
+                            $found = true;
+                            break;
+                        }//if
+                        
+                    }//if
+                    $words = strtok(' ,.!;-)({}@\'\":^$');
+                    
+                }//while
                 
             }//if            
 

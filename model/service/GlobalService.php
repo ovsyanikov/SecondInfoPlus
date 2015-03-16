@@ -8,6 +8,7 @@ use model\entity\stopword;
 use model\entity\statistic_stop_word;
 use model\entity\SocialInfo;
 use model\entity\CronProperties;
+use model\entity\bad_word;
 
 class GlobalService{
     
@@ -26,6 +27,24 @@ class GlobalService{
         
         
         return $districts;
+        
+    }
+    
+    public function GetBadWords(){
+        
+        $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
+        $stmt->execute();
+        
+        $bad_words = [];
+        $stmt = \util\MySQL::$db->prepare("SELECT * FROM badwords");
+        $stmt->execute();
+        
+        while($word = $stmt->fetchObject('model\entity\bad_word')){
+            $bad_words[] = $word;
+        }//while
+        
+        
+        return $bad_words;
         
     }
     
@@ -388,6 +407,8 @@ class GlobalService{
         $stmt->bindParam(":dis_str",$dis_str);
 
         $res = $stmt->execute();
+        $stmt = \util\MySQL::$db->prepare("DELETE FROM global_news WHERE description like '%порно%'");
+        $stmt->execute();
         
         if($res == 1){
             return true;
