@@ -131,7 +131,7 @@
                                 echo "<a href=\"$source\" title=\"Ссылка на первоисточник\"><span  class=\"google post-icon\">V</span></a>";
                             }//else if
                             else if($ch_social == 'y'){
-                                echo "<a href=\"$source\" title=\"Ссылка на первоисточник\"><span  class=\"google post-icon\">Y</span></a>";
+                                echo "<a href=\"$source\" title=\"Ссылка на первоисточник\"><span  class=\"yandex post-icon\">Я</span></a>";
                             }//else if
                             
                             //qr
