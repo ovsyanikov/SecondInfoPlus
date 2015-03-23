@@ -66,7 +66,7 @@ foreach ($districts as $district){
         $response = $oAuth->performRequest();
         $js_obj = json_decode($response);
 
-       if(property_exists($js_obj, 'statuses')){
+       if(@property_exists($js_obj, 'statuses')){
 
            foreach($js_obj->statuses as $status){
 
@@ -129,9 +129,9 @@ foreach ($districts as $district){
                     $new_global_news->setDistrict_str($district->getTitle());
                     $new_global_news->setStop_words($sw->getWord());
 
-                    if(property_exists($status->entities, 'media')){
+                    if(@property_exists($status->entities, 'media')){
                         $media = $status->entities->media;
-                            if(property_exists($media, 'media_url')){
+                            if(@property_exists($media, 'media_url')){
                                 $media_url = $media->media_url;
 
                                 if($media_url != NULL){
@@ -158,8 +158,12 @@ foreach ($districts as $district){
 
                     }//else
                     $new_global_news->setSearchType('t');
-                    $glob_service->AddGlobalNews($new_global_news);
-                
+                    $precent = $glob_service->GetUniquePercent($new_global_news);
+                    
+                    if(intval($precent) <= 95){
+                        $glob_service->AddGlobalNews($new_global_news);
+                    }//if
+                    
             }//if
 
 
@@ -197,7 +201,7 @@ foreach ($districts as $district){
         $response = $oAuth->performRequest();
         $js_obj = json_decode($response);
 
-       if(property_exists($js_obj, 'statuses')){
+       if(@property_exists($js_obj, 'statuses')){
            foreach($js_obj->statuses as $status){
 
             $last_id = $status->id_str;
@@ -258,9 +262,9 @@ foreach ($districts as $district){
                     $new_global_news->setDistrict_str($district->getTitle());
                     $new_global_news->setStop_words($sw->getWord());
 
-                    if(property_exists($status->entities, 'media')){
+                    if(@property_exists($status->entities, 'media')){
                         $media = $status->entities->media;
-                            if(property_exists($media, 'media_url')){
+                            if(@property_exists($media, 'media_url')){
                                 $media_url = $media->media_url;
 
                                 if($media_url != NULL){
@@ -287,7 +291,12 @@ foreach ($districts as $district){
 
                     }//else
                     $new_global_news->setSearchType('t');
-                    $glob_service->AddGlobalNews($new_global_news);
+                    $precent = $glob_service->GetUniquePercent($new_global_news);
+                    
+                    if(intval($precent) <= 95){
+                        $glob_service->AddGlobalNews($new_global_news);
+                    }//if
+                    
                 
             }//if
 

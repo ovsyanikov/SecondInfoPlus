@@ -90,9 +90,9 @@
                 <div class="specific-post post">
                     <?php 
                         $post_distr = $this->view->global_news->getDistrict_str();
-                        $post_sw = $this->view->global_news->getStop_words();
+                        $post_sw = trim($this->view->global_news->getStop_words());
                         $tit = $this->view->global_news->getTitle();
-                        $tit = preg_replace("/[^а-яa-z\\\\.,;\\/!@#$%^&*()_+-=\\\'\\\"«»]/ius",' ',$tit);;
+                        $tit = preg_replace("/[^а-яa-z\\\\.,;\\/!@#$%^&*()_+-=\\\'\\\"«»]/ius",' ',$tit);
                         $tit = str_replace("\\n", " ", $tit);
                         echo "<h2 class=\"sp_h2 post-h2 h2\">$tit</h2><br />";
                         echo "<p  class=\"post_bottom\">Район: $post_distr, cтоп-слово:$post_sw</p>";
@@ -105,8 +105,10 @@
                         
                         $descr = $this->view->global_news->getDescription();
                         $descr = str_replace("\\n", "<br />", $descr);
+                        $descr = stripslashes($descr);
                         //$descr = str_replace("\", "", $descr);
-                        $descr = str_replace($post_sw, $ch_sw, $descr);
+                        $descr = str_ireplace($post_sw, $ch_sw, $descr);
+                       
                         //$descr = str_replace($post_distr, "<span class=\"bold\">$post_distr</span>", $descr);
                         
 

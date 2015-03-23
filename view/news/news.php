@@ -75,7 +75,7 @@
                 <a  href="google_queries.php">Google-web поиск <?php echo "{$this->view->google_posts}"; ?></a>
             </div>
             <div class="side-post">
-                <a  href="google_news_queries.php">Google-news поиск <?php echo "{$this->view->google_posts}"; ?></a>
+                <a  href="google_news_queries.php">Google-news поиск <?php echo "{$this->view->google_news_posts}"; ?></a>
             </div>            
             <div class="side-post">
                 <a  href="fb_queries.php">Facebook поиск <?php echo "{$this->view->fb_posts}"; ?></a>
@@ -114,6 +114,8 @@
                             $description = str_replace($post_sw, "<span class=\"bold\">$post_sw</span>", $description);
                             
                             $description = str_replace("\\n", " ", $description);
+                            $description = stripslashes($description);
+                            
                             $date = $news->getDate();
                             
                             $image = $news->getImage();
@@ -127,7 +129,7 @@
                             else if($ch_social == 'f'){
                                 echo "<a href=\"$source\" title=\"Ссылка на первоисточник\"><span  class=\"facebook post-icon\">S</span></a>";
                             }//else if
-                            else if($ch_social == 'g'){
+                            else if($ch_social == 'g' || $ch_social == 'n'){
                                 echo "<a href=\"$source\" title=\"Ссылка на первоисточник\"><span  class=\"google post-icon\">V</span></a>";
                             }//else if
                             else if($ch_social == 'y'){

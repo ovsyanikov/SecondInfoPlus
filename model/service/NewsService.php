@@ -56,6 +56,8 @@ class NewsService{
         
       }
       
+      
+      
       function GetMyPosts(){
           
           $news = [];

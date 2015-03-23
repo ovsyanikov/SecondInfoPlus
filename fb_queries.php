@@ -39,7 +39,7 @@ $districts = $glob_service->GetDistricts();
     
     $global = new GlobalService();
 
-    $result = file_get_contents("https://ajax.googleapis.com/ajax/services/search/web?v=2.0&q=$to_search&rsz=large");    
+    $result = file_get_contents("https://ajax.googleapis.com/ajax/services/search/web?v=1.0&q=$to_search%20site:http://www.facebook.com/");    
     $result_from_json = json_decode($result);
     echo "<pre>";
     
@@ -76,7 +76,7 @@ $districts = $glob_service->GetDistricts();
                 $new_global_news->setDate($date);
                 $new_global_news->setDistrict_str($district->getTitle());
                 $new_global_news->setStop_words($sw->getWord());   
-                $new_global_news->setSearchType('g');
+                $new_global_news->setSearchType('f');
                 
                 $glob_service->AddGlobalNews($new_global_news);
                 echo "in base<br />";
@@ -88,4 +88,5 @@ $districts = $glob_service->GetDistricts();
     $i++;
     echo "$i<br />";     
     
-    }//foreach
+}//foreach
+

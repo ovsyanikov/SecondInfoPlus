@@ -12,6 +12,23 @@ use model\entity\bad_word;
 
 class GlobalService{
     
+    public function GetUniquePercent(global_news $news){
+          
+           $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
+           $stmt->execute();
+           
+           $descr = $news->getDescription();
+           $SearchType = $news->getSearchType();
+           
+           $stmt = \util\MySQL::$db->prepare("SELECT MAX(levenshtein_ratio(`description`,:search_text)) FROM `global_news` WHERE SearchType = :st");
+           $stmt->bindParam(':search_text',$descr);
+           $stmt->bindParam(':st',$SearchType);
+           $stmt->execute();
+           
+           return $stmt->fetch(\PDO::FETCH_BOTH)[0];
+           
+      }
+    
     public function GetDistricts(){
         
         $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
@@ -21,12 +38,21 @@ class GlobalService{
         $stmt = \util\MySQL::$db->prepare("SELECT * FROM districts");
         $stmt->execute();
         
-        while($district = $stmt->fetchObject(district::class)){
+        while($district = $stmt->fetchObject('model\entity\district')){
             $districts[] = $district;
         }//while
         
         
         return $districts;
+        
+    }
+    
+    public function GetGoogleNewsPostsCount(){
+        
+        $stmt = \util\MySQL::$db->prepare("SELECT Count(*) FROM global_news WHERE SearchType = 'n'");
+        $stmt->execute();
+        
+        return $stmt->fetch(\PDO::FETCH_BOTH)[0];
         
     }
     
@@ -98,7 +124,7 @@ class GlobalService{
         $stmt = \util\MySQL::$db->prepare("SELECT * FROM cronproperties");
         $stmt->execute();
         
-        $cron = $stmt->fetchObject(CronProperties::class);
+        $cron = $stmt->fetchObject('model\entity\CronProperties');
         
         if(is_a($cron, 'model\entity\CronProperties')){
             
@@ -131,7 +157,7 @@ class GlobalService{
         $stmt = \util\MySQL::$db->prepare("SELECT * FROM social_info");
         $stmt->execute();
         
-        $sf = $stmt->fetchObject(SocialInfo::class);
+        $sf = $stmt->fetchObject('model\entity\SocialInfo');
         
         if(is_a($sf,'model\entity\SocialInfo')){
             $lastId = $sf->getLastRecordId();   
@@ -192,7 +218,7 @@ class GlobalService{
         $params = array("%$text%");
         $stmt->execute($params);
         
-        $news = $stmt->fetchObject(global_news::class);
+        $news = $stmt->fetchObject('model\entity\global_news');
         
         if(!is_a($news,'model\entity\global_news')){
             return 0;
@@ -223,7 +249,7 @@ class GlobalService{
         $stmt->bindParam(':word',$stopWord);
         $stmt->execute();
         
-        $stopWordContains = $stmt->fetchObject(stopword::class);
+        $stopWordContains = $stmt->fetchObject('model\entity\stopword');
         
         if(is_a($stopWordContains,'model\entity\stopword')){
             
@@ -372,50 +398,57 @@ class GlobalService{
     
     public function AddGlobalNews(global_news $news){
         
-        $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
-        $stmt->execute();
-        $search_type = $news->getSearchType();
+ //       $percent = $this->GetUniquePercent($news->getDescription());
         
-        $stmt = \util\MySQL::$db->prepare("INSERT INTO global_news(id,title,description,public_date,district,Source,Images,Date,Stop_words,District_str,SearchType)".
-                " VALUES(NULL,:title,:description,now(),:distr,:src,:img,:date,:s_w,:dis_str,'$search_type') ");
-        $title = preg_replace("/[^а-яa-z\\\\.,;\\/!@#$%^&*()_+-=\\\'\\\"«»\n\t\r ]/ius",'',$news->getTitle());
-        
-        $stmt->bindParam(":title",$title);
-        
-        $description = preg_replace("/[^а-яa-z\\\\.,;\\/!@#$%^&*()_+-=\\\'\\\"«»\n\t\r ]/ius",'',$news->getDescription());
-        
-        $description = \util\MySQL::$db->quote($description,\PDO::PARAM_STR);
-        
-        $stmt->bindParam(":description",$description );
-        
-        $destr = $news->getDistrict();
-        $stmt->bindParam(":distr",$destr);
-        
-        $source = $news->getSource();
-        $stmt->bindParam(":src",$source);
-        
-        $img = $news->getImage();
-        $stmt->bindParam(":img",$img);
-        
-        $public_date = $news->getDate();
-        $stmt->bindParam(":date",$public_date);
-        
-        $sw = $news->getStop_words();
-        $stmt->bindParam(":s_w",$sw);
+ //       if(intval($percent) < 96){
+            
+            $stmt = \util\MySQL::$db->prepare("SET NAMES utf8");
+            $stmt->execute();
+            $search_type = $news->getSearchType();
 
-        $dis_str = $news->getDistrict_str();
-        $stmt->bindParam(":dis_str",$dis_str);
+            $stmt = \util\MySQL::$db->prepare("INSERT INTO global_news(id,title,description,public_date,district,Source,Images,Date,Stop_words,District_str,SearchType)".
+                    " VALUES(NULL,:title,:description,now(),:distr,:src,:img,:date,:s_w,:dis_str,'$search_type') ");
+            $title = preg_replace("/[^а-яa-z\\\\.,;\\/!@#$%^&*()_+-=\\\'\\\"«»\n\t\r ]/ius",'',$news->getTitle());
 
-        $res = $stmt->execute();
-        $stmt = \util\MySQL::$db->prepare("DELETE FROM global_news WHERE description like '%порно%'");
-        $stmt->execute();
+            $stmt->bindParam(":title",$title);
+
+            $description = preg_replace("/[^а-яa-z\\\\.,;\\/!@#$%^&*()_+-=\\\'\\\"«»\n\t\r ]/ius",'',$news->getDescription());
+
+            $description = \util\MySQL::$db->quote($description,\PDO::PARAM_STR);
+
+            $stmt->bindParam(":description",$description );
+
+            $destr = $news->getDistrict();
+            $stmt->bindParam(":distr",$destr);
+
+            $source = $news->getSource();
+            $stmt->bindParam(":src",$source);
+
+            $img = $news->getImage();
+            $stmt->bindParam(":img",$img);
+
+            $public_date = $news->getDate();
+            $stmt->bindParam(":date",$public_date);
+
+            $sw = $news->getStop_words();
+            $stmt->bindParam(":s_w",$sw);
+
+            $dis_str = $news->getDistrict_str();
+            $stmt->bindParam(":dis_str",$dis_str);
+
+            $res = $stmt->execute();
+            $stmt = \util\MySQL::$db->prepare("DELETE FROM global_news WHERE description like '% порно %'");
+            $stmt->execute();
         
-        if($res == 1){
-            return true;
-        }//if
-        else{
-            return false;
-        }//else
+            if($res == 1){
+                return true;
+            }//if
+            else{
+                return false;
+            }//else
+ //       }//if
+        
+ //       return false;
         
     }
     
@@ -466,7 +499,7 @@ class GlobalService{
     $stmt->bindParam(":rdate",$date_right);
     $stmt->execute();
 
-    while($news = $stmt->fetchObject(global_news::class)){
+    while($news = $stmt->fetchObject('model\entity\global_news')){
 
         $globalNews[] = $news;
 
@@ -503,7 +536,7 @@ class GlobalService{
     $stmt->bindParam(":id",$id);
     $stmt->execute();
 
-    $stopword = $stmt->fetchObject(stopword::class);
+    $stopword = $stmt->fetchObject('model\entity\stopword');
 
     if(is_a($stopword, 'model\entity\stopword')){
            return $stopword;
@@ -523,7 +556,7 @@ class GlobalService{
     $stmt->bindParam(":word",$word);
     $stmt->execute();
 
-    $stopword = $stmt->fetchObject(stopword::class);
+    $stopword = $stmt->fetchObject('model\entity\stopword');
 
     if(is_a($stopword, 'model\entity\stopword')){
            return $stopword;
@@ -540,7 +573,7 @@ class GlobalService{
     $stmt->bindParam(":word",$word);
     $stmt->execute();
 
-    $exist_word = $stmt->fetchObject(stopword::class);
+    $exist_word = $stmt->fetchObject('model\entity\stopword');
 
     if(is_a($exist_word,'model\entity\stopword')){
 
@@ -583,7 +616,7 @@ class GlobalService{
     $stmt->bindParam(":uid",$id);
     $stmt->execute();
 
-    while( $sw = $stmt->fetchObject(statistic_stop_word::class)){
+    while( $sw = $stmt->fetchObject('model\entity\statistic_stop_word')){
 
         $stat_wrd[] = $sw;
 
@@ -615,7 +648,7 @@ class GlobalService{
 
     $stop_words = [];
 
-    while($stop_word = $stmt->fetchObject(stopword::class)){
+    while($stop_word = $stmt->fetchObject('model\entity\stopword')){
 
         $stop_words[] = $stop_word;
 

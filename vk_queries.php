@@ -36,7 +36,8 @@ $stop_word_for_search = $glob_service->GetStopWords();
 
 //Получаем все районы из БД
 $districts = $glob_service->GetDistricts();
-$first_time = time() - 14400;
+//$first_time = time() - 14400;
+$first_time = time() - 3600;
 
 foreach ($districts as $district){//Проходим по всем районам
 

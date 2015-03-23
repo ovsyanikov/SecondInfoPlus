@@ -216,6 +216,7 @@ $(document).ready(function(){
             }//else 
         });
     });
+    
     $('#GetGoogleNewsPosts').click(function(){
         $.get("google_news_queries.php",null,function(data_global){ 
             if(data_global == "final"){
@@ -272,6 +273,7 @@ $(document).ready(function(){
 //            }//else
     }
     });
+    
     //Добавить стопслово в "Настройках"
     $("#AddStopWordSettings").click(function(){
         
@@ -307,6 +309,7 @@ $(document).ready(function(){
 //        }//else
         }
     });
+    
     //Получить новости (Главная)
     $("#more_news").click(function(){
         
@@ -320,17 +323,8 @@ $(document).ready(function(){
                
                 d_id = glob_news.id;
                 ch_social = new String(glob_news.Source);
-                type_search = new String(glob_news.SearchType);
                 title =  new String(glob_news.title);
                 description = new String(glob_news.description);
-                description = description.replace(/\\n/g," ");
-                description = description.replace(/\"/g,'"');
-                
-                
-                //description.replace('\"','"');
-                
-                
-            
                 image = glob_news.Images;
                 date_public = glob_news.Date;
                 
@@ -352,8 +346,10 @@ $(document).ready(function(){
                 }//if
                 description = description.replace(distr_str, "<span class=\"bold\">"+distr_str+"</span>");
                 description = description.replace(sw, "<span class=\"bold\">"+sw+"</span>");
+                description = description.replace(/\\n/g, " ");
+                description = description.replace(/\\"/g, "\"");
 
-                if(type_search == "v"){
+                if(ch_social.indexOf("vk") != -1){
 
                     if(image != null){
                         $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"vk post-icon\">Q</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
@@ -364,7 +360,7 @@ $(document).ready(function(){
 
 
                 }//if vk.com
-                else if(type_search == "t"){
+                else if(ch_social.indexOf("twitter") != -1){
                      if(image != null){
                         $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"twitter post-icon\">R</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
                     }//if
@@ -373,7 +369,7 @@ $(document).ready(function(){
                     }//else if not image
                     
                 }//if facebook
-                else if(type_search == 'f'){
+                else if(ch_social.indexOf("facebook") != -1){
                      if(image != null){
                         $("#newsContent").append("<div data-post_id="+d_id+" class=\"post\"><a href=\""+ch_social+"\" title=\"Ссылка на первоисточник\"><span  class=\"facebook post-icon\">S</span></a><span  class=\"post-date2\" title=\"Время публикации\">"+date_public+"</span><img  class=\"post-img\" src=\""+image+"\" alt=\"\"/><a href=\"?ctrl=news&act=SpecificPostHome&id="+d_id+"\"><h2 id=\"postTitle\" class=\"post-h2 h2\">"+title+"</h2></a><p id=\"postContent\" class=\"post-text\">"+description+"</p><p  class=\"post_bottom\">Район: "+distr_str+", cтоп-слово: "+sw+"</p>");
                     }//if
@@ -409,6 +405,7 @@ $(document).ready(function(){
     
     });
     //Добавить район в "Районы"
+    
     $("#AddDistrict").click(function(){
         
         new_district_title = new String($("#NewDistrictTitle").val());
@@ -445,6 +442,7 @@ $(document).ready(function(){
         }//else
         
     });
+    
     //Добавить стопслово в "Районы"
     $("#AddStopWord").click(function(){
         
@@ -544,6 +542,8 @@ $(document).ready(function(){
                                     sw = new String(glob_news.Stop_words);
                                     description = description.replace(distr_str, "<span class=\"bold\">"+distr_str+"</span>");
                                     description = description.replace(sw, "<span class=\"bold\">"+sw+"</span>");
+                                    description = description.replace(/\\n/g, " ");
+                                    description = description.replace(/\\"/g, "\"");
                                     
                                     if(ch_social.indexOf("vk") != -1){
 
@@ -972,7 +972,7 @@ $(document).ready(function(){
                     
                      if(data == "yes"){//
                          $('#AuthoriseForm').submit();
-                     }//if
+                     }//if 
                      else{
                          ShowAuthorizeMessage('Неверный логин или пароль');
                          

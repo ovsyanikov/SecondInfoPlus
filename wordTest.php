@@ -1,12 +1,6 @@
 <meta charset="UTF-8">
 <?php 
-foreach ($bad_words as $word) {
-                            
-                            if(stristr($words, $word->getWord())){
-                                $bad_word = true;
-                                break;
-                            }//if
-                        }//
+
 //
 //
 //function multiexplode ($delimiters,$string) {
@@ -58,3 +52,5 @@ foreach ($bad_words as $word) {
 //    echo "$key <br/>";
 //    
 //}//foreach
+
+phpinfo();

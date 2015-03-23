@@ -32,10 +32,7 @@ $stop_word_for_search = $glob_service->GetStopWords();
 $districts = $glob_service->GetDistricts();
 //$cron_obj = $global->GetCronProperties();
 //$offset = $cron_obj->getOffset();    
-$count = 0;
-
-for($offset = 0;$offset <= 400; $offset+=8){
-    
+$count = 0;   
     foreach ($districts as $district){//Проходим по всем районам
     
     $d_title = $district->getTitle();
@@ -107,6 +104,4 @@ for($offset = 0;$offset <= 400; $offset+=8){
         
 
     }//foreach
-    
-}//for
 

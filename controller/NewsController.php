@@ -37,6 +37,7 @@ class NewsController extends \controller\BaseController{
            $this->view->vk_posts = $glob_sevice->GetVkPostsCount();
            $this->view->tw_posts = $glob_sevice->GetTwitterPostsCount();
            $this->view->google_posts = $glob_sevice->GetGooglePostsCount();
+           $this->view->google_news_posts = $glob_sevice->GetGoogleNewsPostsCount();
            $this->view->fb_posts = $glob_sevice->GetFaceBookPostsCount();
            $this->view->ya_posts = $glob_sevice->GetYandexPostsCount();
            
